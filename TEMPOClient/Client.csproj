@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <DebugType>
+    </DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48895090-6F3A-4F9B-BF47-BA566E650326}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>Resources\icons.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>TEMPO.Client</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TEMPO.Client</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\TEMPO.Authorization\TEMPO.Authorization.csproj">
+      <Name>TEMPO.Authorization</Name>
+      <Project>{FFC07737-BC56-4CD2-9949-C469EA0A1493}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\TEMPO.BusinessEntity\TEMPO.BusinessEntity.csproj">
+      <Name>TEMPO.BusinessEntity</Name>
+      <Project>{93665123-25B5-4FA7-A9C0-D4694AAD8F4F}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\TEMPO.RequestBroker\TEMPO.RequestBroker.csproj">
+      <Name>TEMPO.RequestBroker</Name>
+      <Project>{18C8490C-7B8C-4E98-B32A-C9807DB9552E}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApproveTimeSheets.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ApproveTimeSheetSearch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AP_LineItemPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AP_LineItemsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AP_TimeEntryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClientCRUDEntryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ClientCRUDPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CreateNewTimeSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeCRUDEntryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EmployeeCRUDPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LineItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LineItemsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LoginPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NavPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectCRUDEntryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectCRUDPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_EmployeeTimeSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_ProjectTimeSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SearchResultLineItemPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SearchResultsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServerURL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeEntryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TimeSheetNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeSheetsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TypeCRUDEntryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TypeCRUDPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIElements\CRUDTreeViewDS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIElements\GraphicButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIElements\GraphicLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIElements\InputValidation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIElements\ResourceManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIElements\SubPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIElements\TextInput.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="production.config" />
+    <Content Include="App.ico" />
+    <Content Include="Resources\TextResources.xml" />
+    <EmbeddedResource Include="CreateNewTimeSheet.resx">
+      <DependentUpon>CreateNewTimeSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainScreen.resx">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\addnewdocument.png" />
+    <EmbeddedResource Include="Resources\addrowbutton-over.png" />
+    <EmbeddedResource Include="Resources\addrowbutton.png" />
+    <EmbeddedResource Include="Resources\addtolistbutton-over.png" />
+    <EmbeddedResource Include="Resources\addtolistbutton.png" />
+    <EmbeddedResource Include="Resources\adminbutton-over.png" />
+    <EmbeddedResource Include="Resources\adminbutton.png" />
+    <EmbeddedResource Include="Resources\approvebutton-over.png" />
+    <EmbeddedResource Include="Resources\approvebutton.png" />
+    <EmbeddedResource Include="Resources\approvedbutton-over.png" />
+    <EmbeddedResource Include="Resources\approvedbutton.png" />
+    <EmbeddedResource Include="Resources\approvedsearchpanel.png" />
+    <EmbeddedResource Include="Resources\approvetimesheetspanel.png" />
+    <EmbeddedResource Include="Resources\ap_timeentrypanel.png" />
+    <EmbeddedResource Include="Resources\byemployeebutton-over.png" />
+    <EmbeddedResource Include="Resources\byemployeebutton.png" />
+    <EmbeddedResource Include="Resources\byprojectbutton-over.png" />
+    <EmbeddedResource Include="Resources\byprojectbutton.png" />
+    <EmbeddedResource Include="Resources\clientsbutton-over.png" />
+    <EmbeddedResource Include="Resources\clientsbutton.png" />
+    <EmbeddedResource Include="Resources\createnew-pe.png" />
+    <EmbeddedResource Include="Resources\createnewtsbutton.png" />
+    <EmbeddedResource Include="Resources\CRUDpanel.png" />
+    <EmbeddedResource Include="Resources\currentbutton-over.png" />
+    <EmbeddedResource Include="Resources\currentbutton.png" />
+    <EmbeddedResource Include="Resources\employeesbutton-over.png" />
+    <EmbeddedResource Include="Resources\employeesbutton.png" />
+    <EmbeddedResource Include="Resources\exitbutton-over.png" />
+    <EmbeddedResource Include="Resources\exitbutton.png" />
+    <EmbeddedResource Include="Resources\folderclosed.png" />
+    <EmbeddedResource Include="Resources\folderopen.png" />
+    <EmbeddedResource Include="Resources\icons.ico" />
+    <EmbeddedResource Include="Resources\lineitementrypanel.png" />
+    <EmbeddedResource Include="Resources\loginbutton.png" />
+    <EmbeddedResource Include="Resources\loginpanel.png" />
+    <EmbeddedResource Include="Resources\logoutbutton.png" />
+    <EmbeddedResource Include="Resources\logoutpanel.png" />
+    <EmbeddedResource Include="Resources\mainpanel.png" />
+    <EmbeddedResource Include="Resources\mmtbutton-over.png" />
+    <EmbeddedResource Include="Resources\mmtbutton.png" />
+    <EmbeddedResource Include="Resources\modalwindow-createts.png" />
+    <EmbeddedResource Include="Resources\modalwindow.png" />
+    <EmbeddedResource Include="Resources\navpanel.png" />
+    <EmbeddedResource Include="Resources\notesbutton-over.png" />
+    <EmbeddedResource Include="Resources\notesbutton.png" />
+    <EmbeddedResource Include="Resources\openbutton-over.png" />
+    <EmbeddedResource Include="Resources\openbutton.png" />
+    <EmbeddedResource Include="Resources\pdficon.png" />
+    <EmbeddedResource Include="Resources\projectsbutton-over.png" />
+    <EmbeddedResource Include="Resources\projectsbutton.png" />
+    <EmbeddedResource Include="Resources\removerowbutton-over.png" />
+    <EmbeddedResource Include="Resources\removerowbutton.png" />
+    <EmbeddedResource Include="Resources\removetimesheetbutton-over.png" />
+    <EmbeddedResource Include="Resources\removetimesheetbutton.png" />
+    <EmbeddedResource Include="Resources\reportsbutton-over.png" />
+    <EmbeddedResource Include="Resources\reportsbutton.png" />
+    <EmbeddedResource Include="Resources\savebutton-over.png" />
+    <EmbeddedResource Include="Resources\savebutton.png" />
+    <EmbeddedResource Include="Resources\searchbutton-over.png" />
+    <EmbeddedResource Include="Resources\searchbutton.png" />
+    <EmbeddedResource Include="Resources\searchpanelicon.png" />
+    <EmbeddedResource Include="Resources\searchresultitempanel.png" />
+    <EmbeddedResource Include="Resources\timeentrypanel.png" />
+    <EmbeddedResource Include="Resources\timesheeticon.png" />
+    <EmbeddedResource Include="Resources\timesheetsbutton-over.png" />
+    <EmbeddedResource Include="Resources\timesheetsbutton.png" />
+    <EmbeddedResource Include="Resources\timesheetspanel.png" />
+    <EmbeddedResource Include="Resources\timesummarybyemp.png" />
+    <EmbeddedResource Include="Resources\timesummarybyproject.png" />
+    <EmbeddedResource Include="Resources\timesummarypreview.png" />
+    <EmbeddedResource Include="Resources\trayicon.ico" />
+    <EmbeddedResource Include="Resources\treeview\closed.png" />
+    <EmbeddedResource Include="Resources\treeview\file.png" />
+    <EmbeddedResource Include="Resources\treeview\open.png" />
+    <EmbeddedResource Include="Resources\tsnew.png" />
+    <EmbeddedResource Include="Resources\tsnewover.png" />
+    <EmbeddedResource Include="Resources\tsopen.png" />
+    <EmbeddedResource Include="Resources\tsopenover.png" />
+    <EmbeddedResource Include="Resources\typesbutton-over.png" />
+    <EmbeddedResource Include="Resources\typesbutton.png" />
+    <EmbeddedResource Include="ServerURL.resx">
+      <DependentUpon>ServerURL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeEntryPanel.resx">
+      <DependentUpon>TimeEntryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeSheetNotesForm.resx">
+      <DependentUpon>TimeSheetNotesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIElements\GraphicButton.resx">
+      <DependentUpon>GraphicButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIElements\GraphicLabel.resx">
+      <DependentUpon>GraphicLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIElements\SubPanel.resx">
+      <DependentUpon>SubPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIElements\TextInput.resx">
+      <DependentUpon>TextInput.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

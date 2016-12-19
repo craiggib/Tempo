@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<PanelDefinitions>
+	<Panel name="Login">
+		<labelvalues>
+			<text id="1">USER NAME</text>
+			<text id="2">LOGIN</text>
+			<text id="3">WELCOME</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="15">Unable to Authenticate to Server. Check your User Name/Password and try Again. If Problem persists please contact administrator.</text>
+			<text id="16">Failed to Initialize Security Context</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="Navigation" />
+	<Panel name="TimeSheets">
+		<labelvalues>
+			<text id="4">SAVED TIME SHEETS</text>			
+		</labelvalues>
+		<stringvalues>
+			<text id="21">Time Sheet was saved successfully.</text>
+			<text id="18">ERROR: Time Sheet could not be save. Please Try Again</text>
+			<text id="20">Input Validation Error: Please enter information in all drop downs in a row and at least one day.</text>
+			<text id="114">Confirm Delete Time Sheet</text>
+			<text id="115">Are you sure you want to remove this Time Sheet?</text>
+			<text id="116">Time Sheet was removed successfully.</text>
+			<text id="117">ERROR: Unable to remove Time Sheet. Please Try Again</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="TimeEntry">
+		<labelvalues>
+			<text id="5">ADD ROW</text>
+			<text id="6">STATUS</text>
+			<text id="7">TOTAL</text>
+			<text id="8">U</text>
+			<text id="9">M</text>
+			<text id="10">T</text>
+			<text id="11">W</text>
+			<text id="12">T</text>
+			<text id="13">F</text>
+			<text id="14">S</text>
+		</labelvalues>
+	</Panel>
+	<Panel name="LineItemsPanel">
+			<stringvalues>
+			<text id="17">Time Sheets can only have 25 line items.</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="LineItem">
+		<labelvalues>	
+		</labelvalues>
+		<stringvalues>
+			<text id="19">Only numbers are allowed when entering hours worked.</text>
+			<text id="22">Are you sure you want to remove this entry?</text>
+			<text id="23">Confirm Delete</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="ApprovedTimeSheetSearch">
+		<labelvalues>	
+			<text id="24">EMPLOYEE</text>
+			<text id="25">STATUS</text>
+			<text id="26">FROM</text>
+			<text id="27">TO</text>
+			<text id="28">Approved</text>
+			<text id="29">PERIOD ENDING</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="30">Please select a "From" date and a "To" date.</text>
+			<text id="31">"From" date cannot be smaller then "To" date.</text>
+			<text id="32">No results were found, please expand search parameters and try again.</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="EmployeeCRUDEntry">
+		<labelvalues>	
+			<text id="33">EMPLOYEE NAME</text>
+			<text id="34">PASSWORD</text>
+			<text id="35">BILLABLE RATE</text>
+			<text id="44">TEMPO ROLES</text>
+			<text id="45">ACCESS TO REPORTS</text>
+			<text id="46">ACCESS TO ADMIN</text>
+			<text id="47">TEMPO ACCOUNT ACTIVE</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="36">Validation Error: Employee Name must have a value</text>
+			<text id="37">Validation Error: Password must have a value</text>
+			<text id="38">Validation Error: Billable Rate must have a value</text>
+			<text id="39">Validation Error: Billable Rate must be a number</text>
+			<text id="40">Error Saving Record</text>
+			<text id="41">Record Saved Successfully</text>
+			<text id="42">Error Creating Record</text>
+			<text id="43">Record Created Successfully</text>
+			<text id="48">Are you sure you want to delete this Employee?</text>
+			<text id="49">CONFIRM DELETE</text>
+			<text id="50">Error removing Employee</text>
+			<text id="51">This Employee can't be deleted as they have Timesheets. Mark as inactive instead.</text>
+			<text id="52">Employee removed Successfully</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="ClientCRUDEntry">
+		<labelvalues>	
+			<text id="53">CLIENT NAME</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="54">Validation Error: Client name must have a value</text>
+			<text id="55">Error Saving Record</text>
+			<text id="56">Record Saved Successfully</text>
+			<text id="57">Error Creating Record</text>
+			<text id="58">Record Created Successfully</text>
+			<text id="59">Are you sure you want to delete this Client?</text>
+			<text id="60">CONFIRM DELETE</text>
+			<text id="61">Error removing Client</text>
+			<text id="62">Client removed Successfully</text>
+			<text id="63">This Client can't be deleted as it is associated with Projects.</text>
+		</stringvalues>
+	</Panel>
+	<Panel name="TypeCRUDEntry">
+		<labelvalues>	
+			<text id="64">WORK TYPE</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="65">Validation Error: Work Type must have a value</text>
+			<text id="66">Error Saving Record</text>
+			<text id="67">Record Saved Successfully</text>
+			<text id="68">Error Creating Record</text>
+			<text id="69">Record Created Successfully</text>
+			<text id="70">Are you sure you want to delete this Work Type?</text>
+			<text id="71">CONFIRM DELETE</text>
+			<text id="72">Error removing Client</text>
+			<text id="73">Work Type Removed Successfully</text>
+			<text id="74">This Work Type can't be deleted as it is associated with Time Sheets</text>
+		</stringvalues>
+	</Panel>	
+	<Panel name="ProjectCRUDEntry">
+		<labelvalues>	
+			<text id="75">CLIENT NAME</text>
+			<text id="76">PROJECT YEAR</text>
+			<text id="77">PROJECT NUMBER</text>
+			<text id="78">REFERENCE NUMBER</text>
+			<text id="93">PROJECT TYPE</text>
+			<text id="121">BRIEF DESCRIPTION</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="79">Validation Error: Project Number name must have a value</text>
+			<text id="80">Error Saving Record</text>
+			<text id="81">Record Saved Successfully</text>
+			<text id="82">Error Creating Record</text>
+			<text id="83">Record Created Successfully</text>
+			<text id="84">Are you sure you want to delete this Project?</text>
+			<text id="85">CONFIRM DELETE</text>
+			<text id="86">Error removing Client</text>
+			<text id="87">Project removed Successfully</text>
+			<text id="88">This Project can't be deleted as it is associated with Time Sheets</text>
+			<text id="89">Validation Error: Reference Number name must have a value</text>
+			<text id="90">Validation Error: You must select a Client</text>
+			<text id="91">Validation Error: You must select a Job Year</text>
+			<text id="92">Validation Error: You must select a Project Type</text>
+			<text id="122">Validation Error: You must enter a Brief Description</text>
+		</stringvalues>
+	</Panel>	
+	<Panel name="ApproveTimeSheets">
+		<labelvalues>
+			<text id="94">SUBMITTED TIMESHEETS</text>
+		</labelvalues>
+		<stringvalues>
+			<text id="104">ERROR: Time Sheet could not be save. Please Try Again</text>
+			<text id="105">Time Sheet was updated successfully.</text>
+			<text id="106">Input Validation Error: Please enter information in all drop downs in a row and at least one day.</text>
+			<text id="107">Input Validation Error: You must change the status to update a TimeSheet</text>
+			<text id="108">Changes to timesheet will not be made if this timesheet is not approved. Continue?</text>
+			<text id="109">CONFIRM</text>
+		</stringvalues>
+	</Panel>	
+	<Panel name="AP_TimeEntryPanel">
+		<labelvalues>
+			<text id="95">STATUS</text>
+			<text id="96">TOTAL</text>
+			<text id="97">U</text>
+			<text id="98">M</text>
+			<text id="99">T</text>
+			<text id="100">W</text>
+			<text id="101">T</text>
+			<text id="102">F</text>
+			<text id="103">S</text>
+		</labelvalues>
+		<stringvalues></stringvalues>
+	</Panel>
+	<Panel name="RPT_EmployeeTimeSummary">
+		<labelvalues>
+			<text id="110">Reports are generated in Adobe Acrobat. To download the free Acrobat Reader visit http://www.adobe.com/</text>
+			<text id="111">From: </text>
+			<text id="112">To: </text>		
+			<text id="113">Employee(s): </text>		
+		</labelvalues>
+		<stringvalues></stringvalues>
+	</Panel>
+	
+		<Panel name="RPT_ProjectTimeSummary">
+		<labelvalues>
+			<text id="118">From: </text>
+			<text id="119">To: </text>		
+			<text id="120">Project: </text>		
+		</labelvalues>
+		<stringvalues></stringvalues>
+	</Panel>
+	
+</PanelDefinitions>

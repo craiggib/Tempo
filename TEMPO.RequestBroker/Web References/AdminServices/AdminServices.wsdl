@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://tempuri.org/EmployeeDS.xsd" />
+      <s:import namespace="http://tempuri.org/ClientDS.xsd" />
+      <s:import namespace="http://tempuri.org/ProjectDS.xsd" />
+      <s:import namespace="http://tempuri.org/ProjectTypeDS.xsd" />
+      <s:import namespace="http://tempuri.org/JobYearDS.xsd" />
+      <s:import namespace="http://tempuri.org/WorkTypeDS.xsd" />
+      <s:import schemaLocation="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx?schema=ProjectDS" namespace="http://tempuri.org/ProjectDS.xsd" />
+      <s:import schemaLocation="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx?schema=WorkTypeDS" namespace="http://tempuri.org/WorkTypeDS.xsd" />
+      <s:import schemaLocation="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx?schema=EmployeeDS" namespace="http://tempuri.org/EmployeeDS.xsd" />
+      <s:import schemaLocation="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx?schema=ClientDS" namespace="http://tempuri.org/ClientDS.xsd" />
+      <s:import schemaLocation="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx?schema=ProjectTypeDS" namespace="http://tempuri.org/ProjectTypeDS.xsd" />
+      <s:import schemaLocation="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx?schema=JobYearDS" namespace="http://tempuri.org/JobYearDS.xsd" />
+      <s:element name="GetAllEmployees">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllEmployeesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllEmployeesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/EmployeeDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateEmployees">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/EmployeeDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="roles" type="tns:ArrayOfInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="empid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateEmployeesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateEmployee">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/EmployeeDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="roles" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateEmployeeResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllClients">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllClientsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllClientsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ClientDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateClients">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ClientDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateClientsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="projectid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ProjectDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllProjects">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllProjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllProjectsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ProjectDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProjects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ProjectDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProjectsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProjectTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProjectTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectTypesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ProjectTypeDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJobYears">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetJobYearsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetJobYearsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/JobYearDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWorkTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetWorkTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWorkTypesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/WorkTypeDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWorkTypes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/WorkTypeDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWorkTypesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProjectsByClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="clientid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectsByClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectsByClientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ProjectDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllEmployeesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllEmployees" />
+  </wsdl:message>
+  <wsdl:message name="GetAllEmployeesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEmployeesSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateEmployees" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEmployeesSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateEmployeeSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateEmployee" />
+  </wsdl:message>
+  <wsdl:message name="CreateEmployeeSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateEmployeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllClientsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllClients" />
+  </wsdl:message>
+  <wsdl:message name="GetAllClientsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateClientsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateClients" />
+  </wsdl:message>
+  <wsdl:message name="UpdateClientsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProject" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllProjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllProjects" />
+  </wsdl:message>
+  <wsdl:message name="GetAllProjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateProjects" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetJobYearsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetJobYears" />
+  </wsdl:message>
+  <wsdl:message name="GetJobYearsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetJobYearsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWorkTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWorkTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWorkTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateWorkTypes" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWorkTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateWorkTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsByClientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectsByClient" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsByClientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectsByClientResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AdminServicesSoap">
+    <wsdl:operation name="GetAllEmployees">
+      <wsdl:input message="tns:GetAllEmployeesSoapIn" />
+      <wsdl:output message="tns:GetAllEmployeesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEmployees">
+      <wsdl:input message="tns:UpdateEmployeesSoapIn" />
+      <wsdl:output message="tns:UpdateEmployeesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateEmployee">
+      <wsdl:input message="tns:CreateEmployeeSoapIn" />
+      <wsdl:output message="tns:CreateEmployeeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClients">
+      <wsdl:input message="tns:GetAllClientsSoapIn" />
+      <wsdl:output message="tns:GetAllClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClients">
+      <wsdl:input message="tns:UpdateClientsSoapIn" />
+      <wsdl:output message="tns:UpdateClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProject">
+      <wsdl:input message="tns:GetProjectSoapIn" />
+      <wsdl:output message="tns:GetProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProjects">
+      <wsdl:input message="tns:GetAllProjectsSoapIn" />
+      <wsdl:output message="tns:GetAllProjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjects">
+      <wsdl:input message="tns:UpdateProjectsSoapIn" />
+      <wsdl:output message="tns:UpdateProjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectTypes">
+      <wsdl:input message="tns:GetProjectTypesSoapIn" />
+      <wsdl:output message="tns:GetProjectTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobYears">
+      <wsdl:input message="tns:GetJobYearsSoapIn" />
+      <wsdl:output message="tns:GetJobYearsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkTypes">
+      <wsdl:input message="tns:GetWorkTypesSoapIn" />
+      <wsdl:output message="tns:GetWorkTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorkTypes">
+      <wsdl:input message="tns:UpdateWorkTypesSoapIn" />
+      <wsdl:output message="tns:UpdateWorkTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsByClient">
+      <wsdl:input message="tns:GetProjectsByClientSoapIn" />
+      <wsdl:output message="tns:GetProjectsByClientSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AdminServicesSoap" type="tns:AdminServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllEmployees">
+      <soap:operation soapAction="http://tempuri.org/GetAllEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEmployees">
+      <soap:operation soapAction="http://tempuri.org/UpdateEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEmployee">
+      <soap:operation soapAction="http://tempuri.org/CreateEmployee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClients">
+      <soap:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClients">
+      <soap:operation soapAction="http://tempuri.org/UpdateClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProject">
+      <soap:operation soapAction="http://tempuri.org/GetProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProjects">
+      <soap:operation soapAction="http://tempuri.org/GetAllProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjects">
+      <soap:operation soapAction="http://tempuri.org/UpdateProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectTypes">
+      <soap:operation soapAction="http://tempuri.org/GetProjectTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobYears">
+      <soap:operation soapAction="http://tempuri.org/GetJobYears" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkTypes">
+      <soap:operation soapAction="http://tempuri.org/GetWorkTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorkTypes">
+      <soap:operation soapAction="http://tempuri.org/UpdateWorkTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsByClient">
+      <soap:operation soapAction="http://tempuri.org/GetProjectsByClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AdminServicesSoap12" type="tns:AdminServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllEmployees">
+      <soap12:operation soapAction="http://tempuri.org/GetAllEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEmployees">
+      <soap12:operation soapAction="http://tempuri.org/UpdateEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateEmployee">
+      <soap12:operation soapAction="http://tempuri.org/CreateEmployee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClients">
+      <soap12:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClients">
+      <soap12:operation soapAction="http://tempuri.org/UpdateClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProject">
+      <soap12:operation soapAction="http://tempuri.org/GetProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProjects">
+      <soap12:operation soapAction="http://tempuri.org/GetAllProjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProjects">
+      <soap12:operation soapAction="http://tempuri.org/UpdateProjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetProjectTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobYears">
+      <soap12:operation soapAction="http://tempuri.org/GetJobYears" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetWorkTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWorkTypes">
+      <soap12:operation soapAction="http://tempuri.org/UpdateWorkTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsByClient">
+      <soap12:operation soapAction="http://tempuri.org/GetProjectsByClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AdminServices">
+    <wsdl:port name="AdminServicesSoap" binding="tns:AdminServicesSoap">
+      <soap:address location="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AdminServicesSoap12" binding="tns:AdminServicesSoap12">
+      <soap12:address location="http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

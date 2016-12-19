@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="EmployeeDS" targetNamespace="http://tempuri.org/EmployeeDS.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/EmployeeDS.xsd" xmlns:mstns="http://tempuri.org/EmployeeDS.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+	xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	<xs:element name="EmployeeDS" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Employee">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EmpID" type="xs:int" minOccurs="0" msprop:nullValue="_empty" msdata:AutoIncrement="true" />
+							<xs:element name="EmployeeName" type="xs:string" minOccurs="0" />
+							<xs:element name="Password" type="xs:string" minOccurs="0" />
+							<xs:element name="Rate" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Active" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="EmployeeDSKey1">
+			<xs:selector xpath=".//mstns:Employee" />
+			<xs:field xpath="mstns:EmpID" />
+		</xs:unique>
+		<xs:key name="EmployeeDSKey3" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Employee" />
+			<xs:field xpath="mstns:EmpID" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

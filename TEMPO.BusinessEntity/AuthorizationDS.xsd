@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="AuthorizationDS" targetNamespace="http://tempuri.org/AuthorizationDS.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/AuthorizationDS.xsd" xmlns:mstns="http://tempuri.org/AuthorizationDS.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="AuthorizationDS" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Authorization">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="moduleid" type="xs:int" minOccurs="0" msdata:AutoIncrement="false" />
+							<xs:element name="empid" type="xs:int" minOccurs="0" msdata:AutoIncrement="false" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Module">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ModuleID" type="xs:int" minOccurs="0" msdata:AutoIncrement="true" />
+							<xs:element name="ModuleName" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:key name="AuthorizationDSKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Authorization" />
+			<xs:field xpath="mstns:moduleid" />
+		</xs:key>
+		<xs:key name="AuthorizationDSKey3" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Module" />
+			<xs:field xpath="mstns:ModuleID" />
+		</xs:key>
+		<xs:keyref name="ModuleModule" refer="AuthorizationDSKey3" msdata:ConstraintOnly="true">
+			<xs:selector xpath=".//mstns:Authorization" />
+			<xs:field xpath="mstns:moduleid" />
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

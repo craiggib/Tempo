@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmR3ZD0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9EYXRhV2FyZWhvdXNlL0Rlc2lnbmVyLzEuMCI+DQogIDxFbmFibGVkPmZhbHNlPC9FbmFibGVkPg0KICA8UHJvamVjdE5hbWU+PC9Qcm9qZWN0TmFtZT4NCiAgPEF1eFBhdGg+PC9BdXhQYXRoPg0KICA8TG9jYWxQYXRoPjwvTG9jYWxQYXRoPg0KICA8UHJvdmlkZXI+PC9Qcm92aWRlcj4NCjwvU291cmNlQ29udHJvbEluZm8+</State>
+  <DataSources>
+    <ProjectItem>
+      <Name>TEMPO.rds</Name>
+      <FullPath>TEMPO.rds</FullPath>
+    </ProjectItem>
+  </DataSources>
+  <Reports>
+    <ProjectItem>
+      <Name>EmployeeTimeSheet.rdl</Name>
+      <FullPath>EmployeeTimeSheet.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>EmployeeTimeSummary.rdl</Name>
+      <FullPath>EmployeeTimeSummary.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ProjectTimeSummary.rdl</Name>
+      <FullPath>ProjectTimeSummary.rdl</FullPath>
+    </ProjectItem>
+    <ResourceProjectItem>
+      <Name>reportheader.gif</Name>
+      <FullPath>reportheader.gif</FullPath>
+      <MimeType>image/gif</MimeType>
+    </ResourceProjectItem>
+  </Reports>
+  <Configurations>
+    <Configuration>
+      <Name>Debug</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <TargetServerURL>http://localhost:82/ReportServer</TargetServerURL>
+        <TargetFolder>TEMPO.Reports</TargetFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>Production</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <TargetServerURL>http://192.168.0.33/ReportManager</TargetServerURL>
+        <TargetFolder>TEMPO.Reports</TargetFolder>
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>

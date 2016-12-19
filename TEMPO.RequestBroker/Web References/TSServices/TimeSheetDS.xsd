@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:mstns="http://tempuri.org/TimeSheetDS.xsd" xmlns="http://tempuri.org/TimeSheetDS.xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org/TimeSheetDS.xsd" id="TimeSheetDS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="TimeSheetDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TimeSheet">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element msdata:AutoIncrement="true" name="TID" type="xs:int" />
+              <xs:element minOccurs="0" name="PEID" type="xs:int" />
+              <xs:element minOccurs="0" name="EmpID" type="xs:int" />
+              <xs:element minOccurs="0" name="StatusID" type="xs:int" />
+              <xs:element minOccurs="0" name="Notes" type="xs:string" />
+              <xs:element minOccurs="0" name="EndingDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="StatusName" type="xs:string" />
+              <xs:element minOccurs="0" name="EmployeeName" type="xs:string" />
+              <xs:element minOccurs="0" name="TimeSheetName" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TimeEntry">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element msdata:AutoIncrement="true" name="EntryID" type="xs:int" />
+              <xs:element minOccurs="0" name="TID" type="xs:int" />
+              <xs:element minOccurs="0" default="0" name="Sunday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="0" name="Monday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="0" name="Tuesday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="0" name="Wednesday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="0" name="Thursday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="0" name="Friday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="0" name="Saturday" type="xs:decimal" />
+              <xs:element minOccurs="0" default="-1" name="WorkTypeID" type="xs:int" />
+              <xs:element minOccurs="0" default="-1" name="ClientID" type="xs:int" />
+              <xs:element minOccurs="0" default="-1" name="ProjectID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique msdata:PrimaryKey="true" name="TimeSheetDSKey1">
+      <xs:selector xpath=".//mstns:TimeSheet" />
+      <xs:field xpath="mstns:TID" />
+    </xs:unique>
+    <xs:unique msdata:PrimaryKey="true" name="TimeSheetDSKey2">
+      <xs:selector xpath=".//mstns:TimeEntry" />
+      <xs:field xpath="mstns:EntryID" />
+    </xs:unique>
+    <xs:keyref name="TimeSheetTimeEntry" refer="mstns:TimeSheetDSKey1">
+      <xs:selector xpath=".//mstns:TimeEntry" />
+      <xs:field xpath="mstns:TID" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

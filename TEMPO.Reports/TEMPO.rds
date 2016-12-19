@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TEMPO</Name>
+  <DataSourceID>b3939d30-dfbd-49ac-ac3f-4b9c6772407a</DataSourceID>
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>data source=192.168.0.33\irescodb;initial catalog=TEMPO</ConnectString>
+  </ConnectionProperties>
+</RptDataSource>

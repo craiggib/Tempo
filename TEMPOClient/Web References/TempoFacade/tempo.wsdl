@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://tempuri.org/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="s0:Employee" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Employee">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="EmployeeID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="EmployeeName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:double" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessEntity" abstract="true" />
+      <s:element name="GetSecurityContext">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSecurityContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSecurityContextResult" type="s0:SecurityContext" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SecurityContext">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessRule">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MODAUTH_TimeSheet" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="MODAUTH_Reports" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="MODAUTH_Admin" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BusinessRule" abstract="true" />
+      <s:element name="SearchTimeSheets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="employeeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="date1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="date2" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="searchtype" type="s0:SearchType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="SearchType">
+        <s:restriction base="s:string">
+          <s:enumeration value="DateEmp" />
+          <s:enumeration value="SavedEmp" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SearchTimeSheetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchTimeSheetsResult" type="s0:ArrayOfTimeSheet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTimeSheet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TimeSheet" nillable="true" type="s0:TimeSheet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TimeSheet">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Employee" type="s0:Employee" />
+              <s:element minOccurs="0" maxOccurs="1" name="PeriodEnding" type="s0:PeriodEnding" />
+              <s:element minOccurs="1" maxOccurs="1" name="TimeSheetID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="LineItems" type="s0:TimeEntry" />
+              <s:element minOccurs="0" maxOccurs="1" name="TimeSheetStatus" type="s0:Status" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PeriodEnding">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PeriodEndingDate" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PeriodEndingID" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TimeEntry">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="EntryID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Hours" type="s0:ArrayOfDouble" />
+              <s:element minOccurs="0" maxOccurs="1" name="WorkType" type="s0:WorkType" />
+              <s:element minOccurs="0" maxOccurs="1" name="Project" type="s0:Project" />
+              <s:element minOccurs="0" maxOccurs="1" name="Client" type="s0:Client" />
+              <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TimeSheetID" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfDouble">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="double" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WorkType">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="TypeName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Project">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ProjectID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Client" type="s0:Client" />
+              <s:element minOccurs="1" maxOccurs="1" name="JobNumberYear" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="JobNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefernceJobNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProjectType" type="s0:ProjectType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Client">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ClientID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClientName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ProjectType">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ProjectTypeID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProjectTypeDescription" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Status">
+        <s:complexContent mixed="false">
+          <s:extension base="s0:BusinessEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="StatusID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatusName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="getLookUpVal_Status">
+        <s:complexType />
+      </s:element>
+      <s:element name="getLookUpVal_StatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLookUpVal_StatusResult" type="s0:ArrayOfStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Status" nillable="true" type="s0:Status" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getLookUpVal_Client">
+        <s:complexType />
+      </s:element>
+      <s:element name="getLookUpVal_ClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLookUpVal_ClientResult" type="s0:ArrayOfClient" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClient">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Client" nillable="true" type="s0:Client" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getLookUpVal_Project">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="clientid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLookUpVal_ProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLookUpVal_ProjectResult" type="s0:ArrayOfProject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Project" nillable="true" type="s0:Project" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getLookUpVal_WorkType">
+        <s:complexType />
+      </s:element>
+      <s:element name="getLookUpVal_WorkTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLookUpVal_WorkTypeResult" type="s0:ArrayOfWorkType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfWorkType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WorkType" nillable="true" type="s0:WorkType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="updateTimeSheet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ts" type="s0:TimeSheet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateTimeSheetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateTimeSheetResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Employee" type="s0:Employee" />
+      <s:element name="SecurityContext" type="s0:SecurityContext" />
+      <s:element name="ArrayOfTimeSheet" nillable="true" type="s0:ArrayOfTimeSheet" />
+      <s:element name="ArrayOfStatus" nillable="true" type="s0:ArrayOfStatus" />
+      <s:element name="ArrayOfClient" nillable="true" type="s0:ArrayOfClient" />
+      <s:element name="ArrayOfProject" nillable="true" type="s0:ArrayOfProject" />
+      <s:element name="ArrayOfWorkType" nillable="true" type="s0:ArrayOfWorkType" />
+    </s:schema>
+  </types>
+  <message name="LoginSoapIn">
+    <part name="parameters" element="s0:Login" />
+  </message>
+  <message name="LoginSoapOut">
+    <part name="parameters" element="s0:LoginResponse" />
+  </message>
+  <message name="GetSecurityContextSoapIn">
+    <part name="parameters" element="s0:GetSecurityContext" />
+  </message>
+  <message name="GetSecurityContextSoapOut">
+    <part name="parameters" element="s0:GetSecurityContextResponse" />
+  </message>
+  <message name="SearchTimeSheetsSoapIn">
+    <part name="parameters" element="s0:SearchTimeSheets" />
+  </message>
+  <message name="SearchTimeSheetsSoapOut">
+    <part name="parameters" element="s0:SearchTimeSheetsResponse" />
+  </message>
+  <message name="getLookUpVal_StatusSoapIn">
+    <part name="parameters" element="s0:getLookUpVal_Status" />
+  </message>
+  <message name="getLookUpVal_StatusSoapOut">
+    <part name="parameters" element="s0:getLookUpVal_StatusResponse" />
+  </message>
+  <message name="getLookUpVal_ClientSoapIn">
+    <part name="parameters" element="s0:getLookUpVal_Client" />
+  </message>
+  <message name="getLookUpVal_ClientSoapOut">
+    <part name="parameters" element="s0:getLookUpVal_ClientResponse" />
+  </message>
+  <message name="getLookUpVal_ProjectSoapIn">
+    <part name="parameters" element="s0:getLookUpVal_Project" />
+  </message>
+  <message name="getLookUpVal_ProjectSoapOut">
+    <part name="parameters" element="s0:getLookUpVal_ProjectResponse" />
+  </message>
+  <message name="getLookUpVal_WorkTypeSoapIn">
+    <part name="parameters" element="s0:getLookUpVal_WorkType" />
+  </message>
+  <message name="getLookUpVal_WorkTypeSoapOut">
+    <part name="parameters" element="s0:getLookUpVal_WorkTypeResponse" />
+  </message>
+  <message name="updateTimeSheetSoapIn">
+    <part name="parameters" element="s0:updateTimeSheet" />
+  </message>
+  <message name="updateTimeSheetSoapOut">
+    <part name="parameters" element="s0:updateTimeSheetResponse" />
+  </message>
+  <message name="LoginHttpGetIn">
+    <part name="username" type="s:string" />
+    <part name="password" type="s:string" />
+  </message>
+  <message name="LoginHttpGetOut">
+    <part name="Body" element="s0:Employee" />
+  </message>
+  <message name="GetSecurityContextHttpGetIn" />
+  <message name="GetSecurityContextHttpGetOut">
+    <part name="Body" element="s0:SecurityContext" />
+  </message>
+  <message name="SearchTimeSheetsHttpGetIn">
+    <part name="employeeID" type="s:string" />
+    <part name="date1" type="s:string" />
+    <part name="date2" type="s:string" />
+    <part name="searchtype" type="s:string" />
+  </message>
+  <message name="SearchTimeSheetsHttpGetOut">
+    <part name="Body" element="s0:ArrayOfTimeSheet" />
+  </message>
+  <message name="getLookUpVal_StatusHttpGetIn" />
+  <message name="getLookUpVal_StatusHttpGetOut">
+    <part name="Body" element="s0:ArrayOfStatus" />
+  </message>
+  <message name="getLookUpVal_ClientHttpGetIn" />
+  <message name="getLookUpVal_ClientHttpGetOut">
+    <part name="Body" element="s0:ArrayOfClient" />
+  </message>
+  <message name="getLookUpVal_ProjectHttpGetIn">
+    <part name="clientid" type="s:string" />
+  </message>
+  <message name="getLookUpVal_ProjectHttpGetOut">
+    <part name="Body" element="s0:ArrayOfProject" />
+  </message>
+  <message name="getLookUpVal_WorkTypeHttpGetIn" />
+  <message name="getLookUpVal_WorkTypeHttpGetOut">
+    <part name="Body" element="s0:ArrayOfWorkType" />
+  </message>
+  <message name="LoginHttpPostIn">
+    <part name="username" type="s:string" />
+    <part name="password" type="s:string" />
+  </message>
+  <message name="LoginHttpPostOut">
+    <part name="Body" element="s0:Employee" />
+  </message>
+  <message name="GetSecurityContextHttpPostIn" />
+  <message name="GetSecurityContextHttpPostOut">
+    <part name="Body" element="s0:SecurityContext" />
+  </message>
+  <message name="SearchTimeSheetsHttpPostIn">
+    <part name="employeeID" type="s:string" />
+    <part name="date1" type="s:string" />
+    <part name="date2" type="s:string" />
+    <part name="searchtype" type="s:string" />
+  </message>
+  <message name="SearchTimeSheetsHttpPostOut">
+    <part name="Body" element="s0:ArrayOfTimeSheet" />
+  </message>
+  <message name="getLookUpVal_StatusHttpPostIn" />
+  <message name="getLookUpVal_StatusHttpPostOut">
+    <part name="Body" element="s0:ArrayOfStatus" />
+  </message>
+  <message name="getLookUpVal_ClientHttpPostIn" />
+  <message name="getLookUpVal_ClientHttpPostOut">
+    <part name="Body" element="s0:ArrayOfClient" />
+  </message>
+  <message name="getLookUpVal_ProjectHttpPostIn">
+    <part name="clientid" type="s:string" />
+  </message>
+  <message name="getLookUpVal_ProjectHttpPostOut">
+    <part name="Body" element="s0:ArrayOfProject" />
+  </message>
+  <message name="getLookUpVal_WorkTypeHttpPostIn" />
+  <message name="getLookUpVal_WorkTypeHttpPostOut">
+    <part name="Body" element="s0:ArrayOfWorkType" />
+  </message>
+  <portType name="TempoSoap">
+    <operation name="Login">
+      <input message="s0:LoginSoapIn" />
+      <output message="s0:LoginSoapOut" />
+    </operation>
+    <operation name="GetSecurityContext">
+      <input message="s0:GetSecurityContextSoapIn" />
+      <output message="s0:GetSecurityContextSoapOut" />
+    </operation>
+    <operation name="SearchTimeSheets">
+      <input message="s0:SearchTimeSheetsSoapIn" />
+      <output message="s0:SearchTimeSheetsSoapOut" />
+    </operation>
+    <operation name="getLookUpVal_Status">
+      <input message="s0:getLookUpVal_StatusSoapIn" />
+      <output message="s0:getLookUpVal_StatusSoapOut" />
+    </operation>
+    <operation name="getLookUpVal_Client">
+      <input message="s0:getLookUpVal_ClientSoapIn" />
+      <output message="s0:getLookUpVal_ClientSoapOut" />
+    </operation>
+    <operation name="getLookUpVal_Project">
+      <input message="s0:getLookUpVal_ProjectSoapIn" />
+      <output message="s0:getLookUpVal_ProjectSoapOut" />
+    </operation>
+    <operation name="getLookUpVal_WorkType">
+      <input message="s0:getLookUpVal_WorkTypeSoapIn" />
+      <output message="s0:getLookUpVal_WorkTypeSoapOut" />
+    </operation>
+    <operation name="updateTimeSheet">
+      <input message="s0:updateTimeSheetSoapIn" />
+      <output message="s0:updateTimeSheetSoapOut" />
+    </operation>
+  </portType>
+  <portType name="TempoHttpGet">
+    <operation name="Login">
+      <input message="s0:LoginHttpGetIn" />
+      <output message="s0:LoginHttpGetOut" />
+    </operation>
+    <operation name="GetSecurityContext">
+      <input message="s0:GetSecurityContextHttpGetIn" />
+      <output message="s0:GetSecurityContextHttpGetOut" />
+    </operation>
+    <operation name="SearchTimeSheets">
+      <input message="s0:SearchTimeSheetsHttpGetIn" />
+      <output message="s0:SearchTimeSheetsHttpGetOut" />
+    </operation>
+    <operation name="getLookUpVal_Status">
+      <input message="s0:getLookUpVal_StatusHttpGetIn" />
+      <output message="s0:getLookUpVal_StatusHttpGetOut" />
+    </operation>
+    <operation name="getLookUpVal_Client">
+      <input message="s0:getLookUpVal_ClientHttpGetIn" />
+      <output message="s0:getLookUpVal_ClientHttpGetOut" />
+    </operation>
+    <operation name="getLookUpVal_Project">
+      <input message="s0:getLookUpVal_ProjectHttpGetIn" />
+      <output message="s0:getLookUpVal_ProjectHttpGetOut" />
+    </operation>
+    <operation name="getLookUpVal_WorkType">
+      <input message="s0:getLookUpVal_WorkTypeHttpGetIn" />
+      <output message="s0:getLookUpVal_WorkTypeHttpGetOut" />
+    </operation>
+  </portType>
+  <portType name="TempoHttpPost">
+    <operation name="Login">
+      <input message="s0:LoginHttpPostIn" />
+      <output message="s0:LoginHttpPostOut" />
+    </operation>
+    <operation name="GetSecurityContext">
+      <input message="s0:GetSecurityContextHttpPostIn" />
+      <output message="s0:GetSecurityContextHttpPostOut" />
+    </operation>
+    <operation name="SearchTimeSheets">
+      <input message="s0:SearchTimeSheetsHttpPostIn" />
+      <output message="s0:SearchTimeSheetsHttpPostOut" />
+    </operation>
+    <operation name="getLookUpVal_Status">
+      <input message="s0:getLookUpVal_StatusHttpPostIn" />
+      <output message="s0:getLookUpVal_StatusHttpPostOut" />
+    </operation>
+    <operation name="getLookUpVal_Client">
+      <input message="s0:getLookUpVal_ClientHttpPostIn" />
+      <output message="s0:getLookUpVal_ClientHttpPostOut" />
+    </operation>
+    <operation name="getLookUpVal_Project">
+      <input message="s0:getLookUpVal_ProjectHttpPostIn" />
+      <output message="s0:getLookUpVal_ProjectHttpPostOut" />
+    </operation>
+    <operation name="getLookUpVal_WorkType">
+      <input message="s0:getLookUpVal_WorkTypeHttpPostIn" />
+      <output message="s0:getLookUpVal_WorkTypeHttpPostOut" />
+    </operation>
+  </portType>
+  <binding name="TempoSoap" type="s0:TempoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetSecurityContext">
+      <soap:operation soapAction="http://tempuri.org/GetSecurityContext" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="SearchTimeSheets">
+      <soap:operation soapAction="http://tempuri.org/SearchTimeSheets" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Status">
+      <soap:operation soapAction="http://tempuri.org/getLookUpVal_Status" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Client">
+      <soap:operation soapAction="http://tempuri.org/getLookUpVal_Client" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Project">
+      <soap:operation soapAction="http://tempuri.org/getLookUpVal_Project" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_WorkType">
+      <soap:operation soapAction="http://tempuri.org/getLookUpVal_WorkType" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="updateTimeSheet">
+      <soap:operation soapAction="http://tempuri.org/updateTimeSheet" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="TempoHttpGet" type="s0:TempoHttpGet">
+    <http:binding verb="GET" />
+    <operation name="Login">
+      <http:operation location="/Login" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="GetSecurityContext">
+      <http:operation location="/GetSecurityContext" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="SearchTimeSheets">
+      <http:operation location="/SearchTimeSheets" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Status">
+      <http:operation location="/getLookUpVal_Status" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Client">
+      <http:operation location="/getLookUpVal_Client" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Project">
+      <http:operation location="/getLookUpVal_Project" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_WorkType">
+      <http:operation location="/getLookUpVal_WorkType" />
+      <input>
+        <http:urlEncoded />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="TempoHttpPost" type="s0:TempoHttpPost">
+    <http:binding verb="POST" />
+    <operation name="Login">
+      <http:operation location="/Login" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="GetSecurityContext">
+      <http:operation location="/GetSecurityContext" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="SearchTimeSheets">
+      <http:operation location="/SearchTimeSheets" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Status">
+      <http:operation location="/getLookUpVal_Status" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Client">
+      <http:operation location="/getLookUpVal_Client" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_Project">
+      <http:operation location="/getLookUpVal_Project" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+    <operation name="getLookUpVal_WorkType">
+      <http:operation location="/getLookUpVal_WorkType" />
+      <input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </input>
+      <output>
+        <mime:mimeXml part="Body" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Tempo">
+    <port name="TempoSoap" binding="s0:TempoSoap">
+      <soap:address location="http://localhost/TempoFacade/tempo.asmx" />
+    </port>
+    <port name="TempoHttpGet" binding="s0:TempoHttpGet">
+      <http:address location="http://localhost/TempoFacade/tempo.asmx" />
+    </port>
+    <port name="TempoHttpPost" binding="s0:TempoHttpPost">
+      <http:address location="http://localhost/TempoFacade/tempo.asmx" />
+    </port>
+  </service>
+</definitions>

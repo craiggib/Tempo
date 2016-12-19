@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TEMPO.RequestBroker.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TEMPO_RequestBroker_ReportingServices_ReportingService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://srv:82/ReportServer_SQLEXPRESS/ReportExecution2005.asmx</Value>
+    </Setting>
+    <Setting Name="TEMPO_RequestBroker_AdminServices_AdminServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:56098/TEMPO.ServiceInterface/AdminServices.asmx</Value>
+    </Setting>
+    <Setting Name="TEMPO_RequestBroker_TSServices_TimeSheetServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

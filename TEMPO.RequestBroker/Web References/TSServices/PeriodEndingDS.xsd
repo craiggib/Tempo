@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:mstns="http://tempuri.org/PeriodEndingDS.xsd" xmlns="http://tempuri.org/PeriodEndingDS.xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org/PeriodEndingDS.xsd" id="PeriodEndingDS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element msdata:IsDataSet="true" msdata:UseCurrentLocale="true" name="PeriodEndingDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PeriodEnding">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PEID" type="xs:int" />
+              <xs:element minOccurs="0" name="EndingDate" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique msdata:PrimaryKey="true" name="PeriodEndingDSKey1">
+      <xs:selector xpath=".//mstns:PeriodEnding" />
+      <xs:field xpath="mstns:PEID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{93665123-25B5-4FA7-A9C0-D4694AAD8F4F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>TEMPO.BusinessEntity</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TEMPO.BusinessEntity</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AuthorizationDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuthorizationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ClientDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="JobYearDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobYearDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MMTDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MMTDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PeriodEndingDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PeriodEndingDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectTypeDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectTypeDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="StatusDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatusDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSheetDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeSheetDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="WorkTypeDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkTypeDS.xsd</DependentUpon>
+    </Compile>
+    <Content Include="AuthorizationDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AuthorizationDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ClientDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ClientDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="EmployeeDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EmployeeDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="JobYearDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>JobYearDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="MMTDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MMTDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="PeriodEndingDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PeriodEndingDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProjectDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProjectDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProjectTypeDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProjectTypeDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="StatusDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StatusDS.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="TimeSheetDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TimeSheetDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WorkTypeDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkTypeDS.Designer.cs</LastGenOutput>
+    </Content>
+    <None Include="AuthorizationDS.xsc">
+      <DependentUpon>AuthorizationDS.xsd</DependentUpon>
+    </None>
+    <None Include="AuthorizationDS.xss">
+      <DependentUpon>AuthorizationDS.xsd</DependentUpon>
+    </None>
+    <None Include="AuthorizationDS.xsx">
+      <DependentUpon>AuthorizationDS.xsd</DependentUpon>
+    </None>
+    <None Include="ClientDS.xsx">
+      <DependentUpon>ClientDS.xsd</DependentUpon>
+    </None>
+    <None Include="EmployeeDS.xsc">
+      <DependentUpon>EmployeeDS.xsd</DependentUpon>
+    </None>
+    <None Include="EmployeeDS.xss">
+      <DependentUpon>EmployeeDS.xsd</DependentUpon>
+    </None>
+    <None Include="EmployeeDS.xsx">
+      <DependentUpon>EmployeeDS.xsd</DependentUpon>
+    </None>
+    <None Include="JobYearDS.xsx">
+      <DependentUpon>JobYearDS.xsd</DependentUpon>
+    </None>
+    <None Include="MMTDS.xsx">
+      <DependentUpon>MMTDS.xsd</DependentUpon>
+    </None>
+    <None Include="PeriodEndingDS.xsx">
+      <DependentUpon>PeriodEndingDS.xsd</DependentUpon>
+    </None>
+    <None Include="ProjectDS.xsx">
+      <DependentUpon>ProjectDS.xsd</DependentUpon>
+    </None>
+    <None Include="ProjectTypeDS.xsx">
+      <DependentUpon>ProjectTypeDS.xsd</DependentUpon>
+    </None>
+    <None Include="StatusDS.xsx">
+      <DependentUpon>StatusDS.xsd</DependentUpon>
+    </None>
+    <None Include="TimeSheetDS.xsc">
+      <DependentUpon>TimeSheetDS.xsd</DependentUpon>
+    </None>
+    <None Include="TimeSheetDS.xss">
+      <DependentUpon>TimeSheetDS.xsd</DependentUpon>
+    </None>
+    <None Include="TimeSheetDS.xsx">
+      <DependentUpon>TimeSheetDS.xsd</DependentUpon>
+    </None>
+    <None Include="WorkTypeDS.xsx">
+      <DependentUpon>WorkTypeDS.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

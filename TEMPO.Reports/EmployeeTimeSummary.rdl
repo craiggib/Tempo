@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2003/10/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Table Name="table1">
+        <Height>0.75in</Height>
+        <ZIndex>8</ZIndex>
+        <Style />
+        <Header>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox4">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>8</ZIndex>
+                      <rd:DefaultName>textbox4</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Employee Name</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox5">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <TextAlign>Right</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <rd:DefaultName>textbox5</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Period Ending</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox6">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <TextAlign>Right</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>6</ZIndex>
+                      <rd:DefaultName>textbox6</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>Total Time</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="employeename_1">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <rd:DefaultName>employeename_1</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!employeename.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="endingdate_1">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>d</Format>
+                        <TextAlign>Right</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>1</ZIndex>
+                      <rd:DefaultName>endingdate_1</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!endingdate.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="periodtotal">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <Format>N</Format>
+                        <TextAlign>Right</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <rd:DefaultName>periodtotal</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!periodtotal.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <DataSetName>TEMPO</DataSetName>
+        <Top>1.375in</Top>
+        <Width>7.29607in</Width>
+        <Footer>
+          <TableRows>
+            <TableRow>
+              <Height>0.25in</Height>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox10">
+                      <Style>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>5</ZIndex>
+                      <rd:DefaultName>textbox10</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox11">
+                      <Style>
+                        <BorderStyle>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderWidth>
+                          <Top>1pt</Top>
+                        </BorderWidth>
+                        <BorderColor>
+                          <Top>Black</Top>
+                        </BorderColor>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                      </Style>
+                      <ZIndex>4</ZIndex>
+                      <rd:DefaultName>textbox11</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox12">
+                      <Style>
+                        <BorderStyle>
+                          <Top>Solid</Top>
+                        </BorderStyle>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <BorderWidth>
+                          <Top>1pt</Top>
+                        </BorderWidth>
+                        <BorderColor>
+                          <Top>Black</Top>
+                        </BorderColor>
+                        <TextAlign>Right</TextAlign>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingRight>2pt</PaddingRight>
+                        <FontWeight>700</FontWeight>
+                      </Style>
+                      <ZIndex>3</ZIndex>
+                      <rd:DefaultName>textbox12</rd:DefaultName>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Sum(Fields!periodtotal.Value)</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+            </TableRow>
+          </TableRows>
+        </Footer>
+        <Left>2.5in</Left>
+        <TableColumns>
+          <TableColumn>
+            <Width>3.09847in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.05046in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.14714in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+      <Textbox Name="textbox13">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>7</ZIndex>
+        <Top>0.625in</Top>
+        <rd:DefaultName>textbox13</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>0.625in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>From:</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+      <Textbox Name="endingdate">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <Format>d</Format>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>6</ZIndex>
+        <Top>0.625in</Top>
+        <rd:DefaultName>endingdate</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>1.375in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=Parameters!fromdate.Value</Value>
+        <Left>0.75in</Left>
+      </Textbox>
+      <Textbox Name="employeename">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>5</ZIndex>
+        <Top>0.375in</Top>
+        <rd:DefaultName>employeename</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>3.125in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=First(Fields!employeename.Value)</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+      <Textbox Name="textbox1">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <FontSize>12pt</FontSize>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+          <FontWeight>700</FontWeight>
+        </Style>
+        <ZIndex>4</ZIndex>
+        <Top>0.125in</Top>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Height>0.25in</Height>
+        <Width>2.625in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>Employee Time Summary</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+      <Image Name="image1">
+        <ZIndex>3</ZIndex>
+        <Top>0.25in</Top>
+        <MIMEType />
+        <Height>0.625in</Height>
+        <Width>6.25in</Width>
+        <Source>External</Source>
+        <Style />
+        <Value>reportheader.gif</Value>
+        <Left>3.5in</Left>
+        <Sizing>Fit</Sizing>
+      </Image>
+      <Textbox Name="textbox2">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <Format>d</Format>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>2</ZIndex>
+        <Top>0.875in</Top>
+        <Height>0.25in</Height>
+        <Width>1.375in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>=Parameters!enddate.Value</Value>
+        <Left>0.75in</Left>
+      </Textbox>
+      <Textbox Name="textbox3">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <Top>0.875in</Top>
+        <Height>0.25in</Height>
+        <Width>0.625in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>To:</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+      <Textbox Name="textbox7">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <FontStyle>Italic</FontStyle>
+          <Color>Brown</Color>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <Top>1.125in</Top>
+        <Height>0.25in</Height>
+        <Width>1.375in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>Approved Time Only</Value>
+        <Left>0.125in</Left>
+      </Textbox>
+    </ReportItems>
+    <Style />
+    <Height>4.375in</Height>
+  </Body>
+  <DataSources>
+    <DataSource Name="TEMPO">
+      <rd:DataSourceID>82a04e81-af72-4d5e-ac7b-7dade1c7ca44</rd:DataSourceID>
+      <DataSourceReference>TEMPO</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <Code />
+  <Width>11in</Width>
+  <DataSets>
+    <DataSet Name="TEMPO">
+      <Fields>
+        <Field Name="periodtotal">
+          <DataField>periodtotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="employeename">
+          <DataField>employeename</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="endingdate">
+          <DataField>endingdate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>TEMPO</DataSourceName>
+        <CommandText>SELECT     SUM(dbo.timeentry.sunday) + SUM(dbo.timeentry.monday) + SUM(dbo.timeentry.tuesday) + SUM(dbo.timeentry.wednesday) 
+                      + SUM(dbo.timeentry.thursday) + SUM(dbo.timeentry.friday) + SUM(dbo.timeentry.saturday) AS periodtotal, dbo.employee.employeename, 
+                      dbo.periodending.endingdate
+FROM         dbo.timesheet INNER JOIN
+                      dbo.timeentry ON dbo.timesheet.tid = dbo.timeentry.tid INNER JOIN
+                      dbo.employee ON dbo.timesheet.empid = dbo.employee.empid INNER JOIN
+                      dbo.periodending ON dbo.timesheet.peid = dbo.periodending.peid
+WHERE     (dbo.periodending.endingdate BETWEEN @fromdate AND @enddate) AND (dbo.employee.empid = @empid) AND (dbo.timesheet.statusid = 3)
+GROUP BY dbo.timesheet.tid, dbo.employee.employeename, dbo.periodending.endingdate</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@fromdate">
+            <Value>=Parameters!fromdate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@enddate">
+            <Value>=Parameters!enddate.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@empid">
+            <Value>=Parameters!empid.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <PageHeight>8.5in</PageHeight>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <Description />
+  <PageWidth>11in</PageWidth>
+  <rd:ReportID>440b1d51-8186-4a8f-8d05-b8a17241cfbc</rd:ReportID>
+  <PageFooter>
+    <ReportItems>
+      <Textbox Name="textbox22">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <FontSize>8pt</FontSize>
+          <FontStyle>Italic</FontStyle>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <Width>2.875in</Width>
+        <CanGrow>true</CanGrow>
+        <Value>TEMPO TimeSheet Management</Value>
+      </Textbox>
+      <Textbox Name="textbox19">
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <FontSize>8pt</FontSize>
+          <FontStyle>Italic</FontStyle>
+          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingRight>2pt</PaddingRight>
+        </Style>
+        <rd:DefaultName>textbox19</rd:DefaultName>
+        <CanGrow>true</CanGrow>
+        <Value>=Globals!ExecutionTime</Value>
+        <Left>8.125in</Left>
+      </Textbox>
+    </ReportItems>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <Style />
+    <Height>0.25in</Height>
+  </PageFooter>
+  <ReportParameters>
+    <ReportParameter Name="fromdate">
+      <DataType>DateTime</DataType>
+      <Prompt>fromdate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="enddate">
+      <DataType>DateTime</DataType>
+      <Prompt>enddate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="empid">
+      <DataType>Integer</DataType>
+      <Prompt>empid</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

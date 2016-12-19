@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=PeriodEndingDS" filename="PeriodEndingDS.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=TimeSheetDS" filename="TimeSheetDS.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=StatusDS" filename="StatusDS.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?wsdl" filename="TimeSheetServices.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?disco" filename="TimeSheetServices.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=ProjectDS" filename="ProjectDS.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://tempuri.org/PeriodEndingDS.xsd" />
+      <s:import namespace="http://tempuri.org/TimeSheetDS.xsd" />
+      <s:import namespace="http://tempuri.org/ProjectDS.xsd" />
+      <s:import namespace="http://tempuri.org/StatusDS.xsd" />
+      <s:import schemaLocation="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=PeriodEndingDS" namespace="http://tempuri.org/PeriodEndingDS.xsd" />
+      <s:import schemaLocation="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=StatusDS" namespace="http://tempuri.org/StatusDS.xsd" />
+      <s:import schemaLocation="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=ProjectDS" namespace="http://tempuri.org/ProjectDS.xsd" />
+      <s:import schemaLocation="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx?schema=TimeSheetDS" namespace="http://tempuri.org/TimeSheetDS.xsd" />
+      <s:element name="GetPeriodEndingByRange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="from" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="to" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPeriodEndingByRangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPeriodEndingByRangeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/PeriodEndingDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTimeSheet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTimeSheetResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSavedRejectedTimeSheets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="employeeid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSavedRejectedTimeSheetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSavedRejectedTimeSheetsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTimeSheet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timesheet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTimeSheetResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteTimeSheet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timesheet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTimeSheetResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubmittedTimeSheets">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubmittedTimeSheetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubmittedTimeSheetsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApproveTimeSheets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timesheet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApproveTimeSheetsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetApprovedTimeSheets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="employeeid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="from" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="to" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetApprovedTimeSheetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetApprovedTimeSheetsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProjectListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/ProjectDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusStates">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="timesheet">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/TimeSheetDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="index" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="callingempid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatusStatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatusStatesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="http://tempuri.org/StatusDS.xsd" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPeriodEndingByRangeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPeriodEndingByRange" />
+  </wsdl:message>
+  <wsdl:message name="GetPeriodEndingByRangeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPeriodEndingByRangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTimeSheetSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTimeSheet" />
+  </wsdl:message>
+  <wsdl:message name="CreateTimeSheetSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTimeSheetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSavedRejectedTimeSheetsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSavedRejectedTimeSheets" />
+  </wsdl:message>
+  <wsdl:message name="GetSavedRejectedTimeSheetsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSavedRejectedTimeSheetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTimeSheetSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTimeSheet" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTimeSheetSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTimeSheetResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTimeSheetSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteTimeSheet" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTimeSheetSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteTimeSheetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubmittedTimeSheetsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubmittedTimeSheets" />
+  </wsdl:message>
+  <wsdl:message name="GetSubmittedTimeSheetsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubmittedTimeSheetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApproveTimeSheetsSoapIn">
+    <wsdl:part name="parameters" element="tns:ApproveTimeSheets" />
+  </wsdl:message>
+  <wsdl:message name="ApproveTimeSheetsSoapOut">
+    <wsdl:part name="parameters" element="tns:ApproveTimeSheetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetApprovedTimeSheetsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetApprovedTimeSheets" />
+  </wsdl:message>
+  <wsdl:message name="GetApprovedTimeSheetsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetApprovedTimeSheetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectList" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusStatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatusStates" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusStatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatusStatesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TimeSheetServicesSoap">
+    <wsdl:operation name="GetPeriodEndingByRange">
+      <wsdl:input message="tns:GetPeriodEndingByRangeSoapIn" />
+      <wsdl:output message="tns:GetPeriodEndingByRangeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTimeSheet">
+      <wsdl:input message="tns:CreateTimeSheetSoapIn" />
+      <wsdl:output message="tns:CreateTimeSheetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSavedRejectedTimeSheets">
+      <wsdl:input message="tns:GetSavedRejectedTimeSheetsSoapIn" />
+      <wsdl:output message="tns:GetSavedRejectedTimeSheetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTimeSheet">
+      <wsdl:input message="tns:UpdateTimeSheetSoapIn" />
+      <wsdl:output message="tns:UpdateTimeSheetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTimeSheet">
+      <wsdl:input message="tns:DeleteTimeSheetSoapIn" />
+      <wsdl:output message="tns:DeleteTimeSheetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubmittedTimeSheets">
+      <wsdl:input message="tns:GetSubmittedTimeSheetsSoapIn" />
+      <wsdl:output message="tns:GetSubmittedTimeSheetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApproveTimeSheets">
+      <wsdl:input message="tns:ApproveTimeSheetsSoapIn" />
+      <wsdl:output message="tns:ApproveTimeSheetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApprovedTimeSheets">
+      <wsdl:input message="tns:GetApprovedTimeSheetsSoapIn" />
+      <wsdl:output message="tns:GetApprovedTimeSheetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectList">
+      <wsdl:input message="tns:GetProjectListSoapIn" />
+      <wsdl:output message="tns:GetProjectListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusStates">
+      <wsdl:input message="tns:GetStatusStatesSoapIn" />
+      <wsdl:output message="tns:GetStatusStatesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TimeSheetServicesSoap" type="tns:TimeSheetServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPeriodEndingByRange">
+      <soap:operation soapAction="http://tempuri.org/GetPeriodEndingByRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTimeSheet">
+      <soap:operation soapAction="http://tempuri.org/CreateTimeSheet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSavedRejectedTimeSheets">
+      <soap:operation soapAction="http://tempuri.org/GetSavedRejectedTimeSheets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTimeSheet">
+      <soap:operation soapAction="http://tempuri.org/UpdateTimeSheet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTimeSheet">
+      <soap:operation soapAction="http://tempuri.org/DeleteTimeSheet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubmittedTimeSheets">
+      <soap:operation soapAction="http://tempuri.org/GetSubmittedTimeSheets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveTimeSheets">
+      <soap:operation soapAction="http://tempuri.org/ApproveTimeSheets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApprovedTimeSheets">
+      <soap:operation soapAction="http://tempuri.org/GetApprovedTimeSheets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectList">
+      <soap:operation soapAction="http://tempuri.org/GetProjectList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusStates">
+      <soap:operation soapAction="http://tempuri.org/GetStatusStates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TimeSheetServicesSoap12" type="tns:TimeSheetServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPeriodEndingByRange">
+      <soap12:operation soapAction="http://tempuri.org/GetPeriodEndingByRange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTimeSheet">
+      <soap12:operation soapAction="http://tempuri.org/CreateTimeSheet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSavedRejectedTimeSheets">
+      <soap12:operation soapAction="http://tempuri.org/GetSavedRejectedTimeSheets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTimeSheet">
+      <soap12:operation soapAction="http://tempuri.org/UpdateTimeSheet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTimeSheet">
+      <soap12:operation soapAction="http://tempuri.org/DeleteTimeSheet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubmittedTimeSheets">
+      <soap12:operation soapAction="http://tempuri.org/GetSubmittedTimeSheets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveTimeSheets">
+      <soap12:operation soapAction="http://tempuri.org/ApproveTimeSheets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApprovedTimeSheets">
+      <soap12:operation soapAction="http://tempuri.org/GetApprovedTimeSheets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectList">
+      <soap12:operation soapAction="http://tempuri.org/GetProjectList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusStates">
+      <soap12:operation soapAction="http://tempuri.org/GetStatusStates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TimeSheetServices">
+    <wsdl:port name="TimeSheetServicesSoap" binding="tns:TimeSheetServicesSoap">
+      <soap:address location="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TimeSheetServicesSoap12" binding="tns:TimeSheetServicesSoap12">
+      <soap12:address location="http://localhost:1185/Tempo.ServiceInterface/TimeSheetServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
