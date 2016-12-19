@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="021018019531473182912e0e05073755" Name="Diagram1">
+        <EntityTypeShape EntityType="TEMPOModel.client" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.employee" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.JobYear" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.mmt" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.module" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.periodending" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.project" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.projecttype" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.status" Width="1.5" PointX="3.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.timeentry" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.timesheet" Width="1.5" PointX="6" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.worktype" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="TEMPOModel.FK__project__clienti__117F9D94" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__timesheet__empid__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK_project_JobYear" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__mmt__entryid__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__mmt__projectid__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__mmt__worktypeid__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__timesheet__peid__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__project__project__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__timeentry__proje__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__timesheet__statu__164452B1" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__timeentry__tid__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.FK__timeentry__workt__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="TEMPOModel.moduleauth" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

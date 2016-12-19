@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEMPO.WebApi", "TEMPO.WebAp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TEMPO.DB", "TEMPO.DB\TEMPO.DB.sqlproj", "{9DF7769F-5CC6-4BE7-844A-F8F0C5459330}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEMPO.Data", "TEMPO.Data\TEMPO.Data.csproj", "{3DA77959-17D5-48A5-8262-E8AF5968391F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug__mstuart__02272003_refactoring|.NET = Debug__mstuart__02272003_refactoring|.NET
@@ -325,6 +327,38 @@ Global
 		{9DF7769F-5CC6-4BE7-844A-F8F0C5459330}.Release|x86.ActiveCfg = Release|Any CPU
 		{9DF7769F-5CC6-4BE7-844A-F8F0C5459330}.Release|x86.Build.0 = Release|Any CPU
 		{9DF7769F-5CC6-4BE7-844A-F8F0C5459330}.Release|x86.Deploy.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|.NET.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|.NET.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|Any CPU.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|x86.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug__mstuart__02272003_refactoring|x86.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|.NET.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Debug|x86.Build.0 = Debug|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|.NET.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|.NET.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|Any CPU.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|Mixed Platforms.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|x86.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Production|x86.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|.NET.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|.NET.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|x86.ActiveCfg = Release|Any CPU
+		{3DA77959-17D5-48A5-8262-E8AF5968391F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
