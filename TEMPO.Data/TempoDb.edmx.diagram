@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="021018019531473182912e0e05073755" Name="Diagram1">
-        <EntityTypeShape EntityType="TEMPOModel.client" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.employee" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.Client" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.Employee" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TEMPOModel.JobYear" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.mmt" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.module" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.periodending" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.project" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.projecttype" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.status" Width="1.5" PointX="3.75" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.timeentry" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.timesheet" Width="1.5" PointX="6" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.worktype" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.MiscTimeLog" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.Module" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.PeriodEnding" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.Project" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.ProjectType" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.Status" Width="1.5" PointX="3.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.TimeEntry" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.TimeSheet" Width="1.5" PointX="6" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.WorkType" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
         <AssociationConnector Association="TEMPOModel.FK__project__clienti__117F9D94" ManuallyRouted="false" />
         <AssociationConnector Association="TEMPOModel.FK__timesheet__empid__4C6B5938" ManuallyRouted="false" />
         <AssociationConnector Association="TEMPOModel.FK_project_JobYear" ManuallyRouted="false" />

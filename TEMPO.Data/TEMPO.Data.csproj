@@ -51,32 +51,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="client.cs">
+    <Compile Include="Client.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="employee.cs">
+    <Compile Include="Employee.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="JobYear.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="mmt.cs">
+    <Compile Include="MiscTimeLog.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="module.cs">
+    <Compile Include="Module.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="periodending.cs">
+    <Compile Include="PeriodEnding.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="project.cs">
+    <Compile Include="Project.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="projecttype.cs">
+    <Compile Include="ProjectType.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="status.cs">
+    <Compile Include="Status.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="TempoDb.Context.cs">
@@ -94,13 +94,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TempoDb.edmx</DependentUpon>
     </Compile>
-    <Compile Include="timeentry.cs">
+    <Compile Include="TimeEntry.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="timesheet.cs">
+    <Compile Include="TimeSheet.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="worktype.cs">
+    <Compile Include="WorkType.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
   </ItemGroup>

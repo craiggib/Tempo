@@ -12,18 +12,18 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class projecttype
+    public partial class ProjectType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public projecttype()
+        public ProjectType()
         {
-            this.projects = new HashSet<project>();
+            this.projects = new HashSet<Project>();
         }
     
         public int projecttypeid { get; set; }
         public string projecttypedesc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<project> projects { get; set; }
+        public virtual ICollection<Project> projects { get; set; }
     }
 }

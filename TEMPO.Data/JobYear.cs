@@ -17,13 +17,13 @@ namespace TEMPO.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JobYear()
         {
-            this.projects = new HashSet<project>();
+            this.projects = new HashSet<Project>();
         }
     
         public int JobYearID { get; set; }
         public int JobYear1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<project> projects { get; set; }
+        public virtual ICollection<Project> projects { get; set; }
     }
 }

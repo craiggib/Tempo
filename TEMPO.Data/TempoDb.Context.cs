@@ -25,17 +25,17 @@ namespace TEMPO.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<client> clients { get; set; }
-        public virtual DbSet<employee> employees { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<JobYear> JobYears { get; set; }
-        public virtual DbSet<mmt> mmts { get; set; }
-        public virtual DbSet<module> modules { get; set; }
-        public virtual DbSet<periodending> periodendings { get; set; }
-        public virtual DbSet<project> projects { get; set; }
-        public virtual DbSet<projecttype> projecttypes { get; set; }
-        public virtual DbSet<status> status { get; set; }
-        public virtual DbSet<timeentry> timeentries { get; set; }
-        public virtual DbSet<timesheet> timesheets { get; set; }
-        public virtual DbSet<worktype> worktypes { get; set; }
+        public virtual DbSet<MiscTimeLog> MiscTimeLogs { get; set; }
+        public virtual DbSet<Module> Modules { get; set; }
+        public virtual DbSet<PeriodEnding> PeriodEndings { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectType> ProjectTypes { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<TimeEntry> TimeEntries { get; set; }
+        public virtual DbSet<TimeSheet> TimeSheets { get; set; }
+        public virtual DbSet<WorkType> WorkTypes { get; set; }
     }
 }

@@ -12,18 +12,18 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class status
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public status()
+        public Status()
         {
-            this.timesheets = new HashSet<timesheet>();
+            this.timesheets = new HashSet<TimeSheet>();
         }
     
         public int statusid { get; set; }
         public string statusname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timesheet> timesheets { get; set; }
+        public virtual ICollection<TimeSheet> timesheets { get; set; }
     }
 }

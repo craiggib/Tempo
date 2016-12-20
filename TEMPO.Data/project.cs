@@ -12,13 +12,13 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class project
+    public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public project()
+        public Project()
         {
-            this.mmts = new HashSet<mmt>();
-            this.timeentries = new HashSet<timeentry>();
+            this.mmts = new HashSet<MiscTimeLog>();
+            this.timeentries = new HashSet<TimeEntry>();
         }
     
         public int projectid { get; set; }
@@ -29,12 +29,12 @@ namespace TEMPO.Data
         public Nullable<int> projecttypeid { get; set; }
         public string description { get; set; }
     
-        public virtual client client { get; set; }
+        public virtual Client client { get; set; }
         public virtual JobYear JobYear { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<mmt> mmts { get; set; }
-        public virtual projecttype projecttype { get; set; }
+        public virtual ICollection<MiscTimeLog> mmts { get; set; }
+        public virtual ProjectType projecttype { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timeentry> timeentries { get; set; }
+        public virtual ICollection<TimeEntry> timeentries { get; set; }
     }
 }

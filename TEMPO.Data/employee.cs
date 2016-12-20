@@ -12,13 +12,13 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class employee
+    public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public employee()
+        public Employee()
         {
-            this.timesheets = new HashSet<timesheet>();
-            this.modules = new HashSet<module>();
+            this.timesheets = new HashSet<TimeSheet>();
+            this.modules = new HashSet<Module>();
         }
     
         public int empid { get; set; }
@@ -28,8 +28,8 @@ namespace TEMPO.Data
         public bool active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timesheet> timesheets { get; set; }
+        public virtual ICollection<TimeSheet> timesheets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<module> modules { get; set; }
+        public virtual ICollection<Module> modules { get; set; }
     }
 }

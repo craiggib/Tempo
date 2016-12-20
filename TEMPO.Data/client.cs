@@ -12,18 +12,18 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class client
+    public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public client()
+        public Client()
         {
-            this.projects = new HashSet<project>();
+            this.projects = new HashSet<Project>();
         }
     
         public int clientid { get; set; }
         public string clientname { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<project> projects { get; set; }
+        public virtual ICollection<Project> projects { get; set; }
     }
 }

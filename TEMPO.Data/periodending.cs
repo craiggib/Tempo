@@ -12,18 +12,18 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class periodending
+    public partial class PeriodEnding
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public periodending()
+        public PeriodEnding()
         {
-            this.timesheets = new HashSet<timesheet>();
+            this.timesheets = new HashSet<TimeSheet>();
         }
     
         public int peid { get; set; }
         public System.DateTime endingdate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timesheet> timesheets { get; set; }
+        public virtual ICollection<TimeSheet> timesheets { get; set; }
     }
 }

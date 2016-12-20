@@ -12,21 +12,21 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class worktype
+    public partial class WorkType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public worktype()
+        public WorkType()
         {
-            this.mmts = new HashSet<mmt>();
-            this.timeentries = new HashSet<timeentry>();
+            this.mmts = new HashSet<MiscTimeLog>();
+            this.timeentries = new HashSet<TimeEntry>();
         }
     
         public int worktypeid { get; set; }
         public string worktypename { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<mmt> mmts { get; set; }
+        public virtual ICollection<MiscTimeLog> mmts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timeentry> timeentries { get; set; }
+        public virtual ICollection<TimeEntry> timeentries { get; set; }
     }
 }

@@ -12,12 +12,12 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class timesheet
+    public partial class TimeSheet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public timesheet()
+        public TimeSheet()
         {
-            this.timeentries = new HashSet<timeentry>();
+            this.timeentries = new HashSet<TimeEntry>();
         }
     
         public int tid { get; set; }
@@ -26,10 +26,10 @@ namespace TEMPO.Data
         public Nullable<int> statusid { get; set; }
         public string notes { get; set; }
     
-        public virtual employee employee { get; set; }
-        public virtual periodending periodending { get; set; }
-        public virtual status status { get; set; }
+        public virtual Employee employee { get; set; }
+        public virtual PeriodEnding periodending { get; set; }
+        public virtual Status status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<timeentry> timeentries { get; set; }
+        public virtual ICollection<TimeEntry> timeentries { get; set; }
     }
 }

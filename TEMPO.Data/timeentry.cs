@@ -12,12 +12,12 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class timeentry
+    public partial class TimeEntry
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public timeentry()
+        public TimeEntry()
         {
-            this.mmts = new HashSet<mmt>();
+            this.mmts = new HashSet<MiscTimeLog>();
         }
     
         public int entryid { get; set; }
@@ -33,9 +33,9 @@ namespace TEMPO.Data
         public Nullable<int> projectid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<mmt> mmts { get; set; }
-        public virtual project project { get; set; }
-        public virtual timesheet timesheet { get; set; }
-        public virtual worktype worktype { get; set; }
+        public virtual ICollection<MiscTimeLog> mmts { get; set; }
+        public virtual Project project { get; set; }
+        public virtual TimeSheet timesheet { get; set; }
+        public virtual WorkType worktype { get; set; }
     }
 }

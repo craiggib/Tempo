@@ -12,15 +12,15 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class mmt
+    public partial class MiscTimeLog
     {
         public int mmtid { get; set; }
         public Nullable<int> entryid { get; set; }
         public Nullable<int> worktypeid { get; set; }
         public Nullable<int> projectid { get; set; }
     
-        public virtual timeentry timeentry { get; set; }
-        public virtual project project { get; set; }
-        public virtual worktype worktype { get; set; }
+        public virtual TimeEntry timeentry { get; set; }
+        public virtual Project project { get; set; }
+        public virtual WorkType worktype { get; set; }
     }
 }

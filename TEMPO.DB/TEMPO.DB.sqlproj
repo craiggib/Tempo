@@ -81,10 +81,6 @@
     <Build Include="dbo\Tables\project.sql" />
     <Build Include="dbo\Tables\timesheet.sql" />
     <Build Include="dbo\Views\ProjectList.sql" />
-    <Build Include="Security\tempo_user.sql" />
-    <Build Include="Security\tuser.sql" />
-    <Build Include="Security\tempouser.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Stored Procedures\DeleteUserRoles.sql" />
     <Build Include="dbo\Stored Procedures\GetAllRoles.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployee.sql" />
@@ -95,6 +91,5 @@
     <Build Include="dbo\Stored Procedures\EmployeeTimeSheetReport.sql" />
     <Build Include="dbo\Stored Procedures\GetJobYears.sql" />
     <Build Include="dbo\Stored Procedures\GetSubmittedTimeSheets.sql" />
-    <Build Include="Security\tempo_user_1.sql" />
   </ItemGroup>
 </Project>

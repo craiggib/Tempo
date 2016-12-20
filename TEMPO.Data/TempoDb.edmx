@@ -371,7 +371,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TEMPOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="client">
+        <EntityType Name="Client">
           <Key>
             <PropertyRef Name="clientid" />
           </Key>
@@ -379,7 +379,7 @@
           <Property Name="clientname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="projects" Relationship="Self.FK__project__clienti__117F9D94" FromRole="client" ToRole="project" />
         </EntityType>
-        <EntityType Name="employee">
+        <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="empid" />
           </Key>
@@ -399,7 +399,7 @@
           <Property Name="JobYear1" Type="Int32" Nullable="false" />
           <NavigationProperty Name="projects" Relationship="Self.FK_project_JobYear" FromRole="JobYear" ToRole="project" />
         </EntityType>
-        <EntityType Name="mmt">
+        <EntityType Name="MiscTimeLog">
           <Key>
             <PropertyRef Name="mmtid" />
           </Key>
@@ -411,7 +411,7 @@
           <NavigationProperty Name="project" Relationship="Self.FK__mmt__projectid__1B0907CE" FromRole="mmt" ToRole="project" />
           <NavigationProperty Name="worktype" Relationship="Self.FK__mmt__worktypeid__1BFD2C07" FromRole="mmt" ToRole="worktype" />
         </EntityType>
-        <EntityType Name="module">
+        <EntityType Name="Module">
           <Key>
             <PropertyRef Name="moduleid" />
           </Key>
@@ -419,7 +419,7 @@
           <Property Name="modulename" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="employees" Relationship="Self.moduleauth" FromRole="module" ToRole="employee" />
         </EntityType>
-        <EntityType Name="periodending">
+        <EntityType Name="PeriodEnding">
           <Key>
             <PropertyRef Name="peid" />
           </Key>
@@ -427,7 +427,7 @@
           <Property Name="endingdate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="timesheets" Relationship="Self.FK__timesheet__peid__15502E78" FromRole="periodending" ToRole="timesheet" />
         </EntityType>
-        <EntityType Name="project">
+        <EntityType Name="Project">
           <Key>
             <PropertyRef Name="projectid" />
           </Key>
@@ -444,7 +444,7 @@
           <NavigationProperty Name="projecttype" Relationship="Self.FK__project__project__1273C1CD" FromRole="project" ToRole="projecttype" />
           <NavigationProperty Name="timeentries" Relationship="Self.FK__timeentry__proje__5224328E" FromRole="project" ToRole="timeentry" />
         </EntityType>
-        <EntityType Name="projecttype">
+        <EntityType Name="ProjectType">
           <Key>
             <PropertyRef Name="projecttypeid" />
           </Key>
@@ -452,7 +452,7 @@
           <Property Name="projecttypedesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="projects" Relationship="Self.FK__project__project__1273C1CD" FromRole="projecttype" ToRole="project" />
         </EntityType>
-        <EntityType Name="status">
+        <EntityType Name="Status">
           <Key>
             <PropertyRef Name="statusid" />
           </Key>
@@ -460,7 +460,7 @@
           <Property Name="statusname" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="timesheets" Relationship="Self.FK__timesheet__statu__164452B1" FromRole="status" ToRole="timesheet" />
         </EntityType>
-        <EntityType Name="timeentry">
+        <EntityType Name="TimeEntry">
           <Key>
             <PropertyRef Name="entryid" />
           </Key>
@@ -480,7 +480,7 @@
           <NavigationProperty Name="timesheet" Relationship="Self.FK__timeentry__tid__503BEA1C" FromRole="timeentry" ToRole="timesheet" />
           <NavigationProperty Name="worktype" Relationship="Self.FK__timeentry__workt__51300E55" FromRole="timeentry" ToRole="worktype" />
         </EntityType>
-        <EntityType Name="timesheet">
+        <EntityType Name="TimeSheet">
           <Key>
             <PropertyRef Name="tid" />
           </Key>
@@ -494,7 +494,7 @@
           <NavigationProperty Name="status" Relationship="Self.FK__timesheet__statu__164452B1" FromRole="timesheet" ToRole="status" />
           <NavigationProperty Name="timeentries" Relationship="Self.FK__timeentry__tid__503BEA1C" FromRole="timesheet" ToRole="timeentry" />
         </EntityType>
-        <EntityType Name="worktype">
+        <EntityType Name="WorkType">
           <Key>
             <PropertyRef Name="worktypeid" />
           </Key>
@@ -504,8 +504,8 @@
           <NavigationProperty Name="timeentries" Relationship="Self.FK__timeentry__workt__51300E55" FromRole="worktype" ToRole="timeentry" />
         </EntityType>
         <Association Name="FK__project__clienti__117F9D94">
-          <End Role="client" Type="Self.client" Multiplicity="0..1" />
-          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <End Role="client" Type="TEMPOModel.Client" Multiplicity="0..1" />
+          <End Role="project" Type="TEMPOModel.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="client">
               <PropertyRef Name="clientid" />
@@ -516,8 +516,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__timesheet__empid__4C6B5938">
-          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
-          <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+          <End Role="employee" Type="TEMPOModel.Employee" Multiplicity="0..1" />
+          <End Role="timesheet" Type="TEMPOModel.TimeSheet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="employee">
               <PropertyRef Name="empid" />
@@ -529,7 +529,7 @@
         </Association>
         <Association Name="FK_project_JobYear">
           <End Role="JobYear" Type="Self.JobYear" Multiplicity="1" />
-          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <End Role="project" Type="TEMPOModel.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="JobYear">
               <PropertyRef Name="JobYearID" />
@@ -540,10 +540,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__mmt__entryid__55009F39">
-          <End Role="timeentry" Type="Self.timeentry" Multiplicity="0..1">
+          <End Role="timeentry" Type="TEMPOModel.TimeEntry" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="mmt" Type="Self.mmt" Multiplicity="*" />
+          <End Role="mmt" Type="TEMPOModel.MiscTimeLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timeentry">
               <PropertyRef Name="entryid" />
@@ -554,8 +554,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__mmt__projectid__1B0907CE">
-          <End Role="project" Type="Self.project" Multiplicity="0..1" />
-          <End Role="mmt" Type="Self.mmt" Multiplicity="*" />
+          <End Role="project" Type="TEMPOModel.Project" Multiplicity="0..1" />
+          <End Role="mmt" Type="TEMPOModel.MiscTimeLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="project">
               <PropertyRef Name="projectid" />
@@ -566,8 +566,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__mmt__worktypeid__1BFD2C07">
-          <End Role="worktype" Type="Self.worktype" Multiplicity="0..1" />
-          <End Role="mmt" Type="Self.mmt" Multiplicity="*" />
+          <End Role="worktype" Type="TEMPOModel.WorkType" Multiplicity="0..1" />
+          <End Role="mmt" Type="TEMPOModel.MiscTimeLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="worktype">
               <PropertyRef Name="worktypeid" />
@@ -578,8 +578,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__timesheet__peid__15502E78">
-          <End Role="periodending" Type="Self.periodending" Multiplicity="0..1" />
-          <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+          <End Role="periodending" Type="TEMPOModel.PeriodEnding" Multiplicity="0..1" />
+          <End Role="timesheet" Type="TEMPOModel.TimeSheet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="periodending">
               <PropertyRef Name="peid" />
@@ -590,8 +590,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__project__project__1273C1CD">
-          <End Role="projecttype" Type="Self.projecttype" Multiplicity="0..1" />
-          <End Role="project" Type="Self.project" Multiplicity="*" />
+          <End Role="projecttype" Type="TEMPOModel.ProjectType" Multiplicity="0..1" />
+          <End Role="project" Type="TEMPOModel.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="projecttype">
               <PropertyRef Name="projecttypeid" />
@@ -602,8 +602,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__timeentry__proje__5224328E">
-          <End Role="project" Type="Self.project" Multiplicity="0..1" />
-          <End Role="timeentry" Type="Self.timeentry" Multiplicity="*" />
+          <End Role="project" Type="TEMPOModel.Project" Multiplicity="0..1" />
+          <End Role="timeentry" Type="TEMPOModel.TimeEntry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="project">
               <PropertyRef Name="projectid" />
@@ -614,8 +614,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__timesheet__statu__164452B1">
-          <End Role="status" Type="Self.status" Multiplicity="0..1" />
-          <End Role="timesheet" Type="Self.timesheet" Multiplicity="*" />
+          <End Role="status" Type="TEMPOModel.Status" Multiplicity="0..1" />
+          <End Role="timesheet" Type="TEMPOModel.TimeSheet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="status">
               <PropertyRef Name="statusid" />
@@ -626,10 +626,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__timeentry__tid__503BEA1C">
-          <End Role="timesheet" Type="Self.timesheet" Multiplicity="0..1">
+          <End Role="timesheet" Type="TEMPOModel.TimeSheet" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="timeentry" Type="Self.timeentry" Multiplicity="*" />
+          <End Role="timeentry" Type="TEMPOModel.TimeEntry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="timesheet">
               <PropertyRef Name="tid" />
@@ -640,8 +640,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__timeentry__workt__51300E55">
-          <End Role="worktype" Type="Self.worktype" Multiplicity="0..1" />
-          <End Role="timeentry" Type="Self.timeentry" Multiplicity="*" />
+          <End Role="worktype" Type="TEMPOModel.WorkType" Multiplicity="0..1" />
+          <End Role="timeentry" Type="TEMPOModel.TimeEntry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="worktype">
               <PropertyRef Name="worktypeid" />
@@ -652,73 +652,73 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="moduleauth">
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <End Role="module" Type="Self.module" Multiplicity="*" />
+          <End Role="employee" Type="TEMPOModel.Employee" Multiplicity="*" />
+          <End Role="module" Type="TEMPOModel.Module" Multiplicity="*" />
         </Association>
         <EntityContainer Name="TEMPOEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="clients" EntityType="Self.client" />
-          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="Clients" EntityType="TEMPOModel.Client" />
+          <EntitySet Name="Employees" EntityType="TEMPOModel.Employee" />
           <EntitySet Name="JobYears" EntityType="Self.JobYear" />
-          <EntitySet Name="mmts" EntityType="Self.mmt" />
-          <EntitySet Name="modules" EntityType="Self.module" />
-          <EntitySet Name="periodendings" EntityType="Self.periodending" />
-          <EntitySet Name="projects" EntityType="Self.project" />
-          <EntitySet Name="projecttypes" EntityType="Self.projecttype" />
-          <EntitySet Name="status" EntityType="Self.status" />
-          <EntitySet Name="timeentries" EntityType="Self.timeentry" />
-          <EntitySet Name="timesheets" EntityType="Self.timesheet" />
-          <EntitySet Name="worktypes" EntityType="Self.worktype" />
+          <EntitySet Name="MiscTimeLogs" EntityType="TEMPOModel.MiscTimeLog" />
+          <EntitySet Name="Modules" EntityType="TEMPOModel.Module" />
+          <EntitySet Name="PeriodEndings" EntityType="TEMPOModel.PeriodEnding" />
+          <EntitySet Name="Projects" EntityType="TEMPOModel.Project" />
+          <EntitySet Name="ProjectTypes" EntityType="TEMPOModel.ProjectType" />
+          <EntitySet Name="Status" EntityType="TEMPOModel.Status" />
+          <EntitySet Name="TimeEntries" EntityType="TEMPOModel.TimeEntry" />
+          <EntitySet Name="TimeSheets" EntityType="TEMPOModel.TimeSheet" />
+          <EntitySet Name="WorkTypes" EntityType="TEMPOModel.WorkType" />
           <AssociationSet Name="FK__project__clienti__117F9D94" Association="Self.FK__project__clienti__117F9D94">
-            <End Role="client" EntitySet="clients" />
-            <End Role="project" EntitySet="projects" />
+            <End Role="client" EntitySet="Clients" />
+            <End Role="project" EntitySet="Projects" />
           </AssociationSet>
           <AssociationSet Name="FK__timesheet__empid__4C6B5938" Association="Self.FK__timesheet__empid__4C6B5938">
-            <End Role="employee" EntitySet="employees" />
-            <End Role="timesheet" EntitySet="timesheets" />
+            <End Role="employee" EntitySet="Employees" />
+            <End Role="timesheet" EntitySet="TimeSheets" />
           </AssociationSet>
           <AssociationSet Name="FK_project_JobYear" Association="Self.FK_project_JobYear">
             <End Role="JobYear" EntitySet="JobYears" />
-            <End Role="project" EntitySet="projects" />
+            <End Role="project" EntitySet="Projects" />
           </AssociationSet>
           <AssociationSet Name="FK__mmt__entryid__55009F39" Association="Self.FK__mmt__entryid__55009F39">
-            <End Role="timeentry" EntitySet="timeentries" />
-            <End Role="mmt" EntitySet="mmts" />
+            <End Role="timeentry" EntitySet="TimeEntries" />
+            <End Role="mmt" EntitySet="MiscTimeLogs" />
           </AssociationSet>
           <AssociationSet Name="FK__mmt__projectid__1B0907CE" Association="Self.FK__mmt__projectid__1B0907CE">
-            <End Role="project" EntitySet="projects" />
-            <End Role="mmt" EntitySet="mmts" />
+            <End Role="project" EntitySet="Projects" />
+            <End Role="mmt" EntitySet="MiscTimeLogs" />
           </AssociationSet>
           <AssociationSet Name="FK__mmt__worktypeid__1BFD2C07" Association="Self.FK__mmt__worktypeid__1BFD2C07">
-            <End Role="worktype" EntitySet="worktypes" />
-            <End Role="mmt" EntitySet="mmts" />
+            <End Role="worktype" EntitySet="WorkTypes" />
+            <End Role="mmt" EntitySet="MiscTimeLogs" />
           </AssociationSet>
           <AssociationSet Name="FK__timesheet__peid__15502E78" Association="Self.FK__timesheet__peid__15502E78">
-            <End Role="periodending" EntitySet="periodendings" />
-            <End Role="timesheet" EntitySet="timesheets" />
+            <End Role="periodending" EntitySet="PeriodEndings" />
+            <End Role="timesheet" EntitySet="TimeSheets" />
           </AssociationSet>
           <AssociationSet Name="FK__project__project__1273C1CD" Association="Self.FK__project__project__1273C1CD">
-            <End Role="projecttype" EntitySet="projecttypes" />
-            <End Role="project" EntitySet="projects" />
+            <End Role="projecttype" EntitySet="ProjectTypes" />
+            <End Role="project" EntitySet="Projects" />
           </AssociationSet>
           <AssociationSet Name="FK__timeentry__proje__5224328E" Association="Self.FK__timeentry__proje__5224328E">
-            <End Role="project" EntitySet="projects" />
-            <End Role="timeentry" EntitySet="timeentries" />
+            <End Role="project" EntitySet="Projects" />
+            <End Role="timeentry" EntitySet="TimeEntries" />
           </AssociationSet>
           <AssociationSet Name="FK__timesheet__statu__164452B1" Association="Self.FK__timesheet__statu__164452B1">
-            <End Role="status" EntitySet="status" />
-            <End Role="timesheet" EntitySet="timesheets" />
+            <End Role="status" EntitySet="Status" />
+            <End Role="timesheet" EntitySet="TimeSheets" />
           </AssociationSet>
           <AssociationSet Name="FK__timeentry__tid__503BEA1C" Association="Self.FK__timeentry__tid__503BEA1C">
-            <End Role="timesheet" EntitySet="timesheets" />
-            <End Role="timeentry" EntitySet="timeentries" />
+            <End Role="timesheet" EntitySet="TimeSheets" />
+            <End Role="timeentry" EntitySet="TimeEntries" />
           </AssociationSet>
           <AssociationSet Name="FK__timeentry__workt__51300E55" Association="Self.FK__timeentry__workt__51300E55">
-            <End Role="worktype" EntitySet="worktypes" />
-            <End Role="timeentry" EntitySet="timeentries" />
+            <End Role="worktype" EntitySet="WorkTypes" />
+            <End Role="timeentry" EntitySet="TimeEntries" />
           </AssociationSet>
           <AssociationSet Name="moduleauth" Association="Self.moduleauth">
-            <End Role="employee" EntitySet="employees" />
-            <End Role="module" EntitySet="modules" />
+            <End Role="employee" EntitySet="Employees" />
+            <End Role="module" EntitySet="Modules" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -727,16 +727,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TEMPOModelStoreContainer" CdmEntityContainer="TEMPOEntities">
-          <EntitySetMapping Name="clients">
-            <EntityTypeMapping TypeName="TEMPOModel.client">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="TEMPOModel.Client">
               <MappingFragment StoreEntitySet="client">
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
                 <ScalarProperty Name="clientname" ColumnName="clientname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="employees">
-            <EntityTypeMapping TypeName="TEMPOModel.employee">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TEMPOModel.Employee">
               <MappingFragment StoreEntitySet="employee">
                 <ScalarProperty Name="empid" ColumnName="empid" />
                 <ScalarProperty Name="employeename" ColumnName="employeename" />
@@ -754,8 +754,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="mmts">
-            <EntityTypeMapping TypeName="TEMPOModel.mmt">
+          <EntitySetMapping Name="MiscTimeLogs">
+            <EntityTypeMapping TypeName="TEMPOModel.MiscTimeLog">
               <MappingFragment StoreEntitySet="mmt">
                 <ScalarProperty Name="mmtid" ColumnName="mmtid" />
                 <ScalarProperty Name="entryid" ColumnName="entryid" />
@@ -764,24 +764,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="modules">
-            <EntityTypeMapping TypeName="TEMPOModel.module">
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="TEMPOModel.Module">
               <MappingFragment StoreEntitySet="module">
                 <ScalarProperty Name="moduleid" ColumnName="moduleid" />
                 <ScalarProperty Name="modulename" ColumnName="modulename" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="periodendings">
-            <EntityTypeMapping TypeName="TEMPOModel.periodending">
+          <EntitySetMapping Name="PeriodEndings">
+            <EntityTypeMapping TypeName="TEMPOModel.PeriodEnding">
               <MappingFragment StoreEntitySet="periodending">
                 <ScalarProperty Name="peid" ColumnName="peid" />
                 <ScalarProperty Name="endingdate" ColumnName="endingdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="projects">
-            <EntityTypeMapping TypeName="TEMPOModel.project">
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="TEMPOModel.Project">
               <MappingFragment StoreEntitySet="project">
                 <ScalarProperty Name="projectid" ColumnName="projectid" />
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
@@ -793,24 +793,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="projecttypes">
-            <EntityTypeMapping TypeName="TEMPOModel.projecttype">
+          <EntitySetMapping Name="ProjectTypes">
+            <EntityTypeMapping TypeName="TEMPOModel.ProjectType">
               <MappingFragment StoreEntitySet="projecttype">
                 <ScalarProperty Name="projecttypeid" ColumnName="projecttypeid" />
                 <ScalarProperty Name="projecttypedesc" ColumnName="projecttypedesc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="status">
-            <EntityTypeMapping TypeName="TEMPOModel.status">
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="TEMPOModel.Status">
               <MappingFragment StoreEntitySet="status">
                 <ScalarProperty Name="statusid" ColumnName="statusid" />
                 <ScalarProperty Name="statusname" ColumnName="statusname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="timeentries">
-            <EntityTypeMapping TypeName="TEMPOModel.timeentry">
+          <EntitySetMapping Name="TimeEntries">
+            <EntityTypeMapping TypeName="TEMPOModel.TimeEntry">
               <MappingFragment StoreEntitySet="timeentry">
                 <ScalarProperty Name="entryid" ColumnName="entryid" />
                 <ScalarProperty Name="tid" ColumnName="tid" />
@@ -826,8 +826,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="timesheets">
-            <EntityTypeMapping TypeName="TEMPOModel.timesheet">
+          <EntitySetMapping Name="TimeSheets">
+            <EntityTypeMapping TypeName="TEMPOModel.TimeSheet">
               <MappingFragment StoreEntitySet="timesheet">
                 <ScalarProperty Name="tid" ColumnName="tid" />
                 <ScalarProperty Name="peid" ColumnName="peid" />
@@ -837,8 +837,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="worktypes">
-            <EntityTypeMapping TypeName="TEMPOModel.worktype">
+          <EntitySetMapping Name="WorkTypes">
+            <EntityTypeMapping TypeName="TEMPOModel.WorkType">
               <MappingFragment StoreEntitySet="worktype">
                 <ScalarProperty Name="worktypeid" ColumnName="worktypeid" />
                 <ScalarProperty Name="worktypename" ColumnName="worktypename" />
