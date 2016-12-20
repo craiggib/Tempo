@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace TEMPO.WebApi.Areas.HelpPage.ModelDescriptions
+namespace TEMPO.Web.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

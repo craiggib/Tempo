@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using TEMPO.WebApi.Areas.HelpPage.ModelDescriptions;
-using TEMPO.WebApi.Areas.HelpPage.Models;
+using TEMPO.Web.Areas.HelpPage.ModelDescriptions;
+using TEMPO.Web.Areas.HelpPage.Models;
 
-namespace TEMPO.WebApi.Areas.HelpPage.Controllers
+namespace TEMPO.Web.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

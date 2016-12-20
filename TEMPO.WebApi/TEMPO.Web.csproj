@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TEMPO.WebApi</RootNamespace>
-    <AssemblyName>TEMPO.WebApi</AssemblyName>
+    <RootNamespace>TEMPO.Web</RootNamespace>
+    <AssemblyName>TEMPO.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -274,6 +274,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\TimeSheet\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,6 +286,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TEMPO.BusinessLayer\TEMPO.BusinessLayer.csproj">
+      <Project>{8E47C656-CAC5-4058-9CCC-1CDC9E3711A7}</Project>
+      <Name>TEMPO.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TEMPO.Data\TEMPO.Data.csproj">
+      <Project>{3da77959-17d5-48a5-8262-e8af5968391f}</Project>
+      <Name>TEMPO.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

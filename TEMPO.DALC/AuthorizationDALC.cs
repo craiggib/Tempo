@@ -47,7 +47,7 @@ namespace TEMPO.DALC {
             // build the empty data set
             AuthorizationDS authds = new AuthorizationDS();
             // populate the dataset
-            tempodb.LoadDataSet(command, authds, new string[] { "Module", "Authorization"});
+            tempodb.LoadDataSet(command, authds, new string[] { "Module", "ModuleAuth"});
 			return authds;
 		}
 

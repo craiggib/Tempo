@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using TEMPO.WebApi.Models;
-using TEMPO.WebApi.Providers;
-using TEMPO.WebApi.Results;
+using TEMPO.Web.Models;
+using TEMPO.Web.Providers;
+using TEMPO.Web.Results;
 
-namespace TEMPO.WebApi.Controllers
+namespace TEMPO.Web.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]

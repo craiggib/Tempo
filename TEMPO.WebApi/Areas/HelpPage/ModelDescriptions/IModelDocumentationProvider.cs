@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace TEMPO.WebApi.Areas.HelpPage.ModelDescriptions
+namespace TEMPO.Web.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

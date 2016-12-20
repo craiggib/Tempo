@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TEMPO.WebApi.Controllers
+namespace TEMPO.Web.Controllers
 {
     public class HomeController : Controller
     {

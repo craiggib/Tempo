@@ -1,39 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
+using System.Web.Mvc;
+using TEMPO.BusinessLayer.TimeSheets;
 
-namespace TEMPO.WebApi.Controllers
+namespace TEMPO.Web.Controllers
 {
-    public class TimeSheetController : ApiController
+    public class TimeSheetController : Controller
     {
-        // GET: api/TimeSheet
-        public IEnumerable<string> Get()
+        // GET: TimeSheet
+        public ActionResult Index()
         {
-            return new string[] { "value1", "value2" };
+            TimeSheet ts = new TimeSheet();
+            return View(ts.GetTimeSheets(9));
         }
 
-        // GET: api/TimeSheet/5
-        public string Get(int id)
+        // GET: TimeSheet/Details/5
+        public ActionResult Details(int id)
         {
-            return "value";
+            return View();
         }
 
-        // POST: api/TimeSheet
-        public void Post([FromBody]string value)
+        // GET: TimeSheet/Create
+        public ActionResult Create()
         {
+            return View();
         }
 
-        // PUT: api/TimeSheet/5
-        public void Put(int id, [FromBody]string value)
+        // POST: TimeSheet/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        // DELETE: api/TimeSheet/5
-        public void Delete(int id)
+        // GET: TimeSheet/Edit/5
+        public ActionResult Edit(int id)
         {
+            return View();
+        }
+
+        // POST: TimeSheet/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: TimeSheet/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: TimeSheet/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

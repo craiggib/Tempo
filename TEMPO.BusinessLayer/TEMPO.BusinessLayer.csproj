@@ -80,9 +80,26 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TEMPO.Data\TEMPO.Data.csproj">
+      <Project>{3da77959-17d5-48a5-8262-e8af5968391f}</Project>
+      <Name>TEMPO.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TEMPO.DB\TEMPO.DB.sqlproj">
+      <Project>{9df7769f-5cc6-4be7-844a-f8f0c5459330}</Project>
+      <Name>TEMPO.DB</Name>
+    </ProjectReference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
@@ -113,6 +130,12 @@
     <Compile Include="TimeSheet.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TimeSheets\TimeSheet.cs" />
+    <Compile Include="TimeSheets\TimeSheetStatus.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

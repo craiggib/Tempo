@@ -138,7 +138,7 @@ namespace TEMPO.Client {
 			// now update the value list
 			for (int i = 0; i<_listroles.Items.Count; i++) {
 				// attempt to find the module in the authorization list
-				if ( _authds.Authorization.FindBymoduleid( _authds.Module[i].ModuleID ) != null)
+				if ( _authds.ModuleAuth.FindBymoduleid( _authds.Module[i].ModuleID ) != null)
 					_listroles.SetSelected(i, true);
 				else 
 					_listroles.SetSelected(i, false);
@@ -185,12 +185,12 @@ namespace TEMPO.Client {
 		/// </summary>
 		private void UpdateAuthorization () {
 			// clear out the existing table
-			_authds.Authorization.Clear();
+			_authds.ModuleAuth.Clear();
 
 			// iterate through the value list
 			for (int i = 0; i<_listroles.Items.Count; i++) {
 				// attempt to find the module in the authorization list
-				if ( _authds.Authorization.FindBymoduleid( _authds.Module[i].ModuleID ) != null)
+				if ( _authds.ModuleAuth.FindBymoduleid( _authds.Module[i].ModuleID ) != null)
 					_listroles.SetSelected(i, true);
 				else 
 					_listroles.SetSelected(i, false);

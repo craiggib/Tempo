@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="TEMPO_Authorization_AuthFramework_AuthorizationServices" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:81/authorizationservices.asmx</Value>
+      <Value Profile="(Default)">http://localhost:56098/authorizationservices.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

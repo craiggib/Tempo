@@ -26,7 +26,7 @@ namespace TEMPO.Authorization.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:81/authorizationservices.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:56098/authorizationservices.asmx")]
         public string TEMPO_Authorization_AuthFramework_AuthorizationServices {
             get {
                 return ((string)(this["TEMPO_Authorization_AuthFramework_AuthorizationServices"]));

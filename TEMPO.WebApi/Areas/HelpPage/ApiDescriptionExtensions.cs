@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace TEMPO.WebApi.Areas.HelpPage
+namespace TEMPO.Web.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

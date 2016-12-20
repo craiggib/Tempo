@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace TEMPO.WebApi.Areas.HelpPage.ModelDescriptions
+namespace TEMPO.Web.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

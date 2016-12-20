@@ -135,6 +135,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProjectTypeDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="StatusDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,6 +202,7 @@
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WorkTypeDS.Designer.cs</LastGenOutput>
     </Content>
+    <None Include="app.config" />
     <None Include="AuthorizationDS.xsc">
       <DependentUpon>AuthorizationDS.xsd</DependentUpon>
     </None>
@@ -232,6 +238,10 @@
     </None>
     <None Include="ProjectTypeDS.xsx">
       <DependentUpon>ProjectTypeDS.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="StatusDS.xsx">
       <DependentUpon>StatusDS.xsd</DependentUpon>

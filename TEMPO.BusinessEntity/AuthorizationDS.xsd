@@ -1,39 +1,46 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<xs:schema id="AuthorizationDS" targetNamespace="http://tempuri.org/AuthorizationDS.xsd" elementFormDefault="qualified"
-	attributeFormDefault="qualified" xmlns="http://tempuri.org/AuthorizationDS.xsd" xmlns:mstns="http://tempuri.org/AuthorizationDS.xsd"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-	<xs:element name="AuthorizationDS" msdata:IsDataSet="true">
-		<xs:complexType>
-			<xs:choice maxOccurs="unbounded">
-				<xs:element name="Authorization">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="moduleid" type="xs:int" minOccurs="0" msdata:AutoIncrement="false" />
-							<xs:element name="empid" type="xs:int" minOccurs="0" msdata:AutoIncrement="false" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="Module">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="ModuleID" type="xs:int" minOccurs="0" msdata:AutoIncrement="true" />
-							<xs:element name="ModuleName" type="xs:string" minOccurs="0" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:choice>
-		</xs:complexType>
-		<xs:key name="AuthorizationDSKey1" msdata:PrimaryKey="true">
-			<xs:selector xpath=".//mstns:Authorization" />
-			<xs:field xpath="mstns:moduleid" />
-		</xs:key>
-		<xs:key name="AuthorizationDSKey3" msdata:PrimaryKey="true">
-			<xs:selector xpath=".//mstns:Module" />
-			<xs:field xpath="mstns:ModuleID" />
-		</xs:key>
-		<xs:keyref name="ModuleModule" refer="AuthorizationDSKey3" msdata:ConstraintOnly="true">
-			<xs:selector xpath=".//mstns:Authorization" />
-			<xs:field xpath="mstns:moduleid" />
-		</xs:keyref>
-	</xs:element>
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AuthorizationDS" targetNamespace="http://tempuri.org/AuthorizationDS.xsd" xmlns:mstns="http://tempuri.org/AuthorizationDS.xsd" xmlns="http://tempuri.org/AuthorizationDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AuthorizationDS" msdata:IsDataSet="true" msdata:Locale="en-US" msprop:Generator_DataSetName="AuthorizationDS" msprop:Generator_UserDSName="AuthorizationDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ModuleAuth" msprop:Generator_TableClassName="ModuleAuthDataTable" msprop:Generator_TableVarName="tableModuleAuth" msprop:Generator_TablePropName="ModuleAuth" msprop:Generator_RowDeletingName="ModuleAuthRowDeleting" msprop:Generator_RowChangingName="ModuleAuthRowChanging" msprop:Generator_RowEvHandlerName="ModuleAuthRowChangeEventHandler" msprop:Generator_RowDeletedName="ModuleAuthRowDeleted" msprop:Generator_UserTableName="ModuleAuth" msprop:Generator_RowChangedName="ModuleAuthRowChanged" msprop:Generator_RowEvArgName="ModuleAuthRowChangeEvent" msprop:Generator_RowClassName="ModuleAuthRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="moduleid" msprop:Generator_ColumnVarNameInTable="columnmoduleid" msprop:Generator_ColumnPropNameInRow="moduleid" msprop:Generator_ColumnPropNameInTable="moduleidColumn" msprop:Generator_UserColumnName="moduleid" type="xs:int" />
+              <xs:element name="empid" msprop:Generator_ColumnVarNameInTable="columnempid" msprop:Generator_ColumnPropNameInRow="empid" msprop:Generator_ColumnPropNameInTable="empidColumn" msprop:Generator_UserColumnName="empid" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Module" msprop:Generator_TableClassName="ModuleDataTable" msprop:Generator_TableVarName="tableModule" msprop:Generator_TablePropName="Module" msprop:Generator_RowDeletingName="ModuleRowDeleting" msprop:Generator_RowChangingName="ModuleRowChanging" msprop:Generator_RowEvHandlerName="ModuleRowChangeEventHandler" msprop:Generator_RowDeletedName="ModuleRowDeleted" msprop:Generator_UserTableName="Module" msprop:Generator_RowChangedName="ModuleRowChanged" msprop:Generator_RowEvArgName="ModuleRowChangeEvent" msprop:Generator_RowClassName="ModuleRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ModuleID" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnModuleID" msprop:Generator_ColumnPropNameInRow="ModuleID" msprop:Generator_ColumnPropNameInTable="ModuleIDColumn" msprop:Generator_UserColumnName="ModuleID" type="xs:int" />
+              <xs:element name="ModuleName" msprop:Generator_ColumnVarNameInTable="columnModuleName" msprop:Generator_ColumnPropNameInRow="ModuleName" msprop:Generator_ColumnPropNameInTable="ModuleNameColumn" msprop:Generator_UserColumnName="ModuleName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="AuthorizationDSKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ModuleAuth" />
+      <xs:field xpath="mstns:moduleid" />
+    </xs:unique>
+    <xs:unique name="AuthorizationDSKey3" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Module" />
+      <xs:field xpath="mstns:ModuleID" />
+    </xs:unique>
+    <xs:keyref name="ModuleModule" refer="AuthorizationDSKey3" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:ModuleAuth" />
+      <xs:field xpath="mstns:moduleid" />
+    </xs:keyref>
+  </xs:element>
 </xs:schema>
