@@ -1,4 +1,4 @@
-namespace TEMPO.WebApi.Areas.HelpPage.ModelDescriptions
+namespace TEMPO.Web.Areas.HelpPage.ModelDescriptions
 {
     public class CollectionModelDescription : ModelDescription
     {

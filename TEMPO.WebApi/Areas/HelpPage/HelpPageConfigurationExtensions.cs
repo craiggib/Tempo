@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using TEMPO.WebApi.Areas.HelpPage.ModelDescriptions;
-using TEMPO.WebApi.Areas.HelpPage.Models;
+using TEMPO.Web.Areas.HelpPage.ModelDescriptions;
+using TEMPO.Web.Areas.HelpPage.Models;
 
-namespace TEMPO.WebApi.Areas.HelpPage
+namespace TEMPO.Web.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

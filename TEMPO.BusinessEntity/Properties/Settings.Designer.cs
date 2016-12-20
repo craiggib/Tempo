@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TEMPO.Authorization.Properties {
+namespace TEMPO.BusinessEntity.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,11 +25,12 @@ namespace TEMPO.Authorization.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:56098/authorizationservices.asmx")]
-        public string TEMPO_Authorization_AuthFramework_AuthorizationServices {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TEMPO;Integrated Security=True" +
+            ";MultipleActiveResultSets=True;Application Name=EntityFramework")]
+        public string TEMPOConnectionString {
             get {
-                return ((string)(this["TEMPO_Authorization_AuthFramework_AuthorizationServices"]));
+                return ((string)(this["TEMPOConnectionString"]));
             }
         }
     }

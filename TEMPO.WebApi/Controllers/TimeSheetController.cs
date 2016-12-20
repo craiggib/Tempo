@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TEMPO.BusinessLayer.TimeSheets;
 
-namespace TEMPO.WebApi.Controllers
+namespace TEMPO.Web.Controllers
 {
     public class TimeSheetController : Controller
     {

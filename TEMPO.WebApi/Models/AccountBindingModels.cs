@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace TEMPO.WebApi.Models
+namespace TEMPO.Web.Models
 {
     // Models used as parameters to AccountController actions.
 

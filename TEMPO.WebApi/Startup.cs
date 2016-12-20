@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(TEMPO.WebApi.Startup))]
+[assembly: OwinStartup(typeof(TEMPO.Web.Startup))]
 
-namespace TEMPO.WebApi
+namespace TEMPO.Web
 {
     public partial class Startup
     {
