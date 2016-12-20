@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost:81/authorizationservices.asmx?wsdl" filename="authorizationservices.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:81/authorizationservices.asmx?schema=AuthorizationDS" filename="AuthorizationDS.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://localhost:81/authorizationservices.asmx?disco" filename="authorizationservices.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://localhost:56098/authorizationservices.asmx?disco" filename="authorizationservices.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost:56098/authorizationservices.asmx?wsdl" filename="authorizationservices.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:56098/authorizationservices.asmx?schema=AuthorizationDS" filename="AuthorizationDS.xsd" />
   </Results>
 </DiscoveryClientResultsFile>

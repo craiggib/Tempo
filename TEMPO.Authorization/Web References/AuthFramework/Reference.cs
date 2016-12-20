@@ -236,7 +236,7 @@ namespace TEMPO.Authorization.AuthFramework {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
     public partial class AuthorizationDS : global::System.Data.DataSet {
         
-        private AuthorizationDataTable tableAuthorization;
+        private ModuleAuthDataTable tableModuleAuth;
         
         private ModuleDataTable tableModule;
         
@@ -268,8 +268,8 @@ namespace TEMPO.Authorization.AuthFramework {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Authorization"] != null)) {
-                    base.Tables.Add(new AuthorizationDataTable(ds.Tables["Authorization"]));
+                if ((ds.Tables["ModuleAuth"] != null)) {
+                    base.Tables.Add(new ModuleAuthDataTable(ds.Tables["ModuleAuth"]));
                 }
                 if ((ds.Tables["Module"] != null)) {
                     base.Tables.Add(new ModuleDataTable(ds.Tables["Module"]));
@@ -296,9 +296,9 @@ namespace TEMPO.Authorization.AuthFramework {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public AuthorizationDataTable Authorization {
+        public ModuleAuthDataTable ModuleAuth {
             get {
-                return this.tableAuthorization;
+                return this.tableModuleAuth;
             }
         }
         
@@ -379,8 +379,8 @@ namespace TEMPO.Authorization.AuthFramework {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Authorization"] != null)) {
-                    base.Tables.Add(new AuthorizationDataTable(ds.Tables["Authorization"]));
+                if ((ds.Tables["ModuleAuth"] != null)) {
+                    base.Tables.Add(new ModuleAuthDataTable(ds.Tables["ModuleAuth"]));
                 }
                 if ((ds.Tables["Module"] != null)) {
                     base.Tables.Add(new ModuleDataTable(ds.Tables["Module"]));
@@ -418,10 +418,10 @@ namespace TEMPO.Authorization.AuthFramework {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableAuthorization = ((AuthorizationDataTable)(base.Tables["Authorization"]));
+            this.tableModuleAuth = ((ModuleAuthDataTable)(base.Tables["ModuleAuth"]));
             if ((initTable == true)) {
-                if ((this.tableAuthorization != null)) {
-                    this.tableAuthorization.InitVars();
+                if ((this.tableModuleAuth != null)) {
+                    this.tableModuleAuth.InitVars();
                 }
             }
             this.tableModule = ((ModuleDataTable)(base.Tables["Module"]));
@@ -438,17 +438,18 @@ namespace TEMPO.Authorization.AuthFramework {
             this.DataSetName = "AuthorizationDS";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/AuthorizationDS.xsd";
+            this.Locale = new global::System.Globalization.CultureInfo("en-US");
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableAuthorization = new AuthorizationDataTable();
-            base.Tables.Add(this.tableAuthorization);
+            this.tableModuleAuth = new ModuleAuthDataTable();
+            base.Tables.Add(this.tableModuleAuth);
             this.tableModule = new ModuleDataTable();
             base.Tables.Add(this.tableModule);
             global::System.Data.ForeignKeyConstraint fkc;
             fkc = new global::System.Data.ForeignKeyConstraint("ModuleModule", new global::System.Data.DataColumn[] {
                         this.tableModule.ModuleIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAuthorization.moduleidColumn});
-            this.tableAuthorization.Constraints.Add(fkc);
+                        this.tableModuleAuth.moduleidColumn});
+            this.tableModuleAuth.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
@@ -456,7 +457,7 @@ namespace TEMPO.Authorization.AuthFramework {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeAuthorization() {
+        private bool ShouldSerializeModuleAuth() {
             return false;
         }
         
@@ -522,7 +523,7 @@ namespace TEMPO.Authorization.AuthFramework {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void AuthorizationRowChangeEventHandler(object sender, AuthorizationRowChangeEvent e);
+        public delegate void ModuleAuthRowChangeEventHandler(object sender, ModuleAuthRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ModuleRowChangeEventHandler(object sender, ModuleRowChangeEvent e);
@@ -532,7 +533,7 @@ namespace TEMPO.Authorization.AuthFramework {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class AuthorizationDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class ModuleAuthDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
             private global::System.Data.DataColumn columnmoduleid;
             
@@ -540,8 +541,8 @@ namespace TEMPO.Authorization.AuthFramework {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationDataTable() {
-                this.TableName = "Authorization";
+            public ModuleAuthDataTable() {
+                this.TableName = "ModuleAuth";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -549,7 +550,7 @@ namespace TEMPO.Authorization.AuthFramework {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal AuthorizationDataTable(global::System.Data.DataTable table) {
+            internal ModuleAuthDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -566,7 +567,7 @@ namespace TEMPO.Authorization.AuthFramework {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected AuthorizationDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected ModuleAuthDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -598,46 +599,46 @@ namespace TEMPO.Authorization.AuthFramework {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationRow this[int index] {
+            public ModuleAuthRow this[int index] {
                 get {
-                    return ((AuthorizationRow)(this.Rows[index]));
+                    return ((ModuleAuthRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event AuthorizationRowChangeEventHandler AuthorizationRowChanging;
+            public event ModuleAuthRowChangeEventHandler ModuleAuthRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event AuthorizationRowChangeEventHandler AuthorizationRowChanged;
+            public event ModuleAuthRowChangeEventHandler ModuleAuthRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event AuthorizationRowChangeEventHandler AuthorizationRowDeleting;
+            public event ModuleAuthRowChangeEventHandler ModuleAuthRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event AuthorizationRowChangeEventHandler AuthorizationRowDeleted;
+            public event ModuleAuthRowChangeEventHandler ModuleAuthRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddAuthorizationRow(AuthorizationRow row) {
+            public void AddModuleAuthRow(ModuleAuthRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationRow AddAuthorizationRow(int moduleid, int empid) {
-                AuthorizationRow rowAuthorizationRow = ((AuthorizationRow)(this.NewRow()));
+            public ModuleAuthRow AddModuleAuthRow(int moduleid, int empid) {
+                ModuleAuthRow rowModuleAuthRow = ((ModuleAuthRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         moduleid,
                         empid};
-                rowAuthorizationRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowAuthorizationRow);
-                return rowAuthorizationRow;
+                rowModuleAuthRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowModuleAuthRow);
+                return rowModuleAuthRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationRow FindBymoduleid(int moduleid) {
-                return ((AuthorizationRow)(this.Rows.Find(new object[] {
+            public ModuleAuthRow FindBymoduleid(int moduleid) {
+                return ((ModuleAuthRow)(this.Rows.Find(new object[] {
                             moduleid})));
             }
             
@@ -650,7 +651,7 @@ namespace TEMPO.Authorization.AuthFramework {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                AuthorizationDataTable cln = ((AuthorizationDataTable)(base.Clone()));
+                ModuleAuthDataTable cln = ((ModuleAuthDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -658,7 +659,7 @@ namespace TEMPO.Authorization.AuthFramework {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new AuthorizationDataTable();
+                return new ModuleAuthDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -683,28 +684,28 @@ namespace TEMPO.Authorization.AuthFramework {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationRow NewAuthorizationRow() {
-                return ((AuthorizationRow)(this.NewRow()));
+            public ModuleAuthRow NewModuleAuthRow() {
+                return ((ModuleAuthRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new AuthorizationRow(builder);
+                return new ModuleAuthRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(AuthorizationRow);
+                return typeof(ModuleAuthRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.AuthorizationRowChanged != null)) {
-                    this.AuthorizationRowChanged(this, new AuthorizationRowChangeEvent(((AuthorizationRow)(e.Row)), e.Action));
+                if ((this.ModuleAuthRowChanged != null)) {
+                    this.ModuleAuthRowChanged(this, new ModuleAuthRowChangeEvent(((ModuleAuthRow)(e.Row)), e.Action));
                 }
             }
             
@@ -712,8 +713,8 @@ namespace TEMPO.Authorization.AuthFramework {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.AuthorizationRowChanging != null)) {
-                    this.AuthorizationRowChanging(this, new AuthorizationRowChangeEvent(((AuthorizationRow)(e.Row)), e.Action));
+                if ((this.ModuleAuthRowChanging != null)) {
+                    this.ModuleAuthRowChanging(this, new ModuleAuthRowChangeEvent(((ModuleAuthRow)(e.Row)), e.Action));
                 }
             }
             
@@ -721,8 +722,8 @@ namespace TEMPO.Authorization.AuthFramework {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.AuthorizationRowDeleted != null)) {
-                    this.AuthorizationRowDeleted(this, new AuthorizationRowChangeEvent(((AuthorizationRow)(e.Row)), e.Action));
+                if ((this.ModuleAuthRowDeleted != null)) {
+                    this.ModuleAuthRowDeleted(this, new ModuleAuthRowChangeEvent(((ModuleAuthRow)(e.Row)), e.Action));
                 }
             }
             
@@ -730,14 +731,14 @@ namespace TEMPO.Authorization.AuthFramework {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.AuthorizationRowDeleting != null)) {
-                    this.AuthorizationRowDeleting(this, new AuthorizationRowChangeEvent(((AuthorizationRow)(e.Row)), e.Action));
+                if ((this.ModuleAuthRowDeleting != null)) {
+                    this.ModuleAuthRowDeleting(this, new ModuleAuthRowChangeEvent(((ModuleAuthRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveAuthorizationRow(AuthorizationRow row) {
+            public void RemoveModuleAuthRow(ModuleAuthRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -764,7 +765,7 @@ namespace TEMPO.Authorization.AuthFramework {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "AuthorizationDataTable";
+                attribute2.FixedValue = "ModuleAuthDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1087,25 +1088,25 @@ namespace TEMPO.Authorization.AuthFramework {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class AuthorizationRow : global::System.Data.DataRow {
+        public partial class ModuleAuthRow : global::System.Data.DataRow {
             
-            private AuthorizationDataTable tableAuthorization;
+            private ModuleAuthDataTable tableModuleAuth;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal AuthorizationRow(global::System.Data.DataRowBuilder rb) : 
+            internal ModuleAuthRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableAuthorization = ((AuthorizationDataTable)(this.Table));
+                this.tableModuleAuth = ((ModuleAuthDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int moduleid {
                 get {
-                    return ((int)(this[this.tableAuthorization.moduleidColumn]));
+                    return ((int)(this[this.tableModuleAuth.moduleidColumn]));
                 }
                 set {
-                    this[this.tableAuthorization.moduleidColumn] = value;
+                    this[this.tableModuleAuth.moduleidColumn] = value;
                 }
             }
             
@@ -1114,27 +1115,27 @@ namespace TEMPO.Authorization.AuthFramework {
             public int empid {
                 get {
                     try {
-                        return ((int)(this[this.tableAuthorization.empidColumn]));
+                        return ((int)(this[this.tableModuleAuth.empidColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'empid\' in table \'Authorization\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'empid\' in table \'ModuleAuth\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableAuthorization.empidColumn] = value;
+                    this[this.tableModuleAuth.empidColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsempidNull() {
-                return this.IsNull(this.tableAuthorization.empidColumn);
+                return this.IsNull(this.tableModuleAuth.empidColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetempidNull() {
-                this[this.tableAuthorization.empidColumn] = global::System.Convert.DBNull;
+                this[this.tableModuleAuth.empidColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1196,22 +1197,22 @@ namespace TEMPO.Authorization.AuthFramework {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class AuthorizationRowChangeEvent : global::System.EventArgs {
+        public class ModuleAuthRowChangeEvent : global::System.EventArgs {
             
-            private AuthorizationRow eventRow;
+            private ModuleAuthRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationRowChangeEvent(AuthorizationRow row, global::System.Data.DataRowAction action) {
+            public ModuleAuthRowChangeEvent(ModuleAuthRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuthorizationRow Row {
+            public ModuleAuthRow Row {
                 get {
                     return this.eventRow;
                 }

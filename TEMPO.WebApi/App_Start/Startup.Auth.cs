@@ -8,10 +8,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using TEMPO.WebApi.Providers;
-using TEMPO.WebApi.Models;
+using TEMPO.Web.Providers;
+using TEMPO.Web.Models;
 
-namespace TEMPO.WebApi
+namespace TEMPO.Web
 {
     public partial class Startup
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TEMPO.WebApi.Models
+namespace TEMPO.Web.Models
 {
     // Models returned by AccountController actions.
 

@@ -28,9 +28,9 @@ namespace TEMPO.Authorization
 			AuthFramework.AuthorizationServices authorization = new TEMPO.Authorization.AuthFramework.AuthorizationServices();
 			authorization.Url = System.Configuration.ConfigurationManager.AppSettings["TEMPO.Authorization.AuthFramework.AuthorizationServices"];
 			AuthFramework.AuthorizationDS authds = authorization.GetUserRoles(_identity.UserID);
-			_roles = new string[authds.Authorization.Count];
-            for (int i = 0; i < authds.Authorization.Count; i++) 
-				_roles[i] = authds.Module.FindByModuleID(authds.Authorization[i].moduleid).ModuleName;
+			_roles = new string[authds.ModuleAuth.Count];
+            for (int i = 0; i < authds.ModuleAuth.Count; i++) 
+				_roles[i] = authds.Module.FindByModuleID(authds.ModuleAuth[i].moduleid).ModuleName;
 		}
 
 		#endregion
