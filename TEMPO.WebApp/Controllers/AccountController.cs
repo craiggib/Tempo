@@ -10,7 +10,7 @@ using TEMPO.WebApp.Models.Account;
 
 namespace TEMPO.WebApp.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         public ActionResult Login()
         {
@@ -24,12 +24,13 @@ namespace TEMPO.WebApp.Controllers
             Employee employee = account.Login(user.EmployeeName, user.Password);
             if(employee != null)
             {
+                
                 FormsAuthentication.SetAuthCookie(employee.employeename, true);
+                SetUserId(employee);
                 return RedirectToAction("Index", "Home");
             }
             else
-            {
-                
+            {                
                 ModelState.AddModelError("", "UserName or Password is wrong");
             }
             return View();

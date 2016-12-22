@@ -132,8 +132,8 @@
     <Compile Include="TimeSheet.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TimeSheets\TimeSheetManager.cs" />
-    <Compile Include="TimeSheets\TimeSheetStatus.cs" />
+    <Compile Include="Timesheets\TimesheetManager.cs" />
+    <Compile Include="Timesheets\TimesheetStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

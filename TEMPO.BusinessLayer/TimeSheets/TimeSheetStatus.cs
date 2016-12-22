@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace TEMPO.BusinessLayer.TimeSheets
 {
-    public enum TimeSheetStatus
+    public enum TimesheetStatus
     {
         Saved = 1,
         Submitted = 2,
         Approved = 3,
         Rejected = 4
     }
+    
 }
