@@ -7,17 +7,17 @@ using TEMPO.Data;
 
 namespace TEMPO.BusinessLayer.TimeSheets
 {
-    public class TimeSheet
+    public class TimeSheetManager
     {
         public Data.TimeSheet GetTimeSheet(int timeSheetId)
         {
-            TEMPOEntities dataConext = new TEMPOEntities();
+            TempoDbContext dataConext = new TempoDbContext();
             return dataConext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
         }
 
         public List<Data.TimeSheet> GetTimeSheets(int employeeId)
         {
-            TEMPOEntities dataConext = new TEMPOEntities();
+            TempoDbContext dataConext = new TempoDbContext();
             return dataConext.TimeSheets.Where(i => i.empid == employeeId).ToList();
         }
     }

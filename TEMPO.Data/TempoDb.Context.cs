@@ -13,10 +13,10 @@ namespace TEMPO.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TEMPOEntities : DbContext
+    public partial class TempoDbContext : DbContext
     {
-        public TEMPOEntities()
-            : base("name=TEMPOEntities")
+        public TempoDbContext()
+            : base("name=TempoDbContext")
         {
         }
     

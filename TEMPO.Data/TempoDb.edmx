@@ -655,7 +655,7 @@
           <End Role="employee" Type="TEMPOModel.Employee" Multiplicity="*" />
           <End Role="module" Type="TEMPOModel.Module" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="TEMPOEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TempoDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="TEMPOModel.Client" />
           <EntitySet Name="Employees" EntityType="TEMPOModel.Employee" />
           <EntitySet Name="JobYears" EntityType="Self.JobYear" />
@@ -726,7 +726,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TEMPOModelStoreContainer" CdmEntityContainer="TEMPOEntities">
+        <EntityContainerMapping StorageEntityContainer="TEMPOModelStoreContainer" CdmEntityContainer="TempoDbContext">
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="TEMPOModel.Client">
               <MappingFragment StoreEntitySet="client">
