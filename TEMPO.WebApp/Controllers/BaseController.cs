@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +11,40 @@ namespace TEMPO.WebApp.Controllers
     public class BaseController : Controller
     {
         private const string USERID_COOKIE_NAME = "Tempo.UserId";
+        private IMapper _mapper;
+
+        protected IMapper Mapper
+        {
+            get
+            {
+                return _mapper;
+            }
+        }
+
+        public BaseController()
+        {
+
+            var config = new MapperConfiguration(i =>
+            {
+                i.CreateMap<Data.TimeSheet, Models.Timesheet.Timesheet>()
+                    .ForMember(d => d.PeriodEnding, o => o.MapFrom(s => s.periodending.endingdate))
+                    .ForMember(d => d.StatusName, o => o.MapFrom(s => s.status.statusname))
+                    .ForMember(d => d.TimesheetId, o => o.MapFrom(s => s.tid));
+                i.CreateMap<Data.TimeEntry, Models.Timesheet.TimeEntry>();
+                i.CreateMap<Data.Project, Models.Project.Project>()
+                    .ForMember(d => d.ProjectId, o => o.MapFrom(s => s.projectid))
+                    .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.client.clientname))
+                    .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
+                    .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear.JobYear1}-{s.jobnum} {s.description}"));
+            });
+
+            _mapper = config.CreateMapper();
+        }
 
         protected int GetUserID()
         {
             HttpCookie myCookie = Request.Cookies[USERID_COOKIE_NAME];
-            if(myCookie != null)
+            if (myCookie != null)
             {
                 return int.Parse(myCookie.Value);
             }

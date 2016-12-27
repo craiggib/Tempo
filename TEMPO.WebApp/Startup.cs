@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using AutoMapper;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(TEMPO.WebApp.Startup))]
@@ -9,6 +10,9 @@ namespace TEMPO.WebApp
         public void Configuration(IAppBuilder app)
         {
             //ConfigureAuth(app);
+
+            
+            
         }
     }
 }

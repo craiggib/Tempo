@@ -206,7 +206,7 @@ namespace TEMPO.RequestBroker {
 			
 			// set up the data set to recieve
 			StatusDS returnval = new StatusDS();
-			returnval.Merge(_tsServices.GetStatusStates(send_ds,index,((TEMPOIdentity)Thread.CurrentPrincipal.Identity).UserID));
+			//returnval.Merge(_tsServices.GetStatusStates(send_ds,index,((TEMPOIdentity)Thread.CurrentPrincipal.Identity).UserID));
 			return (returnval);			
 		}
 

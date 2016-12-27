@@ -129,6 +129,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseManager.cs" />
+    <Compile Include="Project\ProjectManager.cs" />
     <Compile Include="TimeSheet.cs">
       <SubType>Code</SubType>
     </Compile>
