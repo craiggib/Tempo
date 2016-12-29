@@ -36,7 +36,7 @@
     .time-entry-delete {
         padding-left: 5px;
     }
-   
+
     .input-validation-error {
         border: 1px solid #ff0000;
         background-color: #ffeeee;
@@ -52,25 +52,40 @@
 
         <div class="row">
             <div class="col-md-9">
+                @Html.HiddenFor(i => i.PeriodEnding)
+                @Html.HiddenFor(i => i.TimesheetId)
+
 
                 <div class="row">
-                    <div class="col-md-6">                        
-                        @Html.HiddenFor(i => i.PeriodEnding)
-                        @Html.HiddenFor(i => i.TimesheetId)
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PeriodEnding, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-8 form-control-static">
-                                @Html.DisplayFor(model => model.PeriodEnding)
-                            </div>
+                    <div class="col-md-6">
+
+                        <div>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.EmployeeName)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.EmployeeName)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.StatusName)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.StatusName)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PeriodEnding)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.PeriodEnding)
+                                </dd>
+                            </dl>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.StatusName, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-8 form-control-static">
-                                @Html.DisplayFor(model => model.StatusName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.StatusName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
@@ -84,7 +99,7 @@
 
                 <!-- TimeEntries -->
                 <table id="timeEntryTable">
-                    <thead>                       
+                    <thead>
                         <tr>
                             <th class="time-entry-column-project">Project</th>
                             <th class="time-entry-column-worktype">Type</th>
@@ -96,13 +111,13 @@
                             <th class="time-entry-column">Fri</th>
                             <th class="time-entry-column">Sat</th>
                         </tr>
-                        
+
                     </thead>
                     <tbody>
 
                         @foreach (var timeEntry in Model.TimeEntries)
                         {
-                            @Html.Partial("_TimeEntry", timeEntry)                            
+                            @Html.Partial("_TimeEntry", timeEntry)
                         }
 
                     </tbody>
@@ -120,8 +135,8 @@
                 <div class="jumbotron">
                     <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
                     <p>Weekly Hours</p>
-                    <input type="submit" value="Save" class="btn btn-default btn-primary" />
-                    <input type="submit" value="Submit" class="btn btn-default btn-success" />
+                    <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+                    <input type="submit" value="Submit" class="btn btn-sm btn-success" />
                 </div>
 
             </div>
@@ -176,8 +191,8 @@
             var total = 0;
             $(".time-entry").each(function () {
                 var dailyTotal = parseInt($(this).val());
-                total += isNaN(dailyTotal) ? 0 : dailyTotal;                
-            })            
+                total += isNaN(dailyTotal) ? 0 : dailyTotal;
+            })
             $("#weekly-total").text(total);
         }
 

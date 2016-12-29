@@ -1,0 +1,139 @@
+﻿@model TEMPO.WebApp.Models.Timesheet.Timesheet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Timesheet</h2>
+
+<style>
+    .time-entry-column {
+        text-align: center;
+        width: 55px;
+    }
+
+    .time-entry-column-worktype {
+        width: 120px;
+        padding-right: 5px;
+    }
+
+    .time-entry-column-project {
+        width: 300px;
+        padding-right: 5px;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-9">
+
+
+
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EmployeeName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StatusName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StatusName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PeriodEnding)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PeriodEnding)
+                </dd>
+            </dl>
+        </div>
+
+        <!-- TimeEntries -->
+        <table id="timeEntryTable">
+            <thead>
+                <tr>
+                    <th class="time-entry-column-project">Project</th>
+                    <th class="time-entry-column-worktype">Type</th>
+                    <th class="time-entry-column">Sun</th>
+                    <th class="time-entry-column">Mon</th>
+                    <th class="time-entry-column">Tue</th>
+                    <th class="time-entry-column">Wed</th>
+                    <th class="time-entry-column">Thu</th>
+                    <th class="time-entry-column">Fri</th>
+                    <th class="time-entry-column">Sat</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                @foreach (var timeEntry in Model.TimeEntries)
+                {
+
+                <tr class="timeEntry-row">
+                    <td class="time-entry-column-project">
+                        @Html.DisplayFor(i => timeEntry.ProjectName)
+                    </td>
+                    <td class="time-entry-column-worktype">
+                        @Html.DisplayFor(i => timeEntry.WorkTypeName)
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i => timeEntry.Sunday)" disabled>
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Monday)" disabled>
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Tuesday)" disabled>
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Wednesday)" disabled>
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Thursday)" disabled>
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Friday)" disabled>
+                    </td>
+                    <td class="time-entry-column">
+                        <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Saturday)" disabled>
+                    </td>
+                    <td class="time-entry-delete">
+
+                        @*<button type="button" class="btn btn-warning btn-xs deleteTimeEntry" aria-label="Left Align" data-timeEntryId="@Model.EntryId"
+                                    data-toggle="confirmation">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>*@
+                    </td>
+
+                </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="col-md-3">
+        <div class="jumbotron">
+            <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
+            <p>Weekly Hours</p>   
+                <input type="submit" value="Reject" class="btn btn-sm btn-danger" />
+                <input type="submit" value="Approve" class="btn btn-sm btn-success" />   
+        </div>
+
+    </div>
+</div>
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

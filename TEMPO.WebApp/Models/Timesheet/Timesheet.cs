@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace TEMPO.WebApp.Models.Timesheet
         public List<TimeEntry> TimeEntries { get; set; }
 
         public float WeeklyTotal { get; set; }
+
+        [Display(Name = "Employee")]
+        public string EmployeeName { get; set; }
      
     }
 }

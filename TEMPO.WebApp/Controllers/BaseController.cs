@@ -29,9 +29,14 @@ namespace TEMPO.WebApp.Controllers
                 i.CreateMap<Data.TimeSheet, Models.Timesheet.Timesheet>()
                     .ForMember(d => d.PeriodEnding, o => o.MapFrom(s => s.periodending.endingdate))
                     .ForMember(d => d.StatusName, o => o.MapFrom(s => s.status.statusname))
-                    .ForMember(d => d.TimesheetId, o => o.MapFrom(s => s.tid));
+                    .ForMember(d => d.TimesheetId, o => o.MapFrom(s => s.tid))
+                    .ForMember(d => d.EmployeeName, o => o.MapFrom(s => s.employee.employeename))
+                    .AfterMap((src, dest) => dest.WeeklyTotal = dest.TimeEntries.Sum(j => j.Sunday + j.Monday + j.Tuesday + j.Wednesday + j.Thursday + j.Friday + j.Saturday));
 
-                i.CreateMap<Data.TimeEntry, Models.Timesheet.TimeEntry>();
+                i.CreateMap<Data.TimeEntry, Models.Timesheet.TimeEntry>()
+                    .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.project.JobYear.JobYear1}-{s.project.jobnum} {s.project.description}"))
+                    .ForMember(d => d.WorkTypeName, o => o.MapFrom(s => s.worktype.worktypename));
+                    
 
                 i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
 
