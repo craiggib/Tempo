@@ -37,6 +37,10 @@
         padding-left: 5px;
     }
    
+    .input-validation-error {
+        border: 1px solid #ff0000;
+        background-color: #ffeeee;
+    }
 </style>
 
 @using (Html.BeginForm())
@@ -50,8 +54,7 @@
             <div class="col-md-9">
 
                 <div class="row">
-                    <div class="col-md-6">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-md-6">                        
                         @Html.HiddenFor(i => i.PeriodEnding)
                         @Html.HiddenFor(i => i.TimesheetId)
                         <div class="form-group">
@@ -81,7 +84,7 @@
 
                 <!-- TimeEntries -->
                 <table id="timeEntryTable">
-                    <thead>
+                    <thead>                       
                         <tr>
                             <th class="time-entry-column-project">Project</th>
                             <th class="time-entry-column-worktype">Type</th>
@@ -93,43 +96,13 @@
                             <th class="time-entry-column">Fri</th>
                             <th class="time-entry-column">Sat</th>
                         </tr>
+                        
                     </thead>
                     <tbody>
 
-                        @*@for (int i = 0; i < Model.TimeEntries.Count; i++)*@
-
                         @foreach (var timeEntry in Model.TimeEntries)
                         {
-                            @Html.Partial("_TimeEntry", timeEntry)
-                            @*<tr>
-                                    <td>
-                                        @Html.DropDownListFor(t => Model.TimeEntries[i].ProjectId, Model.TimeEntries[i].Projects, new { @class = "form-control" })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Sunday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Monday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Tuesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Wednesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Thursday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Friday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(t => Model.TimeEntries[i].Saturday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                    </td>
-                                    <td>
-                                        <span class="label label-primary">@Html.DisplayFor(t => Model.TimeEntries[i].WeeklyTotal)</span>
-                                    </td>
-                                </tr>*@
+                            @Html.Partial("_TimeEntry", timeEntry)                            
                         }
 
                     </tbody>
@@ -141,17 +114,11 @@
                         </tr>
                     </tfoot>
                 </table>
-
-                @*<div class="form-group">
-                        <div class="col-md-offset-3 col-md-9">
-                            <input type="submit" value="Save" class="btn btn-default btn-green" />
-                        </div>
-                    </div>*@
             </div>
 
             <div class="col-md-3">
                 <div class="jumbotron">
-                    <h1>@Html.DisplayFor(t => t.WeeklyTotal)</h1>
+                    <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
                     <p>Weekly Hours</p>
                     <input type="submit" value="Save" class="btn btn-default btn-primary" />
                     <input type="submit" value="Submit" class="btn btn-default btn-success" />
@@ -178,30 +145,43 @@
             $.get(url, function (response) {
                 //console.log(response)
                 tableBody.append(response);
-            });
-        });
-        $(".deleteTimeEntry").click(function () {
+                bindDeleteClick();
 
-            var entryId = $(this).data("timeentryid");
-            var url = '@Url.Action("DeleteTimeEntry", "Timesheet")';
-            var rowToRemove = $(this).closest('.timeEntry-row');
-
-            bootbox.confirm("Are you sure?", function (result) {
-                if (result) {
-                    $.post(url, { entryId: entryId }, function (response) {
-                        rowToRemove.remove();
-                    });
-                }
+                $('form').data('validator', null);
+                $.validator.unobtrusive.parse($('form'));
             });
         });
 
-        if ('@ViewBag.ShowSuccess' != "") {
-            $('#divSuccessMessage').show();
-        }
-        else {
-            $('#divSuccessMessage').hide();
+        function bindDeleteClick() {
+            $(".deleteTimeEntry").off();
+            $(".deleteTimeEntry").click(function () {
+
+                var entryId = $(this).data("timeentryid");
+                var url = '@Url.Action("DeleteTimeEntry", "Timesheet")';
+                var rowToRemove = $(this).closest('.timeEntry-row');
+
+                bootbox.confirm("Are you sure?", function (result) {
+                    if (result) {
+                        $.post(url, { entryId: entryId }, function (response) {
+                            rowToRemove.remove();
+                        });
+                    }
+                });
+            });
         }
 
+        bindDeleteClick();
+
+        function sumWeeklyHours() {
+            var total = 0;
+            $(".time-entry").each(function () {
+                var dailyTotal = parseInt($(this).val());
+                total += isNaN(dailyTotal) ? 0 : dailyTotal;                
+            })            
+            $("#weekly-total").text(total);
+        }
+
+        $(".time-entry").keyup(sumWeeklyHours);
 
     </script>
 }

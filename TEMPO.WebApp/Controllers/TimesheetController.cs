@@ -126,6 +126,7 @@ namespace TEMPO.WebApp.Controllers
         public PartialViewResult AddTimeEntry()
         {
             Models.Timesheet.TimeEntry teViewModel = new Models.Timesheet.TimeEntry();
+
             teViewModel.Projects = new SelectList(BuildProjectList(), "ProjectId", "ProjectName");
             teViewModel.WorkTypes = new SelectList(BuildWorkTypes(), "WorkTypeId", "WorkTypeName");
             return PartialView("_TimeEntry", teViewModel);
