@@ -54,6 +54,7 @@
     <Compile Include="Client.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="DailyTime.cs" />
     <Compile Include="Employee.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>

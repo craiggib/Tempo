@@ -30,7 +30,11 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.PeriodEnding, o => o.MapFrom(s => s.periodending.endingdate))
                     .ForMember(d => d.StatusName, o => o.MapFrom(s => s.status.statusname))
                     .ForMember(d => d.TimesheetId, o => o.MapFrom(s => s.tid));
+
                 i.CreateMap<Data.TimeEntry, Models.Timesheet.TimeEntry>();
+
+                i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
+
                 i.CreateMap<Data.Project, Models.Project.Project>()
                     .ForMember(d => d.ProjectId, o => o.MapFrom(s => s.projectid))
                     .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.client.clientname))

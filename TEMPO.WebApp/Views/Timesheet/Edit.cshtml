@@ -9,22 +9,34 @@
 <style>
     .time-entry {
         width: 55px;
-        text-align: left;
+        /*text-align: left;*/
+        text-align: center;
     }
 
     .time-entry-column {
-        width: 65px;
-        text-align: left;
-        padding-left: 5px;
+        /*width: 65px;*/
+        text-align: center;
+        /*padding-left: 5px;*/
+    }
+
+    .time-entry-column-worktype {
+        width: 150px;
+        padding-right: 5px;
     }
 
     .time-entry-column-project {
         width: 300px;
         padding-right: 5px;
     }
+
     .time-entry-add {
         padding-top: 10px;
     }
+
+    .time-entry-delete {
+        padding-left: 5px;
+    }
+   
 </style>
 
 @using (Html.BeginForm())
@@ -32,33 +44,47 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
+
 
         <div class="row">
             <div class="col-md-9">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PeriodEnding, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10 form-control-static">
-                        @Html.DisplayFor(model => model.PeriodEnding)
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(i => i.PeriodEnding)
+                        @Html.HiddenFor(i => i.TimesheetId)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PeriodEnding, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8 form-control-static">
+                                @Html.DisplayFor(model => model.PeriodEnding)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StatusName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8 form-control-static">
+                                @Html.DisplayFor(model => model.StatusName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StatusName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                        {
+                            <div class="alert alert-success">
+                                @ViewBag.SuccessMessage
+                            </div>
+                        }
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.StatusName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10 form-control-static">
-                        @Html.DisplayFor(model => model.StatusName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.StatusName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
 
                 <!-- TimeEntries -->
-                <table>
+                <table id="timeEntryTable">
                     <thead>
                         <tr>
                             <th class="time-entry-column-project">Project</th>
+                            <th class="time-entry-column-worktype">Type</th>
                             <th class="time-entry-column">Sun</th>
                             <th class="time-entry-column">Mon</th>
                             <th class="time-entry-column">Tue</th>
@@ -70,44 +96,50 @@
                     </thead>
                     <tbody>
 
-                        @for (int i = 0; i < Model.TimeEntries.Count; i++)
+                        @*@for (int i = 0; i < Model.TimeEntries.Count; i++)*@
+
+                        @foreach (var timeEntry in Model.TimeEntries)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DropDownListFor(t => Model.TimeEntries[i].ProjectId, Model.TimeEntries[i].Projects, new { @class = "form-control" })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Sunday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Monday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Tuesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Wednesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Thursday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Friday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(t => Model.TimeEntries[i].Saturday, new { htmlAttributes = new { @class = "form-control time-entry" } })
-                                </td>
-                                <td>
-                                    <span class="label label-primary">@Html.DisplayFor(t => Model.TimeEntries[i].WeeklyTotal)</span>
-                                </td>
-                            </tr>
+                            @Html.Partial("_TimeEntry", timeEntry)
+                            @*<tr>
+                                    <td>
+                                        @Html.DropDownListFor(t => Model.TimeEntries[i].ProjectId, Model.TimeEntries[i].Projects, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Sunday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Monday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Tuesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Wednesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Thursday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Friday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(t => Model.TimeEntries[i].Saturday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+                                    </td>
+                                    <td>
+                                        <span class="label label-primary">@Html.DisplayFor(t => Model.TimeEntries[i].WeeklyTotal)</span>
+                                    </td>
+                                </tr>*@
                         }
+
+                    </tbody>
+                    <tfoot>
                         <tr>
                             <td class="time-entry-add">
-                                <input type="submit" value="Add" class="btn btn-default btn-sm" />
+                                <button type="button" value="Add" id="addTimeEntry" class="btn btn-default btn-sm btn-primary">Add</button>
                             </td>
                         </tr>
-                    </tbody>
+                    </tfoot>
                 </table>
 
                 @*<div class="form-group">
@@ -124,6 +156,7 @@
                     <input type="submit" value="Save" class="btn btn-default btn-primary" />
                     <input type="submit" value="Submit" class="btn btn-default btn-success" />
                 </div>
+
             </div>
         </div>
     </div>
@@ -133,6 +166,42 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
+    <script>
+        $('#addTimeEntry').click(function () {
+            var url = '@Url.Action("AddTimeEntry", "Timesheet")';
+            var tableBody = $('#timeEntryTable tbody');
+            $.get(url, function (response) {
+                //console.log(response)
+                tableBody.append(response);
+            });
+        });
+        $(".deleteTimeEntry").click(function () {
+
+            var entryId = $(this).data("timeentryid");
+            var url = '@Url.Action("DeleteTimeEntry", "Timesheet")';
+            var rowToRemove = $(this).closest('.timeEntry-row');
+
+            bootbox.confirm("Are you sure?", function (result) {
+                if (result) {
+                    $.post(url, { entryId: entryId }, function (response) {
+                        rowToRemove.remove();
+                    });
+                }
+            });
+        });
+
+        if ('@ViewBag.ShowSuccess' != "") {
+            $('#divSuccessMessage').show();
+        }
+        else {
+            $('#divSuccessMessage').hide();
+        }
+
+
+    </script>
 }

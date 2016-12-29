@@ -21,6 +21,6 @@ namespace TEMPO.WebApp.Models.Timesheet
         public int ProjectId { get; set; }
 
         public SelectList Projects { get; set; }
-        public float WeeklyTotal { get; set; }
+        public SelectList WorkTypes { get; set; }
     }
 }

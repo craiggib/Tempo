@@ -1,0 +1,43 @@
+﻿@model TEMPO.WebApp.Models.Timesheet.TimeEntry
+<tr class="timeEntry-row">
+    @using (Html.BeginCollectionItem("TimeEntries"))
+    {
+
+        <td class="time-entry-column-project">
+            @Html.HiddenFor(t=>t.EntryId)
+            @Html.DropDownListFor(t => t.ProjectId, Model.Projects, new { @class = "form-control" })
+        </td>
+        <td class="time-entry-column-worktype">
+            @Html.DropDownListFor(t => t.WorkTypeId, Model.WorkTypes, new { @class = "form-control" })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Sunday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Monday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Tuesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Wednesday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Thursday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Friday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td>
+            @Html.EditorFor(t => t.Saturday, new { htmlAttributes = new { @class = "form-control time-entry" } })
+        </td>
+        <td class="time-entry-delete">
+
+            <button type="button" class="btn btn-warning btn-xs deleteTimeEntry" aria-label="Left Align" data-timeEntryId="@Model.EntryId"
+                     data-toggle="confirmation">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+
+        </td>
+    }
+</tr>
