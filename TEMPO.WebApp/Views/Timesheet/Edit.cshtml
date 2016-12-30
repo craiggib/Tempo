@@ -41,9 +41,13 @@
         border: 1px solid #ff0000;
         background-color: #ffeeee;
     }
+
+    .modal-content textarea.form-control {
+        max-width: 100%;
+    }
 </style>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "timeSheetForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -129,6 +133,7 @@
                         </tr>
                     </tfoot>
                 </table>
+               
             </div>
 
             <div class="col-md-3">
@@ -136,7 +141,10 @@
                     <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
                     <p>Weekly Hours</p>
                     <input type="submit" value="Save" class="btn btn-sm btn-primary" />
-                    <input type="submit" value="Submit" class="btn btn-sm btn-success" />
+                    <button type="button" value="Submit" class="btn btn-sm btn-success" id="submitTimeSheet">Submit</button>
+                    @Html.HiddenFor(i => i.SubmitForApproval)                    
+                    @Html.HiddenFor(i => i.Notes)
+                    
                 </div>
 
             </div>
@@ -155,6 +163,10 @@
     <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
     <script>
         $('#addTimeEntry').click(function () {
+            addTimeEntryRow();
+        });
+
+        function addTimeEntryRow() {
             var url = '@Url.Action("AddTimeEntry", "Timesheet")';
             var tableBody = $('#timeEntryTable tbody');
             $.get(url, function (response) {
@@ -165,7 +177,7 @@
                 $('form').data('validator', null);
                 $.validator.unobtrusive.parse($('form'));
             });
-        });
+        }
 
         function bindDeleteClick() {
             $(".deleteTimeEntry").off();
@@ -197,6 +209,37 @@
         }
 
         $(".time-entry").keyup(sumWeeklyHours);
+
+        function addFirstRow() {
+            var rowCount = $('#timeEntryTable tr').length;
+            if (rowCount <= 2) {
+                addTimeEntryRow();
+            }
+        }
+        addFirstRow();
+
+        $("#submitTimeSheet").click(function () {
+
+            bootbox.prompt({
+                title: "Submit Your Timesheet",
+                placeholder: 'Notes (optional)',
+                inputType: 'textarea',
+                buttons: {
+                    confirm: {
+                        label: 'Submit'
+                    }
+                },
+                callback: function (result) {
+                    if (result != null) {
+                        $("#Notes").val(result);
+                        $("#SubmitForApproval").val("True");                        
+                        $("#timeSheetForm").submit();                        
+                    }
+                }
+            });
+        });
+
+
 
     </script>
 }

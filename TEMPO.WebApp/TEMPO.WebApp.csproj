@@ -233,6 +233,7 @@
     <Content Include="Views\Timesheet\_TimeEntry.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Timesheet\Details.cshtml" />
+    <Content Include="Views\Timesheet\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

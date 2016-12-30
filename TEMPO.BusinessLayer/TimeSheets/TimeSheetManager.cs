@@ -9,22 +9,43 @@ namespace TEMPO.BusinessLayer.TimeSheets
 {
     public class TimesheetManager
     {
-        public Data.TimeSheet GetTimeSheet(int timeSheetId)
+        private TempoDbContext _dataContext;
+
+        public TimesheetManager()
         {
-            TempoDbContext dataConext = new TempoDbContext();
-            return dataConext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
+            _dataContext = new TempoDbContext();
+        }
+
+        #region Timesheets
+
+        public Data.TimeSheet GetTimeSheet(int timeSheetId)
+        {            
+            return _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
         }
 
         public List<Data.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status)
         {
-            var statusInts = status.Select(i => (int)i);
-            TempoDbContext dataConext = new TempoDbContext();
-            return dataConext.TimeSheets.Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId).ToList();
+            var statusInts = status.Select(i => (int)i);            
+            return _dataContext.TimeSheets.Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId).ToList();
         }
 
-        public void AddTimeEntry(int timeSheetId, int projectId, int worktypeId, List<DailyTime> dailyWorkTimes)
+        public void SetState(int timeSheetId, TimesheetStatus newState, string notes)
         {
-            TempoDbContext dataConext = new TempoDbContext();
+            var timeSheet= _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
+            if(timeSheet != null)
+            {
+                timeSheet.notes = notes;
+                timeSheet.statusid = (int)newState;
+                _dataContext.SaveChanges();
+            }
+        }
+
+        #endregion
+        
+        #region TimeEntry
+
+        public void AddTimeEntry(int timeSheetId, int projectId, int worktypeId, List<DailyTime> dailyWorkTimes)
+        {            
             var timeEntry = new TimeEntry
             {
                 sunday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Sunday)?.HoursWorked,
@@ -38,14 +59,13 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 tid = timeSheetId,
                 worktypeid = worktypeId
             };
-            dataConext.TimeEntries.Add(timeEntry);
-            dataConext.SaveChanges();
+            _dataContext.TimeEntries.Add(timeEntry);
+            _dataContext.SaveChanges();
         }
 
         public void UpdateTimeEntry(int timeEntryId, int projectId, int worktypeId, List<DailyTime> dailyWorkTimes)
-        {
-            TempoDbContext dataConext = new TempoDbContext();
-            var timeEntry = dataConext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
+        {            
+            var timeEntry = _dataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
             if (timeEntry != null)
             {
                 timeEntry.sunday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Sunday)?.HoursWorked;
@@ -58,26 +78,30 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 timeEntry.projectid = projectId;
                 timeEntry.worktypeid = worktypeId;
                 
-                dataConext.SaveChanges();
+                _dataContext.SaveChanges();
             }
         }
-
-
+        
         public void DeleteTimeEntry(int timeEntryId)
-        {
-            TempoDbContext dataConext = new TempoDbContext();
-            var timeEntry = dataConext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
+        {            
+            var timeEntry = _dataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
             if (timeEntry != null)
             {
-                dataConext.TimeEntries.Remove(timeEntry);
-                dataConext.SaveChanges();
+                _dataContext.TimeEntries.Remove(timeEntry);
+                _dataContext.SaveChanges();
             }
         }
 
+        #endregion
+
+        #region WorkTypes
+
         public List<Data.WorkType> GetWorkTypes()
-        {
-            TempoDbContext dataContext = new TempoDbContext();
-            return dataContext.WorkTypes.ToList();
+        {            
+            return _dataContext.WorkTypes.ToList();
         }
+
+        #endregion
+
     }
 }

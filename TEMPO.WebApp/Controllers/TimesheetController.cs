@@ -19,6 +19,7 @@ namespace TEMPO.WebApp.Controllers
         {
             _tsManager = new TimesheetManager();
         }
+
         public ActionResult Index(List<int> types)
         {
             var statusTypes = new List<TimesheetStatus>();
@@ -48,6 +49,11 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult Details(int id)
         {
+            if(TempData["submitted"] != null)
+            {
+                ViewBag.SuccessMessage = "Timesheet Submitted";
+                TempData.Remove("submitted");
+            }
             Models.Timesheet.Timesheet timesheetVM = Mapper.Map<Models.Timesheet.Timesheet>(_tsManager.GetTimeSheet(id));
             return View(timesheetVM);
         }
@@ -61,6 +67,23 @@ namespace TEMPO.WebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Models.Timesheet.Timesheet timesheetVm)
         {
+            UpdateTimesheet(timesheetVm);
+            if(timesheetVm.SubmitForApproval)
+            {
+                _tsManager.SetState(timesheetVm.TimesheetId, TimesheetStatus.Submitted, timesheetVm.Notes);
+                TempData["submitted"] = true;
+                return RedirectToAction("Details", new { id = timesheetVm.TimesheetId });                
+            }
+            else
+            {
+                ViewBag.SuccessMessage = "Timesheet Saved";
+                Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(timesheetVm.TimesheetId);
+                return View(tsViewModel);
+            }            
+        }
+
+        private void UpdateTimesheet(Models.Timesheet.Timesheet timesheetVm)
+        {
             foreach (var timeEntryVm in timesheetVm.TimeEntries)
             {
                 if (timeEntryVm.EntryId == 0)
@@ -72,12 +95,8 @@ namespace TEMPO.WebApp.Controllers
                     _tsManager.UpdateTimeEntry(timeEntryVm.EntryId, timeEntryVm.ProjectId, timeEntryVm.WorkTypeId, BuildDailyTime(timeEntryVm));
                 }
             }
-
-            ViewBag.SuccessMessage = "Timesheet Saved";
-            Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(timesheetVm.TimesheetId);
-            return View(tsViewModel);
         }
-
+        
         private List<DailyTime> BuildDailyTime(Models.Timesheet.TimeEntry timeEntry)
         {
             var dailyTime = new List<DailyTime>();
@@ -94,7 +113,11 @@ namespace TEMPO.WebApp.Controllers
         public ActionResult Edit(int id)
         {
             Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(id);
-            return View(tsViewModel);
+            if (tsViewModel.StatusName != "Saved")
+            {
+                return RedirectToAction("Review", new { id = id });
+            }
+            return View(tsViewModel);            
         }
 
         private Models.Timesheet.Timesheet GetTimeSheet(int id)
@@ -108,8 +131,7 @@ namespace TEMPO.WebApp.Controllers
             {
                 i.Projects = new SelectList(projectList, "ProjectId", "ProjectName", i.ProjectId);
                 i.WorkTypes = new SelectList(workTypes, "WorkTypeId", "WorkTypeName", i.WorkTypeId);
-            });
-            //tsViewModel.WeeklyTotal = tsViewModel.TimeEntries.Sum(i => i.Sunday + i.Monday + i.Tuesday + i.Wednesday + i.Thursday + i.Friday + i.Saturday);
+            });            
             return tsViewModel;
         }
 
@@ -142,6 +164,12 @@ namespace TEMPO.WebApp.Controllers
         public void DeleteTimeEntry(int entryId)
         {
             _tsManager.DeleteTimeEntry(entryId);
+        }
+
+        public ActionResult Review(int id)
+        {
+            Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(id);
+            return View(tsViewModel);
         }
     }
 }

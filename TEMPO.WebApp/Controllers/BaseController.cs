@@ -28,7 +28,7 @@ namespace TEMPO.WebApp.Controllers
             {
                 i.CreateMap<Data.TimeSheet, Models.Timesheet.Timesheet>()
                     .ForMember(d => d.PeriodEnding, o => o.MapFrom(s => s.periodending.endingdate))
-                    .ForMember(d => d.StatusName, o => o.MapFrom(s => s.status.statusname))
+                    .ForMember(d => d.StatusName, o => o.MapFrom(s => s.status.statusname.Trim()))
                     .ForMember(d => d.TimesheetId, o => o.MapFrom(s => s.tid))
                     .ForMember(d => d.EmployeeName, o => o.MapFrom(s => s.employee.employeename))
                     .AfterMap((src, dest) => dest.WeeklyTotal = dest.TimeEntries.Sum(j => j.Sunday + j.Monday + j.Tuesday + j.Wednesday + j.Thursday + j.Friday + j.Saturday));

@@ -13,6 +13,7 @@ namespace TEMPO.WebApp.Models.Timesheet
         public int TimesheetId { get; set; }
         [Display(Name = "Status")]
         public string StatusName { get; set; }
+        public int StatusId { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         [Display(Name = "Week Ending")]
@@ -24,6 +25,11 @@ namespace TEMPO.WebApp.Models.Timesheet
 
         [Display(Name = "Employee")]
         public string EmployeeName { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Notes { get; set; }
+
+        public bool SubmitForApproval { get; set; }
      
     }
 }

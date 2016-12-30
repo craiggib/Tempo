@@ -1,11 +1,10 @@
 ﻿@model TEMPO.WebApp.Models.Timesheet.Timesheet
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View Timesheet</h2>
+<h2>Review Timesheet</h2>
 
 <style>
     .time-entry-column {
@@ -22,12 +21,14 @@
         width: 300px;
         padding-right: 5px;
     }
+    .timsheet-Notes{
+        margin-top:50px;        
+    }
 </style>
 
 
 <div class="row">
     <div class="col-md-9">
-
 
         <div class="row">
             <div class="col-md-6">
@@ -67,6 +68,18 @@
                 }
             </div>
         </div>
+
+        @if (!string.IsNullOrEmpty(Model.Notes))
+        {
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-info">                        
+                        <div class="panel-body">@Html.DisplayFor(t => t.Notes)</div>
+                    </div>
+
+                </div>
+            </div>
+        }
 
         <!-- TimeEntries -->
         <table id="timeEntryTable">
@@ -117,13 +130,7 @@
                         <td class="time-entry-column">
                             <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Saturday)" disabled>
                         </td>
-                        <td class="time-entry-delete">
-
-                            @*<button type="button" class="btn btn-warning btn-xs deleteTimeEntry" aria-label="Left Align" data-timeEntryId="@Model.EntryId"
-                                        data-toggle="confirmation">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>*@
-                        </td>
+                        <td class="time-entry-delete"></td>
 
                     </tr>
                 }
@@ -131,7 +138,7 @@
             </tbody>
 
         </table>
-
+       
     </div>
 
     <div class="col-md-3">
