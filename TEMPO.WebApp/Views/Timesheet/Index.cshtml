@@ -57,7 +57,7 @@
         <h3>Saved</h3>
 
         @if (Model.SavedTimeSheets.Count() != 0)
-            {
+        {
             <table class="table">
                 <tr>
                     <th>
@@ -67,18 +67,23 @@
                         Total Hours
                     </th>
                     <th>Action</th>
-                </tr>
+                </tr>                
                 @foreach (var item in Model.SavedTimeSheets)
                 {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.PeriodEnding)
+                            @if ((DateTime.Today - item.PeriodEnding).Days > 2)
+                            {
+                                <span class="label label-danger label-sm">Overdue</span>
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.WeeklyTotal)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.TimesheetId })
+                           
                         </td>
                     </tr>
                 }
