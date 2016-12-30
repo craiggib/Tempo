@@ -15,7 +15,7 @@ namespace TEMPO.WebApp.Controllers
         public ActionResult Login()
         {
             return View();
-        }
+        } 
 
         [HttpPost]
         public ActionResult Login(UserAccount user)
