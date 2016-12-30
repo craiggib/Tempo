@@ -36,7 +36,9 @@ namespace TEMPO.WebApp.Controllers
                 i.CreateMap<Data.TimeEntry, Models.Timesheet.TimeEntry>()
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.project.JobYear.JobYear1}-{s.project.jobnum} {s.project.description}"))
                     .ForMember(d => d.WorkTypeName, o => o.MapFrom(s => s.worktype.worktypename));
-                    
+
+                i.CreateMap<Data.PeriodEnding, Models.Timesheet.PeriodEnding>()
+                    .ForMember(d => d.PeriodEndingId, o => o.MapFrom(s => s.peid));
 
                 i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
 

@@ -68,6 +68,18 @@
             </div>
         </div>
 
+        @if (!string.IsNullOrEmpty(Model.Notes))
+        {
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-info">
+                        <div class="panel-body">@Html.DisplayFor(t => t.Notes)</div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
         <!-- TimeEntries -->
         <table id="timeEntryTable">
             <thead>
@@ -138,8 +150,7 @@
         <div class="jumbotron">
             <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
             <p>Weekly Hours</p>
-            <input type="submit" value="Reject" class="btn btn-sm btn-danger" />
-            <input type="submit" value="Approve" class="btn btn-sm btn-success" />
+            
         </div>
 
     </div>

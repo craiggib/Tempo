@@ -1,40 +1,253 @@
-﻿@model IEnumerable<TEMPO.WebApp.Models.Timesheet.Timesheet>
+﻿@model TEMPO.WebApp.Models.Timesheet.TimesheetsHome
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Timesheets</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PeriodEnding)
-        </th>
-        <th></th>
-    </tr>
+<style>
+    .panel-new-timesheet-header {
+        padding-top: 3px !important;
+        padding-bottom: 3px !important;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PeriodEnding)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TimesheetId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.TimesheetId }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    .panel-new-timesheet-body {
+        padding-top: 0px !important;
+    }
+    .approved-heading {
+        display:inline;        
+        margin-top: 15px;
+    }
+     .approved-list-row {
+         padding-top:15px;
+     }
+     h3 {
+         padding-bottom: 15px;
+     }
+</style>
 
-</table>
+<div class="row">
+    <div class="col-md-5 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-new-timesheet-header">New Timesheet</div>
+            <div class="panel-body panel-new-timesheet-body">
+                <form action="@Url.Action("Create")" class="form-new-timesheet" method="post">
+                    <div class="form-group">
+                        <label for="NewPeriodEndingId" class="col-md-4 form-control-static">Week Ending</label>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(t => t.NewPeriodEndingId, Model.NewTimesheets, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary btn-sm">Create</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+
+
+
+        <h3>Saved</h3>
+
+        @if (Model.SavedTimeSheets.Count() != 0)
+            {
+            <table class="table">
+                <tr>
+                    <th>
+                        Week Ending
+                    </th>
+                    <th>
+                        Total Hours
+                    </th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var item in Model.SavedTimeSheets)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodEnding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.TimesheetId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="panel panel-info">
+                <div class="panel-body">No Timesheets yet? Create one!</div>
+            </div>
+        }
+
+
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <h3>Rejected</h3>
+
+
+        @if (Model.RejectedTimeSheets.Count() != 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        Week Ending
+                    </th>
+                    <th>
+                        Total Hours
+                    </th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var item in Model.RejectedTimeSheets)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodEnding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.TimesheetId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="panel panel-info">
+                <div class="panel-body">Nothing to see here. Feels good, doesn't it?</div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<h3 class="approved-heading">Approved
+    
+    </h3><span class="label label-info label-sm">Last 3 Months</span>
+
+<div class="row approved-list-row">
+    <div class="col-md-4">
+
+        @if (Model.ApprovedCurrentMonth.Count() != 0)
+        {
+            <h4>
+                @(Model.ApprovedCurrentMonth.First().PeriodEnding.ToString("MMMM yyyy"))
+            </h4>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Week Ending
+                    </th>
+                    <th>
+                        Total Hours
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.ApprovedCurrentMonth)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodEnding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View", "Details", new { id = item.TimesheetId })
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+    </div>
+    <div class="col-md-4">
+        @if (Model.ApprovedBackMonth1.Count() != 0)
+            {
+            <h4>
+                @(Model.ApprovedBackMonth1.First().PeriodEnding.ToString("MMMM yyyy"))
+            </h4>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Week Ending
+                    </th>
+                    <th>
+                        Total Hours
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.ApprovedBackMonth1)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodEnding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("View", "Details", new { id = item.TimesheetId })
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+    </div>
+    <div class="col-md-4">
+        <h4>
+            @if (Model.ApprovedBackMonth2.Count() != 0)
+            {
+                <h4>
+                    @(Model.ApprovedBackMonth2.First().PeriodEnding.ToString("MMMM yyyy"))
+                </h4>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            Week Ending
+                        </th>
+                        <th>
+                            Total Hours
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.ApprovedBackMonth2)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PeriodEnding)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                            </td>
+                            <td>
+                                @Html.ActionLink("View", "Details", new { id = item.TimesheetId })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </h4>
+    </div>
+</div>

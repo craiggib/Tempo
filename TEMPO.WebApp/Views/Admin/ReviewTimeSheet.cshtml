@@ -21,8 +21,9 @@
         width: 300px;
         padding-right: 5px;
     }
-    .timsheet-Notes{
-        margin-top:50px;        
+
+    .timsheet-Notes {
+        margin-top: 50px;
     }
 </style>
 
@@ -73,7 +74,7 @@
         {
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <div class="panel panel-info">                        
+                    <div class="panel panel-info">
                         <div class="panel-body">@Html.DisplayFor(t => t.Notes)</div>
                     </div>
 
@@ -138,15 +139,18 @@
             </tbody>
 
         </table>
-       
+
     </div>
 
     <div class="col-md-3">
         <div class="jumbotron">
             <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
             <p>Weekly Hours</p>
-            <input type="submit" value="Reject" class="btn btn-sm btn-danger" />
-            <input type="submit" value="Approve" class="btn btn-sm btn-success" />
+
+            <form method="post">
+                <input type="submit" value="Reject" class="btn btn-sm btn-danger" formaction="@Url.Action("Reject", new { id = Model.TimesheetId })" />
+                <input type="submit" value="Approve" class="btn btn-sm btn-success" formaction="@Url.Action("Approve", new { id = Model.TimesheetId })" />
+            </form>
         </div>
 
     </div>

@@ -19,25 +19,57 @@ namespace TEMPO.BusinessLayer.TimeSheets
         #region Timesheets
 
         public Data.TimeSheet GetTimeSheet(int timeSheetId)
-        {            
+        {
             return _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
         }
 
         public List<Data.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status)
         {
-            var statusInts = status.Select(i => (int)i);            
+            var statusInts = status.Select(i => (int)i);
             return _dataContext.TimeSheets.Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId).ToList();
         }
 
-        public void SetState(int timeSheetId, TimesheetStatus newState, string notes)
+        public List<Data.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status, DateTime dateFilter)
+        {
+            var statusInts = status.Select(i => (int)i);
+            return _dataContext.TimeSheets
+                .Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId && i.periodending.endingdate > dateFilter)
+                .ToList();
+        }
+
+        public List<Data.TimeSheet> GetTimeSheets(List<TimesheetStatus> status)
+        {
+            var statusInts = status.Select(i => (int)i);
+            return _dataContext.TimeSheets
+                .Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value))
+                .ToList();
+        }
+
+        public void SetState(int timeSheetId, TimesheetStatus newState, string notes = null)
         {
             var timeSheet= _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
             if(timeSheet != null)
             {
-                timeSheet.notes = notes;
+                if (notes != null)
+                {
+                    timeSheet.notes = notes;
+                }
                 timeSheet.statusid = (int)newState;
                 _dataContext.SaveChanges();
             }
+        }
+
+        public Data.TimeSheet CreateTimesheet(int employeeId, int periodEndingId)
+        {
+            Data.TimeSheet newTimeSheet = new Data.TimeSheet
+            {
+                empid = employeeId,
+                peid = periodEndingId,
+                statusid = (int)TimesheetStatus.Saved
+            };
+            _dataContext.TimeSheets.Add(newTimeSheet);
+            _dataContext.SaveChanges();
+            return newTimeSheet;
         }
 
         #endregion
@@ -102,6 +134,31 @@ namespace TEMPO.BusinessLayer.TimeSheets
         }
 
         #endregion
+
+        #region Period Endings
+
+        /// <summary>
+        /// return a list of valid period endings. valid = go back and forward one month, remove any existing as options
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
+        public List<Data.PeriodEnding> GetNewPeriodEndings(int employeeId)
+        {
+            var today = DateTime.Today;
+            var forwardOneMonth = today.AddMonths(1);
+            var backOneMonth = today.AddMonths(-1);
+
+            List<DateTime> existingPeriods = _dataContext.TimeSheets
+                .Where(i => i.empid == employeeId && backOneMonth < i.periodending.endingdate && forwardOneMonth > i.periodending.endingdate)
+                .Select(i => i.periodending.endingdate)
+                .ToList();
+
+            return _dataContext.PeriodEndings
+                .Where(i => backOneMonth < i.endingdate && forwardOneMonth > i.endingdate && !existingPeriods.Contains(i.endingdate))
+                .ToList();
+        }
+        #endregion
+
 
     }
 }

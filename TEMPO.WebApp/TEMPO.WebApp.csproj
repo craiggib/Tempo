@@ -180,13 +180,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\TimesheetController.cs" />
+    <Compile Include="Controllers\TimesheetUtil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account\UserAccount.cs" />
+    <Compile Include="Models\Admin\AdminHome.cs" />
     <Compile Include="Models\Project\Project.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
     <Compile Include="Models\Timesheet\Timesheet.cs" />
+    <Compile Include="Models\Timesheet\TimesheetsHome.cs" />
     <Compile Include="Models\Timesheet\WorkType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -233,7 +238,8 @@
     <Content Include="Views\Timesheet\_TimeEntry.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Timesheet\Details.cshtml" />
-    <Content Include="Views\Timesheet\Review.cshtml" />
+    <Content Include="Views\Admin\ReviewTimeSheet.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,6 +30,7 @@ namespace TEMPO.WebApp.Models.Timesheet
         public string Notes { get; set; }
 
         public bool SubmitForApproval { get; set; }
+        public bool ApproveTimesheet { get; set; }
      
     }
 }

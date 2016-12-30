@@ -1,0 +1,62 @@
+﻿@model TEMPO.WebApp.Models.Admin.AdminHome
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Administration</h2>
+
+<div class="row">
+    <div class="col-md-5">
+        
+        <h3>Submitted Timesheets</h3>
+
+        @if (Model.SubmittedTimesheets.Count() != 0)
+            {
+            <table class="table">
+                <tr>
+                    <th>
+                        Employee
+                    </th>
+                    <th>
+                        Week Ending
+                    </th>
+                    <th>
+                        Total Hours
+                    </th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var item in Model.SubmittedTimesheets)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodEnding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Review", "ReviewTimeSheet", new { id = item.TimesheetId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="panel panel-info">
+                <div class="panel-body">No Timesheets have been submitted!</div>
+            </div>
+        }
+
+
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+     
+    </div>
+</div>
