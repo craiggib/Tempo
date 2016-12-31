@@ -8,11 +8,11 @@ namespace TEMPO.BusinessLayer.Client
 {
     public class ClientManager : BaseManager
     {
-        public List<Data.Client> GetClients()
+        public List<Data.ClientSummary> GetClientSummary()
         {
-            return DataContext.Clients.ToList();
+            return DataContext.ClientSummaries.ToList();
         }
-
+        
         public Data.Client GetClient(int clientId)
         {
             return DataContext.Clients.FirstOrDefault(i=>i.clientid == clientId);

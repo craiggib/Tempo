@@ -91,5 +91,7 @@
     <Build Include="dbo\Stored Procedures\EmployeeTimeSheetReport.sql" />
     <Build Include="dbo\Stored Procedures\GetJobYears.sql" />
     <Build Include="dbo\Stored Procedures\GetSubmittedTimeSheets.sql" />
+    <Build Include="dbo\Views\ClientSummary.sql" />
+    <Build Include="dbo\Views\ProjectBillableHours.sql" />
   </ItemGroup>
 </Project>

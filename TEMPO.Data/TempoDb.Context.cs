@@ -37,5 +37,7 @@ namespace TEMPO.Data
         public virtual DbSet<TimeEntry> TimeEntries { get; set; }
         public virtual DbSet<TimeSheet> TimeSheets { get; set; }
         public virtual DbSet<WorkType> WorkTypes { get; set; }
+        public virtual DbSet<ClientSummary> ClientSummaries { get; set; }
+        public virtual DbSet<ProjectBillableHour> ProjectBillableHours { get; set; }
     }
 }

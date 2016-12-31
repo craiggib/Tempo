@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="021018019531473182912e0e05073755" Name="Diagram1">
+      <Diagram DiagramId="021018019531473182912e0e05073755" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="TEMPOModel.Client" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TEMPOModel.Employee" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TEMPOModel.JobYear" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
@@ -30,6 +30,8 @@
         <AssociationConnector Association="TEMPOModel.FK__timeentry__tid__503BEA1C" ManuallyRouted="false" />
         <AssociationConnector Association="TEMPOModel.FK__timeentry__workt__51300E55" ManuallyRouted="false" />
         <AssociationConnector Association="TEMPOModel.moduleauth" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TEMPOModel.ClientSummary" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TEMPOModel.ProjectBillableHour" Width="1.5" PointX="11.75" PointY="3.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

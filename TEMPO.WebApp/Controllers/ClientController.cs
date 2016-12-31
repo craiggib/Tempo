@@ -20,8 +20,8 @@ namespace TEMPO.WebApp.Controllers
         }
         public ActionResult Index()
         {
-            var clientList = _clientManager.GetClients()
-                .Select(i => Mapper.Map<Models.Client.Client>(i))
+            var clientList = _clientManager.GetClientSummary()
+                .Select(i => Mapper.Map<Models.Client.ClientSummary>(i))
                 .OrderBy(i=> i.ClientName)
                 .ToList();
             return View(clientList);

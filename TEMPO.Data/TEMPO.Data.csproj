@@ -54,6 +54,10 @@
     <Compile Include="Client.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClientProjectSummary.cs" />
+    <Compile Include="ClientSummary.cs">
+      <DependentUpon>TempoDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="DailyTime.cs" />
     <Compile Include="Employee.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
@@ -71,6 +75,9 @@
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Project.cs">
+      <DependentUpon>TempoDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectBillableHour.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="ProjectType.cs">

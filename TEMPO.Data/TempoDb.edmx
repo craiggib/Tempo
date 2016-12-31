@@ -120,6 +120,31 @@
           <Property Name="worktypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="worktypename" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TEMPO.dbo.ClientSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ClientSummary">
+          <Key>
+            <PropertyRef Name="clientid" />
+            <PropertyRef Name="clientname" />
+          </Key>
+          <Property Name="clientid" Type="int" Nullable="false" />
+          <Property Name="clientname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="projectcount" Type="int" />
+          <Property Name="lastHoursLogged" Type="datetime" />
+          <Property Name="totalhourslogged" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="totalamount" Type="decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProjectBillableHours">
+          <Key>
+            <PropertyRef Name="entryid" />
+          </Key>
+          <Property Name="entryid" Type="int" Nullable="false" />
+          <Property Name="projectid" Type="int" />
+          <Property Name="entryHours" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="amount" Type="decimal" Precision="38" Scale="4" />
+        </EntityType>
         <Association Name="FK__mmt__entryid__55009F39">
           <End Role="timeentry" Type="Self.timeentry" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -310,6 +335,24 @@
           <EntitySet Name="timeentry" EntityType="Self.timeentry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="timesheet" EntityType="Self.timesheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="worktype" EntityType="Self.worktype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientSummary" EntityType="Self.ClientSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ClientSummary].[clientid] AS [clientid], 
+    [ClientSummary].[clientname] AS [clientname], 
+    [ClientSummary].[projectcount] AS [projectcount], 
+    [ClientSummary].[lastHoursLogged] AS [lastHoursLogged], 
+    [ClientSummary].[totalhourslogged] AS [totalhourslogged], 
+    [ClientSummary].[totalamount] AS [totalamount]
+    FROM [dbo].[ClientSummary] AS [ClientSummary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProjectBillableHours" EntityType="Self.ProjectBillableHours" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProjectBillableHours].[entryid] AS [entryid], 
+    [ProjectBillableHours].[projectid] AS [projectid], 
+    [ProjectBillableHours].[entryHours] AS [entryHours], 
+    [ProjectBillableHours].[amount] AS [amount]
+    FROM [dbo].[ProjectBillableHours] AS [ProjectBillableHours]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__mmt__entryid__55009F39" Association="Self.FK__mmt__entryid__55009F39">
             <End Role="timeentry" EntitySet="timeentry" />
             <End Role="mmt" EntitySet="mmt" />
@@ -721,7 +764,30 @@
             <End Role="employee" EntitySet="Employees" />
             <End Role="module" EntitySet="Modules" />
           </AssociationSet>
+          <EntitySet Name="ClientSummaries" EntityType="TEMPOModel.ClientSummary" />
+          <EntitySet Name="ProjectBillableHours" EntityType="TEMPOModel.ProjectBillableHour" />
         </EntityContainer>
+        <EntityType Name="ClientSummary">
+          <Key>
+            <PropertyRef Name="clientid" />
+            <PropertyRef Name="clientname" />
+          </Key>
+          <Property Name="clientid" Type="Int32" Nullable="false" />
+          <Property Name="clientname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="projectcount" Type="Int32" />
+          <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
+          <Property Name="totalhourslogged" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="totalamount" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <EntityType Name="ProjectBillableHour">
+          <Key>
+            <PropertyRef Name="entryid" />
+          </Key>
+          <Property Name="entryid" Type="Int32" Nullable="false" />
+          <Property Name="projectid" Type="Int32" />
+          <Property Name="entryHours" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="amount" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -855,6 +921,28 @@
               <ScalarProperty Name="moduleid" ColumnName="moduleid" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ClientSummaries">
+            <EntityTypeMapping TypeName="TEMPOModel.ClientSummary">
+              <MappingFragment StoreEntitySet="ClientSummary">
+                <ScalarProperty Name="totalamount" ColumnName="totalamount" />
+                <ScalarProperty Name="totalhourslogged" ColumnName="totalhourslogged" />
+                <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
+                <ScalarProperty Name="projectcount" ColumnName="projectcount" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectBillableHours">
+            <EntityTypeMapping TypeName="TEMPOModel.ProjectBillableHour">
+              <MappingFragment StoreEntitySet="ProjectBillableHours">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="entryHours" ColumnName="entryHours" />
+                <ScalarProperty Name="projectid" ColumnName="projectid" />
+                <ScalarProperty Name="entryid" ColumnName="entryid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
