@@ -188,6 +188,7 @@
     <Compile Include="Models\Account\UserAccount.cs" />
     <Compile Include="Models\Admin\AdminHome.cs" />
     <Compile Include="Models\Client\Client.cs" />
+    <Compile Include="Models\Client\ClientDetails.cs" />
     <Compile Include="Models\Project\Project.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
@@ -243,12 +244,13 @@
     <Content Include="Views\Admin\ReviewTimeSheet.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\Details.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Home\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Project\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

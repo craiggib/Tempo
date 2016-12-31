@@ -41,7 +41,7 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.PeriodEndingId, o => o.MapFrom(s => s.peid));
 
                 i.CreateMap<Data.Client, Models.Client.Client>();
-
+                
                 i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
 
                 i.CreateMap<Data.Project, Models.Project.Project>()

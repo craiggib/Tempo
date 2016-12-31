@@ -10,11 +10,11 @@ namespace TEMPO.BusinessLayer
     public abstract class BaseManager
     {
 
-        protected TempoDbContext DataConext { get; private set; }
+        protected TempoDbContext DataContext { get; private set; }
 
         public BaseManager()
         {
-            DataConext = new TempoDbContext();
+            DataContext = new TempoDbContext();
         }
         
     }

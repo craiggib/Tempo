@@ -10,7 +10,12 @@ namespace TEMPO.BusinessLayer.Client
     {
         public List<Data.Client> GetClients()
         {
-            return DataConext.Clients.ToList();
+            return DataContext.Clients.ToList();
+        }
+
+        public Data.Client GetClient(int clientId)
+        {
+            return DataContext.Clients.FirstOrDefault(i=>i.clientid == clientId);
         }
     }
 }

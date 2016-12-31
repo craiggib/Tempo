@@ -28,6 +28,7 @@ namespace TEMPO.Data
         public string refjobnum { get; set; }
         public Nullable<int> projecttypeid { get; set; }
         public string description { get; set; }
+        public bool Active { get; set; }
     
         public virtual Client client { get; set; }
         public virtual JobYear JobYear { get; set; }

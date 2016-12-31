@@ -7,12 +7,20 @@ using TEMPO.Data;
 
 namespace TEMPO.BusinessLayer.Project
 {
-    public class ProjectManager
+    public class ProjectManager : BaseManager
     {
         public List<Data.Project> GetProjects()
         {
-            TempoDbContext dataConext = new TempoDbContext();
-            return dataConext.Projects.ToList();
+            return DataContext.Projects.ToList();
+        }
+
+        public List<Data.Project> GetProjects(int clientId)
+        {
+            return DataContext.Projects.Where(i => i.clientid == clientId).ToList();
+        }
+        public Data.Project GetProject(int projectId)
+        {
+            return DataContext.Projects.Where(i => i.projectid == projectId).FirstOrDefault();
         }
     }
 }

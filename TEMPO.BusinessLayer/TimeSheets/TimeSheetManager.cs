@@ -7,7 +7,7 @@ using TEMPO.Data;
 
 namespace TEMPO.BusinessLayer.TimeSheets
 {
-    public class TimesheetManager
+    public class TimesheetManager :BaseManager
     {
         private TempoDbContext _dataContext;
 
@@ -122,6 +122,12 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 _dataContext.TimeEntries.Remove(timeEntry);
                 _dataContext.SaveChanges();
             }
+        }
+
+        public List<TimeEntry> GetTimeEntries(int projectId)
+        {
+            return DataContext.TimeEntries.Where(i => i.projectid == projectId)
+                .ToList();
         }
 
         #endregion

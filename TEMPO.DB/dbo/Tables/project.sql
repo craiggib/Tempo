@@ -9,6 +9,7 @@
     PRIMARY KEY CLUSTERED ([projectid] ASC),
     FOREIGN KEY ([clientid]) REFERENCES [dbo].[client] ([clientid]),
     FOREIGN KEY ([projecttypeid]) REFERENCES [dbo].[projecttype] ([projecttypeid]),
-    CONSTRAINT [FK_project_JobYear] FOREIGN KEY ([jobnumyear]) REFERENCES [dbo].[JobYear] ([JobYearID])
+    CONSTRAINT [FK_project_JobYear] FOREIGN KEY ([jobnumyear]) REFERENCES [dbo].[JobYear] ([JobYearID]),
+	Active bit not null default(1)
 );
 

@@ -11,7 +11,7 @@ namespace TEMPO.BusinessLayer
     {
         public Employee Login(string userName, string password)
         {
-            return DataConext.Employees.FirstOrDefault(i => i.employeename == userName && i.password == password);
+            return DataContext.Employees.FirstOrDefault(i => i.employeename == userName && i.password == password);
         }
     }
 }
