@@ -93,5 +93,6 @@
     <Build Include="dbo\Stored Procedures\GetSubmittedTimeSheets.sql" />
     <Build Include="dbo\Views\ClientSummary.sql" />
     <Build Include="dbo\Views\ProjectBillableHours.sql" />
+    <Build Include="dbo\Views\ProjectSummary.sql" />
   </ItemGroup>
 </Project>

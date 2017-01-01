@@ -11,5 +11,6 @@ namespace TEMPO.WebApp.Models.Project
         public string ReferenceJobNumber { get; set; }
         public string CustomerName { get; set; }
         public string ProjectName { get; set; }
+        public string Description { get; set; }
     }
 }

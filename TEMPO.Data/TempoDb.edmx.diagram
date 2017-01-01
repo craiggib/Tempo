@@ -32,6 +32,7 @@
         <AssociationConnector Association="TEMPOModel.moduleauth" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TEMPOModel.ClientSummary" Width="1.5" PointX="11.75" PointY="0.75" />
         <EntityTypeShape EntityType="TEMPOModel.ProjectBillableHour" Width="1.5" PointX="11.75" PointY="3.375" />
+        <EntityTypeShape EntityType="TEMPOModel.ProjectSummary" Width="1.5" PointX="11.625" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

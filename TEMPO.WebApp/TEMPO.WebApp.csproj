@@ -192,6 +192,7 @@
     <Compile Include="Models\Client\ClientSummary.cs" />
     <Compile Include="Models\Project\Project.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Models\Project\ProjectSummary.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
     <Compile Include="Models\Timesheet\Timesheet.cs" />
@@ -203,6 +204,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\easy-autocomplete\easy-autocomplete.min.css" />
+    <Content Include="Content\easy-autocomplete\easy-autocomplete.themes.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -214,6 +217,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.easy-autocomplete.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -247,9 +251,11 @@
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\easy-autocomplete\maps\" />
     <Folder Include="Models\Home\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

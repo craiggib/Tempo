@@ -50,6 +50,11 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.client.clientname))
                     .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear.JobYear1}-{s.jobnum} {s.description}"));
+
+                i.CreateMap<Data.ProjectSummary, Models.Project.ProjectSummary>()                                        
+                    .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
+                    .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.projecttypedesc))
+                    .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear}-{s.jobnum} {s.description}"));
             });
 
             _mapper = config.CreateMapper();

@@ -46,5 +46,39 @@ namespace TEMPO.WebApp.Controllers
             
             return View(cDetails);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var client = Mapper.Map<Models.Client.Client>(_clientManager.GetClient(id));
+            client.ProjectList = new ProjectManager().GetProjectSummaries(id)
+                .Select(i=> Mapper.Map<Models.Project.ProjectSummary>(i))
+                .OrderByDescending(i=>i.ProjectName)
+                .ToList();
+
+            return View(client);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Models.Client.Client clientVm)
+        {
+            _clientManager.UpdateClient(clientVm.ClientId, clientVm.ClientName);
+            ViewBag.SuccessMessage = "Updated Successfully";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Models.Client.Client clientVm)
+        {
+            var newClient = _clientManager.CreateClient(clientVm.ClientName);
+            return RedirectToAction("Edit", new { id = newClient.clientid });
+        }
+        
+        public JsonResult GetAllCustomers()
+        {
+            var searchResults = _clientManager.GetClients()
+                .Select(i => Mapper.Map<Client>(i));
+            return Json(searchResults, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

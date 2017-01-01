@@ -145,6 +145,28 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a pr
           <Property Name="entryHours" Type="decimal" Precision="38" Scale="2" />
           <Property Name="amount" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProjectSummary">
+          <Key>
+            <PropertyRef Name="projectid" />
+            <PropertyRef Name="jobnum" />
+            <PropertyRef Name="projecttypedesc" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="JobYear" />
+          </Key>
+          <Property Name="projectid" Type="int" Nullable="false" />
+          <Property Name="clientid" Type="int" />
+          <Property Name="jobnum" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="refjobnum" Type="varchar" MaxLength="50" />
+          <Property Name="projecttypedesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="30" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="JobYear" Type="int" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="TotalHours" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="lastHoursLogged" Type="datetime" />
+        </EntityType>
         <Association Name="FK__mmt__entryid__55009F39">
           <End Role="timeentry" Type="Self.timeentry" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -352,6 +374,21 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a pr
     [ProjectBillableHours].[entryHours] AS [entryHours], 
     [ProjectBillableHours].[amount] AS [amount]
     FROM [dbo].[ProjectBillableHours] AS [ProjectBillableHours]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProjectSummary" EntityType="Self.ProjectSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProjectSummary].[projectid] AS [projectid], 
+    [ProjectSummary].[clientid] AS [clientid], 
+    [ProjectSummary].[jobnum] AS [jobnum], 
+    [ProjectSummary].[refjobnum] AS [refjobnum], 
+    [ProjectSummary].[projecttypedesc] AS [projecttypedesc], 
+    [ProjectSummary].[description] AS [description], 
+    [ProjectSummary].[active] AS [active], 
+    [ProjectSummary].[JobYear] AS [JobYear], 
+    [ProjectSummary].[TotalAmount] AS [TotalAmount], 
+    [ProjectSummary].[TotalHours] AS [TotalHours], 
+    [ProjectSummary].[lastHoursLogged] AS [lastHoursLogged]
+    FROM [dbo].[ProjectSummary] AS [ProjectSummary]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__mmt__entryid__55009F39" Association="Self.FK__mmt__entryid__55009F39">
             <End Role="timeentry" EntitySet="timeentry" />
@@ -766,6 +803,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a pr
           </AssociationSet>
           <EntitySet Name="ClientSummaries" EntityType="TEMPOModel.ClientSummary" />
           <EntitySet Name="ProjectBillableHours" EntityType="TEMPOModel.ProjectBillableHour" />
+          <EntitySet Name="ProjectSummaries" EntityType="TEMPOModel.ProjectSummary" />
         </EntityContainer>
         <EntityType Name="ClientSummary">
           <Key>
@@ -787,6 +825,26 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a pr
           <Property Name="projectid" Type="Int32" />
           <Property Name="entryHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="amount" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <EntityType Name="ProjectSummary">
+          <Key>
+            <PropertyRef Name="projectid" />
+            <PropertyRef Name="jobnum" />
+            <PropertyRef Name="projecttypedesc" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="JobYear" />
+          </Key>
+          <Property Name="projectid" Type="Int32" Nullable="false" />
+          <Property Name="clientid" Type="Int32" />
+          <Property Name="jobnum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="refjobnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="projecttypedesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="JobYear" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="TotalHours" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -940,6 +998,23 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a pr
                 <ScalarProperty Name="entryHours" ColumnName="entryHours" />
                 <ScalarProperty Name="projectid" ColumnName="projectid" />
                 <ScalarProperty Name="entryid" ColumnName="entryid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectSummaries">
+            <EntityTypeMapping TypeName="TEMPOModel.ProjectSummary">
+              <MappingFragment StoreEntitySet="ProjectSummary">
+                <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="JobYear" ColumnName="JobYear" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="projecttypedesc" ColumnName="projecttypedesc" />
+                <ScalarProperty Name="refjobnum" ColumnName="refjobnum" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="projectid" ColumnName="projectid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

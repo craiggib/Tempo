@@ -80,6 +80,9 @@
     <Compile Include="ProjectBillableHour.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProjectSummary.cs">
+      <DependentUpon>TempoDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProjectType.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>

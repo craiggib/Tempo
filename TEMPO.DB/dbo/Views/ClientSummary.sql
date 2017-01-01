@@ -21,6 +21,6 @@ SELECT client.clientid, client.clientname, count(project.projectid) as projectco
 				ProjectBillableHours.projectid = project.projectid
 			and project.clientid = client.clientid) as totalamount
 
-FROM client, project
-where client.clientid = project.clientid
+FROM client left outer join project on client.clientid = project.clientid
+--where client.clientid = project.clientid
 group by client.clientid, client.clientname

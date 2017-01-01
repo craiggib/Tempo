@@ -18,6 +18,13 @@ namespace TEMPO.BusinessLayer.Project
         {
             return DataContext.Projects.Where(i => i.clientid == clientId).ToList();
         }
+
+        public List<Data.ProjectSummary> GetProjectSummaries(int clientId)
+        {
+            return DataContext.ProjectSummaries.Where(i => i.clientid == clientId).ToList();
+        }
+
+
         public Data.Project GetProject(int projectId)
         {
             return DataContext.Projects.Where(i => i.projectid == projectId).FirstOrDefault();
