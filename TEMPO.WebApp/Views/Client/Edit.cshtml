@@ -4,40 +4,66 @@
     ViewBag.Title = "Edit Client";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .total-billing {
+        font-size: 50px;
+    }
+</style>
 
 <h2>Edit Client</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-
-        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm())
         {
-            <div class="alert alert-success">
-                @ViewBag.SuccessMessage
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.SuccessMessage
+                    </div>
+                }
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ClientId)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
         }
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ClientId)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
+    @if (Model.ProjectList != null && Model.ProjectList.Count > 0)
+    {
+        <div class="col-md-3 text-center">
+
+            <div>
+                <span class="text-muted">
+                    <i class="fa fa-money"></i> Total Billing
+                </span>
+                <div class="total-billing text-success">@(string.Format("{0:c}", Model.ProjectList.Sum(i=>i.TotalAmount)))</div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div>
+                <span class="text-muted"><i class="fa fa-clock-o"></i> Total Hours</span>
+                <div class="total-billing text-info">@(Model.ProjectList.Sum(i => i.TotalHours))</div>
+            </div>
+        </div>
+    }
+</div>
 
 <div class="row">
     <div class="col-md-6">
