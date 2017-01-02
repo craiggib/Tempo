@@ -18,13 +18,34 @@ namespace TEMPO.WebApp.Controllers
         {
             _clientManager = new ClientManager();
         }
-        public ActionResult Index()
+        public ActionResult Index(string sort)
         {
             var clientList = _clientManager.GetClientSummary()
-                .Select(i => Mapper.Map<Models.Client.ClientSummary>(i))
-                .OrderBy(i=> i.ClientName)
-                .ToList();
-            return View(clientList);
+                .Select(i => Mapper.Map<Models.Client.ClientSummary>(i));                         
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                if(sort == "hours")
+                {
+                    clientList = clientList.OrderByDescending(i => i.TotalHoursLogged);
+                    
+                }
+                else if(sort == "alpha")
+                {
+                    clientList = clientList.OrderBy(i => i.ClientName);
+                }
+                else
+                {
+                    clientList = clientList.OrderByDescending(i => i.LastHoursLogged); 
+                }
+            }
+            else
+            {
+                clientList = clientList.OrderByDescending(i => i.LastHoursLogged);
+            }
+                
+                
+            return View(clientList.ToList());
         }
 
         public ActionResult Details(int id)
@@ -63,7 +84,7 @@ namespace TEMPO.WebApp.Controllers
         {
             _clientManager.UpdateClient(clientVm.ClientId, clientVm.ClientName);
             ViewBag.SuccessMessage = "Updated Successfully";
-            return View();
+            return RedirectToAction("Edit", new { id = clientVm.ClientId });
         }
 
         [HttpPost]
@@ -72,7 +93,7 @@ namespace TEMPO.WebApp.Controllers
             var newClient = _clientManager.CreateClient(clientVm.ClientName);
             return RedirectToAction("Edit", new { id = newClient.clientid });
         }
-        
+
         public JsonResult GetAllCustomers()
         {
             var searchResults = _clientManager.GetClients()

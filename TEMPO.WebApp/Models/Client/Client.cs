@@ -9,8 +9,9 @@ namespace TEMPO.WebApp.Models.Client
     public class Client
     {
         public int ClientId { get; set; }
-
-        [Display(Name = "Client Name")]
+                
+        [Display(Name = "Name")]
+        [Required]        
         public string ClientName { get; set; }
 
         public List<Models.Project.ProjectSummary> ProjectList { get; set; }

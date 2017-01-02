@@ -9,6 +9,8 @@
 
 <link href="~/Content/easy-autocomplete/easy-autocomplete.min.css" rel="stylesheet" />
 <link href="~/Content/easy-autocomplete/easy-autocomplete.themes.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Open+Sans">
 <style>
     .project-count {
         font-size: 40px;
@@ -17,6 +19,7 @@
     .small-content {
         font-size: small;
         color: gray;
+        font-family: 'Open Sans', serif;
     }
 
     .client-actions {
@@ -43,87 +46,70 @@
 
 
 <div class="row">
-    <div class="col-sm-10">
+    <div class="col-md-4">
         <div class="form-group">
             <input type="text" class="form-control search-form" id="customerSearch" placeholder="Search..." />
         </div>
     </div>
-    <div class="col-md-2">
-        <button class="form-control" data-toggle="modal" data-target="#myModal">Create new &raquo;</button>
-    </div>
+    <div class="col-md-4 text-right">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "recent" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "recent" })">Recent</a>
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "alpha" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "alpha" })">Alphabetical</a>
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "hours" })">Billed Hours</a>
+        </div>
+    </div>   
 </div>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <form action="@Url.Action("Create")" class="form-new-timesheet" method="post">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Create New</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="ClientName" class="col-md-4">
-                            Client Name
-                        </label>         
-                        <input type="text" class="form-control" id="ClientName" name="ClientName" />
-                    </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-default btn-primary">Create</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<ul class="list-group">
-    @foreach (var item in Model)
-    {
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>
-                        <a href="@Url.Action("Edit", new { id = item.ClientId })"> @Html.DisplayFor(modelItem => item.ClientName)</a>
-
-                    </h4>
-                    <div class="small-content">
-                        @Html.DisplayFor(modelItem => item.TotalHoursLogged) billed hours, @Html.DisplayFor(modelItem => item.TotalAmount)
-                    </div>
-                </div>
-                <div class="col-md-4">
+<div class="row">
+    <div class="col-md-8">
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="project-count">
-                                <a href=""><span class="label label-info ">@Html.DisplayFor(modelItem => item.ProjectCount)</span></a>
-                            </div>
-                        </div>
-                        <div class="col-md-7 project-info">
-                            <div class="small-content">Projects</div>
-                            <div class="small-content"><a href="">1 active, 32 inactive</a></div>
+                        <div class="col-md-6">
+                            <h4>
+                                <a href="@Url.Action("Edit", new { id = item.ClientId })"> @Html.DisplayFor(modelItem => item.ClientName)</a>
+                            </h4>
                             <div class="small-content">
-                                Last Hours Logged <div class="label label-default">@Html.DisplayFor(modelItem => item.LastHoursLogged)</div>
+                                @Html.DisplayFor(modelItem => item.TotalHoursLogged) billed hours, @Html.DisplayFor(modelItem => item.TotalAmount)
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="project-count">
+                                        <span class="label label-info ">@Html.DisplayFor(modelItem => item.ProjectCount)</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 project-info">
+                                    <div class="small-content"><a href="">Active Projects</a></div>
+                                    <div class="small-content">
+                                        Recent Hours <div class="label label-default">@Html.DisplayFor(modelItem => item.LastHoursLogged)</div>
+                                    </div>
+                                </div>
 
 
+                            </div>
+                        </div>
+                        @*<div class="col-md-4 client-actions">
+                            <button class="btn btn-default btn-sm client-actions-button">New Project &raquo;</button>
+                                <button class="btn btn-default btn-sm">New Quote &raquo;</button>
+                                                </div>*@
                     </div>
-                </div>
-                <div class="col-md-4 client-actions">
-                    <button class="btn btn-default btn-sm client-actions-button">New Project &raquo;</button>
-                    <button class="btn btn-default btn-sm">New Quote &raquo;</button>
-                </div>
-            </div>
 
-        </li>
-    }
-</ul>
-
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("_Create", new TEMPO.WebApp.Models.Client.Client())        
+    </div>
+</div>
 @section Scripts {
 
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/scripts/jquery.easy-autocomplete.js"></script>
     <script>
 
