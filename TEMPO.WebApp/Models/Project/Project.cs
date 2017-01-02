@@ -19,6 +19,7 @@ namespace TEMPO.WebApp.Models.Project
         [Required]
         public string ProjectNumber { get; set; }
 
+        [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }
 
         public string ProjectName { get; set; }
@@ -36,6 +37,9 @@ namespace TEMPO.WebApp.Models.Project
         [Required]
         [Display(Name = "Type")]
         public int ProjectTypeId { get; set; }
+                
+        [Display(Name = "Amount")]
+        public float? ContractedAmount { get; set; }
 
         public List<Models.Project.ProjectType> ProjectTypes { get; set; }
 

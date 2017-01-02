@@ -29,6 +29,8 @@ namespace TEMPO.Data
         public Nullable<int> projecttypeid { get; set; }
         public string description { get; set; }
         public bool Active { get; set; }
+        public Nullable<int> quoteid { get; set; }
+        public Nullable<decimal> contractamount { get; set; }
     
         public virtual Client client { get; set; }
         public virtual JobYear JobYear { get; set; }
@@ -37,5 +39,6 @@ namespace TEMPO.Data
         public virtual ProjectType projecttype { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeEntry> timeentries { get; set; }
+        public virtual Quote quote { get; set; }
     }
 }

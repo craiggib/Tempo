@@ -14,6 +14,12 @@ namespace TEMPO.Data
     
     public partial class Quote
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Quote()
+        {
+            this.projects = new HashSet<Project>();
+        }
+    
         public int quoteid { get; set; }
         public double hours { get; set; }
         public string description { get; set; }
@@ -21,5 +27,7 @@ namespace TEMPO.Data
         public Nullable<int> clientid { get; set; }
     
         public virtual Client client { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> projects { get; set; }
     }
 }

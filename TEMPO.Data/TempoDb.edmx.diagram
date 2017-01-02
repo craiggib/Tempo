@@ -35,6 +35,7 @@
         <EntityTypeShape EntityType="TEMPOModel.ProjectSummary" Width="1.5" PointX="11.625" PointY="5.375" />
         <EntityTypeShape EntityType="TEMPOModel.Quote" Width="1.5" PointX="1" PointY="4.625" />
         <AssociationConnector Association="TEMPOModel.FK__quote__clientid__1332DBDC" />
+        <AssociationConnector Association="TEMPOModel.FK__project__quoteid__22751F6C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

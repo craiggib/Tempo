@@ -40,7 +40,7 @@ namespace TEMPO.BusinessLayer.Project
             return DataContext.ProjectTypes.ToList();
         }
 
-        public Data.Project Create(int clientId, int jobYearId, string projectNumber, string refNumber, int typeId, string description)
+        public Data.Project Create(int clientId, int jobYearId, string projectNumber, string refNumber, int typeId, string description, float? amount)
         {
             var newProject = new Data.Project
             {
@@ -50,7 +50,8 @@ namespace TEMPO.BusinessLayer.Project
                 jobnum = projectNumber,
                 jobnumyear = jobYearId,
                 refjobnum = refNumber,
-                projecttypeid = typeId
+                projecttypeid = typeId,
+                contractamount = (decimal) amount
             };
             DataContext.Projects.Add(newProject);
             DataContext.SaveChanges();

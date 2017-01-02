@@ -25,8 +25,21 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult Edit(int id)
         {
-            Project project = Mapper.Map<Project>(_projectManager.GetProject(id));
+            Project project = GetProject(id);
             return View(project);
+        }
+
+        private Project GetProject(int id)
+        {
+            Project project = Mapper.Map<Project>(_projectManager.GetProject(id));
+            project.JobYears = _projectManager.GetJobYears()
+                .Select(i => Mapper.Map<Models.Project.JobYear>(i))
+                .ToList();
+            project.ProjectTypes = _projectManager.GetProjectTypes()
+                .Select(i => Mapper.Map<Models.Project.ProjectType>(i))
+                .ToList();
+            return project;
+
         }
 
         [HttpPost]
@@ -38,7 +51,8 @@ namespace TEMPO.WebApp.Controllers
                 projectVm.ProjectNumber, 
                 projectVm.ReferenceJobNumber, 
                 projectVm.ProjectTypeId, 
-                projectVm.Description);
+                projectVm.Description,
+                projectVm.ContractedAmount);
 
             return RedirectToAction("Edit", new { id = newProject.projectid });
         }
