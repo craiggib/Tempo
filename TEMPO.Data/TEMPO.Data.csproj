@@ -87,6 +87,9 @@
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quote.cs">
+      <DependentUpon>TempoDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Status.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>

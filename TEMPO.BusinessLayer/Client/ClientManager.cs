@@ -35,22 +35,23 @@ namespace TEMPO.BusinessLayer.Client
 
         public Data.Client CreateClient(string clientName)
         {
-            try
+            var newClient = new Data.Client
             {
-                var newClient = new Data.Client
-                {
-                    clientname = clientName
-                };
-                DataContext.Clients.Add(newClient);
-                DataContext.SaveChanges();
+                clientname = clientName
+            };
+            DataContext.Clients.Add(newClient);
+            DataContext.SaveChanges();
 
-                return newClient;
-            }
-            catch (Exception e)
-            {
-                int i = 0;
-            }
-            return null;
+            return newClient;
         }
+
+        #region Quotes 
+
+        public List<Data.Quote> GetQuotes(int clientId)
+        {
+            return DataContext.Quotes.Where(i => i.clientid == clientId).ToList();
+        }
+
+        #endregion
     }
 }

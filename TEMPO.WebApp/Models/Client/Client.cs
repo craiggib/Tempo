@@ -15,5 +15,6 @@ namespace TEMPO.WebApp.Models.Client
         public string ClientName { get; set; }
 
         public List<Models.Project.ProjectSummary> ProjectList { get; set; }
+        public List<Models.Client.Quote> QuoteList { get; set; }
     }
 }

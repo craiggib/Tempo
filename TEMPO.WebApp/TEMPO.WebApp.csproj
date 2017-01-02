@@ -190,6 +190,7 @@
     <Compile Include="Models\Client\Client.cs" />
     <Compile Include="Models\Client\ClientDetails.cs" />
     <Compile Include="Models\Client\ClientSummary.cs" />
+    <Compile Include="Models\Client\Quote.cs" />
     <Compile Include="Models\Project\Project.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Models\Project\ProjectSummary.cs" />
@@ -261,6 +262,8 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\_Create.cshtml" />
+    <Content Include="Views\Client\_CreateQuote.cshtml" />
+    <Content Include="Views\Shared\Project\_CreateProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

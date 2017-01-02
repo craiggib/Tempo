@@ -18,6 +18,7 @@ namespace TEMPO.Data
         public Client()
         {
             this.projects = new HashSet<Project>();
+            this.quotes = new HashSet<Quote>();
         }
     
         public int clientid { get; set; }
@@ -25,5 +26,7 @@ namespace TEMPO.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Quote> quotes { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace TEMPO.WebApp.Controllers
 
                 i.CreateMap<Data.Client, Models.Client.Client>();
                 i.CreateMap<Data.ClientSummary, Models.Client.ClientSummary>();
+                i.CreateMap<Data.Quote, Models.Client.Quote>();
 
                 i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
 

@@ -6,11 +6,20 @@
 }
 <style>
     .total-billing {
-        font-size: 50px;
+        font-size: 40px;
+    }
+    .projectlist{
+        font-size:85%;
+    }
+    h2 {
+        margin-bottom:20px;
+    }
+    .projectlist-row{
+        margin-top:20px;
     }
 </style>
 
-<h2>Edit Client</h2>
+<h2>Client Details</h2>
 <div class="row">
     <div class="col-md-6">
         @using (Html.BeginForm())
@@ -39,12 +48,13 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-3 col-md-9">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm" />
                     </div>
                 </div>
             </div>
         }
     </div>
+
     @if (Model.ProjectList != null && Model.ProjectList.Count > 0)
     {
         <div class="col-md-3 text-center">
@@ -53,7 +63,7 @@
                 <span class="text-muted">
                     <i class="fa fa-money"></i> Total Billing
                 </span>
-                <div class="total-billing text-success">@(string.Format("{0:c}", Model.ProjectList.Sum(i=>i.TotalAmount)))</div>
+                <div class="total-billing text-success">@(string.Format("{0:c}", Model.ProjectList.Sum(i => i.TotalAmount)))</div>
             </div>
         </div>
         <div class="col-md-3 text-center">
@@ -65,39 +75,59 @@
     }
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <h3>Projects</h3>
+<div class="row projectlist-row">
+    <div class="col-md-8">
 
-        <ul class="list-group">
-            @foreach (var item in Model.ProjectList)
-            {
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "recent" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Edit", "Client", new { sort = "recent" })">Recent</a>                    
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Edit", "Client", new { sort = "hours" })">Billed Hours</a>
+                </div>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Type</th>
+                    <th>Recent Hours</th>
+                    <th>Hours</th>
+                    <th>Billing</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ProjectList)
+                {
+                    <tr>
+                        <td>
                             <a href="@Url.Action("Edit", "Project", new {id= item.ProjectId})">@Html.DisplayFor(i => item.ProjectName)</a>
                             <div><small>@Html.DisplayFor(i => item.Description)</small></div>
-                            <span class="label label-default">@Html.DisplayFor(modelItem => item.LastHoursLogged)</span>
-                        </div>
-                        <div class="col-md-4">
-                            <p class="text-center">@Html.DisplayFor(i => item.ProjectType)</p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="label label-primary">@Html.DisplayFor(i => item.TotalHours) Hours</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="label label-success">@Html.DisplayFor(i => item.TotalAmount)</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            }
-        </ul>
+                        </td>
+                        <td class="projectlist">
+                            @Html.DisplayFor(i => item.ProjectType)
+                        </td>
+                        <td class="projectlist">
+                            @Html.DisplayFor(modelItem => item.LastHoursLogged)
+                        </td>
+                        <td class="projectlist">
+                            @Html.DisplayFor(i => item.TotalHours)
+                        </td>
+                        <td class="projectlist">
+                            @Html.DisplayFor(i => item.TotalAmount)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
+     
     </div>
-    <div class="col-md-6">
-        <h3>Quotes</h3>
+    <div class="col-md-4">
+        @Html.Partial("Project/_CreateProject", new TEMPO.WebApp.Models.Project.Project())
+
+
     </div>
 </div>
 

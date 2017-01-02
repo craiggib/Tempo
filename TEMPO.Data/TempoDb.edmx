@@ -80,6 +80,16 @@
           <Property Name="projecttypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="projecttypedesc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="quote">
+          <Key>
+            <PropertyRef Name="quoteid" />
+          </Key>
+          <Property Name="quoteid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hours" Type="float" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="clientid" Type="int" />
+        </EntityType>
         <EntityType Name="status">
           <Key>
             <PropertyRef Name="statusid" />
@@ -257,6 +267,18 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__quote__clientid__1332DBDC">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="quote" Type="Self.quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="clientid" />
+            </Principal>
+            <Dependent Role="quote">
+              <PropertyRef Name="clientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__timeentry__proje__5224328E">
           <End Role="project" Type="Self.project" Multiplicity="0..1" />
           <End Role="timeentry" Type="Self.timeentry" Multiplicity="*" />
@@ -353,6 +375,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <EntitySet Name="periodending" EntityType="Self.periodending" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="projecttype" EntityType="Self.projecttype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quote" EntityType="Self.quote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="timeentry" EntityType="Self.timeentry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="timesheet" EntityType="Self.timesheet" Schema="dbo" store:Type="Tables" />
@@ -418,6 +441,10 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
             <End Role="projecttype" EntitySet="projecttype" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
+          <AssociationSet Name="FK__quote__clientid__1332DBDC" Association="Self.FK__quote__clientid__1332DBDC">
+            <End Role="client" EntitySet="client" />
+            <End Role="quote" EntitySet="quote" />
+          </AssociationSet>
           <AssociationSet Name="FK__timeentry__proje__5224328E" Association="Self.FK__timeentry__proje__5224328E">
             <End Role="project" EntitySet="project" />
             <End Role="timeentry" EntitySet="timeentry" />
@@ -458,6 +485,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <Property Name="clientid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="clientname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="projects" Relationship="Self.FK__project__clienti__117F9D94" FromRole="client" ToRole="project" />
+          <NavigationProperty Name="quotes" Relationship="TEMPOModel.FK__quote__clientid__1332DBDC" FromRole="Client" ToRole="quote" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -804,6 +832,11 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <EntitySet Name="ClientSummaries" EntityType="TEMPOModel.ClientSummary" />
           <EntitySet Name="ProjectBillableHours" EntityType="TEMPOModel.ProjectBillableHour" />
           <EntitySet Name="ProjectSummaries" EntityType="TEMPOModel.ProjectSummary" />
+          <EntitySet Name="Quotes" EntityType="TEMPOModel.Quote" />
+          <AssociationSet Name="FK__quote__clientid__1332DBDC" Association="TEMPOModel.FK__quote__clientid__1332DBDC">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="quote" EntitySet="Quotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClientSummary">
           <Key>
@@ -846,6 +879,29 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <Property Name="TotalHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="quoteid" />
+          </Key>
+          <Property Name="quoteid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hours" Type="Double" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="clientid" Type="Int32" />
+          <NavigationProperty Name="client" Relationship="TEMPOModel.FK__quote__clientid__1332DBDC" FromRole="quote" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK__quote__clientid__1332DBDC">
+          <End Type="TEMPOModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="TEMPOModel.Quote" Role="quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="clientid" />
+            </Principal>
+            <Dependent Role="quote">
+              <PropertyRef Name="clientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1015,6 +1071,17 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
                 <ScalarProperty Name="jobnum" ColumnName="jobnum" />
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
                 <ScalarProperty Name="projectid" ColumnName="projectid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotes">
+            <EntityTypeMapping TypeName="TEMPOModel.Quote">
+              <MappingFragment StoreEntitySet="quote">
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="hours" ColumnName="hours" />
+                <ScalarProperty Name="quoteid" ColumnName="quoteid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

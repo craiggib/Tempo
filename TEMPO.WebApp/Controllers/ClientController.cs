@@ -68,23 +68,61 @@ namespace TEMPO.WebApp.Controllers
             return View(cDetails);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string sort)
         {
-            var client = Mapper.Map<Models.Client.Client>(_clientManager.GetClient(id));
-            client.ProjectList = new ProjectManager().GetProjectSummaries(id)
-                .Select(i=> Mapper.Map<Models.Project.ProjectSummary>(i))
-                .OrderByDescending(i=>i.ProjectName)
-                .ToList();
-
+            Client client = GetClient(id, ToSortType(sort));
             return View(client);
         }
 
-        [HttpPost]
-        public ActionResult Edit(Models.Client.Client clientVm)
+        private ProjectSortType ToSortType(string sort)
         {
-            _clientManager.UpdateClient(clientVm.ClientId, clientVm.ClientName);
-            ViewBag.SuccessMessage = "Updated Successfully";
-            return RedirectToAction("Edit", new { id = clientVm.ClientId });
+            if(sort == "hours")
+            {
+                return ProjectSortType.BilledHours;
+            }
+            else if (sort == "recent")
+            {
+                return ProjectSortType.Recent;
+            }
+            else
+            {
+                return ProjectSortType.Default;
+            }
+        }
+
+        private Client GetClient(int id, ProjectSortType sortype)
+        {
+            var client = Mapper.Map<Models.Client.Client>(_clientManager.GetClient(id));
+            client.QuoteList = _clientManager.GetQuotes(id)
+                .Select(i => Mapper.Map<Quote>(i))
+                .ToList();
+       
+            client.ProjectList = new ProjectManager().GetProjectSummaries(id)
+                .Select(i => Mapper.Map<Models.Project.ProjectSummary>(i))
+                .ToList();
+
+
+            switch (sortype)
+            {
+                default:
+                case ProjectSortType.Default:
+                case ProjectSortType.Recent:
+                    client.ProjectList = client.ProjectList.OrderByDescending(i => i.LastHoursLogged).ToList();
+                    break;
+                case ProjectSortType.BilledHours:
+                    client.ProjectList = client.ProjectList.OrderByDescending(i => i.TotalHours).ToList();
+                    break;
+            }
+                
+            return client;
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Models.Client.Client clientVm, string sort)
+        {
+            _clientManager.UpdateClient(clientVm.ClientId, clientVm.ClientName);                
+            ViewBag.SuccessMessage = "Updated Successfully";            
+            return View(GetClient(clientVm.ClientId, ToSortType(sort)));
         }
 
         [HttpPost]
@@ -101,5 +139,17 @@ namespace TEMPO.WebApp.Controllers
             return Json(searchResults, JsonRequestBehavior.AllowGet);
         }
         
+        private enum ProjectSortType
+        {
+            Default = 0,
+            Recent = 1,
+            BilledHours = 2
+        }
+
+        #region Quotes
+
+        
+
+        #endregion
     }
 }
