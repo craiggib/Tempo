@@ -92,7 +92,7 @@
                 <tr>
                     <th>Project Name</th>
                     <th>Type</th>
-                    <th>Recent Hours</th>
+                    <th>Last Hours</th>
                     <th>Hours</th>
                     <th>Billing</th>
                 </tr>
@@ -125,7 +125,7 @@
      
     </div>
     <div class="col-md-4">
-        @Html.Partial("Project/_CreateProject", new TEMPO.WebApp.Models.Project.Project())
+        @Html.Partial("Project/_CreateProject", new TEMPO.WebApp.Models.Project.Project { ClientId = Model.ClientId, JobYears = Model.JobYears, JobYearId = Model.CurrentJobYearId ?? 0, ProjectTypes = Model.ProjectTypes })
 
 
     </div>
@@ -134,3 +134,8 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

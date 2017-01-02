@@ -8,11 +8,17 @@ namespace TEMPO.WebApp.Models.Project
 {
     public class Project
     {
+        public int ClientId { get; set; }
         public int ProjectId { get; set; }
 
-        [Display(Name = "Reference Number")]
+        [Display(Name = "Ref. Number")]
         public string ReferenceJobNumber { get; set; }
-                
+
+        [Display(Name = "Project Number")]
+        [StringLength(10)]
+        [Required]
+        public string ProjectNumber { get; set; }
+
         public string CustomerName { get; set; }
 
         public string ProjectName { get; set; }
@@ -22,6 +28,17 @@ namespace TEMPO.WebApp.Models.Project
 
         [Display(Name = "Job Number")]
         public string JobNumber { get; set; }
-        
+                
+        [Display(Name = "Year")]
+        [Required]
+        public int JobYearId { get; set; }
+               
+        [Required]
+        [Display(Name = "Type")]
+        public int ProjectTypeId { get; set; }
+
+        public List<Models.Project.ProjectType> ProjectTypes { get; set; }
+
+        public List<Models.Project.JobYear> JobYears { get; set; }
     }
 }

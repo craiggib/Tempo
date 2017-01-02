@@ -29,5 +29,32 @@ namespace TEMPO.BusinessLayer.Project
         {
             return DataContext.Projects.Where(i => i.projectid == projectId).FirstOrDefault();
         }
+
+        public List<Data.JobYear> GetJobYears()
+        {
+            return DataContext.JobYears.ToList();
+        }
+
+        public List<Data.ProjectType> GetProjectTypes()
+        {
+            return DataContext.ProjectTypes.ToList();
+        }
+
+        public Data.Project Create(int clientId, int jobYearId, string projectNumber, string refNumber, int typeId, string description)
+        {
+            var newProject = new Data.Project
+            {
+                clientid = clientId,
+                Active = true,
+                description = description,
+                jobnum = projectNumber,
+                jobnumyear = jobYearId,
+                refjobnum = refNumber,
+                projecttypeid = typeId
+            };
+            DataContext.Projects.Add(newProject);
+            DataContext.SaveChanges();
+            return newProject;
+        }
     }
 }

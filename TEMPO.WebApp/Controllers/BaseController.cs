@@ -37,6 +37,8 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.project.JobYear.JobYear1}-{s.project.jobnum} {s.project.description}"))
                     .ForMember(d => d.WorkTypeName, o => o.MapFrom(s => s.worktype.worktypename));
 
+                i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
+
                 i.CreateMap<Data.PeriodEnding, Models.Timesheet.PeriodEnding>()
                     .ForMember(d => d.PeriodEndingId, o => o.MapFrom(s => s.peid));
 
@@ -44,7 +46,11 @@ namespace TEMPO.WebApp.Controllers
                 i.CreateMap<Data.ClientSummary, Models.Client.ClientSummary>();
                 i.CreateMap<Data.Quote, Models.Client.Quote>();
 
-                i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
+                i.CreateMap<Data.JobYear, Models.Project.JobYear>()
+                    .ForMember(d => d.Year, o => o.MapFrom(s => s.JobYear1));
+
+                i.CreateMap<Data.ProjectType, Models.Project.ProjectType>()
+                    .ForMember(d => d.Description, o => o.MapFrom(s => s.projecttypedesc));
 
                 i.CreateMap<Data.Project, Models.Project.Project>()
                     .ForMember(d => d.ProjectId, o => o.MapFrom(s => s.projectid))
@@ -52,7 +58,7 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear.JobYear1}-{s.jobnum} {s.description}"));
 
-                i.CreateMap<Data.ProjectSummary, Models.Project.ProjectSummary>()                                        
+                i.CreateMap<Data.ProjectSummary, Models.Project.ProjectSummary>()
                     .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
                     .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.projecttypedesc))
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear}-{s.jobnum} {s.description}"));

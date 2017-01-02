@@ -96,11 +96,20 @@ namespace TEMPO.WebApp.Controllers
             client.QuoteList = _clientManager.GetQuotes(id)
                 .Select(i => Mapper.Map<Quote>(i))
                 .ToList();
-       
-            client.ProjectList = new ProjectManager().GetProjectSummaries(id)
+
+            var projectManager = new ProjectManager();
+            client.ProjectList = projectManager.GetProjectSummaries(id)
                 .Select(i => Mapper.Map<Models.Project.ProjectSummary>(i))
                 .ToList();
 
+            client.JobYears = projectManager.GetJobYears()
+                .Select(i => Mapper.Map<Models.Project.JobYear>(i))
+                .ToList();
+            client.CurrentJobYearId = client.JobYears.FirstOrDefault(i => i.Year == DateTime.Today.Year)?.JobYearId;
+
+            client.ProjectTypes = projectManager.GetProjectTypes()
+                .Select(i => Mapper.Map<Models.Project.ProjectType>(i))
+                .ToList();
 
             switch (sortype)
             {

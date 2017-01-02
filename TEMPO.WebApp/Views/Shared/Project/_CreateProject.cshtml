@@ -1,41 +1,57 @@
 ﻿@model TEMPO.WebApp.Models.Project.Project
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Project"))
 {
     @Html.AntiForgeryToken()
 
     <div class="panel panel-default">
         <div class="panel-heading">New Project</div>
-        <div class="panel-body">
-
+        <div class="panel-body form-horizontal">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.ReferenceJobNumber, htmlAttributes: new { @class = "control-label" })
+            @Html.HiddenFor(m => m.ClientId)
+            <div class="form-group text-left">
+                @Html.LabelFor(model => model.JobYearId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.JobYearId, new SelectList(Model.JobYears, "JobYearId", "Year"), new { @class = "form-control" })
+                </div>
+            </div>
 
-                @Html.EditorFor(model => model.ReferenceJobNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReferenceJobNumber, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
 
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
-
-                @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
-
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.ReferenceJobNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.ReferenceJobNumber, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
 
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                @Html.LabelFor(model => model.ProjectTypeId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.ProjectTypeId, new SelectList(Model.ProjectTypes, "ProjectTypeId", "Description"), new { @class = "form-control" })
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-7">
                     <input type="submit" value="Create" class="btn btn-primary btn-sm" />
                 </div>
             </div>

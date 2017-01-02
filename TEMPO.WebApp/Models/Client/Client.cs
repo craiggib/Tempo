@@ -16,5 +16,10 @@ namespace TEMPO.WebApp.Models.Client
 
         public List<Models.Project.ProjectSummary> ProjectList { get; set; }
         public List<Models.Client.Quote> QuoteList { get; set; }
+
+        public List<Models.Project.JobYear> JobYears { get; set; }
+        public int? CurrentJobYearId { get; set; }
+
+        public List<Models.Project.ProjectType> ProjectTypes { get; set; }
     }
 }

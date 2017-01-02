@@ -10,7 +10,14 @@ namespace TEMPO.WebApp.Controllers
 {
     public class ProjectController : BaseController
     {
-        // GET: Project
+        private ProjectManager _projectManager;
+
+        public ProjectController()
+        {
+            _projectManager = new ProjectManager();
+        }
+
+
         public ActionResult Index()
         {
             return View();
@@ -18,9 +25,24 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult Edit(int id)
         {
-            var projectManager = new ProjectManager();
-            Project project = Mapper.Map<Project>(projectManager.GetProject(id));
+            Project project = Mapper.Map<Project>(_projectManager.GetProject(id));
             return View(project);
         }
+
+        [HttpPost]
+        public ActionResult Create(Project projectVm)
+        {
+            var newProject = _projectManager.Create(
+                projectVm.ClientId, 
+                projectVm.JobYearId, 
+                projectVm.ProjectNumber, 
+                projectVm.ReferenceJobNumber, 
+                projectVm.ProjectTypeId, 
+                projectVm.Description);
+
+            return RedirectToAction("Edit", new { id = newProject.projectid });
+        }
+
+
     }
 }

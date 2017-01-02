@@ -191,9 +191,11 @@
     <Compile Include="Models\Client\ClientDetails.cs" />
     <Compile Include="Models\Client\ClientSummary.cs" />
     <Compile Include="Models\Client\Quote.cs" />
+    <Compile Include="Models\Project\JobYear.cs" />
     <Compile Include="Models\Project\Project.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Models\Project\ProjectSummary.cs" />
+    <Compile Include="Models\Project\ProjectType.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
     <Compile Include="Models\Timesheet\Timesheet.cs" />
