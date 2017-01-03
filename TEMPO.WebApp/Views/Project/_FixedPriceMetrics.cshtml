@@ -53,7 +53,7 @@
                 }
                 else
                 {
-                    <div class="total-billing text-info">@(string.Format("{0:c}", Model.ContractedAmount / Model.Weight))</div>
+                    <div class="total-billing text-success">@(string.Format("{0:c}", Model.ContractedAmount / Model.Weight))</div>
                 }
             </div>
         </div>
@@ -71,7 +71,7 @@
                 }
                 else
                 {
-                    <div class="total-billing text-info">@(string.Format("{0:c}", Model.InternalHours / Model.Weight))</div>
+                    <div class="total-billing text-info">@(string.Format("{0:f2}", Model.InternalHours / Model.Weight))</div>
                 }
             </div>
         </div>

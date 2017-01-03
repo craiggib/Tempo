@@ -102,6 +102,20 @@ namespace TEMPO.WebApp.Controllers
             return RedirectToAction("Edit", new { id = newProject.projectid });
         }
 
+        public JsonResult GetProjectTimebreakdown(int projectId)
+        {
+            var tsManager = new TimesheetManager();
+
+            ProjectTimeBreakdown timeBreakdown = new ProjectTimeBreakdown();            
+
+            var groupedByWorkType = tsManager.GetTimeEntrySummaries(projectId)
+                .GroupBy(i => i.worktypename);
+            
+            timeBreakdown.WorkTypes = groupedByWorkType.Select(i => i.Key).ToList();
+            timeBreakdown.Hours = groupedByWorkType.Select(i => i.Sum(j => j.entryHours.Value)).ToList();
+
+            return Json(timeBreakdown, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

@@ -195,6 +195,7 @@
     <Compile Include="Models\Project\Project.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Models\Project\ProjectSummary.cs" />
+    <Compile Include="Models\Project\ProjectTimeBreakdown.cs" />
     <Compile Include="Models\Project\ProjectType.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
