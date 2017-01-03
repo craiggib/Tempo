@@ -77,7 +77,7 @@
     <Compile Include="Project.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProjectBillableHour.cs">
+    <Compile Include="ProjectList.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="ProjectSummary.cs">
@@ -109,6 +109,9 @@
       <DependentUpon>TempoDb.edmx</DependentUpon>
     </Compile>
     <Compile Include="TimeEntry.cs">
+      <DependentUpon>TempoDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeEntrySummary.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
     <Compile Include="TimeSheet.cs">

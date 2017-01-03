@@ -18,6 +18,6 @@ namespace TEMPO.WebApp.Models.Client
 
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public float TotalAmount { get; set; }
+        public float TotalInternalAmount { get; set; }
     }
 }

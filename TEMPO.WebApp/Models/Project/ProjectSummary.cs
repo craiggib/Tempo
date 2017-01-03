@@ -18,7 +18,7 @@ namespace TEMPO.WebApp.Models.Project
 
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public float TotalAmount { get; set; }
+        public float InternalAmount { get; set; }
         public float TotalHours { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]

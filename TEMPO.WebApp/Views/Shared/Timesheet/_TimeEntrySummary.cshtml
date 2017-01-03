@@ -1,0 +1,28 @@
+﻿@model TEMPO.WebApp.Models.Timesheet.TimeEntrySummary
+
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => Model.EmployeeName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.WorkTypeName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.EntryHours)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => Model.InternalAmount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.EndingDate)
+    </td>
+    <td>
+        <a class="btn btn-default btn-sm" href="@Url.Action("Details", "Timesheet", new { id= Model.TimesheetId})">
+            <i class="fa fa-clock-o"></i> View Timesheet
+        </a>
+       
+    </td>
+</tr>
+
+

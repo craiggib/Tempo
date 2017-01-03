@@ -5,77 +5,244 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Project Details</h2>
+<style>
+    .total-billing {
+        font-size: 40px;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-   
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(m => m.ClientId)
-        
-        <div class="form-group text-left">
-            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-            <div class="col-md-7">
-                <a href="@Url.Action("Edit", "Client", new { id = Model.ClientId })">@Html.DisplayFor(model => model.CustomerName, new { @class = "form-control-static" })</a>
+    .chart-container {
+        width: 400px;
+        height: 120px;
+    }
+
+    .timesummary-row {
+        margin-top: 30px;
+    }
+</style>
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-5">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.ClientId)
+                @Html.HiddenFor(m => m.ProjectId)
+
+                <div class="form-group text-left">
+                    @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7 form-control-static">
+                        <a href="@Url.Action("Edit", "Client", new { id = Model.ClientId })">@Html.DisplayFor(model => model.CustomerName, new { @class = "form-control-static" })</a>
+                    </div>
+                </div>
+                <div class="form-group text-left">
+                    @Html.LabelFor(model => model.JobYearId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.JobYearId, new SelectList(Model.JobYears, "JobYearId", "Year"), new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReferenceJobNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.ReferenceJobNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectTypeId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.ProjectTypeId, new SelectList(Model.ProjectTypes, "ProjectTypeId", "Description"), new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContractedAmount, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            @Html.EditorFor(model => model.ContractedAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DrawingCount, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.DrawingCount, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group text-left">
-            @Html.LabelFor(model => model.JobYearId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-            <div class="col-md-7">
-                @Html.DropDownListFor(model => model.JobYearId, new SelectList(Model.JobYears, "JobYearId", "Year"), new { @class = "form-control" })
-            </div>
-        </div>
+        }
+    </div>
+    <div class="col-md-7">
+        @Html.Partial("_FixedPriceMetrics", Model)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-            <div class="col-md-7">
-                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReferenceJobNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-            <div class="col-md-7">
-                @Html.EditorFor(model => model.ReferenceJobNumber, new { htmlAttributes = new { @class = "form-control", placeholder  = "Optional" } })
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectTypeId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-            <div class="col-md-7">
-                @Html.DropDownListFor(model => model.ProjectTypeId, new SelectList(Model.ProjectTypes, "ProjectTypeId", "Description"), new { @class = "form-control" })
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-            <div class="col-md-7">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-5 col-md-7">
-                <input type="submit" value="Create" class="btn btn-primary btn-sm" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="chart-container">
+            <div>
+                <canvas id="myChart"></canvas>
             </div>
         </div>
     </div>
+</div>
+
+<hr />
+<div class="row timesummary-row">
+    <div class="col-md-9">
+        
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <strong>Time Entry Filter</strong>
+            </div>
+            <div class="col-md-5 text-right">
+                <div class="form-inline">
+                    <div class="form-group">
+                        
+                        <div class="input-daterange input-group" id="datepicker">                            
+                            <input type="text" class="input-sm form-control" name="start" />
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="input-sm form-control" name="end" />
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="col-md-1 text-right">
+                <button class="btn btn-primary btn-sm">Search</button>
+            </div>
+
+        </div>
+        <br />  
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Employee Name
+                    </th>
+                    <th>
+                        Work Type
+                    </th>
+                    <th>
+                        Hours
+                    </th>
+                    <th>
+                        Internal Fees
+                    </th>
+                    <th>
+                        Week Ending
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model.TimeEntrySummaries)
+                {
+                    @Html.Partial("Timesheet/_TimeEntrySummary", item)
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/Chart.min.js"></script>
+
+    <script>
+
+        $(".input-daterange").datepicker({
+            autoclose: true
+        });
+
+        //var myPieChart = new Chart(ctx, {
+        //    type: 'pie',
+        //    data: data,
+        //    options: options
+        //});
+
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Drafting", "Checking", "Administration"],
+                datasets: [{
+
+                    data: [12, 19, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+    </script>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

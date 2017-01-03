@@ -11,15 +11,15 @@ SELECT client.clientid, client.clientname, count(project.projectid) as projectco
 			and	project.clientid = client.clientid
 		order by periodending.endingdate desc) as lastHoursLogged,
 	(select sum(EntryHours) 
-		from ProjectBillableHours, Project
+		from [TimeEntrySummary], Project
 		where 
-				ProjectBillableHours.projectid = project.projectid
+				[TimeEntrySummary].projectid = project.projectid
 			and project.clientid = client.clientid) as totalhourslogged,
-	(select sum(amount) 
-		from ProjectBillableHours, Project
+	(select sum([TimeEntrySummary].internalamount) 
+		from [TimeEntrySummary], Project
 		where 
-				ProjectBillableHours.projectid = project.projectid
-			and project.clientid = client.clientid) as totalamount
+				[TimeEntrySummary].projectid = project.projectid
+			and project.clientid = client.clientid) as internaltotalamount
 
 FROM client left outer join project on client.clientid = project.clientid
 --where client.clientid = project.clientid

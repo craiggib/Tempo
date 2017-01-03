@@ -37,6 +37,9 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.project.JobYear.JobYear1}-{s.project.jobnum} {s.project.description}"))
                     .ForMember(d => d.WorkTypeName, o => o.MapFrom(s => s.worktype.worktypename));
 
+                i.CreateMap<Data.TimeEntrySummary, Models.Timesheet.TimeEntrySummary>()
+                    .ForMember(d => d.TimesheetId, o => o.MapFrom(s => s.tid));
+
                 i.CreateMap<Data.WorkType, Models.Timesheet.WorkType>();
 
                 i.CreateMap<Data.PeriodEnding, Models.Timesheet.PeriodEnding>()
@@ -58,8 +61,9 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.ProjectNumber, o => o.MapFrom(s => s.jobnum))
                     .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
                     .ForMember(d => d.ContractedAmount, o => o.MapFrom(s => s.contractamount))
+                    .ForMember(d => d.JobYearId, o => o.MapFrom(s => s.jobnumyear))
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear.JobYear1}-{s.jobnum} {s.description}"));
-
+                   
                 i.CreateMap<Data.ProjectSummary, Models.Project.ProjectSummary>()
                     .ForMember(d => d.ReferenceJobNumber, o => o.MapFrom(s => s.refjobnum))
                     .ForMember(d => d.ProjectType, o => o.MapFrom(s => s.projecttypedesc))

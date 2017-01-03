@@ -12,6 +12,8 @@
     CONSTRAINT [FK_project_JobYear] FOREIGN KEY ([jobnumyear]) REFERENCES [dbo].[JobYear] ([JobYearID]),
 	Active bit not null default(1), 
     [quoteid] INT NULL references [quote]([quoteid]),
-	contractamount decimal null
+	contractamount decimal null,
+	[Weight] int null,
+	[DrawingCount] int null
 );
 

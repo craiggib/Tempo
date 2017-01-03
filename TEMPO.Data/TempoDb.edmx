@@ -74,6 +74,8 @@
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="quoteid" Type="int" />
           <Property Name="contractamount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="DrawingCount" Type="int" />
         </EntityType>
         <EntityType Name="projecttype">
           <Key>
@@ -144,18 +146,24 @@ warning 6002: The table/view 'TEMPO.dbo.ClientSummary' does not have a primary k
           <Property Name="projectcount" Type="int" />
           <Property Name="lastHoursLogged" Type="datetime" />
           <Property Name="totalhourslogged" Type="decimal" Precision="38" Scale="2" />
-          <Property Name="totalamount" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="internaltotalamount" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'TEMPO.dbo.ProjectBillableHours' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ProjectBillableHours">
+warning 6002: The table/view 'TEMPO.dbo.ProjectList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProjectList">
           <Key>
-            <PropertyRef Name="entryid" />
+            <PropertyRef Name="projectid" />
+            <PropertyRef Name="jobnumyear" />
+            <PropertyRef Name="jobnum" />
           </Key>
-          <Property Name="entryid" Type="int" Nullable="false" />
-          <Property Name="projectid" Type="int" />
-          <Property Name="entryHours" Type="decimal" Precision="38" Scale="2" />
-          <Property Name="amount" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="44" />
+          <Property Name="projectid" Type="int" Nullable="false" />
+          <Property Name="clientid" Type="int" />
+          <Property Name="jobnumyear" Type="int" Nullable="false" />
+          <Property Name="jobnum" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="refjobnum" Type="varchar" MaxLength="50" />
+          <Property Name="projecttypeid" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="30" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -175,9 +183,28 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <Property Name="description" Type="varchar" MaxLength="30" />
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="JobYear" Type="int" Nullable="false" />
-          <Property Name="TotalAmount" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="InternalAmount" Type="decimal" Precision="38" Scale="4" />
           <Property Name="TotalHours" Type="decimal" Precision="38" Scale="2" />
           <Property Name="lastHoursLogged" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TimeEntrySummary">
+          <Key>
+            <PropertyRef Name="entryid" />
+            <PropertyRef Name="employeename" />
+            <PropertyRef Name="endingdate" />
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="worktypename" />
+          </Key>
+          <Property Name="entryid" Type="int" Nullable="false" />
+          <Property Name="projectid" Type="int" />
+          <Property Name="entryHours" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="internalamount" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="employeename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="endingdate" Type="datetime" Nullable="false" />
+          <Property Name="tid" Type="int" Nullable="false" />
+          <Property Name="worktypename" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK__mmt__entryid__55009F39">
           <End Role="timeentry" Type="Self.timeentry" Multiplicity="0..1">
@@ -401,16 +428,20 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
     [ClientSummary].[projectcount] AS [projectcount], 
     [ClientSummary].[lastHoursLogged] AS [lastHoursLogged], 
     [ClientSummary].[totalhourslogged] AS [totalhourslogged], 
-    [ClientSummary].[totalamount] AS [totalamount]
+    [ClientSummary].[internaltotalamount] AS [internaltotalamount]
     FROM [dbo].[ClientSummary] AS [ClientSummary]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="ProjectBillableHours" EntityType="Self.ProjectBillableHours" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="ProjectList" EntityType="Self.ProjectList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [ProjectBillableHours].[entryid] AS [entryid], 
-    [ProjectBillableHours].[projectid] AS [projectid], 
-    [ProjectBillableHours].[entryHours] AS [entryHours], 
-    [ProjectBillableHours].[amount] AS [amount]
-    FROM [dbo].[ProjectBillableHours] AS [ProjectBillableHours]</DefiningQuery>
+    [ProjectList].[ProjectName] AS [ProjectName], 
+    [ProjectList].[projectid] AS [projectid], 
+    [ProjectList].[clientid] AS [clientid], 
+    [ProjectList].[jobnumyear] AS [jobnumyear], 
+    [ProjectList].[jobnum] AS [jobnum], 
+    [ProjectList].[refjobnum] AS [refjobnum], 
+    [ProjectList].[projecttypeid] AS [projecttypeid], 
+    [ProjectList].[description] AS [description]
+    FROM [dbo].[ProjectList] AS [ProjectList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProjectSummary" EntityType="Self.ProjectSummary" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -422,10 +453,22 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
     [ProjectSummary].[description] AS [description], 
     [ProjectSummary].[active] AS [active], 
     [ProjectSummary].[JobYear] AS [JobYear], 
-    [ProjectSummary].[TotalAmount] AS [TotalAmount], 
+    [ProjectSummary].[InternalAmount] AS [InternalAmount], 
     [ProjectSummary].[TotalHours] AS [TotalHours], 
     [ProjectSummary].[lastHoursLogged] AS [lastHoursLogged]
     FROM [dbo].[ProjectSummary] AS [ProjectSummary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TimeEntrySummary" EntityType="Self.TimeEntrySummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TimeEntrySummary].[entryid] AS [entryid], 
+    [TimeEntrySummary].[projectid] AS [projectid], 
+    [TimeEntrySummary].[entryHours] AS [entryHours], 
+    [TimeEntrySummary].[internalamount] AS [internalamount], 
+    [TimeEntrySummary].[employeename] AS [employeename], 
+    [TimeEntrySummary].[endingdate] AS [endingdate], 
+    [TimeEntrySummary].[tid] AS [tid], 
+    [TimeEntrySummary].[worktypename] AS [worktypename]
+    FROM [dbo].[TimeEntrySummary] AS [TimeEntrySummary]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__mmt__entryid__55009F39" Association="Self.FK__mmt__entryid__55009F39">
             <End Role="timeentry" EntitySet="timeentry" />
@@ -573,6 +616,8 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <Property Name="quoteid" Type="Int32" />
           <Property Name="contractamount" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="quote" Relationship="TEMPOModel.FK__project__quoteid__22751F6C" FromRole="Project" ToRole="Quote" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="DrawingCount" Type="Int32" />
         </EntityType>
         <EntityType Name="ProjectType">
           <Key>
@@ -850,9 +895,6 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
             <End Role="employee" EntitySet="Employees" />
             <End Role="module" EntitySet="Modules" />
           </AssociationSet>
-          <EntitySet Name="ClientSummaries" EntityType="TEMPOModel.ClientSummary" />
-          <EntitySet Name="ProjectBillableHours" EntityType="TEMPOModel.ProjectBillableHour" />
-          <EntitySet Name="ProjectSummaries" EntityType="TEMPOModel.ProjectSummary" />
           <EntitySet Name="Quotes" EntityType="TEMPOModel.Quote" />
           <AssociationSet Name="FK__quote__clientid__1332DBDC" Association="TEMPOModel.FK__quote__clientid__1332DBDC">
             <End Role="Client" EntitySet="Clients" />
@@ -862,48 +904,11 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
             <End Role="Quote" EntitySet="Quotes" />
             <End Role="Project" EntitySet="Projects" />
           </AssociationSet>
+          <EntitySet Name="ProjectLists" EntityType="TEMPOModel.ProjectList" />
+          <EntitySet Name="TimeEntrySummaries" EntityType="TEMPOModel.TimeEntrySummary" />
+          <EntitySet Name="ProjectSummaries" EntityType="TEMPOModel.ProjectSummary" />
+          <EntitySet Name="ClientSummaries" EntityType="TEMPOModel.ClientSummary" />
         </EntityContainer>
-        <EntityType Name="ClientSummary">
-          <Key>
-            <PropertyRef Name="clientid" />
-            <PropertyRef Name="clientname" />
-          </Key>
-          <Property Name="clientid" Type="Int32" Nullable="false" />
-          <Property Name="clientname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="projectcount" Type="Int32" />
-          <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
-          <Property Name="totalhourslogged" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="totalamount" Type="Decimal" Precision="38" Scale="4" />
-        </EntityType>
-        <EntityType Name="ProjectBillableHour">
-          <Key>
-            <PropertyRef Name="entryid" />
-          </Key>
-          <Property Name="entryid" Type="Int32" Nullable="false" />
-          <Property Name="projectid" Type="Int32" />
-          <Property Name="entryHours" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="amount" Type="Decimal" Precision="38" Scale="4" />
-        </EntityType>
-        <EntityType Name="ProjectSummary">
-          <Key>
-            <PropertyRef Name="projectid" />
-            <PropertyRef Name="jobnum" />
-            <PropertyRef Name="projecttypedesc" />
-            <PropertyRef Name="active" />
-            <PropertyRef Name="JobYear" />
-          </Key>
-          <Property Name="projectid" Type="Int32" Nullable="false" />
-          <Property Name="clientid" Type="Int32" />
-          <Property Name="jobnum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="refjobnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="projecttypedesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="JobYear" Type="Int32" Nullable="false" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="TotalHours" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Quote">
           <Key>
             <PropertyRef Name="quoteid" />
@@ -940,6 +945,70 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProjectList">
+          <Key>
+            <PropertyRef Name="projectid" />
+            <PropertyRef Name="jobnumyear" />
+            <PropertyRef Name="jobnum" />
+          </Key>
+          <Property Name="ProjectName" Type="String" MaxLength="44" FixedLength="false" Unicode="false" />
+          <Property Name="projectid" Type="Int32" Nullable="false" />
+          <Property Name="clientid" Type="Int32" />
+          <Property Name="jobnumyear" Type="Int32" Nullable="false" />
+          <Property Name="jobnum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="refjobnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="projecttypeid" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TimeEntrySummary">
+          <Key>
+            <PropertyRef Name="entryid" />
+            <PropertyRef Name="employeename" />
+            <PropertyRef Name="endingdate" />
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="worktypename" />
+          </Key>
+          <Property Name="entryid" Type="Int32" Nullable="false" />
+          <Property Name="projectid" Type="Int32" />
+          <Property Name="entryHours" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="internalamount" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="employeename" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="endingdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tid" Type="Int32" Nullable="false" />
+          <Property Name="worktypename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProjectSummary">
+          <Key>
+            <PropertyRef Name="projectid" />
+            <PropertyRef Name="jobnum" />
+            <PropertyRef Name="projecttypedesc" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="JobYear" />
+          </Key>
+          <Property Name="projectid" Type="Int32" Nullable="false" />
+          <Property Name="clientid" Type="Int32" />
+          <Property Name="jobnum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="refjobnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="projecttypedesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="JobYear" Type="Int32" Nullable="false" />
+          <Property Name="InternalAmount" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="TotalHours" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ClientSummary">
+          <Key>
+            <PropertyRef Name="clientid" />
+            <PropertyRef Name="clientname" />
+          </Key>
+          <Property Name="clientid" Type="Int32" Nullable="false" />
+          <Property Name="clientname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="projectcount" Type="Int32" />
+          <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
+          <Property Name="totalhourslogged" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="internaltotalamount" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1002,6 +1071,8 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="TEMPOModel.Project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="DrawingCount" ColumnName="DrawingCount" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="contractamount" ColumnName="contractamount" />
                 <ScalarProperty Name="quoteid" ColumnName="quoteid" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -1075,22 +1146,39 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
               <ScalarProperty Name="moduleid" ColumnName="moduleid" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="ClientSummaries">
-            <EntityTypeMapping TypeName="TEMPOModel.ClientSummary">
-              <MappingFragment StoreEntitySet="ClientSummary">
-                <ScalarProperty Name="totalamount" ColumnName="totalamount" />
-                <ScalarProperty Name="totalhourslogged" ColumnName="totalhourslogged" />
-                <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
-                <ScalarProperty Name="projectcount" ColumnName="projectcount" />
-                <ScalarProperty Name="clientname" ColumnName="clientname" />
+          <EntitySetMapping Name="Quotes">
+            <EntityTypeMapping TypeName="TEMPOModel.Quote">
+              <MappingFragment StoreEntitySet="quote">
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="hours" ColumnName="hours" />
+                <ScalarProperty Name="quoteid" ColumnName="quoteid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProjectBillableHours">
-            <EntityTypeMapping TypeName="TEMPOModel.ProjectBillableHour">
-              <MappingFragment StoreEntitySet="ProjectBillableHours">
-                <ScalarProperty Name="amount" ColumnName="amount" />
+          <EntitySetMapping Name="ProjectLists">
+            <EntityTypeMapping TypeName="TEMPOModel.ProjectList">
+              <MappingFragment StoreEntitySet="ProjectList">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="projecttypeid" ColumnName="projecttypeid" />
+                <ScalarProperty Name="refjobnum" ColumnName="refjobnum" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+                <ScalarProperty Name="jobnumyear" ColumnName="jobnumyear" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="projectid" ColumnName="projectid" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeEntrySummaries">
+            <EntityTypeMapping TypeName="TEMPOModel.TimeEntrySummary">
+              <MappingFragment StoreEntitySet="TimeEntrySummary">
+                <ScalarProperty Name="worktypename" ColumnName="worktypename" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="endingdate" ColumnName="endingdate" />
+                <ScalarProperty Name="employeename" ColumnName="employeename" />
+                <ScalarProperty Name="internalamount" ColumnName="internalamount" />
                 <ScalarProperty Name="entryHours" ColumnName="entryHours" />
                 <ScalarProperty Name="projectid" ColumnName="projectid" />
                 <ScalarProperty Name="entryid" ColumnName="entryid" />
@@ -1102,7 +1190,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
               <MappingFragment StoreEntitySet="ProjectSummary">
                 <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
                 <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="InternalAmount" ColumnName="InternalAmount" />
                 <ScalarProperty Name="JobYear" ColumnName="JobYear" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -1114,14 +1202,15 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Quotes">
-            <EntityTypeMapping TypeName="TEMPOModel.Quote">
-              <MappingFragment StoreEntitySet="quote">
+          <EntitySetMapping Name="ClientSummaries">
+            <EntityTypeMapping TypeName="TEMPOModel.ClientSummary">
+              <MappingFragment StoreEntitySet="ClientSummary">
+                <ScalarProperty Name="internaltotalamount" ColumnName="internaltotalamount" />
+                <ScalarProperty Name="totalhourslogged" ColumnName="totalhourslogged" />
+                <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
+                <ScalarProperty Name="projectcount" ColumnName="projectcount" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="hours" ColumnName="hours" />
-                <ScalarProperty Name="quoteid" ColumnName="quoteid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

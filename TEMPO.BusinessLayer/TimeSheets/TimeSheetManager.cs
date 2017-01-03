@@ -130,6 +130,12 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 .ToList();
         }
 
+        public List<TimeEntrySummary> GetTimeEntrySummaries(int projectId)
+        {
+            return DataContext.TimeEntrySummaries.Where(i => i.projectid == projectId)
+                .ToList();
+        }
+
         #endregion
 
         #region WorkTypes

@@ -63,7 +63,7 @@
                 <span class="text-muted">
                     <i class="fa fa-money"></i> Total Billing
                 </span>
-                <div class="total-billing text-success">@(string.Format("{0:c}", Model.ProjectList.Sum(i => i.TotalAmount)))</div>
+                <div class="total-billing text-success">@(string.Format("{0:c}", Model.ProjectList.Sum(i => i.InternalAmount)))</div>
             </div>
         </div>
         <div class="col-md-3 text-center">
@@ -115,7 +115,7 @@
                             @Html.DisplayFor(i => item.TotalHours)
                         </td>
                         <td class="projectlist">
-                            @Html.DisplayFor(i => item.TotalAmount)
+                            @Html.DisplayFor(i => item.InternalAmount)
                         </td>
                     </tr>
                 }

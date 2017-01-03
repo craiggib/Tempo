@@ -19,6 +19,6 @@ namespace TEMPO.Data
         public Nullable<int> projectcount { get; set; }
         public Nullable<System.DateTime> lastHoursLogged { get; set; }
         public Nullable<decimal> totalhourslogged { get; set; }
-        public Nullable<decimal> totalamount { get; set; }
+        public Nullable<decimal> internaltotalamount { get; set; }
     }
 }

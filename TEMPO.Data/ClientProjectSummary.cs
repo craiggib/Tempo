@@ -11,6 +11,6 @@ namespace TEMPO.Data
         public ClientSummary ClientSummary { get; set; }
         public List<Project> ProjectList { get; set; }
 
-        public List<ProjectBillableHour> BillableHours { get; set; }
+        public List<TimeEntrySummary> TimeEntrySummaries { get; set; }
     }
 }

@@ -12,11 +12,15 @@ namespace TEMPO.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ProjectBillableHour
+    public partial class ProjectList
     {
-        public int entryid { get; set; }
-        public Nullable<int> projectid { get; set; }
-        public Nullable<decimal> entryHours { get; set; }
-        public Nullable<decimal> amount { get; set; }
+        public string ProjectName { get; set; }
+        public int projectid { get; set; }
+        public Nullable<int> clientid { get; set; }
+        public int jobnumyear { get; set; }
+        public string jobnum { get; set; }
+        public string refjobnum { get; set; }
+        public Nullable<int> projecttypeid { get; set; }
+        public string description { get; set; }
     }
 }

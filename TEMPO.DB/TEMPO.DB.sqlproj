@@ -92,7 +92,7 @@
     <Build Include="dbo\Stored Procedures\GetJobYears.sql" />
     <Build Include="dbo\Stored Procedures\GetSubmittedTimeSheets.sql" />
     <Build Include="dbo\Views\ClientSummary.sql" />
-    <Build Include="dbo\Views\ProjectBillableHours.sql" />
+    <Build Include="dbo\Views\TimeEntrySummary.sql" />
     <Build Include="dbo\Views\ProjectSummary.sql" />
     <Build Include="dbo\Tables\quote.sql" />
   </ItemGroup>

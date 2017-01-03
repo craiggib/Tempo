@@ -38,11 +38,36 @@ namespace TEMPO.WebApp.Models.Project
         [Display(Name = "Type")]
         public int ProjectTypeId { get; set; }
                 
-        [Display(Name = "Amount")]
-        public float? ContractedAmount { get; set; }
+        [Display(Name = "Contracted Amount")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        public decimal? ContractedAmount { get; set; }
+
+        [Display(Name = "Drawings")]
+        public int? DrawingCount { get; set; }
+
+        [Display(Name = "Weight (Tonnage)")]
+        public int? Weight { get; set; }
+
+        [Display(Name = "Active")]
+        public bool Active { get; set; }
 
         public List<Models.Project.ProjectType> ProjectTypes { get; set; }
 
         public List<Models.Project.JobYear> JobYears { get; set; }
+        public List<Models.Timesheet.TimeEntrySummary> TimeEntrySummaries { get; set; }
+
+        public float InternalHours { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        public decimal InternalAmount { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        public decimal InternalDifference { get; set; }
+                
+        [DisplayFormat(DataFormatString = "{0:p}")]
+        public float InternalDifferenceRatio { get; set; }
     }
 }

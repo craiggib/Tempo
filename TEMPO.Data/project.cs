@@ -31,6 +31,8 @@ namespace TEMPO.Data
         public bool Active { get; set; }
         public Nullable<int> quoteid { get; set; }
         public Nullable<decimal> contractamount { get; set; }
+        public Nullable<int> Weight { get; set; }
+        public Nullable<int> DrawingCount { get; set; }
     
         public virtual Client client { get; set; }
         public virtual JobYear JobYear { get; set; }

@@ -3,15 +3,15 @@
 
 	select	project.projectid, project.clientid, project.jobnum, project.refjobnum, projecttype.projecttypedesc,
 		project.description, project.active, jobyear.JobYear,
-		(	select sum(amount) 
-			from ProjectBillableHours
+		(	select sum([TimeEntrySummary].internalamount) 
+			from [TimeEntrySummary]
 			where 
-					ProjectBillableHours.projectid = project.projectid				
-		) as TotalAmount,
-		(	select sum(ProjectBillableHours.entryHours) 
-			from ProjectBillableHours
+					[TimeEntrySummary].projectid = project.projectid				
+		) as InternalAmount,
+		(	select sum([TimeEntrySummary].entryHours) 
+			from [TimeEntrySummary]
 			where 
-					ProjectBillableHours.projectid = project.projectid				
+					[TimeEntrySummary].projectid = project.projectid				
 		) as TotalHours,
 		(
 		select top 1 periodending.endingdate 

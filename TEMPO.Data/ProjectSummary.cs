@@ -22,7 +22,7 @@ namespace TEMPO.Data
         public string description { get; set; }
         public bool active { get; set; }
         public int JobYear { get; set; }
-        public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<decimal> InternalAmount { get; set; }
         public Nullable<decimal> TotalHours { get; set; }
         public Nullable<System.DateTime> lastHoursLogged { get; set; }
     }

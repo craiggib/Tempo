@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="quoteid" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="33f61620-f64d-4703-81d1-56b1c0514632" ChangeDateTime="01/03/2017 16:19:50">
+    <Property Name="ElementName" Value="[dbo].[ProjectBillableHours]" />
+    <Property Name="ElementType" Value="SqlView" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[TimeEntrySummary]" />
+  </Operation>
 </Operations>
