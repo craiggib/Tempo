@@ -130,10 +130,14 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 .ToList();
         }
 
-        public List<TimeEntrySummary> GetTimeEntrySummaries(int projectId)
+        public List<TimeEntrySummary> GetTimeEntrySummaries(int projectId, DateTime? start = null, DateTime? end = null)
         {
-            return DataContext.TimeEntrySummaries.Where(i => i.projectid == projectId)
-                .ToList();
+            var searchResults = DataContext.TimeEntrySummaries.Where(i => i.projectid == projectId);
+            if (start.HasValue && end.HasValue)
+            {
+                searchResults = searchResults.Where(i => i.endingdate > start.Value && i.endingdate < end.Value);
+            }
+            return searchResults.ToList();
         }
 
         #endregion

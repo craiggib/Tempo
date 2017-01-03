@@ -24,11 +24,12 @@ namespace TEMPO.WebApp.Controllers
             return View();
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, DateTime? start, DateTime? end)
         {
-            Project project = GetProject(id);
+            Project project = GetProject(id, start, end);
             return View(project);
         }
+
 
         [HttpPost]
         public ActionResult Edit(Project projectVm)
@@ -49,7 +50,7 @@ namespace TEMPO.WebApp.Controllers
             return View(project);
         }
 
-        private Project GetProject(int id)
+        private Project GetProject(int id, DateTime? start = null, DateTime? end = null)
         {
             Project project = Mapper.Map<Project>(_projectManager.GetProject(id));
             project.JobYears = _projectManager.GetJobYears()
@@ -61,10 +62,11 @@ namespace TEMPO.WebApp.Controllers
 
             var tsManager = new TimesheetManager();
 
-            project.TimeEntrySummaries = tsManager.GetTimeEntrySummaries(id)
+            project.TimeEntrySummaries = tsManager.GetTimeEntrySummaries(id, start, end)
                 .Select(i => Mapper.Map<Models.Timesheet.TimeEntrySummary>(i))
                 .OrderByDescending(i => i.EndingDate)
                 .ToList();
+
             if (project.TimeEntrySummaries != null)
             {
                 project.InternalHours = project.TimeEntrySummaries.Sum(j => j.EntryHours);
@@ -72,9 +74,9 @@ namespace TEMPO.WebApp.Controllers
                 if (project.ContractedAmount.HasValue)
                 {
                     project.InternalDifference = project.ContractedAmount.Value - project.InternalAmount;
-                    project.InternalDifferenceRatio = (float)(project.InternalAmount / project.ContractedAmount.Value );
+                    project.InternalDifferenceRatio = (float)(project.InternalAmount / project.ContractedAmount.Value);
                 }
-                
+
             }
             else
             {

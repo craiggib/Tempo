@@ -133,29 +133,30 @@
 <hr />
 <div class="row timesummary-row">
     <div class="col-md-9">
-        
-        <div class="row">
-            <div class="col-md-2 col-md-offset-1">
-                <strong>Time Entry Filter</strong>
-            </div>
-            <div class="col-md-5 text-right">
-                <div class="form-inline">
-                    <div class="form-group">
-                        
-                        <div class="input-daterange input-group" id="datepicker">                            
-                            <input type="text" class="input-sm form-control" name="start" />
-                            <span class="input-group-addon">to</span>
-                            <input type="text" class="input-sm form-control" name="end" />
-                        </div>
-                    </div>                    
+        <form action="@Url.Action("Edit")" method="get">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <strong>Time Entry Filter</strong>
                 </div>
-            </div>
-            <div class="col-md-1 text-right">
-                <button class="btn btn-primary btn-sm">Search</button>
-            </div>
+                <div class="col-md-5 text-right">
+                    <div class="form-inline">
+                        <div class="form-group">
 
-        </div>
-        <br />  
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" value="@Request.QueryString["start"]" class="input-sm form-control" name="start" />
+                                <span class="input-group-addon">to</span>
+                                <input type="text" value="@Request.QueryString["end"]" class="input-sm form-control" name="end" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 text-right">
+                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                </div>
+
+            </div>
+        </form>
+        <br />
         <table class="table">
             <thead>
                 <tr>

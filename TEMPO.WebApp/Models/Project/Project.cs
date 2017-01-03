@@ -69,5 +69,6 @@ namespace TEMPO.WebApp.Models.Project
                 
         [DisplayFormat(DataFormatString = "{0:p}")]
         public float InternalDifferenceRatio { get; set; }
+
     }
 }

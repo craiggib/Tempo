@@ -4,6 +4,9 @@
     .metric {
         min-height:107px;
     }
+    .metric-hours{
+        min-height:90px;
+    }
 </style>
 <div class="row">
     <div class="col-md-4 text-center">
@@ -41,7 +44,7 @@
     <div class="col-md-4 text-center">
         <div class="panel panel-default">
             <div class="panel-heading"><i class="fa fa-money"></i> Cost / Ton</div>
-            <div class="panel-body form-horizontal metric">
+            <div class="panel-body form-horizontal metric-hours">
                 @if (Model.ContractedAmount == null || Model.Weight == null || Model.ContractedAmount.Value == 0 || Model.Weight.Value == 0)
                 {
                     <small>
@@ -58,7 +61,7 @@
     <div class="col-md-4 text-center">
         <div class="panel panel-default">
             <div class="panel-heading"><i class="fa fa-building-o"></i> Hours / Ton</div>
-            <div class="panel-body form-horizontal metric">
+            <div class="panel-body form-horizontal metric-hours">
 
                 @if (Model.Weight == null || Model.Weight.Value == 0)
                 {
