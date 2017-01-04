@@ -12,10 +12,12 @@ namespace TEMPO.WebApp.Controllers
     public class AdminController : BaseController
     {
         private TimesheetManager _tsManager;
+        private TimesheetUtil _tsUtil;
 
         public AdminController()
         {
             _tsManager = new TimesheetManager();
+            _tsUtil = new TimesheetUtil(Mapper, _tsManager);
         }
 
         public ActionResult Index()
@@ -33,21 +35,26 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult ReviewTimeSheet(int id)
         {
-            Models.Timesheet.Timesheet tsViewModel = new TimesheetUtil().GetTimeSheet(id, Mapper, _tsManager);
+            Models.Timesheet.Timesheet tsViewModel = _tsUtil.GetTimeSheet(id);
             return View(tsViewModel);
         }
 
         [HttpPost]
-        public ActionResult Approve(int id)
+        public ActionResult Approve(Models.Timesheet.Timesheet timesheetVm)
         {
-            _tsManager.SetState(id, TimesheetStatus.Approved);
+            _tsUtil.UpdateTimesheet(timesheetVm);            
+            _tsManager.SetState(timesheetVm.TimesheetId, TimesheetStatus.Approved);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Reject(int id)
+        public ActionResult Reject(Models.Timesheet.Timesheet timesheetVm)
         {
-            _tsManager.SetState(id, TimesheetStatus.Rejected);
+            if (!string.IsNullOrEmpty(timesheetVm.ApprovalNotes))
+            {
+                _tsManager.SetApprovalNotes(timesheetVm.TimesheetId, timesheetVm.ApprovalNotes);
+            }
+            _tsManager.SetState(timesheetVm.TimesheetId, TimesheetStatus.Rejected);
             return RedirectToAction("Index");
         }
 

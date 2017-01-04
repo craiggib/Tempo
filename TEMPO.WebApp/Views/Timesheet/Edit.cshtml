@@ -101,6 +101,18 @@
                     </div>
                 </div>
 
+                @if (!string.IsNullOrEmpty(Model.ApprovalNotes))
+                {
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-danger">
+                                <div class="panel-body">@Html.DisplayFor(t => t.ApprovalNotes)</div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
                 <!-- TimeEntries -->
                 <table id="timeEntryTable">
                     <thead>
@@ -121,7 +133,7 @@
 
                         @foreach (var timeEntry in Model.TimeEntries)
                         {
-                            @Html.Partial("_TimeEntry", timeEntry)
+                            @Html.Partial("Timesheet/_TimeEntry", timeEntry)
                         }
 
                     </tbody>

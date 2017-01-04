@@ -25,6 +25,7 @@ namespace TEMPO.Data
         public Nullable<int> empid { get; set; }
         public Nullable<int> statusid { get; set; }
         public string notes { get; set; }
+        public string approvalnotes { get; set; }
     
         public virtual Employee employee { get; set; }
         public virtual PeriodEnding periodending { get; set; }

@@ -1,0 +1,43 @@
+﻿@model TEMPO.WebApp.Models.Timesheet.TimeEntry
+
+<tr class="timeEntry-row">
+    @using (Html.BeginCollectionItem("TimeEntries"))
+    {
+
+        <td class="time-entry-column-project">
+            @Html.HiddenFor(t => t.EntryId)
+            @Html.DropDownListFor(t => t.ProjectId, Model.Projects, "--Select--", new { @class = "form-control" })
+        </td>
+        <td class="time-entry-column-worktype">
+            @Html.DropDownListFor(t => t.WorkTypeId, Model.WorkTypes, new { @class = "form-control" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Sunday, new { disabled = "disabled", @class = "form-control time-entry" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Monday, new { disabled = "disabled", @class = "form-control time-entry" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Tuesday, new { disabled = "disabled", @class = "form-control time-entry disabled" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Wednesday, new { disabled = "disabled", @class = "form-control time-entry" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Thursday, new { disabled = "disabled", @class = "form-control time-entry" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Friday, new { disabled = "disabled", @class = "form-control time-entry" })
+        </td>
+        <td>
+            @Html.TextBoxFor(t => t.Saturday, new { disabled = "disabled", @class = "form-control time-entry" })
+        </td>
+        <td class="time-entry-delete">
+
+            @*<button type="button" class="btn btn-warning btn-xs deleteTimeEntry" aria-label="Left Align" data-timeEntryId="@Model.EntryId"
+                        data-toggle="confirmation">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>*@
+        </td>
+    }
+</tr>

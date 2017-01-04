@@ -28,6 +28,7 @@ namespace TEMPO.WebApp.Models.Timesheet
 
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
+        public string ApprovalNotes { get; set; }
 
         public bool SubmitForApproval { get; set; }
         public bool ApproveTimesheet { get; set; }

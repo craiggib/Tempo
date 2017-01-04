@@ -126,6 +126,7 @@
           <Property Name="empid" Type="int" />
           <Property Name="statusid" Type="int" />
           <Property Name="notes" Type="varchar" MaxLength="500" />
+          <Property Name="approvalnotes" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="worktype">
           <Key>
@@ -668,6 +669,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <NavigationProperty Name="periodending" Relationship="Self.FK__timesheet__peid__15502E78" FromRole="timesheet" ToRole="periodending" />
           <NavigationProperty Name="status" Relationship="Self.FK__timesheet__statu__164452B1" FromRole="timesheet" ToRole="status" />
           <NavigationProperty Name="timeentries" Relationship="Self.FK__timeentry__tid__503BEA1C" FromRole="timesheet" ToRole="timeentry" />
+          <Property Name="approvalnotes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="WorkType">
           <Key>
@@ -1122,6 +1124,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="TimeSheets">
             <EntityTypeMapping TypeName="TEMPOModel.TimeSheet">
               <MappingFragment StoreEntitySet="timesheet">
+                <ScalarProperty Name="approvalnotes" ColumnName="approvalnotes" />
                 <ScalarProperty Name="tid" ColumnName="tid" />
                 <ScalarProperty Name="peid" ColumnName="peid" />
                 <ScalarProperty Name="empid" ColumnName="empid" />

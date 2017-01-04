@@ -12,14 +12,27 @@ namespace TEMPO.WebApp.Controllers
 {
     public class TimesheetUtil
     {
-        public Models.Timesheet.Timesheet GetTimeSheet(int id, IMapper mapper, TimesheetManager timeSheetManager = null)
-        {
-            TimesheetManager tsManager = timeSheetManager ?? new TimesheetManager();
+        private TimesheetManager _tsManager;
+        private IMapper _mapper;
 
-            TimeSheet timesheet = tsManager.GetTimeSheet(id);
-            Models.Timesheet.Timesheet tsViewModel = mapper.Map<Models.Timesheet.Timesheet>(timesheet);
-            List<Models.Project.Project> projectList = BuildProjectList(mapper);
-            List<Models.Timesheet.WorkType> workTypes = BuildWorkTypes(mapper, tsManager);
+        public TimesheetUtil(IMapper mapper, TimesheetManager tsManager)
+        {
+            _tsManager = tsManager;
+            _mapper = mapper;
+        }
+
+        public TimesheetUtil(IMapper mapper)
+        {
+            _tsManager = new TimesheetManager();
+            _mapper = mapper;
+        }
+
+        public Models.Timesheet.Timesheet GetTimeSheet(int id)
+        {            
+            TimeSheet timesheet = _tsManager.GetTimeSheet(id);
+            Models.Timesheet.Timesheet tsViewModel = _mapper.Map<Models.Timesheet.Timesheet>(timesheet);
+            List<Models.Project.Project> projectList = BuildProjectList();
+            List<Models.Timesheet.WorkType> workTypes = BuildWorkTypes();
 
             tsViewModel.TimeEntries.ForEach(i =>
             {
@@ -29,20 +42,48 @@ namespace TEMPO.WebApp.Controllers
             return tsViewModel;
         }
 
-        private List<Models.Project.Project> BuildProjectList(IMapper mapper)
+        public List<Models.Project.Project> BuildProjectList()
         {
             return new ProjectManager().GetProjects()
-                            .Select(i => mapper.Map<Models.Project.Project>(i))
+                            .Select(i => _mapper.Map<Models.Project.Project>(i))
                             .OrderByDescending(i => i.ProjectName)
                             .ToList();
         }
 
-        private List<Models.Timesheet.WorkType> BuildWorkTypes(IMapper mapper, TimesheetManager timeSheetManager)
+        public List<Models.Timesheet.WorkType> BuildWorkTypes()
         {
-            return timeSheetManager.GetWorkTypes()
-                .Select(i => mapper.Map<Models.Timesheet.WorkType>(i))
+            return _tsManager.GetWorkTypes()
+                .Select(i => _mapper.Map<Models.Timesheet.WorkType>(i))
                 .OrderBy(i => i.WorkTypeName)
                 .ToList();
+        }
+
+        public void UpdateTimesheet(Models.Timesheet.Timesheet timesheetVm)
+        {
+            foreach (var timeEntryVm in timesheetVm.TimeEntries)
+            {
+                if (timeEntryVm.EntryId == 0)
+                {
+                    _tsManager.AddTimeEntry(timesheetVm.TimesheetId, timeEntryVm.ProjectId, timeEntryVm.WorkTypeId, BuildDailyTime(timeEntryVm));
+                }
+                else
+                {
+                    _tsManager.UpdateTimeEntry(timeEntryVm.EntryId, timeEntryVm.ProjectId, timeEntryVm.WorkTypeId, BuildDailyTime(timeEntryVm));
+                }
+            }
+        }
+
+        private List<DailyTime> BuildDailyTime(Models.Timesheet.TimeEntry timeEntry)
+        {
+            var dailyTime = new List<DailyTime>();
+            dailyTime.Add(timeEntry.Sunday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Sunday, HoursWorked = timeEntry.Sunday } : null);
+            dailyTime.Add(timeEntry.Monday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Monday, HoursWorked = timeEntry.Monday } : null);
+            dailyTime.Add(timeEntry.Tuesday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Tuesday, HoursWorked = timeEntry.Tuesday } : null);
+            dailyTime.Add(timeEntry.Wednesday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Wednesday, HoursWorked = timeEntry.Wednesday } : null);
+            dailyTime.Add(timeEntry.Thursday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Thursday, HoursWorked = timeEntry.Thursday } : null);
+            dailyTime.Add(timeEntry.Friday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Friday, HoursWorked = timeEntry.Friday } : null);
+            dailyTime.Add(timeEntry.Saturday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Saturday, HoursWorked = timeEntry.Saturday } : null);
+            return dailyTime.Where(i => i != null).ToList();
         }
     }
 }

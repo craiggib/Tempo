@@ -59,6 +59,19 @@ namespace TEMPO.BusinessLayer.TimeSheets
             }
         }
 
+        public void SetApprovalNotes(int timeSheetId, string notes)
+        {
+            var timeSheet = _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
+            if (timeSheet != null)
+            {
+                if (notes != null)
+                {
+                    timeSheet.approvalnotes = notes;
+                }
+                _dataContext.SaveChanges();
+            }
+        }
+
         public Data.TimeSheet CreateTimesheet(int employeeId, int periodEndingId)
         {
             Data.TimeSheet newTimeSheet = new Data.TimeSheet
@@ -100,18 +113,24 @@ namespace TEMPO.BusinessLayer.TimeSheets
             var timeEntry = _dataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
             if (timeEntry != null)
             {
-                timeEntry.sunday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Sunday)?.HoursWorked;
-                timeEntry.monday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Monday)?.HoursWorked;
-                timeEntry.tuesday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Tuesday)?.HoursWorked;
-                timeEntry.wednesday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Wednesday)?.HoursWorked;
-                timeEntry.thursday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Thursday)?.HoursWorked;
-                timeEntry.friday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Friday)?.HoursWorked;
-                timeEntry.saturday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Saturday)?.HoursWorked;
+                timeEntry.sunday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Sunday);
+                timeEntry.monday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Monday);
+                timeEntry.tuesday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Tuesday);
+                timeEntry.wednesday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Wednesday);
+                timeEntry.thursday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Thursday);
+                timeEntry.friday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Friday);
+                timeEntry.saturday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Saturday);
                 timeEntry.projectid = projectId;
                 timeEntry.worktypeid = worktypeId;
                 
                 _dataContext.SaveChanges();
             }
+        }
+
+        private decimal TimeOrDefault(List<DailyTime> dailyWorkTimes, DayOfWeek dayOfWeek)
+        {
+            var dailyWork = dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == dayOfWeek);
+            return dailyWork == null ? 0 : (decimal)dailyWork.HoursWorked;
         }
         
         public void DeleteTimeEntry(int timeEntryId)

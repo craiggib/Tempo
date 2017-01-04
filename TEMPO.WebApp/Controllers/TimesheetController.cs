@@ -14,10 +14,12 @@ namespace TEMPO.WebApp.Controllers
     public class TimesheetController : BaseController
     {
         private TimesheetManager _tsManager;
+        private TimesheetUtil _tsUtil;
 
         public TimesheetController()
         {
             _tsManager = new TimesheetManager();
+            _tsUtil = new TimesheetUtil(Mapper, _tsManager);
         }
 
         public ActionResult Index()
@@ -70,7 +72,7 @@ namespace TEMPO.WebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Models.Timesheet.Timesheet timesheetVm)
         {
-            UpdateTimesheet(timesheetVm);
+            _tsUtil.UpdateTimesheet(timesheetVm);
             if (timesheetVm.SubmitForApproval)
             {
                 _tsManager.SetState(timesheetVm.TimesheetId, TimesheetStatus.Submitted, timesheetVm.Notes);
@@ -80,82 +82,23 @@ namespace TEMPO.WebApp.Controllers
             else
             {
                 ViewBag.SuccessMessage = "Timesheet Saved";
-                Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(timesheetVm.TimesheetId);
+                Models.Timesheet.Timesheet tsViewModel = _tsUtil.GetTimeSheet(timesheetVm.TimesheetId);
                 return View(tsViewModel);
             }
         }
 
-        private void UpdateTimesheet(Models.Timesheet.Timesheet timesheetVm)
-        {
-            foreach (var timeEntryVm in timesheetVm.TimeEntries)
-            {
-                if (timeEntryVm.EntryId == 0)
-                {
-                    _tsManager.AddTimeEntry(timesheetVm.TimesheetId, timeEntryVm.ProjectId, timeEntryVm.WorkTypeId, BuildDailyTime(timeEntryVm));
-                }
-                else
-                {
-                    _tsManager.UpdateTimeEntry(timeEntryVm.EntryId, timeEntryVm.ProjectId, timeEntryVm.WorkTypeId, BuildDailyTime(timeEntryVm));
-                }
-            }
-        }
-
-        private List<DailyTime> BuildDailyTime(Models.Timesheet.TimeEntry timeEntry)
-        {
-            var dailyTime = new List<DailyTime>();
-            dailyTime.Add(timeEntry.Sunday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Sunday, HoursWorked = timeEntry.Sunday } : null);
-            dailyTime.Add(timeEntry.Monday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Monday, HoursWorked = timeEntry.Monday } : null);
-            dailyTime.Add(timeEntry.Tuesday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Tuesday, HoursWorked = timeEntry.Tuesday } : null);
-            dailyTime.Add(timeEntry.Wednesday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Wednesday, HoursWorked = timeEntry.Wednesday } : null);
-            dailyTime.Add(timeEntry.Thursday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Thursday, HoursWorked = timeEntry.Thursday } : null);
-            dailyTime.Add(timeEntry.Friday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Friday, HoursWorked = timeEntry.Friday } : null);
-            dailyTime.Add(timeEntry.Saturday != 0 ? new DailyTime { DayOfWeek = DayOfWeek.Saturday, HoursWorked = timeEntry.Saturday } : null);
-            return dailyTime.Where(i => i != null).ToList();
-        }
-
         public ActionResult Edit(int id)
         {
-            Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(id);            
+            Models.Timesheet.Timesheet tsViewModel = _tsUtil.GetTimeSheet(id);
             return View(tsViewModel);
         }
-
-        private Models.Timesheet.Timesheet GetTimeSheet(int id)
-        {
-            TimeSheet timesheet = _tsManager.GetTimeSheet(id);
-            Models.Timesheet.Timesheet tsViewModel = Mapper.Map<Models.Timesheet.Timesheet>(timesheet);
-            List<Models.Project.Project> projectList = BuildProjectList();
-            List<Models.Timesheet.WorkType> workTypes = BuildWorkTypes();
-
-            tsViewModel.TimeEntries.ForEach(i =>
-            {
-                i.Projects = new SelectList(projectList, "ProjectId", "ProjectName", i.ProjectId);
-                i.WorkTypes = new SelectList(workTypes, "WorkTypeId", "WorkTypeName", i.WorkTypeId);
-            });
-            return tsViewModel;
-        }
-
-        private List<Models.Project.Project> BuildProjectList()
-        {
-            return new ProjectManager().GetProjects(active:true)
-                            .Select(i => Mapper.Map<Models.Project.Project>(i))
-                            .OrderByDescending(i => i.ProjectName)
-                            .ToList();
-        }
-
-        private List<Models.Timesheet.WorkType> BuildWorkTypes()
-        {
-            return _tsManager.GetWorkTypes()
-                .Select(i => Mapper.Map<Models.Timesheet.WorkType>(i))
-                .OrderBy(i => i.WorkTypeName)
-                .ToList();
-        }
-
+        
         public PartialViewResult AddTimeEntry()
         {
             Models.Timesheet.TimeEntry teViewModel = new Models.Timesheet.TimeEntry();
 
-            teViewModel.Projects = new SelectList(BuildProjectList(), "ProjectId", "ProjectName");
-            teViewModel.WorkTypes = new SelectList(BuildWorkTypes(), "WorkTypeId", "WorkTypeName");
+            teViewModel.Projects = new SelectList(_tsUtil.BuildProjectList(), "ProjectId", "ProjectName");
+            teViewModel.WorkTypes = new SelectList(_tsUtil.BuildWorkTypes(), "WorkTypeId", "WorkTypeName");
             return PartialView("_TimeEntry", teViewModel);
         }
 

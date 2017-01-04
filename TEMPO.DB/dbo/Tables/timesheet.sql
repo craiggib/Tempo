@@ -4,6 +4,7 @@
     [empid]    INT           NULL,
     [statusid] INT           NULL,
     [notes]    VARCHAR (500) NULL,
+	[approvalnotes] varchar(500) null,
     PRIMARY KEY CLUSTERED ([tid] ASC),
     FOREIGN KEY ([peid]) REFERENCES [dbo].[periodending] ([peid]),
     FOREIGN KEY ([statusid]) REFERENCES [dbo].[status] ([statusid]),

@@ -25,138 +25,143 @@
     .timsheet-Notes {
         margin-top: 50px;
     }
+    .modal-content textarea.form-control {
+        max-width: 100%;
+    }
 </style>
 
+@using (Html.BeginForm("Reject", "Admin", FormMethod.Post, new { id = "timeSheetForm" }))
+{
+    @Html.HiddenFor(i => i.TimesheetId)
+    @Html.HiddenFor(i => i.ApprovalNotes)
 
-<div class="row">
-    <div class="col-md-9">
+    <div class="row">
+        <div class="col-md-9">
 
-        <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.EmployeeName)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.EmployeeName)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.StatusName)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.StatusName)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.PeriodEnding)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.PeriodEnding)
-                        </dd>
-                    </dl>
-                </div>
-            </div>
-            <div class="col-md-6">
-                @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
-                {
-                    <div class="alert alert-success">
-                        @ViewBag.SuccessMessage
-                    </div>
-                }
-            </div>
-        </div>
-
-        @if (!string.IsNullOrEmpty(Model.Notes))
-        {
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="panel panel-info">
-                        <div class="panel-body">@Html.DisplayFor(t => t.Notes)</div>
-                    </div>
+                <div class="col-md-6">
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.EmployeeName)                                
+                            </dt>
 
+                            <dd>
+                                @Html.DisplayFor(model => model.EmployeeName)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.StatusName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.StatusName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PeriodEnding)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PeriodEnding)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                {
+                        <div class="alert alert-success">
+                            @ViewBag.SuccessMessage
+                        </div>
+                    }
                 </div>
             </div>
-        }
 
-        <!-- TimeEntries -->
-        <table id="timeEntryTable">
-            <thead>
-                <tr>
-                    <th class="time-entry-column-project">Project</th>
-                    <th class="time-entry-column-worktype">Type</th>
-                    <th class="time-entry-column">Sun</th>
-                    <th class="time-entry-column">Mon</th>
-                    <th class="time-entry-column">Tue</th>
-                    <th class="time-entry-column">Wed</th>
-                    <th class="time-entry-column">Thu</th>
-                    <th class="time-entry-column">Fri</th>
-                    <th class="time-entry-column">Sat</th>
-                </tr>
+            @if (!string.IsNullOrEmpty(Model.Notes))
+            {
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-info">
+                            <div class="panel-body">@Html.DisplayFor(t => t.Notes)</div>
+                        </div>
 
-            </thead>
-            <tbody>
+                    </div>
+                </div>
+            }
 
-                @foreach (var timeEntry in Model.TimeEntries)
-                {
-
-                    <tr class="timeEntry-row">
-                        <td class="time-entry-column-project">
-                            @Html.DisplayFor(i => timeEntry.ProjectName)
-                        </td>
-                        <td class="time-entry-column-worktype">
-                            @Html.DisplayFor(i => timeEntry.WorkTypeName)
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i => timeEntry.Sunday)" disabled>
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Monday)" disabled>
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Tuesday)" disabled>
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Wednesday)" disabled>
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Thursday)" disabled>
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Friday)" disabled>
-                        </td>
-                        <td class="time-entry-column">
-                            <input class="form-control" id="disabledInput" type="text" value="@Html.DisplayFor(i =>  timeEntry.Saturday)" disabled>
-                        </td>
-                        <td class="time-entry-delete"></td>
-
+            <!-- TimeEntries -->
+            <table id="timeEntryTable">
+                <thead>
+                    <tr>
+                        <th class="time-entry-column-project">Project</th>
+                        <th class="time-entry-column-worktype">Type</th>
+                        <th class="time-entry-column">Sun</th>
+                        <th class="time-entry-column">Mon</th>
+                        <th class="time-entry-column">Tue</th>
+                        <th class="time-entry-column">Wed</th>
+                        <th class="time-entry-column">Thu</th>
+                        <th class="time-entry-column">Fri</th>
+                        <th class="time-entry-column">Sat</th>
                     </tr>
-                }
 
-            </tbody>
+                </thead>
+                <tbody>
 
-        </table>
+                    @foreach (var timeEntry in Model.TimeEntries)
+                    {
+                        @Html.Partial("Timesheet/_TimeEntryReview", timeEntry)
+                    }
 
-    </div>
+                </tbody>
 
-    <div class="col-md-3">
-        <div class="jumbotron">
-            <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
-            <p>Weekly Hours</p>
+            </table>
 
-            <form method="post">
-                <input type="submit" value="Reject" class="btn btn-sm btn-danger" formaction="@Url.Action("Reject", new { id = Model.TimesheetId })" />
-                <input type="submit" value="Approve" class="btn btn-sm btn-success" formaction="@Url.Action("Approve", new { id = Model.TimesheetId })" />
-            </form>
         </div>
 
-    </div>
-</div>
+        <div class="col-md-3">
+            <div class="jumbotron">
+                <h1 id="weekly-total">@Html.DisplayFor(t => t.WeeklyTotal)</h1>
+                <p>Weekly Hours</p>
 
+                <form method="post">
+                    <buttom type="buttom" value="Reject" id="rejectTimeSheet" class="btn btn-sm btn-danger">Reject</buttom> @*@Url.Action("Reject", new { id = Model.TimesheetId })*@
+                    <input type="submit" value="Approve" class="btn btn-sm btn-success" formaction="@Url.Action("Approve")" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+}
 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
+
+    <script>
+        $("#rejectTimeSheet").click(function () {
+
+            bootbox.prompt({
+                title: "Reject Timesheet",
+                placeholder: 'Rejection Notes (optional)',
+                inputType: 'textarea',
+                buttons: {
+                    confirm: {
+                        label: 'Reject'
+                    }
+                },
+                callback: function (result) {
+                    if (result != null) {
+                        $("#ApprovalNotes").val(result);
+                        $("#timeSheetForm").submit();
+                    }
+                }
+            });
+        });
+
+    </script>
+}
