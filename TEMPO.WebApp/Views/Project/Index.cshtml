@@ -1,0 +1,199 @@
+﻿@model IEnumerable<TEMPO.WebApp.Models.Project.ProjectSummary>
+
+@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Projects</h2>
+
+<link href="~/Content/easy-autocomplete/easy-autocomplete.min.css" rel="stylesheet" />
+<link href="~/Content/easy-autocomplete/easy-autocomplete.themes.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Open+Sans">
+<style>
+    .project-count {
+        font-size: 35px;
+    }
+
+    .small-content {
+        font-size: small;
+        color: gray;
+        font-family: 'Open Sans', serif;
+    }
+
+    .client-actions {
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    .client-actions-button {
+        margin-right: 15px;
+    }
+
+    .project-info {
+        padding-top: 10px;
+    }
+
+    .search-row {
+        margin-bottom: 20px;
+    }
+
+    .search-form {
+        width: 100% !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="text" class="form-control search-form" id="customerSearch" placeholder="Search..." />
+        </div>
+    </div>
+    <div class="col-md-4 text-right">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "recent" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Index", "Project", new { sort = "recent" })">Recent</a>
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "jobnum" ? "active" : "")" href="@Url.Action("Index", "Project", new { sort = "jobnum" })">Job Number</a>
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Index", "Project", new { sort = "hours" })">Hours</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                <a href="@Url.Action("Edit", "Project", new { id = item.ProjectId })"> @Html.DisplayFor(modelItem => item.ProjectName)</a>
+                            </h4>
+
+                            <div class="small-content">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </div>
+                            <div class="small-content">
+                                @Html.DisplayFor(modelItem => item.ClientName)
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="project-count">
+                                        <span class="label label-info ">
+                                            @Html.DisplayFor(modelItem => item.TotalHours)
+                                        </span>
+                                    </div>
+                                    <div class="small-content">hours</div>
+                                </div>
+                                <div class="col-md-8 project-info">
+                                    <div class="small-content">@Html.DisplayFor(modelItem => item.ReferenceJobNumber)</div>
+                                    <div class="small-content">
+                                        Last Hours <div class="label label-default">@Html.DisplayFor(modelItem => item.LastHoursLogged)</div>
+                                    </div>
+                                    <div class="small-content">@Html.DisplayFor(modelItem => item.ProjectType)</div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        @*<div class="col-md-4 client-actions">
+                            <button class="btn btn-default btn-sm client-actions-button">New Project &raquo;</button>
+                                <button class="btn btn-default btn-sm">New Quote &raquo;</button>
+                                                </div>*@
+                    </div>
+
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4">
+        @*@Html.Partial("Project/_CreateProject", new TEMPO.WebApp.Models.Project.Project())*@
+    </div>
+</div>
+
+
+
+
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferenceJobNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InternalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastHoursLogged)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferenceJobNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastHoursLogged)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }*@
+
+</table>

@@ -1,7 +1,7 @@
 ﻿CREATE VIEW [dbo].[ProjectSummary]
 	AS 
 
-	select	project.projectid, project.clientid, project.jobnum, project.refjobnum, projecttype.projecttypedesc,
+	select	project.projectid, project.clientid, project.jobnum, project.refjobnum, projecttype.projecttypedesc, client.clientname,
 		project.description, project.active, jobyear.JobYear,
 		(	select sum([TimeEntrySummary].internalamount) 
 			from [TimeEntrySummary]
@@ -21,5 +21,5 @@
 			and timeentry.projectid = project.projectid
 			and timesheet.peid = periodending.peid			
 		order by periodending.endingdate desc) as lastHoursLogged		
-from project, projecttype, jobyear
-where project.projecttypeid = projecttype.projecttypeid and project.jobnumyear = jobyear.JobYearID
+from project, projecttype, jobyear, client
+where project.projecttypeid = projecttype.projecttypeid and project.jobnumyear = jobyear.JobYearID and client.clientid= project.clientid

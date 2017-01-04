@@ -19,9 +19,33 @@ namespace TEMPO.WebApp.Controllers
             _projectManager = new ProjectManager();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sort)
         {
-            return View();
+            var projectList = _projectManager.GetProjectSummaries(true)
+                .Select(i => Mapper.Map<ProjectSummary>(i));
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                if (sort == "hours")
+                {
+                    projectList = projectList.OrderByDescending(i => i.TotalHours);
+
+                }
+                else if (sort == "jobnumb")
+                {
+                    projectList = projectList.OrderByDescending(i => i.JobYear).ThenByDescending(i=>i.JobNumber);
+                }
+                else
+                {
+                    projectList = projectList.OrderByDescending(i => i.LastHoursLogged);
+                }
+            }
+            else
+            {
+                projectList = projectList.OrderByDescending(i => i.LastHoursLogged);
+            }
+
+            return View(projectList.ToList());
         }
 
         public ActionResult Edit(int id, DateTime? start, DateTime? end)

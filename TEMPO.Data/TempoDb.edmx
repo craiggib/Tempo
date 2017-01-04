@@ -173,6 +173,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
             <PropertyRef Name="projectid" />
             <PropertyRef Name="jobnum" />
             <PropertyRef Name="projecttypedesc" />
+            <PropertyRef Name="clientname" />
             <PropertyRef Name="active" />
             <PropertyRef Name="JobYear" />
           </Key>
@@ -181,6 +182,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <Property Name="jobnum" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="refjobnum" Type="varchar" MaxLength="50" />
           <Property Name="projecttypedesc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clientname" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="30" />
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="JobYear" Type="int" Nullable="false" />
@@ -451,6 +453,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
     [ProjectSummary].[jobnum] AS [jobnum], 
     [ProjectSummary].[refjobnum] AS [refjobnum], 
     [ProjectSummary].[projecttypedesc] AS [projecttypedesc], 
+    [ProjectSummary].[clientname] AS [clientname], 
     [ProjectSummary].[description] AS [description], 
     [ProjectSummary].[active] AS [active], 
     [ProjectSummary].[JobYear] AS [JobYear], 
@@ -986,6 +989,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             <PropertyRef Name="projecttypedesc" />
             <PropertyRef Name="active" />
             <PropertyRef Name="JobYear" />
+            <PropertyRef Name="clientname" />
           </Key>
           <Property Name="projectid" Type="Int32" Nullable="false" />
           <Property Name="clientid" Type="Int32" />
@@ -998,6 +1002,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="InternalAmount" Type="Decimal" Precision="38" Scale="4" />
           <Property Name="TotalHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
+          <Property Name="clientname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ClientSummary">
           <Key>
@@ -1191,6 +1196,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="ProjectSummaries">
             <EntityTypeMapping TypeName="TEMPOModel.ProjectSummary">
               <MappingFragment StoreEntitySet="ProjectSummary">
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
                 <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
                 <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
                 <ScalarProperty Name="InternalAmount" ColumnName="InternalAmount" />

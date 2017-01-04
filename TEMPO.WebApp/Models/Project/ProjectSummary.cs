@@ -23,5 +23,9 @@ namespace TEMPO.WebApp.Models.Project
 
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime? LastHoursLogged { get; set; }
+
+        public string ClientName { get; set; }
+        public int JobYear { get; set; }
+        public string JobNumber { get; set; }
     }
 }

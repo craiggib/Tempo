@@ -30,6 +30,10 @@ namespace TEMPO.BusinessLayer.Project
             return DataContext.ProjectSummaries.Where(i => i.clientid == clientId).ToList();
         }
 
+        public List<Data.ProjectSummary> GetProjectSummaries(bool active)
+        {
+            return DataContext.ProjectSummaries.Where(i => i.active == active).ToList();
+        }
 
         public Data.Project GetProject(int projectId)
         {
