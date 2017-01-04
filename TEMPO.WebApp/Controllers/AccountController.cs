@@ -12,6 +12,8 @@ namespace TEMPO.WebApp.Controllers
 {
     public class AccountController : BaseController
     {
+        private const string ROLE_SEPARATOR = ",";
+
         public ActionResult Login()
         {
             return View();
@@ -24,9 +26,14 @@ namespace TEMPO.WebApp.Controllers
             Employee employee = account.Login(user.EmployeeName, user.Password);
             if(employee != null)
             {
-                
-                FormsAuthentication.SetAuthCookie(employee.employeename, true);
-                SetUserId(employee);
+
+                List<string> roles = employee.modules.Select(i => i.modulename).ToList();
+
+                FormsAuthentication.SetAuthCookie(employee.employeename, false);
+
+                SetAuthenticationCookie(employee, roles);
+                SetUserIdCookie(employee);
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -34,6 +41,29 @@ namespace TEMPO.WebApp.Controllers
                 ModelState.AddModelError("", "UserName or Password is wrong");
             }
             return View();
+        }
+
+        private void SetAuthenticationCookie(Employee employee, List<string> roles)
+        {
+            var authTicket = new FormsAuthenticationTicket(
+                                1,
+                                employee.employeename,
+                                DateTime.Now,
+                                DateTime.Now.AddMinutes(20),
+                                false,
+                                string.Join(ROLE_SEPARATOR, roles));
+
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            HttpContext.Response.Cookies.Add(authCookie);
+        }
+
+        private void SetUserIdCookie(Employee employee)
+        {
+            HttpCookie userIdCookie = new HttpCookie(USERID_COOKIE_NAME);
+            userIdCookie.Value = employee.empid.ToString();
+            userIdCookie.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(userIdCookie);
         }
 
         [HttpPost]

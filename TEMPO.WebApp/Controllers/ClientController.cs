@@ -10,6 +10,7 @@ using TEMPO.WebApp.Models.Client;
 
 namespace TEMPO.WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ClientController : BaseController
     {
         private ClientManager _clientManager;

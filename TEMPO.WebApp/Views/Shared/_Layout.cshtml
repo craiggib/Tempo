@@ -22,9 +22,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Timesheets", "Index", "Timesheet", new { types = 1 }, new { })</li>                    
-                    <li>@Html.ActionLink("Clients", "Index", "Client")</li>
-                    <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+                    @if (User.IsInRole("Timesheets"))
+                    {
+                        <li>@Html.ActionLink("Timesheets", "Index", "Timesheet", new { types = 1 }, new { })</li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Clients", "Index", "Client")</li>
+                        <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

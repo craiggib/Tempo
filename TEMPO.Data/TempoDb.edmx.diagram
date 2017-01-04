@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="021018019531473182912e0e05073755" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="TEMPOModel.Client" Width="1.5" PointX="2.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TEMPOModel.Employee" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TEMPOModel.Employee" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TEMPOModel.JobYear" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TEMPOModel.MiscTimeLog" Width="1.5" PointX="6.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TEMPOModel.Module" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />

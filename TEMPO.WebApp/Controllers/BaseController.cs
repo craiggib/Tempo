@@ -10,7 +10,7 @@ namespace TEMPO.WebApp.Controllers
 {
     public class BaseController : Controller
     {
-        private const string USERID_COOKIE_NAME = "Tempo.UserId";
+        protected const string USERID_COOKIE_NAME = "Tempo.UserId";
         private IMapper _mapper;
 
         protected IMapper Mapper
@@ -88,12 +88,6 @@ namespace TEMPO.WebApp.Controllers
             }
         }
 
-        protected void SetUserId(Employee employee)
-        {
-            HttpCookie userIdCookie = new HttpCookie(USERID_COOKIE_NAME);
-            userIdCookie.Value = employee.empid.ToString();
-            userIdCookie.Expires = DateTime.Now.AddDays(1);
-            Response.Cookies.Add(userIdCookie);
-        }
+        
     }
 }

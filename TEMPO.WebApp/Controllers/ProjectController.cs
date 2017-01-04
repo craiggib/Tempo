@@ -9,6 +9,7 @@ using TEMPO.WebApp.Models.Project;
 
 namespace TEMPO.WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProjectController : BaseController
     {
         private ProjectManager _projectManager;

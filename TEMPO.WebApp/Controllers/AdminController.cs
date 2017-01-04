@@ -9,6 +9,7 @@ using TEMPO.WebApp.Controllers;
 
 namespace TEMPO.WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : BaseController
     {
         private TimesheetManager _tsManager;
