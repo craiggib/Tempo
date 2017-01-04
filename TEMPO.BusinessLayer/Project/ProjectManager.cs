@@ -9,9 +9,15 @@ namespace TEMPO.BusinessLayer.Project
 {
     public class ProjectManager : BaseManager
     {
-        public List<Data.Project> GetProjects()
+        public List<Data.Project> GetProjects(bool? active = null)
         {
-            return DataContext.Projects.ToList();
+            var projectList = DataContext.Projects;
+            if (active.HasValue)
+            {
+                return projectList.Where(i=>i.Active == active.Value).ToList();
+            }
+            return projectList.ToList();
+            
         }
 
         public List<Data.Project> GetProjects(int clientId)

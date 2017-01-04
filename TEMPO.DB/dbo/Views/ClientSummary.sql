@@ -23,5 +23,5 @@ SELECT client.clientid, client.clientname, count(project.projectid) as projectco
 			and project.clientid = client.clientid) as internaltotalamount
 
 FROM client left outer join project on client.clientid = project.clientid
---where client.clientid = project.clientid
+where project.Active = 1
 group by client.clientid, client.clientname

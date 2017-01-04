@@ -115,11 +115,7 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult Edit(int id)
         {
-            Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(id);
-            //if (tsViewModel.StatusName != "Saved" || tsViewModel.StatusName != "Rejected")
-            //{
-            //    return RedirectToAction("Review", new { id = id });
-            //}
+            Models.Timesheet.Timesheet tsViewModel = GetTimeSheet(id);            
             return View(tsViewModel);
         }
 
@@ -140,7 +136,7 @@ namespace TEMPO.WebApp.Controllers
 
         private List<Models.Project.Project> BuildProjectList()
         {
-            return new ProjectManager().GetProjects()
+            return new ProjectManager().GetProjects(active:true)
                             .Select(i => Mapper.Map<Models.Project.Project>(i))
                             .OrderByDescending(i => i.ProjectName)
                             .ToList();

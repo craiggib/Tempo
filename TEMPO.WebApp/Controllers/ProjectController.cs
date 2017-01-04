@@ -18,7 +18,6 @@ namespace TEMPO.WebApp.Controllers
             _projectManager = new ProjectManager();
         }
 
-
         public ActionResult Index()
         {
             return View();
@@ -29,8 +28,7 @@ namespace TEMPO.WebApp.Controllers
             Project project = GetProject(id, start, end);
             return View(project);
         }
-
-
+        
         [HttpPost]
         public ActionResult Edit(Project projectVm)
         {
