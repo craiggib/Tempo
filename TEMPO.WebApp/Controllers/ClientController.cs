@@ -155,10 +155,6 @@ namespace TEMPO.WebApp.Controllers
             BilledHours = 2
         }
 
-        #region Quotes
-
-        
-
-        #endregion
+       
     }
 }

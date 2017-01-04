@@ -55,7 +55,7 @@
         <div class="btn-group" role="group" aria-label="...">
             <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "recent" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "recent" })">Recent</a>
             <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "alpha" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "alpha" })">Alphabetical</a>
-            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "hours" })">Billed Hours</a>
+            <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "hours" })">Hours</a>
         </div>
     </div>   
 </div>
@@ -73,20 +73,22 @@
                                 <a href="@Url.Action("Edit", new { id = item.ClientId })"> @Html.DisplayFor(modelItem => item.ClientName)</a>
                             </h4>
                             <div class="small-content">
-                                @Html.DisplayFor(modelItem => item.TotalHoursLogged) billed hours, @Html.DisplayFor(modelItem => item.TotalInternalAmount)
+                                @Html.DisplayFor(modelItem => item.TotalHoursLogged) hours@*, @Html.DisplayFor(modelItem => item.TotalInternalAmount)*@
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-3">
+                                    
                                     <div class="project-count">
-                                        <span class="label label-info ">@Html.DisplayFor(modelItem => item.ProjectCount)</span>
+                                        <span class="label label-info ">@Html.DisplayFor(modelItem => item.ProjectCount)
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-7 project-info">
-                                    <div class="small-content"><a href="">Active Projects</a></div>
+                                    <div class="small-content">Active Projects</div>
                                     <div class="small-content">
-                                        Recent Hours <div class="label label-default">@Html.DisplayFor(modelItem => item.LastHoursLogged)</div>
+                                        Last Hours <div class="label label-default">@Html.DisplayFor(modelItem => item.LastHoursLogged)</div>
                                     </div>
                                 </div>
 

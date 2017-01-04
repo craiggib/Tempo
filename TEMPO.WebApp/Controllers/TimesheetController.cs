@@ -36,27 +36,6 @@ namespace TEMPO.WebApp.Controllers
                 .OrderByDescending(i => i.PeriodEnding)
                 .ToList();
 
-            DateTime dateFilter = new DateTime(DateTime.Today.AddMonths(-2).Year, DateTime.Today.AddMonths(-2).Month, 1);
-            DateTime monthCurrent = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            DateTime monthBack1 = new DateTime(DateTime.Today.AddMonths(-1).Year, DateTime.Today.AddMonths(-1).Month, 1);
-            DateTime monthBack2 = new DateTime(DateTime.Today.AddMonths(-2).Year, DateTime.Today.AddMonths(-2).Month, 1);
-
-            var approvedTimeSheets = _tsManager
-                .GetTimeSheets(GetUserID(), new List<TimesheetStatus> { TimesheetStatus.Approved}, dateFilter)
-                .Select(i => Mapper.Map<Models.Timesheet.Timesheet>(i));
-
-            timesheetsHomeVm.ApprovedCurrentMonth = approvedTimeSheets
-                .Where(i => i.PeriodEnding.Month == monthCurrent.Month)
-                .ToList();
-
-            timesheetsHomeVm.ApprovedBackMonth1 = approvedTimeSheets
-                .Where(i => i.PeriodEnding.Month == monthBack1.Month)
-                .ToList();
-
-            timesheetsHomeVm.ApprovedBackMonth2 = approvedTimeSheets
-                .Where(i => i.PeriodEnding.Month == monthBack2.Month)
-                .ToList();
-
             var newEndingDateSelectList = _tsManager.GetNewPeriodEndings(GetUserID())
                 .Select(i => Mapper.Map<Models.Timesheet.PeriodEnding>(i))
                 .Select(i => new SelectListItem

@@ -12,10 +12,6 @@ namespace TEMPO.WebApp.Models.Timesheet
         public IEnumerable<Timesheet> RejectedTimeSheets { get; set; }
         public SelectList NewTimesheets { get; set; }
 
-        public IEnumerable<Timesheet> ApprovedCurrentMonth { get; set; }
-        public IEnumerable<Timesheet> ApprovedBackMonth1 { get; set; }
-        public IEnumerable<Timesheet> ApprovedBackMonth2 { get; set; }
-
         public int NewPeriodEndingId { get; set; }
         
         

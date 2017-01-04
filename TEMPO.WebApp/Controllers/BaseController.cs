@@ -46,7 +46,9 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.PeriodEndingId, o => o.MapFrom(s => s.peid));
 
                 i.CreateMap<Data.Client, Models.Client.Client>();
-                i.CreateMap<Data.ClientSummary, Models.Client.ClientSummary>();
+                i.CreateMap<Data.ClientSummary, Models.Client.ClientSummary>()
+                    .ForMember(d => d.TotalInternalAmount, o => o.MapFrom(s => s.internaltotalamount));
+
                 i.CreateMap<Data.Quote, Models.Client.Quote>();
 
                 i.CreateMap<Data.JobYear, Models.Project.JobYear>()

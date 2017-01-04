@@ -6,6 +6,7 @@ SELECT client.clientid, client.clientname, count(project.projectid) as projectco
 		from periodending, timeentry, timesheet, project
 		where 
 				timesheet.tid = timeentry.tid 
+			and timesheet.statusid = 3
 			and timeentry.projectid = project.projectid
 			and timesheet.peid = periodending.peid
 			and	project.clientid = client.clientid
