@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\TimesheetController.cs" />
@@ -187,6 +188,7 @@
     </Compile>
     <Compile Include="Models\Account\UserAccount.cs" />
     <Compile Include="Models\Admin\AdminHome.cs" />
+    <Compile Include="Models\Employee\Employee.cs" />
     <Compile Include="Models\Client\Client.cs" />
     <Compile Include="Models\Client\ClientDetails.cs" />
     <Compile Include="Models\Client\ClientSummary.cs" />
@@ -360,6 +362,8 @@
     <Content Include="Views\Project\_FixedPriceMetrics.cshtml" />
     <Content Include="Views\Project\_TimeMaterialsMetrics.cshtml" />
     <Content Include="Views\Shared\Timesheet\_TimeEntryReview.cshtml" />
+    <Content Include="Views\Shared\Employee\_CreateEmployee.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

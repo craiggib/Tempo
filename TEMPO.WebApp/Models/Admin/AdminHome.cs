@@ -8,5 +8,6 @@ namespace TEMPO.WebApp.Models.Admin
     public class AdminHome
     {
         public IEnumerable<Models.Timesheet.Timesheet> SubmittedTimesheets { get; set; }
+        public IEnumerable<Models.Employee.Employee> EmployeeList { get; set; }
     }
 }

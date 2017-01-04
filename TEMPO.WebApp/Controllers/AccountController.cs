@@ -72,5 +72,6 @@ namespace TEMPO.WebApp.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }
+
     }
 }

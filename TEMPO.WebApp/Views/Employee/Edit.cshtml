@@ -1,0 +1,143 @@
+﻿@model TEMPO.WebApp.Models.Employee.Employee
+
+<h2>Employee Details</h2>
+
+<style>
+    h4 {
+        margin-top: 20px;
+    }
+
+    .timesheet-actions {
+        min-width: 80px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                {
+            <div class="alert alert-success">
+                @ViewBag.SuccessMessage
+            </div>
+        }
+
+
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmployeeId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Active)
+                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary btn-sm" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<div class="row">
+    <div class="col-md-8">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Approved Timesheets</h4>
+            </div>
+            <div class="col-md-4 text-right">
+                <div class="btn-group" role="group">
+                    <a class="timesheet-actions btn btn-default btn-sm @(Request.QueryString["timesheetFilter"] == "last3months" || string.IsNullOrEmpty(Request.QueryString["timesheetFilter"]) ? "active" : "")" href="@Url.Action("Edit", "Employee", new { timesheetFilter = "last3months" })">Last 3 Months</a>
+                    <a class="timesheet-actions btn btn-default btn-sm @(Request.QueryString["timesheetFilter"] == "all" ? "active" : "")" href="@Url.Action("Edit", "Employee", new { timesheetFilter = "all" })">All</a>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Timesheets != null && Model.Timesheets.Count() != 0)
+            {
+            <table class="table">
+                <tr>
+                    <th>
+                        Employee
+                    </th>
+                    <th>
+                        Week Ending
+                    </th>
+                    <th>
+                        Total Hours
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Timesheets)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodEnding)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeeklyTotal)
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-default" href="@Url.Action("Details", "Timesheet", new { id = item.TimesheetId })">
+                                <i class="fa fa-clock-o"></i> View Timesheet
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="panel panel-info">
+                <div class="panel-body">No Timesheets have been approved!</div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Admin")
+</div>

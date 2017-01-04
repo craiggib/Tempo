@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TEMPO.BusinessLayer;
 using TEMPO.BusinessLayer.TimeSheets;
 using TEMPO.Data;
 using TEMPO.WebApp.Controllers;
@@ -14,15 +15,24 @@ namespace TEMPO.WebApp.Controllers
     {
         private TimesheetManager _tsManager;
         private TimesheetUtil _tsUtil;
+        private AccountManager _accountManager;
 
         public AdminController()
         {
             _tsManager = new TimesheetManager();
+            _accountManager = new AccountManager();
             _tsUtil = new TimesheetUtil(Mapper, _tsManager);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string employees)
         {
+
+            if (TempData["employee_created"] != null)
+            {
+                ViewBag.SuccessMessage = "Employee Created";
+                TempData.Remove("employee_created");
+            }
+
             Models.Admin.AdminHome adminHomeVm = new Models.Admin.AdminHome();
 
             adminHomeVm.SubmittedTimesheets = _tsManager
@@ -30,6 +40,15 @@ namespace TEMPO.WebApp.Controllers
                 .Select(i => Mapper.Map<Models.Timesheet.Timesheet>(i))
                 .OrderByDescending(i => i.PeriodEnding)
                 .ToList();
+
+            adminHomeVm.EmployeeList = _accountManager.GetEmployees()                
+                .Select(i=>Mapper.Map<Models.Employee.Employee>(i))
+                .OrderBy(i=>i.EmployeeName);
+
+            if(string.IsNullOrEmpty(employees) || employees == "active")
+            {
+                adminHomeVm.EmployeeList = adminHomeVm.EmployeeList.Where(i => i.Active);                
+            }
 
             return View(adminHomeVm);
         }
@@ -59,5 +78,6 @@ namespace TEMPO.WebApp.Controllers
             return RedirectToAction("Index");
         }
 
+            
     }
 }
