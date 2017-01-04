@@ -197,6 +197,7 @@
     <Compile Include="Models\Project\ProjectSummary.cs" />
     <Compile Include="Models\Project\ProjectTimeBreakdown.cs" />
     <Compile Include="Models\Project\ProjectType.cs" />
+    <Compile Include="Models\Project\ProjectTypeEnum.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
     <Compile Include="Models\Timesheet\TimeEntrySummary.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <None Include="favicon.ico-old" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -356,6 +358,7 @@
     <Content Include="Views\Shared\Project\_CreateProject.cshtml" />
     <Content Include="Views\Shared\Timesheet\_TimeEntrySummary.cshtml" />
     <Content Include="Views\Project\_FixedPriceMetrics.cshtml" />
+    <Content Include="Views\Project\_TimeMaterialsMetrics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -120,8 +120,14 @@
         }
     </div>
     <div class="col-md-7">
-        @Html.Partial("_FixedPriceMetrics", Model)
-
+        @if (Model.ProjectTypeId == (int)TEMPO.WebApp.Models.Project.ProjectTypeEnum.FixedPrice)
+        {
+             @Html.Partial("_FixedPriceMetrics", Model)
+        }
+        else
+        {
+            @Html.Partial("_TimeMaterialsMetrics", Model)
+        }
         <div class="chart-container">
             <div>
                 <canvas id="timeChart"></canvas>

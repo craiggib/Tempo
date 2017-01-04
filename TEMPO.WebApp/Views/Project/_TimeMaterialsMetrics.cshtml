@@ -1,0 +1,68 @@
+﻿@model TEMPO.WebApp.Models.Project.Project
+
+<style>
+    .metric {
+        min-height:107px;
+    }
+    .metric-hours{
+        min-height:90px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-clock-o"></i> Total Hours</div>
+            <div class="panel-body form-horizontal metric">
+                <div class="total-billing text-muted">@Html.DisplayFor(m => Model.InternalHours)</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-money"></i> Contracted Amount</div>
+            <div class="panel-body form-horizontal metric">
+
+                <div class="total-billing text-success">@Html.DisplayFor(m => Model.InternalAmount)</div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-money"></i> Cost / Ton</div>
+            <div class="panel-body form-horizontal metric-hours">
+                @if (Model.Weight == null || Model.InternalAmount == 0 || Model.Weight.Value == 0)
+                {
+                    <small>
+                        <span class="text-muted">Provide a non-zero Contracted Amount and Weight</span>
+                    </small>
+                }
+                else
+                {
+                    <div class="total-billing text-success">@(string.Format("{0:c}", Model.ContractedAmount / Model.Weight))</div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-building-o"></i> Hours / Ton</div>
+            <div class="panel-body form-horizontal metric-hours">
+
+                @if (Model.Weight == null || Model.Weight.Value == 0)
+                {
+                    <small>
+                        <span class="text-muted">Provide a non-zero Weight (Tonnage)</span>
+                    </small>
+                }
+                else
+                {
+                    <div class="total-billing text-info">@(string.Format("{0:f2}", Model.InternalHours / Model.Weight))</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
