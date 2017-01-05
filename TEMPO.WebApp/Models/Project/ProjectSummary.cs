@@ -30,6 +30,6 @@ namespace TEMPO.WebApp.Models.Project
 
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        public decimal ContractedAmount { get; set; }
+        public decimal? ContractedAmount { get; set; }
     }
 }

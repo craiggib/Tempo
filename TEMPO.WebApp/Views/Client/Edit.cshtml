@@ -98,7 +98,7 @@
             <div class="col-md-12 text-right">
                 <div class="btn-group" role="group" aria-label="...">
                     <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "recent" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Edit", "Client", new { sort = "recent" })">Recent</a>                    
-                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Edit", "Client", new { sort = "hours" })">Billed Hours</a>
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Edit", "Client", new { sort = "hours" })">Hours</a>
                 </div>
             </div>
         </div>

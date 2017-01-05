@@ -34,7 +34,7 @@ namespace TEMPO.WebApp.Controllers
                     projectList = projectList.OrderByDescending(i => i.TotalHours);
 
                 }
-                else if (sort == "jobnumb")
+                else if (sort == "jobnum")
                 {
                     projectList = projectList.OrderByDescending(i => i.JobYear).ThenByDescending(i=>i.JobNumber);
                 }
