@@ -44,14 +44,6 @@ namespace TEMPO.BusinessLayer.Client
 
             return newClient;
         }
-
-        #region Quotes 
-
-        public List<Data.Quote> GetQuotes(int clientId)
-        {
-            return DataContext.Quotes.Where(i => i.clientid == clientId).ToList();
-        }
-
-        #endregion
+       
     }
 }

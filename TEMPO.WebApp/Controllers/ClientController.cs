@@ -98,9 +98,9 @@ namespace TEMPO.WebApp.Controllers
         private Client GetClient(int id, ProjectSortType sortype)
         {
             var client = Mapper.Map<Models.Client.Client>(_clientManager.GetClient(id));
-            client.QuoteList = _clientManager.GetQuotes(id)
-                .Select(i => Mapper.Map<Quote>(i))
-                .ToList();
+            //client.QuoteList = _clientManager.GetQuotes(id)
+            //    .Select(i => Mapper.Map<Quote>(i))
+            //    .ToList();
 
             var projectManager = new ProjectManager();
             client.ProjectList = projectManager.GetProjectSummaries(id)

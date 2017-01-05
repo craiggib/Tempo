@@ -25,9 +25,14 @@ namespace TEMPO.Data
         public string description { get; set; }
         public decimal price { get; set; }
         public Nullable<int> clientid { get; set; }
+        public System.DateTime createddate { get; set; }
+        public System.DateTime lastupdateddate { get; set; }
+        public int createdby { get; set; }
+        public bool awarded { get; set; }
     
         public virtual Client client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> projects { get; set; }
+        public virtual Employee employee { get; set; }
     }
 }

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TEMPO.WebApp.Models.Quote.Quote>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@Html.Partial("_CreateQuote", new TEMPO.WebApp.Models.Quote.Quote())
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EstimatedHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstimatedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Awarded)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstimatedHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstimatedPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Awarded)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.QuoteId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.QuoteId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.QuoteId })
+        </td>
+    </tr>
+}    
+</table>

@@ -131,6 +131,7 @@
     <Compile Include="BaseManager.cs" />
     <Compile Include="Client\ClientManager.cs" />
     <Compile Include="Project\ProjectManager.cs" />
+    <Compile Include="Quotes\QuoteManager.cs" />
     <Compile Include="TimeSheet.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -181,6 +181,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\TimesheetController.cs" />
     <Compile Include="Controllers\TimesheetUtil.cs" />
     <Compile Include="Global.asax.cs">
@@ -192,7 +193,6 @@
     <Compile Include="Models\Client\Client.cs" />
     <Compile Include="Models\Client\ClientDetails.cs" />
     <Compile Include="Models\Client\ClientSummary.cs" />
-    <Compile Include="Models\Client\Quote.cs" />
     <Compile Include="Models\Project\JobYear.cs" />
     <Compile Include="Models\Project\Project.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -201,6 +201,7 @@
     <Compile Include="Models\Project\ProjectTimeBreakdown.cs" />
     <Compile Include="Models\Project\ProjectType.cs" />
     <Compile Include="Models\Project\ProjectTypeEnum.cs" />
+    <Compile Include="Models\Quote\Quote.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
     <Compile Include="Models\Timesheet\TimeEntrySummary.cs" />
@@ -366,6 +367,8 @@
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Shared\Project\_CreateProjectClient.cshtml" />
+    <Content Include="Views\Quote\Index.cshtml" />
+    <Content Include="Views\Quote\_CreateQuote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

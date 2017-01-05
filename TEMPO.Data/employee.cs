@@ -19,6 +19,7 @@ namespace TEMPO.Data
         {
             this.timesheets = new HashSet<TimeSheet>();
             this.modules = new HashSet<Module>();
+            this.quotes = new HashSet<Quote>();
         }
     
         public int empid { get; set; }
@@ -31,5 +32,7 @@ namespace TEMPO.Data
         public virtual ICollection<TimeSheet> timesheets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Module> modules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Quote> quotes { get; set; }
     }
 }

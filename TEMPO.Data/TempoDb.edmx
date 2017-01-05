@@ -91,8 +91,12 @@
           <Property Name="quoteid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="hours" Type="float" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="500" />
-          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="clientid" Type="int" />
+          <Property Name="createddate" Type="datetime" Nullable="false" />
+          <Property Name="lastupdateddate" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="awarded" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -301,7 +305,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__project__quoteid__22751F6C">
+        <Association Name="FK__project__quoteid__395884C4">
           <End Role="quote" Type="Self.quote" Multiplicity="0..1" />
           <End Role="project" Type="Self.project" Multiplicity="*" />
           <ReferentialConstraint>
@@ -313,7 +317,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__quote__clientid__1332DBDC">
+        <Association Name="FK__quote__clientid__3864608B">
           <End Role="client" Type="Self.client" Multiplicity="0..1" />
           <End Role="quote" Type="Self.quote" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,6 +326,18 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Principal>
             <Dependent Role="quote">
               <PropertyRef Name="clientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quote__createdby__3A4CA8FD">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="quote" Type="Self.quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="empid" />
+            </Principal>
+            <Dependent Role="quote">
+              <PropertyRef Name="createdby" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -506,12 +522,16 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             <End Role="projecttype" EntitySet="projecttype" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
-          <AssociationSet Name="FK__project__quoteid__22751F6C" Association="Self.FK__project__quoteid__22751F6C">
+          <AssociationSet Name="FK__project__quoteid__395884C4" Association="Self.FK__project__quoteid__395884C4">
             <End Role="quote" EntitySet="quote" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
-          <AssociationSet Name="FK__quote__clientid__1332DBDC" Association="Self.FK__quote__clientid__1332DBDC">
+          <AssociationSet Name="FK__quote__clientid__3864608B" Association="Self.FK__quote__clientid__3864608B">
             <End Role="client" EntitySet="client" />
+            <End Role="quote" EntitySet="quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quote__createdby__3A4CA8FD" Association="Self.FK__quote__createdby__3A4CA8FD">
+            <End Role="employee" EntitySet="employee" />
             <End Role="quote" EntitySet="quote" />
           </AssociationSet>
           <AssociationSet Name="FK__timeentry__proje__5224328E" Association="Self.FK__timeentry__proje__5224328E">
@@ -567,6 +587,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="timesheets" Relationship="Self.FK__timesheet__empid__4C6B5938" FromRole="employee" ToRole="timesheet" />
           <NavigationProperty Name="modules" Relationship="Self.moduleauth" FromRole="employee" ToRole="module" />
+          <NavigationProperty Name="quotes" Relationship="TEMPOModel.FK__quote__createdby__3A4CA8FD" FromRole="Employee" ToRole="Quote" />
         </EntityType>
         <EntityType Name="JobYear">
           <Key>
@@ -917,6 +938,10 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySet Name="TimeEntrySummaries" EntityType="TEMPOModel.TimeEntrySummary" />
           <EntitySet Name="ProjectSummaries" EntityType="TEMPOModel.ProjectSummary" />
           <EntitySet Name="ClientSummaries" EntityType="TEMPOModel.ClientSummary" />
+          <AssociationSet Name="FK__quote__createdby__3A4CA8FD" Association="TEMPOModel.FK__quote__createdby__3A4CA8FD">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Quote">
           <Key>
@@ -925,10 +950,15 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="quoteid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="hours" Type="Double" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="clientid" Type="Int32" />
           <NavigationProperty Name="client" Relationship="TEMPOModel.FK__quote__clientid__1332DBDC" FromRole="quote" ToRole="Client" />
           <NavigationProperty Name="projects" Relationship="TEMPOModel.FK__project__quoteid__22751F6C" FromRole="Quote" ToRole="Project" />
+          <Property Name="createddate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lastupdateddate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="awarded" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="TEMPOModel.FK__quote__createdby__3A4CA8FD" FromRole="Quote" ToRole="Employee" />
         </EntityType>
         <Association Name="FK__quote__clientid__1332DBDC">
           <End Type="TEMPOModel.Client" Role="Client" Multiplicity="0..1" />
@@ -1022,6 +1052,18 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="internaltotalamount" Type="Decimal" Precision="38" Scale="4" />
           <Property Name="TotalContractedAmount" Type="Decimal" Precision="38" Scale="4" />
         </EntityType>
+        <Association Name="FK__quote__createdby__3A4CA8FD">
+          <End Type="TEMPOModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="TEMPOModel.Quote" Role="Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empid" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1163,6 +1205,10 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="Quotes">
             <EntityTypeMapping TypeName="TEMPOModel.Quote">
               <MappingFragment StoreEntitySet="quote">
+                <ScalarProperty Name="awarded" ColumnName="awarded" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastupdateddate" ColumnName="lastupdateddate" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="description" ColumnName="description" />

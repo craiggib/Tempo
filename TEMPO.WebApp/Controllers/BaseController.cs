@@ -49,7 +49,7 @@ namespace TEMPO.WebApp.Controllers
                 i.CreateMap<Data.ClientSummary, Models.Client.ClientSummary>()
                     .ForMember(d => d.TotalInternalAmount, o => o.MapFrom(s => s.internaltotalamount));
 
-                i.CreateMap<Data.Quote, Models.Client.Quote>();
+                i.CreateMap<Data.Quote, Models.Quote.Quote>();
 
                 i.CreateMap<Data.JobYear, Models.Project.JobYear>()
                     .ForMember(d => d.Year, o => o.MapFrom(s => s.JobYear1));
