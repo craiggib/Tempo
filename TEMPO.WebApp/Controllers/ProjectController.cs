@@ -140,5 +140,12 @@ namespace TEMPO.WebApp.Controllers
             return Json(timeBreakdown, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetAllProjects()
+        {
+            var searchResults = _projectManager.GetProjects()
+                .Select(i => Mapper.Map<Project>(i));
+            return Json(searchResults, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

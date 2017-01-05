@@ -47,7 +47,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <input type="text" class="form-control search-form" id="customerSearch" placeholder="Search..." />
+            <input type="text" class="form-control search-form" id="projectSearch" placeholder="Search..." />
         </div>
     </div>
     <div class="col-md-4 text-right">
@@ -116,84 +116,32 @@
     </div>
 </div>
 
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/scripts/jquery.easy-autocomplete.js"></script>
+    <script>
 
 
+        $(function () {
+            $.get('/Project/GetAllProjects', function (allData) {
+                var options = {
+                    data: allData,
+                    getValue: "ProjectName",
+                    list: {
+                        match: {
+                            enabled: true
+                        },
+                        onChooseEvent: function () {
+                            var value = $("#projectSearch").getSelectedItemData().ClientId;
+                            location.href = '/Project/Edit/' + value;
+                        }
+                    },
+                };
+                $("#projectSearch").easyAutocomplete(options);
+            });
+        });
+    </script>
 
 
-
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReferenceJobNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Active)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InternalAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastHoursLogged)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReferenceJobNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InternalAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastHoursLogged)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }*@
-
-</table>
+}
