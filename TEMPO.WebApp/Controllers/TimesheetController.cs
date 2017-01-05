@@ -99,7 +99,7 @@ namespace TEMPO.WebApp.Controllers
 
             teViewModel.Projects = new SelectList(_tsUtil.BuildProjectList(), "ProjectId", "ProjectName");
             teViewModel.WorkTypes = new SelectList(_tsUtil.BuildWorkTypes(), "WorkTypeId", "WorkTypeName");
-            return PartialView("_TimeEntry", teViewModel);
+            return PartialView("Timesheet/_TimeEntry", teViewModel);
         }
 
         [HttpPost]
