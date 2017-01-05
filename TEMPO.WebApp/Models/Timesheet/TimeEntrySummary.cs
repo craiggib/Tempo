@@ -26,6 +26,7 @@ namespace TEMPO.WebApp.Models.Timesheet
         [Display(Name = "Week Ending")]
         public DateTime EndingDate { get; set; }
         public int TimesheetId { get; set; }
+        public int WorkTypeId { get; set; }
 
     }
 }

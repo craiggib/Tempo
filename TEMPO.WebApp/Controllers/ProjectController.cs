@@ -148,13 +148,20 @@ namespace TEMPO.WebApp.Controllers
         {
             var tsManager = new TimesheetManager();
 
-            ProjectTimeBreakdown timeBreakdown = new ProjectTimeBreakdown();            
+            ProjectTimeBreakdown timeBreakdown = new ProjectTimeBreakdown();
 
             var groupedByWorkType = tsManager.GetTimeEntrySummaries(projectId)
-                .GroupBy(i => i.worktypename);
-            
-            timeBreakdown.WorkTypes = groupedByWorkType.Select(i => i.Key).ToList();
-            timeBreakdown.Hours = groupedByWorkType.Select(i => i.Sum(j => j.entryHours.Value)).ToList();
+                .GroupBy(i => i.worktypeid)
+                .Select(i => new
+                {
+                    Id = i.Key,
+                    WorkType = i.First().worktypename,
+                    WorkTypeTotal = i.Sum(s => s.entryHours.Value)
+                })
+                .OrderBy(i => i.Id);
+
+            timeBreakdown.WorkTypes = groupedByWorkType.Select(i => i.WorkType).ToList();
+            timeBreakdown.Hours = groupedByWorkType.Select(i => i.WorkTypeTotal).ToList();
 
             return Json(timeBreakdown, JsonRequestBehavior.AllowGet);
         }

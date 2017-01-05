@@ -22,5 +22,6 @@ namespace TEMPO.Data
         public System.DateTime endingdate { get; set; }
         public int tid { get; set; }
         public string worktypename { get; set; }
+        public int worktypeid { get; set; }
     }
 }

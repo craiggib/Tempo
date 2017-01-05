@@ -205,6 +205,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             <PropertyRef Name="endingdate" />
             <PropertyRef Name="tid" />
             <PropertyRef Name="worktypename" />
+            <PropertyRef Name="worktypeid" />
           </Key>
           <Property Name="entryid" Type="int" Nullable="false" />
           <Property Name="projectid" Type="int" />
@@ -214,6 +215,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="endingdate" Type="datetime" Nullable="false" />
           <Property Name="tid" Type="int" Nullable="false" />
           <Property Name="worktypename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="worktypeid" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__mmt__entryid__55009F39">
           <End Role="timeentry" Type="Self.timeentry" Multiplicity="0..1">
@@ -491,7 +493,8 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
     [TimeEntrySummary].[employeename] AS [employeename], 
     [TimeEntrySummary].[endingdate] AS [endingdate], 
     [TimeEntrySummary].[tid] AS [tid], 
-    [TimeEntrySummary].[worktypename] AS [worktypename]
+    [TimeEntrySummary].[worktypename] AS [worktypename], 
+    [TimeEntrySummary].[worktypeid] AS [worktypeid]
     FROM [dbo].[TimeEntrySummary] AS [TimeEntrySummary]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__mmt__entryid__55009F39" Association="Self.FK__mmt__entryid__55009F39">
@@ -1006,6 +1009,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             <PropertyRef Name="endingdate" />
             <PropertyRef Name="tid" />
             <PropertyRef Name="worktypename" />
+            <PropertyRef Name="worktypeid" />
           </Key>
           <Property Name="entryid" Type="Int32" Nullable="false" />
           <Property Name="projectid" Type="Int32" />
@@ -1015,6 +1019,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="endingdate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tid" Type="Int32" Nullable="false" />
           <Property Name="worktypename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="worktypeid" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ProjectSummary">
           <Key>
@@ -1234,6 +1239,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="TimeEntrySummaries">
             <EntityTypeMapping TypeName="TEMPOModel.TimeEntrySummary">
               <MappingFragment StoreEntitySet="TimeEntrySummary">
+                <ScalarProperty Name="worktypeid" ColumnName="worktypeid" />
                 <ScalarProperty Name="worktypename" ColumnName="worktypename" />
                 <ScalarProperty Name="tid" ColumnName="tid" />
                 <ScalarProperty Name="endingdate" ColumnName="endingdate" />

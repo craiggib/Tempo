@@ -210,8 +210,6 @@
             autoclose: true
         });
 
-       
-
         $(function () {
             $.post('/Project/GetProjectTimebreakdown', { projectId: @Model.ProjectId}, function (allData) {               
                 var ctx =  $("#timeChart");
@@ -223,14 +221,18 @@
 
                             data: allData.Hours, //[12, 19, 3],
                             backgroundColor: [
-                                'rgba(92,184,92, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(152,152,152, 0.2)',
+                                'rgba(214,189,150, 0.2)',
+                                'rgba(145,182,109, 0.2)',
+                                'rgba(207,244,255, 0.2)',
+                                'rgba(234,115,115, 0.2)',
                             ],
                             borderColor: [
-                                'rgba(92,184,92,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
+                                'rgba(152,152,152, 1)',
+                                'rgba(214,189,150, 1)',
+                                'rgba(145,182,109, 1)',
+                                'rgba(207,244,255, 1)',
+                                'rgba(234,115,115, 1)',
                             ],
                             borderWidth: 1
                         }]
