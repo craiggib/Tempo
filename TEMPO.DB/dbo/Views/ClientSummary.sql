@@ -1,6 +1,7 @@
 ﻿CREATE VIEW [dbo].[ClientSummary]
 	AS
 
+
 SELECT client.clientid, client.clientname, count(project.projectid) as projectcount,
 	(select top 1 periodending.endingdate 
 		from periodending, timeentry, timesheet, project
@@ -20,8 +21,13 @@ SELECT client.clientid, client.clientname, count(project.projectid) as projectco
 		from [TimeEntrySummary], Project
 		where 
 				[TimeEntrySummary].projectid = project.projectid
-			and project.clientid = client.clientid) as internaltotalamount
+			and project.clientid = client.clientid) as internaltotalamount,
+	(select sum(contractamount)
+		from projectsummary 
+		where 
+			projectsummary.clientid = client.clientid) as TotalContractedAmount
+
 
 FROM client left outer join project on client.clientid = project.clientid
-where project.Active = 1
+--where project.Active = 1
 group by client.clientid, client.clientname

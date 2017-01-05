@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TEMPO.WebApp.Models.Project.ProjectSummary>
+﻿@model TEMPO.WebApp.Models.Project.ProjectHome
 
 @{
     ViewBag.Title = "Projects";
@@ -63,7 +63,7 @@
 <div class="row">
     <div class="col-md-8">
         <ul class="list-group">
-            @foreach (var item in Model)
+            @foreach (var item in Model.ProjectSummaries)
             {
                 <li class="list-group-item">
                     <div class="row">
@@ -112,7 +112,8 @@
         </ul>
     </div>
     <div class="col-md-4">
-        @*@Html.Partial("Project/_CreateProject", new TEMPO.WebApp.Models.Project.Project())*@
+        @Html.Partial("Project/_CreateProjectClient", new TEMPO.WebApp.Models.Project.Project { ClientList = Model.Clients, JobYears = Model.JobYears, JobYearId = Model.CurrentJobYearId ?? 0, ProjectTypes = Model.ProjectTypes })
+
     </div>
 </div>
 

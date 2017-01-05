@@ -365,6 +365,7 @@
     <Content Include="Views\Shared\Employee\_CreateEmployee.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Shared\Project\_CreateProjectClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

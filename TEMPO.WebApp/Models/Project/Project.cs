@@ -19,7 +19,7 @@ namespace TEMPO.WebApp.Models.Project
         [Required]
         public string ProjectNumber { get; set; }
 
-        [Display(Name = "Customer Name")]
+        [Display(Name = "Client Name")]
         public string CustomerName { get; set; }
 
         public string ProjectName { get; set; }
@@ -69,6 +69,8 @@ namespace TEMPO.WebApp.Models.Project
                 
         [DisplayFormat(DataFormatString = "{0:p}")]
         public float InternalDifferenceRatio { get; set; }
+
+        public List<Models.Client.Client> ClientList { get; set; }
 
     }
 }

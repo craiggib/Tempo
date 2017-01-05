@@ -148,6 +148,7 @@ warning 6002: The table/view 'TEMPO.dbo.ClientSummary' does not have a primary k
           <Property Name="lastHoursLogged" Type="datetime" />
           <Property Name="totalhourslogged" Type="decimal" Precision="38" Scale="2" />
           <Property Name="internaltotalamount" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="TotalContractedAmount" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TEMPO.dbo.ProjectList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -189,6 +190,7 @@ warning 6002: The table/view 'TEMPO.dbo.ProjectSummary' does not have a primary 
           <Property Name="InternalAmount" Type="decimal" Precision="38" Scale="4" />
           <Property Name="TotalHours" Type="decimal" Precision="38" Scale="2" />
           <Property Name="lastHoursLogged" Type="datetime" />
+          <Property Name="contractamount" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -431,7 +433,8 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
     [ClientSummary].[projectcount] AS [projectcount], 
     [ClientSummary].[lastHoursLogged] AS [lastHoursLogged], 
     [ClientSummary].[totalhourslogged] AS [totalhourslogged], 
-    [ClientSummary].[internaltotalamount] AS [internaltotalamount]
+    [ClientSummary].[internaltotalamount] AS [internaltotalamount], 
+    [ClientSummary].[TotalContractedAmount] AS [TotalContractedAmount]
     FROM [dbo].[ClientSummary] AS [ClientSummary]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProjectList" EntityType="Self.ProjectList" store:Type="Views" store:Schema="dbo">
@@ -459,7 +462,8 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
     [ProjectSummary].[JobYear] AS [JobYear], 
     [ProjectSummary].[InternalAmount] AS [InternalAmount], 
     [ProjectSummary].[TotalHours] AS [TotalHours], 
-    [ProjectSummary].[lastHoursLogged] AS [lastHoursLogged]
+    [ProjectSummary].[lastHoursLogged] AS [lastHoursLogged], 
+    [ProjectSummary].[contractamount] AS [contractamount]
     FROM [dbo].[ProjectSummary] AS [ProjectSummary]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TimeEntrySummary" EntityType="Self.TimeEntrySummary" store:Type="Views" store:Schema="dbo">
@@ -1003,6 +1007,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="TotalHours" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
           <Property Name="clientname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="contractamount" Type="Decimal" Precision="38" Scale="4" />
         </EntityType>
         <EntityType Name="ClientSummary">
           <Key>
@@ -1015,6 +1020,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="lastHoursLogged" Type="DateTime" Precision="3" />
           <Property Name="totalhourslogged" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="internaltotalamount" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="TotalContractedAmount" Type="Decimal" Precision="38" Scale="4" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1196,6 +1202,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="ProjectSummaries">
             <EntityTypeMapping TypeName="TEMPOModel.ProjectSummary">
               <MappingFragment StoreEntitySet="ProjectSummary">
+                <ScalarProperty Name="contractamount" ColumnName="contractamount" />
                 <ScalarProperty Name="clientname" ColumnName="clientname" />
                 <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />
                 <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
@@ -1214,6 +1221,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="ClientSummaries">
             <EntityTypeMapping TypeName="TEMPOModel.ClientSummary">
               <MappingFragment StoreEntitySet="ClientSummary">
+                <ScalarProperty Name="TotalContractedAmount" ColumnName="TotalContractedAmount" />
                 <ScalarProperty Name="internaltotalamount" ColumnName="internaltotalamount" />
                 <ScalarProperty Name="totalhourslogged" ColumnName="totalhourslogged" />
                 <ScalarProperty Name="lastHoursLogged" ColumnName="lastHoursLogged" />

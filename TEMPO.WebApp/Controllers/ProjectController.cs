@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TEMPO.BusinessLayer.Client;
 using TEMPO.BusinessLayer.Project;
 using TEMPO.BusinessLayer.TimeSheets;
 using TEMPO.WebApp.Models.Project;
@@ -21,6 +22,8 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult Index(string sort)
         {
+            ProjectHome projectHome = new ProjectHome();
+
             var projectList = _projectManager.GetProjectSummaries(true)
                 .Select(i => Mapper.Map<ProjectSummary>(i));
 
@@ -45,7 +48,23 @@ namespace TEMPO.WebApp.Controllers
                 projectList = projectList.OrderByDescending(i => i.LastHoursLogged);
             }
 
-            return View(projectList.ToList());
+            projectHome.ProjectSummaries = projectList.ToList();
+
+            projectHome.JobYears = _projectManager.GetJobYears()
+                .Select(i => Mapper.Map<Models.Project.JobYear>(i))
+                .ToList();
+            projectHome.CurrentJobYearId = projectHome.JobYears.FirstOrDefault(i => i.Year == DateTime.Today.Year)?.JobYearId;
+
+            projectHome.ProjectTypes = _projectManager.GetProjectTypes()
+                .Select(i => Mapper.Map<Models.Project.ProjectType>(i))
+                .ToList();
+
+            projectHome.Clients = new ClientManager().GetClients()
+                .Select(i => Mapper.Map<Models.Client.Client>(i))
+                .OrderBy(i=>i.ClientName)
+                .ToList();
+
+            return View(projectHome);
         }
 
         public ActionResult Edit(int id, DateTime? start, DateTime? end)

@@ -62,7 +62,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-money"></i> Contracted Amount</div>
                 <div class="panel-body form-horizontal metric">
-                    <div class="total-billing text-success">@(string.Format("{0:c0}", Model.ProjectList.Sum(i => i.InternalAmount)))</div>                   
+                    <div class="total-billing text-success">@(string.Format("{0:c0}", Model.ProjectList.Sum(i => i.ContractedAmount)))</div>                   
                 </div>
             </div>
 
@@ -110,7 +110,7 @@
                     <th>Type</th>
                     <th>Last Hours</th>
                     <th>Hours</th>
-                    <th>Billing</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -131,7 +131,7 @@
                             @Html.DisplayFor(i => item.TotalHours)
                         </td>
                         <td class="projectlist">
-                            @Html.DisplayFor(i => item.InternalAmount)
+                            @Html.DisplayFor(i => item.ContractedAmount)
                         </td>
                     </tr>
                 }

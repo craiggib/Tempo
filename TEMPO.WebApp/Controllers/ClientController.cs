@@ -22,7 +22,11 @@ namespace TEMPO.WebApp.Controllers
         public ActionResult Index(string sort)
         {
             var clientList = _clientManager.GetClientSummary()
-                .Select(i => Mapper.Map<Models.Client.ClientSummary>(i));                         
+                .Select(i => 
+                {
+                    ClientSummary clientSummary = Mapper.Map<Models.Client.ClientSummary>(i);                    
+                    return clientSummary;
+                });                         
 
             if (!string.IsNullOrEmpty(sort))
             {

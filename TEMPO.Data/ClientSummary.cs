@@ -20,5 +20,6 @@ namespace TEMPO.Data
         public Nullable<System.DateTime> lastHoursLogged { get; set; }
         public Nullable<decimal> totalhourslogged { get; set; }
         public Nullable<decimal> internaltotalamount { get; set; }
+        public Nullable<decimal> TotalContractedAmount { get; set; }
     }
 }

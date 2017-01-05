@@ -27,5 +27,9 @@ namespace TEMPO.WebApp.Models.Project
         public string ClientName { get; set; }
         public int JobYear { get; set; }
         public string JobNumber { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public decimal ContractedAmount { get; set; }
     }
 }
