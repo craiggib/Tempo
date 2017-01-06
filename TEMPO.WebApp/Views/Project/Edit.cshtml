@@ -21,7 +21,7 @@
     }
 </style>
 <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
-<div class="row">
+<div class="row hidden-print">
     <div class="col-md-5">
         @using (Html.BeginForm())
         {
@@ -122,7 +122,7 @@
     <div class="col-md-7">
         @if (Model.ProjectTypeId == (int)TEMPO.WebApp.Models.Project.ProjectTypeEnum.FixedPrice)
         {
-             @Html.Partial("_FixedPriceMetrics", Model)
+            @Html.Partial("_FixedPriceMetrics", Model)
         }
         else
         {
@@ -135,6 +135,10 @@
         </div>
     </div>
 </div>
+
+<span class="visible-print">
+    @Html.DisplayFor(model => model.CustomerName)
+</span>
 
 <hr />
 <div class="row timesummary-row">
@@ -211,7 +215,7 @@
         });
 
         $(function () {
-            $.post('/Project/GetProjectTimebreakdown', { projectId: @Model.ProjectId}, function (allData) {               
+            $.post('/Project/GetProjectTimebreakdown', { projectId: @Model.ProjectId}, function (allData) {
                 var ctx =  $("#timeChart");
                 var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -258,7 +262,7 @@
         });
 
 
-       
+
     </script>
 }
 

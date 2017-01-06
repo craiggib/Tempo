@@ -18,6 +18,7 @@ namespace TEMPO.Data
         public Quote()
         {
             this.projects = new HashSet<Project>();
+            this.quotetags = new HashSet<quotetag>();
         }
     
         public int quoteid { get; set; }
@@ -29,10 +30,13 @@ namespace TEMPO.Data
         public System.DateTime lastupdateddate { get; set; }
         public int createdby { get; set; }
         public bool awarded { get; set; }
+        public string clientname { get; set; }
     
         public virtual Client client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Project> projects { get; set; }
         public virtual Employee employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<quotetag> quotetags { get; set; }
     }
 }

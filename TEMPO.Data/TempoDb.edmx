@@ -93,10 +93,19 @@
           <Property Name="description" Type="varchar" MaxLength="500" />
           <Property Name="price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="clientid" Type="int" />
+          <Property Name="clientname" Type="varchar" MaxLength="250" />
           <Property Name="createddate" Type="datetime" Nullable="false" />
           <Property Name="lastupdateddate" Type="datetime" Nullable="false" />
           <Property Name="createdby" Type="int" Nullable="false" />
           <Property Name="awarded" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="quotetags">
+          <Key>
+            <PropertyRef Name="quoteid" />
+            <PropertyRef Name="title" />
+          </Key>
+          <Property Name="quoteid" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -307,7 +316,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__project__quoteid__395884C4">
+        <Association Name="FK__project__quoteid__42E1EEFE">
           <End Role="quote" Type="Self.quote" Multiplicity="0..1" />
           <End Role="project" Type="Self.project" Multiplicity="*" />
           <ReferentialConstraint>
@@ -319,7 +328,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__quote__clientid__3864608B">
+        <Association Name="FK__quote__clientid__40058253">
           <End Role="client" Type="Self.client" Multiplicity="0..1" />
           <End Role="quote" Type="Self.quote" Multiplicity="*" />
           <ReferentialConstraint>
@@ -331,7 +340,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__quote__createdby__3A4CA8FD">
+        <Association Name="FK__quote__createdby__40F9A68C">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="quote" Type="Self.quote" Multiplicity="*" />
           <ReferentialConstraint>
@@ -340,6 +349,18 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Principal>
             <Dependent Role="quote">
               <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quotetags__quote__41EDCAC5">
+          <End Role="quote" Type="Self.quote" Multiplicity="1" />
+          <End Role="quotetags" Type="Self.quotetags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quote">
+              <PropertyRef Name="quoteid" />
+            </Principal>
+            <Dependent Role="quotetags">
+              <PropertyRef Name="quoteid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -440,6 +461,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="projecttype" EntityType="Self.projecttype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="quote" EntityType="Self.quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quotetags" EntityType="Self.quotetags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="timeentry" EntityType="Self.timeentry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="timesheet" EntityType="Self.timesheet" Schema="dbo" store:Type="Tables" />
@@ -525,17 +547,21 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             <End Role="projecttype" EntitySet="projecttype" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
-          <AssociationSet Name="FK__project__quoteid__395884C4" Association="Self.FK__project__quoteid__395884C4">
+          <AssociationSet Name="FK__project__quoteid__42E1EEFE" Association="Self.FK__project__quoteid__42E1EEFE">
             <End Role="quote" EntitySet="quote" />
             <End Role="project" EntitySet="project" />
           </AssociationSet>
-          <AssociationSet Name="FK__quote__clientid__3864608B" Association="Self.FK__quote__clientid__3864608B">
+          <AssociationSet Name="FK__quote__clientid__40058253" Association="Self.FK__quote__clientid__40058253">
             <End Role="client" EntitySet="client" />
             <End Role="quote" EntitySet="quote" />
           </AssociationSet>
-          <AssociationSet Name="FK__quote__createdby__3A4CA8FD" Association="Self.FK__quote__createdby__3A4CA8FD">
+          <AssociationSet Name="FK__quote__createdby__40F9A68C" Association="Self.FK__quote__createdby__40F9A68C">
             <End Role="employee" EntitySet="employee" />
             <End Role="quote" EntitySet="quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quotetags__quote__41EDCAC5" Association="Self.FK__quotetags__quote__41EDCAC5">
+            <End Role="quote" EntitySet="quote" />
+            <End Role="quotetags" EntitySet="quotetags" />
           </AssociationSet>
           <AssociationSet Name="FK__timeentry__proje__5224328E" Association="Self.FK__timeentry__proje__5224328E">
             <End Role="project" EntitySet="project" />
@@ -945,6 +971,11 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Quote" EntitySet="Quotes" />
           </AssociationSet>
+          <EntitySet Name="quotetags" EntityType="TEMPOModel.quotetag" />
+          <AssociationSet Name="FK__quotetags__quote__3C34F16F" Association="TEMPOModel.FK__quotetags__quote__3C34F16F">
+            <End Role="Quote" EntitySet="Quotes" />
+            <End Role="quotetag" EntitySet="quotetags" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Quote">
           <Key>
@@ -962,6 +993,8 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <Property Name="createdby" Type="Int32" Nullable="false" />
           <Property Name="awarded" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="employee" Relationship="TEMPOModel.FK__quote__createdby__3A4CA8FD" FromRole="Quote" ToRole="Employee" />
+          <NavigationProperty Name="quotetags" Relationship="TEMPOModel.FK__quotetags__quote__3C34F16F" FromRole="Quote" ToRole="quotetag" />
+          <Property Name="clientname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__quote__clientid__1332DBDC">
           <End Type="TEMPOModel.Client" Role="Client" Multiplicity="0..1" />
@@ -1066,6 +1099,27 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
             </Principal>
             <Dependent Role="Quote">
               <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="quotetag">
+          <Key>
+            <PropertyRef Name="quoteid" />
+            <PropertyRef Name="title" />
+          </Key>
+          <Property Name="quoteid" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="quote" Relationship="TEMPOModel.FK__quotetags__quote__3C34F16F" FromRole="quotetag" ToRole="Quote" />
+        </EntityType>
+        <Association Name="FK__quotetags__quote__3C34F16F">
+          <End Type="TEMPOModel.Quote" Role="Quote" Multiplicity="1" />
+          <End Type="TEMPOModel.quotetag" Role="quotetag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quote">
+              <PropertyRef Name="quoteid" />
+            </Principal>
+            <Dependent Role="quotetag">
+              <PropertyRef Name="quoteid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1210,6 +1264,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="Quotes">
             <EntityTypeMapping TypeName="TEMPOModel.Quote">
               <MappingFragment StoreEntitySet="quote">
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
                 <ScalarProperty Name="awarded" ColumnName="awarded" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />
                 <ScalarProperty Name="lastupdateddate" ColumnName="lastupdateddate" />
@@ -1280,6 +1335,14 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
                 <ScalarProperty Name="projectcount" ColumnName="projectcount" />
                 <ScalarProperty Name="clientname" ColumnName="clientname" />
                 <ScalarProperty Name="clientid" ColumnName="clientid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quotetags">
+            <EntityTypeMapping TypeName="TEMPOModel.quotetag">
+              <MappingFragment StoreEntitySet="quotetags">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="quoteid" ColumnName="quoteid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

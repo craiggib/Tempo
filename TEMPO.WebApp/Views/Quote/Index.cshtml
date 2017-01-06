@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TEMPO.WebApp.Models.Quote.Quote>
+﻿@model TEMPO.WebApp.Models.Quote.QuoteHome
 
 @{
     ViewBag.Title = "Index";
@@ -6,63 +6,88 @@
 }
 
 <h2>Index</h2>
+<div class="row">
+    <div class="col-md-6">
+        @Html.Partial("_CreateQuote", new TEMPO.WebApp.Models.Quote.Quote { Clients = Model.Clients })
+    </div>
+</div>
 
-@Html.Partial("_CreateQuote", new TEMPO.WebApp.Models.Quote.Quote())
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EstimatedHours)
+            Client
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstimatedPrice)
+            Hours
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+            Last Updated
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Awarded)
-        </th>
+        <th>Awarded</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstimatedHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstimatedPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Awarded)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuoteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuoteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuoteId })
-        </td>
-    </tr>
-}    
+    @foreach (var item in Model.Quotes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awarded)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuoteId })
+
+            </td>
+        </tr>
+    }
 </table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-tagsinput.min.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $("#inputClient-New").click(function () {
+            $("#div-client-select").hide();
+            $("#div-client-input").show();
+            $("#ClientName").val("");
+        });
+
+        $("#inputClient-Existing").click(function () {
+            $("#div-client-select").show();
+            $("#div-client-input").hide();
+            $("#ClientName").val("");
+        });
+
+        $("#div-client-input").hide();
+
+        $('#Tags').tagsinput({
+            confirmKeys: [13, 44, 32]
+        });
+    </script>
+}

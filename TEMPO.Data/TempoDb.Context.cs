@@ -42,5 +42,6 @@ namespace TEMPO.Data
         public virtual DbSet<TimeEntrySummary> TimeEntrySummaries { get; set; }
         public virtual DbSet<ProjectSummary> ProjectSummaries { get; set; }
         public virtual DbSet<ClientSummary> ClientSummaries { get; set; }
+        public virtual DbSet<quotetag> quotetags { get; set; }
     }
 }

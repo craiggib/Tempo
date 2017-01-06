@@ -5,6 +5,7 @@
 	[description] varchar(500) null,
 	[price] decimal(10,2) not null,
 	[clientid] int references client(clientid),
+	[clientname] varchar(250) null,
 	[createddate] datetime not null,
 	[lastupdateddate] datetime not null,
 	[createdby] int not null references employee(empid),
