@@ -27,14 +27,15 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" align="left">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TEMPO", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <img src="/images/Iresco-header.png" width="507" height="57" alt="logo" align="left"/>
             </div>
+            
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Timesheets"))
@@ -59,6 +60,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - TEMPO By Iresco Ltd</p>
+            
         </footer>
     </div>
 
