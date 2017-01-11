@@ -92,6 +92,7 @@
     <Compile Include="quotetag.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuoteTagFrequency.cs" />
     <Compile Include="Status.cs">
       <DependentUpon>TempoDb.tt</DependentUpon>
     </Compile>

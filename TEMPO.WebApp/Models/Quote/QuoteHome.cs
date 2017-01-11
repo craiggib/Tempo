@@ -10,5 +10,7 @@ namespace TEMPO.WebApp.Models.Quote
         public List<Quote> Quotes { get; set; }
 
         public List<Models.Client.Client> Clients { get; set; }
+
+        public List<QuoteTagFrequency> TagFrequency { get; set; }
     }
 }

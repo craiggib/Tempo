@@ -56,7 +56,7 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.ClientName, o => o.MapFrom(s => s.clientid.HasValue ? s.client.clientname : s.clientname))
                     .AfterMap((src, dest) => dest.Tags = string.Join(",", src.quotetags.Select(j => j.title)));
 
-
+                i.CreateMap<Data.QuoteTagFrequency, Models.Quote.QuoteTagFrequency>();
 
                 i.CreateMap<Data.JobYear, Models.Project.JobYear>()
                     .ForMember(d => d.Year, o => o.MapFrom(s => s.JobYear1));

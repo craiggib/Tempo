@@ -25,6 +25,8 @@ namespace TEMPO.WebApp.Controllers
                 .Select(i => Mapper.Map<Models.Quote.Quote>(i))
                 .ToList();
 
+            quoteHome.TagFrequency = Mapper.Map<List<QuoteTagFrequency>>(_quoteManager.GetTagFrequency(20));
+
             ClientManager clientManager = new ClientManager();
             quoteHome.Clients = Mapper.Map<List<Models.Client.Client>>(clientManager.GetClients())
                 .OrderBy(i => i.ClientName)
@@ -58,6 +60,16 @@ namespace TEMPO.WebApp.Controllers
             }
             
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var quote = _quoteManager.GetQuote(id);
+            if(quote != null)
+            {
+                return View(Mapper.Map<Quote>(quote));
+            }
+            return View();
         }
     }
 }

@@ -9,6 +9,12 @@ namespace TEMPO.BusinessLayer.Quotes
     public class QuoteManager : BaseManager
     {
 
+        public Data.Quote GetQuote(int quoteId)
+        {
+            return DataContext.Quotes.Where(i => i.quoteid == quoteId).FirstOrDefault();
+        }
+
+
         public List<Data.Quote> GetQuotes(int clientId)
         {
             return DataContext.Quotes.Where(i => i.clientid == clientId).ToList();
@@ -50,6 +56,20 @@ namespace TEMPO.BusinessLayer.Quotes
                 lastupdateddate = lastUpdated,
                 price = estimatedPrice
             };
+        }
+
+        public List<Data.QuoteTagFrequency> GetTagFrequency(int maxResults)
+        {
+            return DataContext.quotetags
+                 .GroupBy(i => i.title)
+                 .Select(i => new Data.QuoteTagFrequency
+                 {
+                     FrequencyCount = i.Count(),
+                     Tag = i.Key
+                 })
+                 .OrderByDescending(i => i.FrequencyCount)
+                 .Take(maxResults)
+                 .ToList();
         }
 
         private void BuildTags(string tags, Data.Quote quote)

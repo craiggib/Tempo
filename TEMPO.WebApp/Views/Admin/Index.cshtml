@@ -95,7 +95,7 @@
 
         <h4>Submitted Timesheets</h4>
 
-        @if (Model.SubmittedTimesheets.Count() != 0)
+        @if (Model.SubmittedTimesheets != null && Model.SubmittedTimesheets.Count() != 0)
         {
             <table class="table">
                 <tr>
