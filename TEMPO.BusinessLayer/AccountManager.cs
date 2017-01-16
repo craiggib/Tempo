@@ -16,7 +16,7 @@ namespace TEMPO.BusinessLayer
 
         public List<Employee> GetEmployees()
         {
-            return DataContext.Employees.ToList();
+            return DataContext.Employees.ToList();            
         }
 
         public Employee GetEmployee(int employeeId)

@@ -41,7 +41,10 @@ namespace TEMPO.WebApp.Controllers
                 .OrderByDescending(i => i.PeriodEnding)
                 .ToList();
 
-            adminHomeVm.EmployeeList = _accountManager.GetEmployees()                
+            adminHomeVm.EmployeeList = _accountManager.GetEmployees()
+                .Select(i=>i)
+                .ToList()                
+
                 .Select(i=>Mapper.Map<Models.Employee.Employee>(i))
                 .OrderBy(i=>i.EmployeeName);
 

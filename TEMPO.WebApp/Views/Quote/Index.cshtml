@@ -6,7 +6,7 @@
 }
 
 <h2>Quotes</h2>
-
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
 <style>
     .quote-table {
         margin-top: 15px;
@@ -80,7 +80,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form action="@Url.Action("Edit")" method="get">
+                <form action="@Url.Action("Index")" method="get">
                     <div class="row">
 
                         <div class="col-md-8 text-left">
@@ -88,9 +88,9 @@
                                 <div class="form-group">
 
                                     <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" value="@Request.QueryString["start"]" class="input-sm form-control" name="start" />
+                                        <input type="text" value="@Model.QuoteFilterFrom.ToString("MM/dd/yyyy")" class="input-sm form-control" name="start" />
                                         <span class="input-group-addon">to</span>
-                                        <input type="text" value="@Request.QueryString["end"]" class="input-sm form-control" name="end" />
+                                        <input type="text" value="@Model.QuoteFilterTo.ToString("MM/dd/yyyy")" class="input-sm form-control" name="end" />
                                     </div>
                                 </div>
                             </div>
@@ -104,10 +104,10 @@
             </div>
             <div class="col-md-4 col-md-offset-2 text-right">
                 <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "recent" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "recent" })">Recent</a>
-                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "alpha" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "alpha" })">Client</a>
-                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "hours" })">Price</a>
-                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "hours" ? "active" : "")" href="@Url.Action("Index", "Client", new { sort = "hours" })">Awarded</a>
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "number" || string.IsNullOrEmpty(Request.QueryString["sort"]) ? "active" : "")" href="@Url.Action("Index", "Quote", new { sort = "number", start = Model.QuoteFilterFrom, end = Model.QuoteFilterTo })">Number</a>
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "client" ? "active" : "")" href="@Url.Action("Index", "Quote", new { sort = "client", start = Model.QuoteFilterFrom, end = Model.QuoteFilterTo })">Client</a>
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "price" ? "active" : "")" href="@Url.Action("Index", "Quote", new { sort = "price", start = Model.QuoteFilterFrom, end = Model.QuoteFilterTo })">Price</a>
+                    <a class="btn btn-default btn-sm @(Request.QueryString["sort"] == "awarded" ? "active" : "")" href="@Url.Action("Index", "Quote", new { sort = "awarded", start = Model.QuoteFilterFrom, end = Model.QuoteFilterTo })">Awarded</a>
                 </div>
             </div>
         </div>
@@ -208,7 +208,14 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/bootstrap-tagsinput.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
     <script>
+
+        $(".input-daterange").datepicker({
+            autoclose: true
+        });
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })

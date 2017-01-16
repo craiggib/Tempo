@@ -5,116 +5,146 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Edit Quote</h2>
+<style>
+    .input-group {
+        width: 280px;
+    }
+</style>
+<link href="~/Content/bootstrap-tagsinput.css" rel="stylesheet" />
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Quote</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.QuoteId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EstimatedHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EstimatedHours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EstimatedHours, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-7">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EstimatedPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EstimatedPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EstimatedPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastUpdatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastUpdatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastUpdatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.SuccessMessage
+                    </div>
+                }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreateByEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreateByEmployeeId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreateByEmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @Html.HiddenFor(model => model.QuoteId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Awarded, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Awarded)
-                    @Html.ValidationMessageFor(model => model.Awarded, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                    @if (Model.ClientId.HasValue)
+                    {
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "ClientId", "ClientName"), new { @class = "form-control" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control", placeholder = "Potential Client Name..." } })
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EstimatedHours, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.EstimatedHours, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EstimatedHours, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EstimatedPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            @Html.EditorFor(model => model.EstimatedPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control", @data_role = "tagsinput" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
                 </div>
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClientId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClientId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
+    <div class="col-md-5">
+        <div class="jumbotron text-center">
 
+            <a href="@Url.Action("Awarded")" class="btn btn-primary btn-lg">
+                <i class="fa fa-check"></i>
+                Awarded!
+            </a>
+
+        </div>
+        <div class="text-center">
+            <small>
+                This quote was created by @(Model.CreatedBy) on @(Model.CreatedDate) and last updated @(Model.LastUpdatedDate).
+
+            </small>
+            <div>
+                <a class="btn btn-xs btn-default btn-warning" href="@Url.Action("Delete")" id="deleteQuote">Delete Quote</a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
+    
+    <script>
+
+        $('#Tags').tagsinput({
+            confirmKeys: [13, 44, 32]
+        });
+
+        $("#deleteQuote").click(function () {
+
+            bootbox.prompt({
+                title: "Are you sure you want to delete?",
+                inputType: 'textarea',
+                buttons: {
+                    confirm: {
+                        label: 'Yes'
+                    }
+                }
+            });
+        });
+    </script>
+}

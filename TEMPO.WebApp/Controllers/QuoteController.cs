@@ -18,12 +18,40 @@ namespace TEMPO.WebApp.Controllers
             _quoteManager = new QuoteManager();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(DateTime? start, DateTime? end, string sort)
         {
-            QuoteHome quoteHome = new QuoteHome();
-            quoteHome.Quotes = _quoteManager.GetQuotes()
+            QuoteHome quoteHome = new QuoteHome
+            {
+                QuoteFilterFrom = start ?? DateTime.Today.AddMonths(-3),
+                QuoteFilterTo = end ?? DateTime.Today.AddDays(1)
+            };
+
+            quoteHome.Quotes = _quoteManager.GetQuotes(quoteHome.QuoteFilterFrom, quoteHome.QuoteFilterTo)
                 .Select(i => Mapper.Map<Models.Quote.Quote>(i))
+                .OrderByDescending(i => i.QuoteId)
                 .ToList();
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                if (sort == "client")
+                {
+                    quoteHome.Quotes = quoteHome.Quotes.OrderBy(i => i.ClientName).ToList();
+                }
+                else if (sort == "price")
+                {
+                    quoteHome.Quotes = quoteHome.Quotes.OrderByDescending(i => i.EstimatedPrice).ToList();
+                }
+                else if (sort == "awarded")
+                {
+                    quoteHome.Quotes = quoteHome.Quotes.OrderByDescending(i => i.Awarded)
+                        .ThenBy(i => i.QuoteId)
+                        .ToList();
+                }
+                else
+                {
+                    quoteHome.Quotes = quoteHome.Quotes.OrderByDescending(i => i.QuoteId).ToList();
+                }
+            }
 
             quoteHome.TagFrequency = Mapper.Map<List<QuoteTagFrequency>>(_quoteManager.GetTagFrequency(20));
 
@@ -45,7 +73,7 @@ namespace TEMPO.WebApp.Controllers
                     quoteVm.Description,
                     quoteVm.EstimatedHours,
                     quoteVm.EstimatedPrice,
-                    quoteVm.Tags,  
+                    quoteVm.Tags,
                     GetUserID());
             }
             else
@@ -58,18 +86,44 @@ namespace TEMPO.WebApp.Controllers
                     quoteVm.Tags,
                     GetUserID());
             }
-            
+
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int id)
+        [HttpPost]
+        public ActionResult Edit(Quote quoteVm)
         {
-            var quote = _quoteManager.GetQuote(id);
-            if(quote != null)
+            _quoteManager.Update(
+                quoteVm.QuoteId,
+                quoteVm.Description,
+                quoteVm.EstimatedHours,
+                quoteVm.EstimatedPrice,
+                quoteVm.Tags);
+
+            ViewBag.SuccessMessage = "Updated Successfully";
+            return View(GetQuote(quoteVm.QuoteId));
+        }
+
+        public ActionResult Edit(int id)
+        {            
+            return View(GetQuote(id));
+        }
+
+        private Quote GetQuote(int quoteId)
+        {
+            Data.Quote quote = _quoteManager.GetQuote(quoteId);
+            if (quote != null)
             {
-                return View(Mapper.Map<Quote>(quote));
+                var quoteVm = Mapper.Map<Quote>(quote);
+
+                ClientManager clientManager = new ClientManager();
+                quoteVm.Clients = Mapper.Map<List<Models.Client.Client>>(clientManager.GetClients())
+                    .OrderBy(i => i.ClientName)
+                    .ToList();
+
+                return quoteVm;
             }
-            return View();
+            return null;
         }
     }
 }

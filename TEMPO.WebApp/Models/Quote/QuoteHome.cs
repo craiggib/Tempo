@@ -12,5 +12,8 @@ namespace TEMPO.WebApp.Models.Quote
         public List<Models.Client.Client> Clients { get; set; }
 
         public List<QuoteTagFrequency> TagFrequency { get; set; }
+
+        public DateTime QuoteFilterFrom { get; set; }
+        public DateTime QuoteFilterTo { get; set; }
     }
 }

@@ -81,7 +81,8 @@ namespace TEMPO.WebApp.Controllers
                     .ForMember(d => d.ProjectName, o => o.MapFrom(s => $"{s.JobYear}-{s.jobnum} {s.description}"));
 
                 i.CreateMap<Data.Employee, Models.Employee.Employee>()
-                    .ForMember(d => d.EmployeeId, o => o.MapFrom(s => s.empid));
+                    .ForMember(d => d.EmployeeId, o => o.MapFrom(s => s.empid))
+                    .ForMember(d => d.Timesheets, opt => opt.Ignore());
 
             });
 

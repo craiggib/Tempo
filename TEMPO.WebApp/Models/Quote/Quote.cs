@@ -21,8 +21,11 @@ namespace TEMPO.WebApp.Models.Quote
         [Required]        
         [DataType(DataType.Currency)]
         public decimal EstimatedPrice { get; set; }
-        
+
+        [Display(Name = "Created")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy hh:mm tt}")]
         public DateTime CreatedDate { get; set; }
+        [Display(Name = "Updated")]
         public DateTime LastUpdatedDate { get; set; }
         public int CreateByEmployeeId { get; set; }
         

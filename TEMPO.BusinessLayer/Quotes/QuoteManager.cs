@@ -20,9 +20,9 @@ namespace TEMPO.BusinessLayer.Quotes
             return DataContext.Quotes.Where(i => i.clientid == clientId).ToList();
         }
 
-        public List<Data.Quote> GetQuotes()
+        public List<Data.Quote> GetQuotes(DateTime fromDate, DateTime toDate)
         {
-            return DataContext.Quotes.ToList();
+            return DataContext.Quotes.Where(i => i.createddate >= fromDate && i.createddate <= toDate).ToList();
         }
 
         public void CreateQuote(int clientId, string description, float estimatedHours, decimal estimatedPrice, string tags, int createdById)
@@ -45,7 +45,7 @@ namespace TEMPO.BusinessLayer.Quotes
             DataContext.SaveChanges();
         }
 
-        private static Data.Quote BuildQuote(string description, float estimatedHours, decimal estimatedPrice, int createdById, DateTime lastUpdated)
+        private Data.Quote BuildQuote(string description, float estimatedHours, decimal estimatedPrice, int createdById, DateTime lastUpdated)
         {
             return new Data.Quote
             {
@@ -88,7 +88,26 @@ namespace TEMPO.BusinessLayer.Quotes
                 }
             }
         }
+
+        public void Update(int quoteId, string description, float estimatedHours, decimal estimatedPrice, string tags)
+        {
+            Data.Quote quote = GetQuote(quoteId);
+            if (quote == null)
+            {
+                return;
+            }
+
+            quote.description = description;
+            quote.hours = estimatedHours;
+            quote.price = estimatedPrice;
+            quote.lastupdateddate = DateTime.Now;
+
+            DataContext.quotetags.RemoveRange(quote.quotetags);
+            BuildTags(tags, quote);
+
+            DataContext.SaveChanges();
+        }
     }
 
-        
+
 }
