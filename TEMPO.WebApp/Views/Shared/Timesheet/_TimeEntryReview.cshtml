@@ -8,29 +8,36 @@
             @Html.HiddenFor(t => t.EntryId)
             @Html.DropDownListFor(t => t.ProjectId, Model.Projects, "--Select--", new { @class = "form-control" })
         </td>
-        <td class="time-entry-column-worktype">
+        <td class="time-entry-column-worktype">            
             @Html.DropDownListFor(t => t.WorkTypeId, Model.WorkTypes, new { @class = "form-control" })
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Sunday, new { disabled = "disabled", @class = "form-control time-entry" })
+            @Html.HiddenFor(t => t.Sunday)            
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Sunday" name="ignore-m">
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Monday, new { disabled = "disabled", @class = "form-control time-entry" })
+            @Html.HiddenFor(t => t.Monday)
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Monday" name="ignore-m">
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Tuesday, new { disabled = "disabled", @class = "form-control time-entry disabled" })
+            @Html.HiddenFor(t => t.Tuesday)
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Tuesday" name="ignore-m">
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Wednesday, new { disabled = "disabled", @class = "form-control time-entry" })
+            @Html.HiddenFor(t => t.Wednesday)
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Wednesday" name="ignore-m">
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Thursday, new { disabled = "disabled", @class = "form-control time-entry" })
+            @Html.HiddenFor(t => t.Thursday)
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Thursday" name="ignore-m">
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Friday, new { disabled = "disabled", @class = "form-control time-entry" })
+            @Html.HiddenFor(t => t.Friday)
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Friday" name="ignore-m">
         </td>
         <td>
-            @Html.TextBoxFor(t => t.Saturday, new { disabled = "disabled", @class = "form-control time-entry" })
+            @Html.HiddenFor(t => t.Saturday)
+            <input class="form-control time-entry" disabled="disabled" type="text" value="@Model.Saturday" name="ignore-m">
         </td>
         <td class="time-entry-delete">
 
