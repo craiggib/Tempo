@@ -81,14 +81,18 @@ namespace TEMPO.WebApp.Controllers
             }
             else
             {
-                ViewBag.SuccessMessage = "Timesheet Saved";
-                Models.Timesheet.Timesheet tsViewModel = _tsUtil.GetTimeSheet(timesheetVm.TimesheetId);
-                return View(tsViewModel);
+                TempData["saved"] = true;                
+                return RedirectToAction("Edit", new { id = timesheetVm.TimesheetId });
             }
         }
 
         public ActionResult Edit(int id)
         {
+            if (TempData["saved"] != null)
+            {
+                ViewBag.SuccessMessage = "Timesheet Saved";
+                TempData.Remove("saved");
+            }
             Models.Timesheet.Timesheet tsViewModel = _tsUtil.GetTimeSheet(id);
             return View(tsViewModel);
         }
