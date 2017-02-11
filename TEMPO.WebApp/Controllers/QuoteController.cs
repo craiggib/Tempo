@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TEMPO.BusinessLayer.Client;
+using TEMPO.BusinessLayer.Project;
 using TEMPO.BusinessLayer.Quotes;
 using TEMPO.WebApp.Models.Quote;
 
@@ -104,10 +105,26 @@ namespace TEMPO.WebApp.Controllers
             return View(GetQuote(quoteVm.QuoteId));
         }
 
-        public ActionResult Edit(int id)
-        {            
-            return View(GetQuote(id));
+        [HttpPost]
+        public ActionResult Awarded(int id)
+        {
+            _quoteManager.AwardQuote(id);
+            return RedirectToAction("Edit", new { id = id });
         }
+
+        [HttpPost]
+        public ActionResult UnAward(int id)
+        {
+            _quoteManager.UnAwardQuote(id);
+            return RedirectToAction("Edit", new { id = id });
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Quote quote = GetQuote(id);            
+            return View(quote);
+        }
+        
 
         private Quote GetQuote(int quoteId)
         {
@@ -121,9 +138,57 @@ namespace TEMPO.WebApp.Controllers
                     .OrderBy(i => i.ClientName)
                     .ToList();
 
+                if (quoteVm.Awarded)
+                {
+                    var pManager = new ProjectManager();
+                    Data.Project associatedProject = pManager.FindAwardedProject(quoteId);
+                    if (associatedProject != null)
+                    {
+                        quoteVm.AssociatedProject = Mapper.Map<Models.Project.Project>(associatedProject);
+                    }
+                    else
+                    {
+                        quoteVm.PossibleProjects = Mapper.Map<List<Models.Project.Project>>(pManager.GetProjects(active: true, hasQuote: false))
+                            .OrderByDescending(i => i.ProjectName)
+                            .ToList();
+                    }
+                }
+
                 return quoteVm;
             }
             return null;
         }
+
+        [HttpPost]
+        public void Delete(int id)
+        {
+            _quoteManager.Delete(id);
+        }
+        
+        [HttpPost]
+        public ActionResult AssociateProject(Quote quoteVm)
+        {
+            var pManager = new ProjectManager();
+            pManager.AssociateQuote(quoteVm.AssociateToProject.Value, quoteVm.QuoteId);
+            return RedirectToAction("Edit", new { id = quoteVm.QuoteId });
+        }
+
+        [HttpPost]
+        public ActionResult RemoveProjectAssociation(Quote quoteVm)
+        {
+            var pManager = new ProjectManager();
+            pManager.RemoveQuoteAssociation(quoteVm.AssociatedProject.ProjectId);
+            return RedirectToAction("Edit", new { id = quoteVm.QuoteId });
+        }
+
+        public ActionResult TagSearch(string searchTerm)
+        {
+            QuoteTagSearch tagSearch = new QuoteTagSearch();
+            tagSearch.SearchResults = Mapper.Map<List<Models.Quote.Quote>>(_quoteManager.FindQuotesByTag(searchTerm));
+            tagSearch.SearchTerm = searchTerm;
+
+            return View(tagSearch);
+        }
+       
     }
 }

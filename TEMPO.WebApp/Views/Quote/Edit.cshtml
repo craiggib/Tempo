@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-md-7">
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Edit", "Quote", FormMethod.Post, new { id = "quoteEditForm" }))
         {
             @Html.AntiForgeryToken()
 
@@ -96,25 +96,120 @@
 
     </div>
     <div class="col-md-5">
-        <div class="jumbotron text-center">
 
-            <a href="@Url.Action("Awarded")" class="btn btn-primary btn-lg">
-                <i class="fa fa-check"></i>
-                Awarded!
-            </a>
+        <div class="form-horizontal">
+            @if (Model.Awarded)
+            {
+                using (Html.BeginForm("UnAward", "Quote", new { id = Model.QuoteId }))
+                {
+                    @Html.HiddenFor(model => model.QuoteId)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-money"></i> Awarded!
+                            <div class="pull-right">
+                                <button type="submit" value="Remove Association" class="btn btn-primary btn-xs">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-body form-horizontal">
+
+                            <div class="form-group">
+                                <div class="control-label col-md-4  form-control-static">
+                                    <strong>Date</strong>
+                                </div>
+                                <div class="col-md-8 form-control-static">
+                                    @Html.DisplayFor(i => Model.AwardedDate)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                if (Model.AssociatedProject == null)
+                {
+                    using (Html.BeginForm("AssociateProject", "Quote", new { id = Model.QuoteId }))
+                    {
+                        @Html.HiddenFor(model => model.QuoteId)
+                        <div class="panel panel-default">
+                            <div class="panel-heading"> 
+                            <i class="fa fa-clock-o"></i> Associate Quote to Project</div>
+                            <div class="panel-body form-horizontal">
+
+                                <div class="form-group">
+                                    <div class="col-md-8 col-md-offset-1">
+                                        @Html.DropDownListFor(model => model.AssociateToProject, new SelectList(Model.PossibleProjects, "ProjectId", "ProjectName"), new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("RemoveProjectAssociation", "Quote", new { id = Model.QuoteId }))
+                    {
+                        @Html.HiddenFor(model => model.QuoteId)
+                        @Html.HiddenFor(model => model.AssociatedProject.ProjectId)
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o"></i> Associated Project
+                                <div class="pull-right">
+                                    <button type="submit" value="Remove Association" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="panel-body form-horizontal">
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-4  form-control-static">
+                                        <strong>Project</strong>
+                                    </div>
+                                    <div class="col-md-8 form-control-static">
+                                        <a href="@Url.Action("Edit", "Project", new { id = Model.AssociatedProject.ProjectId })">@(Model.AssociatedProject.ProjectName)</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+
+            }
+            else
+            {
+                <div class="jumbotron text-center">
+                    @using (Html.BeginForm("Awarded", "Quote", new { id = Model.QuoteId }))
+                    {
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa fa-check"></i>
+                            Awarded!
+                        </button>
+                    }
+
+                </div>
+            }
 
         </div>
-        <div class="text-center">
-            <small>
-                This quote was created by @(Model.CreatedBy) on @(Model.CreatedDate) and last updated @(Model.LastUpdatedDate).
 
-            </small>
-            <div>
-                <a class="btn btn-xs btn-default btn-warning" href="@Url.Action("Delete")" id="deleteQuote">Delete Quote</a>
-            </div>
-        </div>
+        
 
 
+    </div>
+
+</div>
+<div class="text-right">
+    <small>
+        This quote was created by @(Model.CreatedBy) on @(Model.CreatedDate) <br />
+        Last updated @(Model.LastUpdatedDate).
+
+    </small>
+    <div>
+        <a class="btn btn-xs btn-default btn-warning" formaction="@Url.Action("Delete", new { id = Model.QuoteId })" id="deleteQuote">Delete Quote</a>
     </div>
 </div>
 <div>
@@ -127,7 +222,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/bootstrap-tagsinput.min.js"></script>
     <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
-    
+
     <script>
 
         $('#Tags').tagsinput({
@@ -136,12 +231,20 @@
 
         $("#deleteQuote").click(function () {
 
-            bootbox.prompt({
-                title: "Are you sure you want to delete?",
-                inputType: 'textarea',
+            bootbox.confirm({
+                message: "Are you sure you want to delete?",
                 buttons: {
                     confirm: {
                         label: 'Yes'
+                    }
+                },
+                callback: function (result) {
+                    if (result != null) {
+                        var url = "@Url.Action("Delete", "Quote", new { id = Model.QuoteId })";
+                        $.post(url, null, function (response) {
+                            console.log('redirecting');
+                            window.location.href = "@Url.Action("Index", "Quote")";
+                        });
                     }
                 }
             });

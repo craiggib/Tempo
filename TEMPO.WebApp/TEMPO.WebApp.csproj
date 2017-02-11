@@ -204,6 +204,7 @@
     <Compile Include="Models\Quote\Quote.cs" />
     <Compile Include="Models\Quote\QuoteHome.cs" />
     <Compile Include="Models\Quote\QuoteTagFrequency.cs" />
+    <Compile Include="Models\Quote\QuoteTagSearch.cs" />
     <Compile Include="Models\Timesheet\PeriodEnding.cs" />
     <Compile Include="Models\Timesheet\TimeEntry.cs" />
     <Compile Include="Models\Timesheet\TimeEntrySummary.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Views\Quote\Index.cshtml" />
     <Content Include="Views\Quote\_CreateQuote.cshtml" />
     <Content Include="Views\Quote\Edit.cshtml" />
+    <Content Include="Views\Quote\TagSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

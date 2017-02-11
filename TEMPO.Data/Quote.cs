@@ -31,6 +31,7 @@ namespace TEMPO.Data
         public int createdby { get; set; }
         public bool awarded { get; set; }
         public string clientname { get; set; }
+        public Nullable<System.DateTime> awardedDate { get; set; }
     
         public virtual Client client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

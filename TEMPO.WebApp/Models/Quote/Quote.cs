@@ -28,7 +28,11 @@ namespace TEMPO.WebApp.Models.Quote
         [Display(Name = "Updated")]
         public DateTime LastUpdatedDate { get; set; }
         public int CreateByEmployeeId { get; set; }
-        
+
+        [Display(Name = "Awarded Date")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy hh:mm tt}")]
+        public DateTime AwardedDate { get; set; }
+
         [Display(Name = "Created By")]        
         public string CreatedBy { get; set; }
         public bool Awarded { get; set; }
@@ -40,5 +44,10 @@ namespace TEMPO.WebApp.Models.Quote
         public string Tags { get; set; }
 
         public List<Models.Client.Client> Clients { get; set; }
+
+        public List<Models.Project.Project > PossibleProjects { get; set; }
+
+        public Models.Project.Project AssociatedProject { get; set; }
+        public int? AssociateToProject { get; set; }
     }
 }

@@ -9,14 +9,26 @@ namespace TEMPO.BusinessLayer.Project
 {
     public class ProjectManager : BaseManager
     {
-        public List<Data.Project> GetProjects(bool? active = null)
-        {
-            var projectList = DataContext.Projects;
+        public List<Data.Project> GetProjects(bool? active = null, bool? hasQuote = null)
+        {            
+            IQueryable<Data.Project> allProjects = DataContext.Projects;
             if (active.HasValue)
             {
-                return projectList.Where(i=>i.Active == active.Value).ToList();
+                allProjects = allProjects.Where(i=>i.Active == active.Value);
+            }         
+            if(hasQuote.HasValue)                
+            {
+                if (hasQuote.Value)
+                {
+                    allProjects = allProjects.Where(i => i.quoteid.HasValue);
+                }
+                else
+                {
+                    allProjects = allProjects.Where(i => !i.quoteid.HasValue);
+                }
             }
-            return projectList.ToList();
+
+            return allProjects.ToList();
             
         }
 
@@ -86,5 +98,31 @@ namespace TEMPO.BusinessLayer.Project
                 DataContext.SaveChanges();
             }
         }
+
+        public Data.Project FindAwardedProject(int quoteId)
+        {
+            return DataContext.Projects.Where(i => i.quoteid == quoteId).FirstOrDefault();
+        }
+
+        public void AssociateQuote(int projectId, int quoteId)
+        {
+            Data.Project project = GetProject(projectId);
+            if (project != null)
+            {
+                project.quoteid = quoteId;
+                DataContext.SaveChanges();
+            }
+        }
+
+        public void RemoveQuoteAssociation(int projectId)
+        {
+            Data.Project project = GetProject(projectId);
+            if (project != null)
+            {
+                project.quoteid = null;
+                DataContext.SaveChanges();
+            }
+        }
+
     }
 }

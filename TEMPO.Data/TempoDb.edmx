@@ -98,6 +98,7 @@
           <Property Name="lastupdateddate" Type="datetime" Nullable="false" />
           <Property Name="createdby" Type="int" Nullable="false" />
           <Property Name="awarded" Type="bit" Nullable="false" />
+          <Property Name="awardedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="quotetags">
           <Key>
@@ -995,6 +996,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <NavigationProperty Name="employee" Relationship="TEMPOModel.FK__quote__createdby__3A4CA8FD" FromRole="Quote" ToRole="Employee" />
           <NavigationProperty Name="quotetags" Relationship="TEMPOModel.FK__quotetags__quote__3C34F16F" FromRole="Quote" ToRole="quotetag" />
           <Property Name="clientname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="awardedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK__quote__clientid__1332DBDC">
           <End Type="TEMPOModel.Client" Role="Client" Multiplicity="0..1" />
@@ -1264,6 +1266,7 @@ warning 6002: The table/view 'TEMPO.dbo.TimeEntrySummary' does not have a primar
           <EntitySetMapping Name="Quotes">
             <EntityTypeMapping TypeName="TEMPOModel.Quote">
               <MappingFragment StoreEntitySet="quote">
+                <ScalarProperty Name="awardedDate" ColumnName="awardedDate" />
                 <ScalarProperty Name="clientname" ColumnName="clientname" />
                 <ScalarProperty Name="awarded" ColumnName="awarded" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />

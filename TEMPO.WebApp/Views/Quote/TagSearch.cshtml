@@ -1,0 +1,167 @@
+﻿@model TEMPO.WebApp.Models.Quote.QuoteTagSearch
+
+@{
+    ViewBag.Title = "TagSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .quote-table {
+        margin-top: 15px;
+    }
+
+    .metric-value {
+        font-size: 35px;
+    }
+
+    .btn-tag {
+        margin: 2px;
+    }
+    .search-form{
+        padding-bottom: 0px !important;
+    }
+    .row-search{
+        margin-top:20px;
+    }
+</style>
+
+<div class="row row-search">
+    <div class="col-md-offset-3 col-md-6">
+        @using (Html.BeginForm("TagSearch", "Quote", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-search"></i> Search All Quote Tags                    
+                </div>
+                <div class="panel-body form-horizontal search-form">
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="control-label col-md-3">
+                                    Term
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.SearchTerm, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-8">
+                                    <input type="submit" value="Search" class="btn btn-sm btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+          
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table quote-table">
+            <tr>
+                <th class="text-center">
+                    #
+                </th>
+                <th>
+                    Description
+                </th>
+                <th class="text-center">
+                    Hours
+                </th>
+                <th class="text-center">
+                    Price
+                </th>
+                <th class="text-center">
+                    Last Updated
+                </th>
+
+                <th class="text-center">Awarded</th>
+                <th>
+                    Tags
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.SearchResults)
+            {
+                <tr>
+                    <td class="text-center">
+                        <span class="label label-default">
+                            @Html.DisplayFor(modelItem => item.QuoteId)
+                        </span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                        <div>
+                            <small>
+                                @if (item.ClientId.HasValue)
+                                {
+                                    <a href="@Url.Action("Edit", "Client", new { id = item.ClientId })">@Html.DisplayFor(modelItem => item.ClientName)</a>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.ClientName)
+                                }
+
+
+                            </small>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.EstimatedHours)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.EstimatedPrice)
+                    </td>
+                    <td class="text-center">
+                        @string.Format("{0:dd-MMM-yyyy}", item.LastUpdatedDate)
+                        <div>
+                            <small>
+                                @string.Format("{0:HH:MM tt}", item.LastUpdatedDate)
+                            </small>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Awarded)
+                    </td>
+
+                    <td>
+                        @{
+                            string[] tagList = item.Tags.Split(',');
+                        }
+                        @foreach (string tag in tagList)
+                {
+                            <a class="btn @(tag == Request.QueryString["searchTerm"]  ? "btn-warning" : "btn-info") btn-sm btn-tag" href="@Url.Action("TagSearch", new { SearchTerm = tag })">
+                                @(tag)
+                            </a>
+                        }
+
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Quote", new { id = item.QuoteId })" class="btn btn-default btn-sm">
+                            <i class="fa fa-usd"></i>
+                            View Quote
+                        </a>
+
+
+                    </td>
+                </tr>
+                            }
+
+        </table>
+
+    </div>
+</div>

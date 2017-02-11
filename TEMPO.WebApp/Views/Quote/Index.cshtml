@@ -194,7 +194,7 @@
         <br />
         @foreach (var item in Model.TagFrequency)
         {
-            <a class="btn btn-info btn-sm btn-tag" href="@Url.Action("TagSearch", new { tag = item.Tag })">
+            <a class="btn btn-info btn-sm btn-tag" href="@Url.Action("TagSearch", new { SearchTerm = item.Tag })">
                 @Html.DisplayFor(modelItem => item.Tag)
                 <span class="badge">@Html.DisplayFor(modelItem => item.FrequencyCount)</span>
             </a>

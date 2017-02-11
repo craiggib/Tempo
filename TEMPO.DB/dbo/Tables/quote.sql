@@ -9,5 +9,6 @@
 	[createddate] datetime not null,
 	[lastupdateddate] datetime not null,
 	[createdby] int not null references employee(empid),
-	[awarded] bit not null default(0)
+	[awarded] bit not null default(0), 
+    [awardedDate] DATETIME NULL
 )

@@ -8,12 +8,10 @@ namespace TEMPO.BusinessLayer.Quotes
 {
     public class QuoteManager : BaseManager
     {
-
         public Data.Quote GetQuote(int quoteId)
         {
             return DataContext.Quotes.Where(i => i.quoteid == quoteId).FirstOrDefault();
         }
-
 
         public List<Data.Quote> GetQuotes(int clientId)
         {
@@ -106,6 +104,56 @@ namespace TEMPO.BusinessLayer.Quotes
             BuildTags(tags, quote);
 
             DataContext.SaveChanges();
+        }
+
+        public void Delete(int quoteId)
+        {
+            Data.Quote quote = GetQuote(quoteId);
+            if (quote == null)
+            {
+                return;
+            }
+            DataContext.Quotes.Remove(quote);
+            DataContext.SaveChanges();
+        }
+
+        public void AwardQuote(int quoteId)
+        {
+            Data.Quote quote = GetQuote(quoteId);
+            if (quote == null)
+            {
+                return;
+            }
+            quote.awarded = true;
+            quote.awardedDate = DateTime.Now;
+            DataContext.SaveChanges();            
+        }
+
+        public void UnAwardQuote(int quoteId)
+        {
+            Data.Quote quote = GetQuote(quoteId);
+            if (quote == null)
+            {
+                return;
+            }
+            quote.awarded = false;
+            quote.awardedDate = null;
+
+            var associatedProject = DataContext.Projects.Where(i => i.quoteid == quote.quoteid).FirstOrDefault();
+            if(associatedProject != null)
+            {
+                associatedProject.quoteid = null;
+            }
+
+            DataContext.SaveChanges();
+        }
+
+        public List<Data.Quote> FindQuotesByTag(string tag)
+        {
+            var matchingQuoteIds = DataContext.quotetags.Where(i => i.title.Contains(tag))
+                .Select(i => i.quoteid);
+            return DataContext.Quotes.Where(i => matchingQuoteIds.Contains(i.quoteid))
+                .ToList();
         }
     }
 
