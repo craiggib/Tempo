@@ -1,0 +1,35 @@
+﻿@model TEMPO.WebApp.Models.Project.Project
+<style>
+    .margin-top-15 {
+        margin-top: 15px;
+    }
+    .quote-metric{
+        min-height: 260px;
+    }
+</style>
+<div class="text-center">
+    <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-quote-left"></i> Quote Details</div>
+        <div class="panel-body form-horizontal metric quote-metric">
+
+            
+            <div class="total-billing text-success">@Html.DisplayFor(m => Model.Quote.EstimatedPrice)</div>
+            <small>
+                <span class="text-muted">Estimate Price</span>
+            </small>
+
+            <div class="total-billing text-info margin-top-15">@Html.DisplayFor(m => Model.Quote.EstimatedHours)</div>
+            <small>
+                <span class="text-muted">Estimate Hours</span>
+            </small>
+            <div class="margin-top-15">
+                <a href="@Url.Action("Edit", "Quote", new { id=Model.Quote.QuoteId})" class="btn btn-default btn-sm">
+                    <i class="fa fa-usd"></i>
+                    View Quote
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>

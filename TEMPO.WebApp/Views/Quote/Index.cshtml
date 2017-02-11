@@ -189,8 +189,12 @@
         </table>
     </div>
     <div class="col-md-3">
-
-        <input type="text" class="form-control search-form" id="customerSearch" placeholder="Tag Search..." />
+        @using (Html.BeginForm("TagSearch", "Quote", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+            
+            <input type="text" class="form-control search-form" placeholder="Tag Search..." name="SearchTerm" />
+        }
         <br />
         @foreach (var item in Model.TagFrequency)
         {

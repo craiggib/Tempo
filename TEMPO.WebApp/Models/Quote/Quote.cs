@@ -19,7 +19,8 @@ namespace TEMPO.WebApp.Models.Quote
 
         [Display(Name = "Estimated Price")]
         [Required]        
-        [DataType(DataType.Currency)]
+        [DataType(DataType.Currency)]        
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode =false)]
         public decimal EstimatedPrice { get; set; }
 
         [Display(Name = "Created")]

@@ -72,5 +72,7 @@ namespace TEMPO.WebApp.Models.Project
 
         public List<Models.Client.Client> ClientList { get; set; }
 
+        public Models.Quote.Quote Quote { get; set; }
+        
     }
 }

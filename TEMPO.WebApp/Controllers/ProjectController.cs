@@ -125,7 +125,7 @@ namespace TEMPO.WebApp.Controllers
                 project.InternalHours = 0;
                 project.InternalAmount = 0;
             }
-
+            
             return project;
         }
 
