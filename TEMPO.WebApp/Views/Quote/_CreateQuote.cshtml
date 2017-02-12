@@ -1,5 +1,5 @@
 ﻿@model TEMPO.WebApp.Models.Quote.Quote
-
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-tagsinput.css" rel="stylesheet" />
 <style>
     .input-group {
@@ -16,7 +16,7 @@
             <div class="col-md-8 customer-select" id="div-client-select">
 
                 <div class="input-group">
-                    @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "ClientId", "ClientName"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "ClientId", "ClientName"), new { @class = "form-control selectpicker", data_live_search= "true"})
                     <span class="input-group-btn text-left">
                         <button class="btn btn-secondary" id="inputClient-New" type="button" data-toggle="tooltip" data-placement="top" title="Input Client Name">
                             <i class="fa fa-asterisk"></i>

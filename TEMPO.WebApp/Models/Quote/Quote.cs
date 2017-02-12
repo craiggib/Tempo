@@ -8,6 +8,7 @@ namespace TEMPO.WebApp.Models.Quote
 {
     public class Quote
     {
+        [Display(Name = "Quote Number")]
         public int QuoteId { get; set; }
 
         [Display(Name = "Estimated Hours")]
@@ -42,6 +43,8 @@ namespace TEMPO.WebApp.Models.Quote
         [Display(Name = "Client Name")]
         [Required]
         public string ClientName { get; set; }
+
+        public string DisplayName { get; set; }
         public string Tags { get; set; }
 
         public List<Models.Client.Client> Clients { get; set; }

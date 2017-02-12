@@ -1,0 +1,106 @@
+﻿@model IEnumerable<TEMPO.WebApp.Models.Quote.Quote>
+<style>
+    .td-tags{
+        width: 400px;
+    }
+    .btn-tag {
+        margin: 2px;
+    }
+</style>
+<table class="table quote-table">
+    <tr>
+        <th class="text-center">
+            #
+        </th>
+        <th>
+            Description
+        </th>
+        <th class="text-center">
+            Hours
+        </th>
+        <th class="text-center">
+            Price
+        </th>
+        <th class="text-center">
+            Last Updated
+        </th>
+
+        <th class="text-center">Awarded</th>
+        <th>
+            Tags
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td class="text-center">
+                <span class="label label-default">
+                    @Html.DisplayFor(modelItem => item.QuoteId)
+                </span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+                <div>
+                    <small>
+                        @if (item.ClientId.HasValue)
+                        {
+                            <a href="@Url.Action("Edit", "Client", new { id = item.ClientId })">@Html.DisplayFor(modelItem => item.DisplayName)</a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.DisplayName)
+                        }
+
+
+                    </small>
+                </div>
+            </td>
+
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.EstimatedHours)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.EstimatedPrice)
+            </td>
+            <td class="text-center">
+                @string.Format("{0:dd-MMM-yyyy}", item.LastUpdatedDate)
+                <div>
+                    <small>
+                        @string.Format("{0:HH:MM tt}", item.LastUpdatedDate)
+                    </small>
+                </div>
+            </td>
+
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Awarded)
+            </td>
+
+            <td class="td-tags">
+                @{
+                    string[] tagList = item.Tags.Split(',');
+                }
+                @if (tagList.Count() > 1)
+                {
+                    foreach (string tag in tagList)
+                    {
+                        <a class="btn @(tag == Request.QueryString["searchTerm"] ? "btn-warning" : "btn-info") btn-sm btn-tag" href="@Url.Action("TagSearch", "Quote", new { SearchTerm = tag })">
+                            @(tag)
+                        </a>
+                    }
+                }
+
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Quote", new { id = item.QuoteId })" class="btn btn-default btn-sm">
+                    <i class="fa fa-usd"></i>
+                    View Quote
+                </a>
+
+
+            </td>
+        </tr>
+                    }
+
+</table>

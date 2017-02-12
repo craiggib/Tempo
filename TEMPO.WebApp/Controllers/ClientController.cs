@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TEMPO.BusinessLayer.Client;
 using TEMPO.BusinessLayer.Project;
+using TEMPO.BusinessLayer.Quotes;
 using TEMPO.BusinessLayer.TimeSheets;
 using TEMPO.WebApp.Models.Client;
 
@@ -114,6 +115,11 @@ namespace TEMPO.WebApp.Controllers
 
             client.ProjectTypes = projectManager.GetProjectTypes()
                 .Select(i => Mapper.Map<Models.Project.ProjectType>(i))
+                .ToList();
+
+            client.QuoteList = new QuoteManager().GetQuotes(id)
+                .Select(i => Mapper.Map<Models.Quote.Quote>(i))
+                .OrderByDescending(i=>i.LastUpdatedDate)
                 .ToList();
 
             switch (sortype)

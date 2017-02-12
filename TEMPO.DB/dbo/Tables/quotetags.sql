@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[quotetags]
 (
-	[quoteid] INT NOT NULL references quote([quoteid]),
+	[quoteid] INT NOT NULL references quote([quoteid]) on delete cascade,
 	[title] varchar(100) not null,
 	INDEX IX_quotes NONCLUSTERED ([title]),
 	INDEX IX_titles NONCLUSTERED ([quoteid]),

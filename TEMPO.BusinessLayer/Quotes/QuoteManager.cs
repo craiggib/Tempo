@@ -87,7 +87,7 @@ namespace TEMPO.BusinessLayer.Quotes
             }
         }
 
-        public void Update(int quoteId, string description, float estimatedHours, decimal estimatedPrice, string tags)
+        public void Update(int quoteId, string clientName, string description, float estimatedHours, decimal estimatedPrice, string tags)
         {
             Data.Quote quote = GetQuote(quoteId);
             if (quote == null)
@@ -95,6 +95,8 @@ namespace TEMPO.BusinessLayer.Quotes
                 return;
             }
 
+            quote.clientid = null;
+            quote.clientname = clientName;
             quote.description = description;
             quote.hours = estimatedHours;
             quote.price = estimatedPrice;
@@ -105,7 +107,28 @@ namespace TEMPO.BusinessLayer.Quotes
 
             DataContext.SaveChanges();
         }
+        
+        public void Update(int quoteId, int clientId, string description, float estimatedHours, decimal estimatedPrice, string tags)
+        {
+            Data.Quote quote = GetQuote(quoteId);
+            if (quote == null)
+            {
+                return;
+            }
 
+            quote.clientname = null;
+            quote.clientid = clientId;
+            quote.description = description;
+            quote.hours = estimatedHours;
+            quote.price = estimatedPrice;
+            quote.lastupdateddate = DateTime.Now;
+
+            DataContext.quotetags.RemoveRange(quote.quotetags);
+            BuildTags(tags, quote);
+
+            DataContext.SaveChanges();
+        }
+        
         public void Delete(int quoteId)
         {
             Data.Quote quote = GetQuote(quoteId);
@@ -113,6 +136,13 @@ namespace TEMPO.BusinessLayer.Quotes
             {
                 return;
             }
+
+            var associatedProject = DataContext.Projects.Where(i => i.quoteid == quote.quoteid).FirstOrDefault();
+            if (associatedProject != null)
+            {
+                associatedProject.quoteid = null;
+            }
+
             DataContext.Quotes.Remove(quote);
             DataContext.SaveChanges();
         }

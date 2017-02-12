@@ -21,5 +21,6 @@ namespace TEMPO.WebApp.Models.Client
         public int? CurrentJobYearId { get; set; }
 
         public List<Models.Project.ProjectType> ProjectTypes { get; set; }
+
     }
 }

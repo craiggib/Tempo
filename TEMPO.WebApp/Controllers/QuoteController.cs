@@ -10,6 +10,7 @@ using TEMPO.WebApp.Models.Quote;
 
 namespace TEMPO.WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class QuoteController : BaseController
     {
         private QuoteManager _quoteManager;
@@ -94,12 +95,27 @@ namespace TEMPO.WebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Quote quoteVm)
         {
-            _quoteManager.Update(
-                quoteVm.QuoteId,
-                quoteVm.Description,
-                quoteVm.EstimatedHours,
-                quoteVm.EstimatedPrice,
-                quoteVm.Tags);
+            if (string.IsNullOrEmpty(quoteVm.ClientName))
+            {
+
+                _quoteManager.Update(
+                    quoteVm.QuoteId,
+                    quoteVm.ClientId.Value,
+                    quoteVm.Description,
+                    quoteVm.EstimatedHours,
+                    quoteVm.EstimatedPrice,
+                    quoteVm.Tags);
+            }
+            else
+            {
+                _quoteManager.Update(
+                    quoteVm.QuoteId,
+                    quoteVm.ClientName,
+                    quoteVm.Description,
+                    quoteVm.EstimatedHours,
+                    quoteVm.EstimatedPrice,
+                    quoteVm.Tags);
+                }
 
             ViewBag.SuccessMessage = "Updated Successfully";
             return View(GetQuote(quoteVm.QuoteId));
@@ -121,10 +137,10 @@ namespace TEMPO.WebApp.Controllers
 
         public ActionResult Edit(int id)
         {
-            Quote quote = GetQuote(id);            
+            Quote quote = GetQuote(id);
             return View(quote);
         }
-        
+
 
         private Quote GetQuote(int quoteId)
         {
@@ -164,7 +180,7 @@ namespace TEMPO.WebApp.Controllers
         {
             _quoteManager.Delete(id);
         }
-        
+
         [HttpPost]
         public ActionResult AssociateProject(Quote quoteVm)
         {
@@ -184,11 +200,13 @@ namespace TEMPO.WebApp.Controllers
         public ActionResult TagSearch(string searchTerm)
         {
             QuoteTagSearch tagSearch = new QuoteTagSearch();
-            tagSearch.SearchResults = Mapper.Map<List<Models.Quote.Quote>>(_quoteManager.FindQuotesByTag(searchTerm));
+            tagSearch.SearchResults = Mapper.Map<List<Models.Quote.Quote>>(_quoteManager.FindQuotesByTag(searchTerm))
+                .OrderByDescending(i => i.LastUpdatedDate)
+                .ToList();
             tagSearch.SearchTerm = searchTerm;
 
             return View(tagSearch);
         }
-       
+
     }
 }

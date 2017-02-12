@@ -147,11 +147,11 @@
                             <small>
                                 @if (item.ClientId.HasValue)
                                 {
-                                    <a href="@Url.Action("Edit", "Client", new { id = item.ClientId } )">@Html.DisplayFor(modelItem => item.ClientName)</a>
+                                    <a href="@Url.Action("Edit", "Client", new { id = item.ClientId } )">@Html.DisplayFor(modelItem => item.DisplayName)</a>
                                 }
                                 else
                                 {
-                                    @Html.DisplayFor(modelItem => item.ClientName)
+                                    @Html.DisplayFor(modelItem => item.DisplayName)
                                 }
 
 
@@ -192,7 +192,7 @@
         @using (Html.BeginForm("TagSearch", "Quote", FormMethod.Get))
         {
             @Html.AntiForgeryToken()
-            
+
             <input type="text" class="form-control search-form" placeholder="Tag Search..." name="SearchTerm" />
         }
         <br />
@@ -213,6 +213,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/bootstrap-tagsinput.min.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
 
     <script>
 

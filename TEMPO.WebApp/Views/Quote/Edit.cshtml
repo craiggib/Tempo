@@ -10,9 +10,13 @@
     .input-group {
         width: 280px;
     }
+    .quote-number{
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
 </style>
 <link href="~/Content/bootstrap-tagsinput.css" rel="stylesheet" />
-
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col-md-7">
@@ -35,20 +39,45 @@
 
 
                 <div class="form-group">
+                    @Html.LabelFor(model => model.QuoteId, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9 form-control-static">
+                        <h3 class="quote-number">
+                            <span class="label label-default">
+                                @Html.DisplayFor(model => model.QuoteId, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-3" })
 
-                    @if (Model.ClientId.HasValue)
-                    {
-                        <div class="col-md-9">
-                            @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "ClientId", "ClientName"), new { @class = "form-control" })
+
+                    <div class="col-md-9 customer-select" id="div-client-select">
+
+                        <div class="input-group">
+                            @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "ClientId", "ClientName"), new { @class = "form-control selectpicker", data_live_search = "true" })
+                            <span class="input-group-btn text-left">
+                                <button class="btn btn-secondary" id="inputClient-New" type="button" data-toggle="tooltip" data-placement="top" title="Input Client Name">
+                                    <i class="fa fa-asterisk"></i>
+                                </button>
+                            </span>
                         </div>
-                    }
-                    else
-                    {
-                        <div class="col-md-9">
+
+                    </div>
+
+                    <div class="col-md-9 customer-select" id="div-client-input" visible="hidden">
+                        <div class="input-group">
                             @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control", placeholder = "Potential Client Name..." } })
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" id="inputClient-Existing" type="button" data-toggle="tooltip" data-placement="top" title="Select Client">
+                                    <i class="fa fa-reply"></i>
+                                </button>
+                            </span>
                         </div>
-                    }
+                    </div>
+
                 </div>
 
                 <div class="form-group">
@@ -130,8 +159,9 @@
                     {
                         @Html.HiddenFor(model => model.QuoteId)
                         <div class="panel panel-default">
-                            <div class="panel-heading"> 
-                            <i class="fa fa-clock-o"></i> Associate Quote to Project</div>
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o"></i> Associate Quote to Project
+                            </div>
                             <div class="panel-body form-horizontal">
 
                                 <div class="form-group">
@@ -194,7 +224,7 @@
 
         </div>
 
-        
+
 
 
     </div>
@@ -220,12 +250,40 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/bootstrap-tagsinput.min.js"></script>
     <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
 
     <script>
 
         $('#Tags').tagsinput({
             confirmKeys: [13, 44, 32]
         });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $("#inputClient-New").click(function () {
+            $("#div-client-select").hide();
+            $("#div-client-input").show();
+            $("#ClientName").val("");
+        });
+
+        $("#inputClient-Existing").click(function () {
+            $("#div-client-select").show();
+            $("#div-client-input").hide();
+            $("#ClientName").val("");
+        });
+
+        var clientSelected = @(Model.ClientId.HasValue ? "true" : "false");
+
+        if(clientSelected)
+        {
+            $("#div-client-input").hide();
+        }
+        else {
+            $("#div-client-select").hide();
+        }
+
 
         $("#deleteQuote").click(function () {
 
