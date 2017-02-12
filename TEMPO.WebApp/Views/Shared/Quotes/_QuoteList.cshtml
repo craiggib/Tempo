@@ -77,15 +77,15 @@
                 @Html.DisplayFor(modelItem => item.Awarded)
             </td>
 
-            <td class="td-tags">
+            <td class="td-tags">         
                 @{
                     string[] tagList = item.Tags.Split(',');
                 }
-                @if (tagList.Count() > 1)
+                @if (tagList.Count() >= 1)
                 {
                     foreach (string tag in tagList)
                     {
-                        <a class="btn @(tag == Request.QueryString["searchTerm"] ? "btn-warning" : "btn-info") btn-sm btn-tag" href="@Url.Action("TagSearch", "Quote", new { SearchTerm = tag })">
+                        <a class="btn @(!string.IsNullOrEmpty(Request.QueryString["searchTerm"]) && tag.ToLower() == Request.QueryString["searchTerm"].ToLower() ? "btn-warning" : "btn-info") btn-sm btn-tag" href="@Url.Action("TagSearch", "Quote", new { SearchTerm = tag })">
                             @(tag)
                         </a>
                     }

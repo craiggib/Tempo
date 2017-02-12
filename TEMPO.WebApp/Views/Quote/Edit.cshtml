@@ -295,7 +295,7 @@
                     }
                 },
                 callback: function (result) {
-                    if (result != null) {
+                    if (result == true) {
                         var url = "@Url.Action("Delete", "Quote", new { id = Model.QuoteId })";
                         $.post(url, null, function (response) {
                             console.log('redirecting');
