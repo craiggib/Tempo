@@ -124,5 +124,15 @@ namespace TEMPO.BusinessLayer.Project
             }
         }
 
+        public void Delete(int projectId)
+        {
+            Data.Project project = GetProject(projectId);
+            if (project != null)
+            {
+                DataContext.Projects.Remove(project);
+                DataContext.SaveChanges();
+            }
+        }
+
     }
 }

@@ -172,6 +172,13 @@ namespace TEMPO.WebApp.Controllers
                 .Select(i => Mapper.Map<Project>(i));
             return Json(searchResults, JsonRequestBehavior.AllowGet);
         }
-        
+
+        [HttpPost]
+        public void Delete(int id)
+        {
+            _projectManager.Delete(id);
+        }
+
+
     }
 }

@@ -25,108 +25,108 @@
     <div class="col-md-5">
         @using (Html.BeginForm())
         {
-        @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+            <div class="form-horizontal">
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(m => m.ClientId)
-            @Html.HiddenFor(m => m.ProjectId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.ClientId)
+                @Html.HiddenFor(m => m.ProjectId)
 
-            <div class="form-group text-left">
-                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7 form-control-static">
-                    <a href="@Url.Action("Edit", "Client", new { id = Model.ClientId })">@Html.DisplayFor(model => model.CustomerName, new { @class = "form-control-static" })</a>
+                <div class="form-group text-left">
+                    @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7 form-control-static">
+                        <a href="@Url.Action("Edit", "Client", new { id = Model.ClientId })">@Html.DisplayFor(model => model.CustomerName, new { @class = "form-control-static" })</a>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group text-left">
-                @Html.LabelFor(model => model.JobYearId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.DropDownListFor(model => model.JobYearId, new SelectList(Model.JobYears, "JobYearId", "Year"), new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group text-left">
+                    @Html.LabelFor(model => model.JobYearId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.JobYearId, new SelectList(Model.JobYears, "JobYearId", "Year"), new { @class = "form-control" })
+                    </div>
                 </div>
 
-            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ReferenceJobNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.ReferenceJobNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProjectTypeId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.DropDownListFor(model => model.ProjectTypeId, new SelectList(Model.ProjectTypes, "ProjectTypeId", "Description"), new { @class = "form-control" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReferenceJobNumber, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.ReferenceJobNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectTypeId, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.ProjectTypeId, new SelectList(Model.ProjectTypes, "ProjectTypeId", "Description"), new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContractedAmount, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        @Html.EditorFor(model => model.ContractedAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContractedAmount, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            @Html.EditorFor(model => model.ContractedAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DrawingCount, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.DrawingCount, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "col-md-5 form-control-static" })
+                    <div class="col-md-7">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm" />
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.DrawingCount, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.DrawingCount, new { htmlAttributes = new { @class = "form-control", placeholder = "Optional" } })
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "col-md-5 form-control-static" })
-                <div class="col-md-7">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Active, new { htmlAttributes = new { @class = "" } })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-5 col-md-7">
-                    <input type="submit" value="Save" class="btn btn-primary btn-sm" />
-                </div>
-            </div>
-        </div>
         }
     </div>
     <div class="col-md-7">
         @if (Model.ProjectTypeId == (int)TEMPO.WebApp.Models.Project.ProjectTypeEnum.FixedPrice)
         {
-        @Html.Partial("_FixedPriceMetrics", Model)
+            @Html.Partial("_FixedPriceMetrics", Model)
         }
         else
         {
-        @Html.Partial("_TimeMaterialsMetrics", Model)
+            @Html.Partial("_TimeMaterialsMetrics", Model)
         }
         <div class="chart-container">
             <div>
@@ -212,12 +212,18 @@
     </div>
 </div>
 
+<div class="text-right hidden-print">
+    <div>
+        <a class="btn btn-xs btn-default btn-warning" formaction="@Url.Action("Delete", new { id = Model.ProjectId })" id="deleteProject">Delete Project</a>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/Chart.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootbox.min.js"></script>
 
     <script>
 
@@ -269,6 +275,30 @@
                         }
                     }
                 });
+            });
+        });
+
+        $("#deleteProject").click(function () {
+
+            bootbox.confirm({
+                message: "Are you sure you want to delete?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes'
+                    }
+                },
+                callback: function (result) {
+                    if (result == true) {
+                        var url = "@Url.Action("Delete", "Project", new { id = Model.ProjectId })";
+                        $.post(url, null, function (response) {
+                            console.log('redirecting');
+                            window.location.href = "@Url.Action("Index", "Project")";
+                        })
+                        .fail( function(xhr, textStatus, errorThrown) {
+                            bootbox.alert("Unable to delete project, it has time entries!");
+                        });
+                    }
+                }
             });
         });
 
