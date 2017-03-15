@@ -60,7 +60,7 @@
                     <div class="panel-heading"><i class="fa fa-money"></i> Awarded Value</div>
                     <div class="panel-body form-horizontal metric">
                         <div class="metric-value text-success">
-                            @(string.Format("{0:c0}", Model.Quotes.Where(i => i.Awarded).Sum(i => i.EstimatedPrice)))
+                            @(string.Format("{0:$#,##0,K}", Model.Quotes.Where(i => i.Awarded).Sum(i => i.EstimatedPrice)))
                         </div>
                         <small>
                             <span class="text-success">
