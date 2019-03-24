@@ -117,11 +117,6 @@
       <Project>{93665123-25B5-4FA7-A9C0-D4694AAD8F4F}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
-    <ProjectReference Include="..\TEMPO.DALC\TEMPO.DALC.csproj">
-      <Name>TEMPO.DALC</Name>
-      <Project>{DDD7863F-FCF2-4DBC-849B-FA174A67240F}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountManager.cs" />
@@ -132,9 +127,6 @@
     <Compile Include="Client\ClientManager.cs" />
     <Compile Include="Project\ProjectManager.cs" />
     <Compile Include="Quotes\QuoteManager.cs" />
-    <Compile Include="TimeSheet.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Timesheets\TimesheetManager.cs" />
     <Compile Include="Timesheets\TimesheetStatus.cs" />
   </ItemGroup>
