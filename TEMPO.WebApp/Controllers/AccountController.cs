@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using TEMPO.BusinessLayer;
-using TEMPO.Data;
+using TEMPO.Model;
 using TEMPO.WebApp.Models.Account;
 
 namespace TEMPO.WebApp.Controllers

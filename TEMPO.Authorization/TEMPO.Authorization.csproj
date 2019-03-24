@@ -95,11 +95,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <ProjectReference Include="..\TEMPO.BusinessEntity\TEMPO.BusinessEntity.csproj">
-      <Name>TEMPO.BusinessEntity</Name>
-      <Project>{93665123-25B5-4FA7-A9C0-D4694AAD8F4F}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

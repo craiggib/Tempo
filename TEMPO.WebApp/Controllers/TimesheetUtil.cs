@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using TEMPO.BusinessLayer.Project;
 using TEMPO.BusinessLayer.TimeSheets;
-using TEMPO.Data;
+using TEMPO.Model;
 
 namespace TEMPO.WebApp.Controllers
 {

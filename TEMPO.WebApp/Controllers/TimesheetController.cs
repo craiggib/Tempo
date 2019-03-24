@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using TEMPO.BusinessLayer.Project;
 using TEMPO.BusinessLayer.TimeSheets;
-using TEMPO.Data;
 
 namespace TEMPO.WebApp.Controllers
 {
@@ -65,7 +64,7 @@ namespace TEMPO.WebApp.Controllers
         [HttpPost]
         public ActionResult Create(Models.Timesheet.TimesheetsHome timeSheetsHomeVm)
         {
-            Data.TimeSheet newTimSheet = _tsManager.CreateTimesheet(GetUserID(), timeSheetsHomeVm.NewPeriodEndingId);
+            Model.TimeSheet newTimSheet = _tsManager.CreateTimesheet(GetUserID(), timeSheetsHomeVm.NewPeriodEndingId);
             return RedirectToAction("Edit", new { id = newTimSheet.tid });
         }
 

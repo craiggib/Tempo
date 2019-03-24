@@ -3,94 +3,88 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TEMPO.Data;
+using TEMPO.Model;
 
 namespace TEMPO.BusinessLayer.TimeSheets
 {
-    public class TimesheetManager :BaseManager
+    public class TimesheetManager : BaseManager
     {
-        private TempoDbContext _dataContext;
-
-        public TimesheetManager()
-        {
-            _dataContext = new TempoDbContext();
-        }
 
         #region Timesheets
 
-        public Data.TimeSheet GetTimeSheet(int timeSheetId)
+        public Model.TimeSheet GetTimeSheet(int timeSheetId)
         {
-            return _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
+            return DataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
         }
 
-        public List<Data.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status)
+        public List<Model.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status)
         {
             var statusInts = status.Select(i => (int)i);
-            return _dataContext.TimeSheets.Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId).ToList();
+            return DataContext.TimeSheets.Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId).ToList();
         }
 
-        public List<Data.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status, DateTime dateFilter)
+        public List<Model.TimeSheet> GetTimeSheets(int employeeId, List<TimesheetStatus> status, DateTime dateFilter)
         {
             var statusInts = status.Select(i => (int)i);
-            return _dataContext.TimeSheets
+            return DataContext.TimeSheets
                 .Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value) && i.empid == employeeId && i.periodending.endingdate > dateFilter)
                 .ToList();
         }
 
-        public List<Data.TimeSheet> GetTimeSheets(List<TimesheetStatus> status)
+        public List<Model.TimeSheet> GetTimeSheets(List<TimesheetStatus> status)
         {
             var statusInts = status.Select(i => (int)i);
-            return _dataContext.TimeSheets
+            return DataContext.TimeSheets
                 .Where(i => i.statusid.HasValue && statusInts.Contains(i.statusid.Value))
                 .ToList();
         }
 
         public void SetState(int timeSheetId, TimesheetStatus newState, string notes = null)
         {
-            var timeSheet= _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
-            if(timeSheet != null)
+            var timeSheet = DataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
+            if (timeSheet != null)
             {
                 if (notes != null)
                 {
                     timeSheet.notes = notes;
                 }
                 timeSheet.statusid = (int)newState;
-                _dataContext.SaveChanges();
+                DataContext.SaveChanges();
             }
         }
 
         public void SetApprovalNotes(int timeSheetId, string notes)
         {
-            var timeSheet = _dataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
+            var timeSheet = DataContext.TimeSheets.FirstOrDefault(i => i.tid == timeSheetId);
             if (timeSheet != null)
             {
                 if (notes != null)
                 {
                     timeSheet.approvalnotes = notes;
                 }
-                _dataContext.SaveChanges();
+                DataContext.SaveChanges();
             }
         }
 
-        public Data.TimeSheet CreateTimesheet(int employeeId, int periodEndingId)
+        public Model.TimeSheet CreateTimesheet(int employeeId, int periodEndingId)
         {
-            Data.TimeSheet newTimeSheet = new Data.TimeSheet
+            Model.TimeSheet newTimeSheet = new Model.TimeSheet
             {
                 empid = employeeId,
                 peid = periodEndingId,
                 statusid = (int)TimesheetStatus.Saved
             };
-            _dataContext.TimeSheets.Add(newTimeSheet);
-            _dataContext.SaveChanges();
+            DataContext.TimeSheets.Add(newTimeSheet);
+            DataContext.SaveChanges();
             return newTimeSheet;
         }
 
         #endregion
-        
+
         #region TimeEntry
 
         public void AddTimeEntry(int timeSheetId, int projectId, int worktypeId, List<DailyTime> dailyWorkTimes)
-        {            
+        {
             var timeEntry = new TimeEntry
             {
                 sunday = (decimal?)dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == DayOfWeek.Sunday)?.HoursWorked,
@@ -104,13 +98,13 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 tid = timeSheetId,
                 worktypeid = worktypeId
             };
-            _dataContext.TimeEntries.Add(timeEntry);
-            _dataContext.SaveChanges();
+            DataContext.TimeEntries.Add(timeEntry);
+            DataContext.SaveChanges();
         }
 
         public void UpdateTimeEntry(int timeEntryId, int projectId, int worktypeId, List<DailyTime> dailyWorkTimes)
-        {            
-            var timeEntry = _dataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
+        {
+            var timeEntry = DataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
             if (timeEntry != null)
             {
                 timeEntry.sunday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Sunday);
@@ -122,8 +116,8 @@ namespace TEMPO.BusinessLayer.TimeSheets
                 timeEntry.saturday = TimeOrDefault(dailyWorkTimes, DayOfWeek.Saturday);
                 timeEntry.projectid = projectId;
                 timeEntry.worktypeid = worktypeId;
-                
-                _dataContext.SaveChanges();
+
+                DataContext.SaveChanges();
             }
         }
 
@@ -132,14 +126,14 @@ namespace TEMPO.BusinessLayer.TimeSheets
             var dailyWork = dailyWorkTimes.FirstOrDefault(i => i.DayOfWeek == dayOfWeek);
             return dailyWork == null ? 0 : (decimal)dailyWork.HoursWorked;
         }
-        
+
         public void DeleteTimeEntry(int timeEntryId)
-        {            
-            var timeEntry = _dataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
+        {
+            var timeEntry = DataContext.TimeEntries.FirstOrDefault(i => i.entryid == timeEntryId);
             if (timeEntry != null)
             {
-                _dataContext.TimeEntries.Remove(timeEntry);
-                _dataContext.SaveChanges();
+                DataContext.TimeEntries.Remove(timeEntry);
+                DataContext.SaveChanges();
             }
         }
 
@@ -163,9 +157,9 @@ namespace TEMPO.BusinessLayer.TimeSheets
 
         #region WorkTypes
 
-        public List<Data.WorkType> GetWorkTypes()
-        {            
-            return _dataContext.WorkTypes.ToList();
+        public List<Model.WorkType> GetWorkTypes()
+        {
+            return DataContext.WorkTypes.ToList();
         }
 
         #endregion
@@ -177,23 +171,22 @@ namespace TEMPO.BusinessLayer.TimeSheets
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        public List<Data.PeriodEnding> GetNewPeriodEndings(int employeeId)
+        public List<Model.PeriodEnding> GetNewPeriodEndings(int employeeId)
         {
             var today = DateTime.Today;
             var forwardOneMonth = today.AddMonths(1);
             var backOneMonth = today.AddMonths(-1);
 
-            List<DateTime> existingPeriods = _dataContext.TimeSheets
+            List<DateTime> existingPeriods = DataContext.TimeSheets
                 .Where(i => i.empid == employeeId && backOneMonth < i.periodending.endingdate && forwardOneMonth > i.periodending.endingdate)
                 .Select(i => i.periodending.endingdate)
                 .ToList();
 
-            return _dataContext.PeriodEndings
+            return DataContext.PeriodEndings
                 .Where(i => backOneMonth < i.endingdate && forwardOneMonth > i.endingdate && !existingPeriods.Contains(i.endingdate))
                 .ToList();
         }
         #endregion
-
 
     }
 }

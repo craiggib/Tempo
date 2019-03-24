@@ -144,7 +144,7 @@ namespace TEMPO.WebApp.Controllers
 
         private Quote GetQuote(int quoteId)
         {
-            Data.Quote quote = _quoteManager.GetQuote(quoteId);
+            Model.Quote quote = _quoteManager.GetQuote(quoteId);
             if (quote != null)
             {
                 var quoteVm = Mapper.Map<Quote>(quote);
@@ -157,7 +157,7 @@ namespace TEMPO.WebApp.Controllers
                 if (quoteVm.Awarded)
                 {
                     var pManager = new ProjectManager();
-                    Data.Project associatedProject = pManager.FindAwardedProject(quoteId);
+                    Model.Project associatedProject = pManager.FindAwardedProject(quoteId);
                     if (associatedProject != null)
                     {
                         quoteVm.AssociatedProject = Mapper.Map<Models.Project.Project>(associatedProject);
