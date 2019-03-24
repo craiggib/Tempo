@@ -29,7 +29,7 @@ namespace TEMPO.WebApp.Controllers
             {
                 Models.Employee.Employee employeeVm = Mapper.Map<Models.Employee.Employee>(employee);
 
-                List<Data.TimeSheet> timeSheets;
+                List<Model.TimeSheet> timeSheets;
                 if (string.IsNullOrEmpty(timesheetFilter) || timesheetFilter == "last3months")
                 {
                     timeSheets = _tsManager.GetTimeSheets(

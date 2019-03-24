@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TEMPO.Model;
 
 namespace TEMPO.BusinessLayer.Client
 {
     public class ClientManager : BaseManager
     {
-        public List<Data.ClientSummary> GetClientSummary()
+        public List<ClientSummary> GetClientSummary()
         {
             return DataContext.ClientSummaries.ToList();
         }
 
-        public Data.Client GetClient(int clientId)
+        public Model.Client GetClient(int clientId)
         {
             return DataContext.Clients.FirstOrDefault(i => i.clientid == clientId);
         }
 
         public void UpdateClient(int clientId, string clientName)
         {
-            Data.Client client = GetClient(clientId);
+            Model.Client client = GetClient(clientId);
             if (client != null)
             {
                 client.clientname = clientName;
@@ -28,14 +29,14 @@ namespace TEMPO.BusinessLayer.Client
             }
         }
 
-        public List<Data.Client> GetClients()
+        public List<Model.Client> GetClients()
         {
             return DataContext.Clients.ToList();
         }
 
-        public Data.Client CreateClient(string clientName)
+        public Model.Client CreateClient(string clientName)
         {
-            var newClient = new Data.Client
+            var newClient = new Model.Client
             {
                 clientname = clientName
             };

@@ -8,24 +8,24 @@ namespace TEMPO.BusinessLayer.Quotes
 {
     public class QuoteManager : BaseManager
     {
-        public Data.Quote GetQuote(int quoteId)
+        public Model.Quote GetQuote(int quoteId)
         {
             return DataContext.Quotes.Where(i => i.quoteid == quoteId).FirstOrDefault();
         }
 
-        public List<Data.Quote> GetQuotes(int clientId)
+        public List<Model.Quote> GetQuotes(int clientId)
         {
             return DataContext.Quotes.Where(i => i.clientid == clientId).ToList();
         }
 
-        public List<Data.Quote> GetQuotes(DateTime fromDate, DateTime toDate)
+        public List<Model.Quote> GetQuotes(DateTime fromDate, DateTime toDate)
         {
             return DataContext.Quotes.Where(i => i.createddate >= fromDate && i.createddate <= toDate).ToList();
         }
 
         public void CreateQuote(int clientId, string description, float estimatedHours, decimal estimatedPrice, string tags, int createdById)
         {
-            Data.Quote quote = BuildQuote(description, estimatedHours, estimatedPrice, createdById, DateTime.Now);
+            Model.Quote quote = BuildQuote(description, estimatedHours, estimatedPrice, createdById, DateTime.Now);
             quote.clientid = clientId;
             BuildTags(tags, quote);
 
@@ -35,7 +35,7 @@ namespace TEMPO.BusinessLayer.Quotes
 
         public void CreateQuote(string clientName, string description, float estimatedHours, decimal estimatedPrice, string tags, int createdById)
         {
-            Data.Quote quote = BuildQuote(description, estimatedHours, estimatedPrice, createdById, DateTime.Now);
+            Model.Quote quote = BuildQuote(description, estimatedHours, estimatedPrice, createdById, DateTime.Now);
             quote.clientname = clientName;
             BuildTags(tags, quote);
 
@@ -43,9 +43,9 @@ namespace TEMPO.BusinessLayer.Quotes
             DataContext.SaveChanges();
         }
 
-        private Data.Quote BuildQuote(string description, float estimatedHours, decimal estimatedPrice, int createdById, DateTime lastUpdated)
+        private Model.Quote BuildQuote(string description, float estimatedHours, decimal estimatedPrice, int createdById, DateTime lastUpdated)
         {
-            return new Data.Quote
+            return new Model.Quote
             {
                 createdby = createdById,
                 description = description,
@@ -56,11 +56,11 @@ namespace TEMPO.BusinessLayer.Quotes
             };
         }
 
-        public List<Data.QuoteTagFrequency> GetTagFrequency(int maxResults)
+        public List<Model.QuoteTagFrequency> GetTagFrequency(int maxResults)
         {
-            return DataContext.quotetags
+            return DataContext.QuoteTags
                  .GroupBy(i => i.title)
-                 .Select(i => new Data.QuoteTagFrequency
+                 .Select(i => new Model.QuoteTagFrequency
                  {
                      FrequencyCount = i.Count(),
                      Tag = i.Key
@@ -70,7 +70,7 @@ namespace TEMPO.BusinessLayer.Quotes
                  .ToList();
         }
 
-        private void BuildTags(string tags, Data.Quote quote)
+        private void BuildTags(string tags, Model.Quote quote)
         {
             if (!string.IsNullOrEmpty(tags))
             {
@@ -78,7 +78,7 @@ namespace TEMPO.BusinessLayer.Quotes
 
                 foreach (string tag in tagList)
                 {
-                    DataContext.quotetags.Add(new Data.quotetag
+                    DataContext.QuoteTags.Add(new Model.QuoteTag
                     {
                         title = tag,
                         quote = quote
@@ -89,7 +89,7 @@ namespace TEMPO.BusinessLayer.Quotes
 
         public void Update(int quoteId, string clientName, string description, float estimatedHours, decimal estimatedPrice, string tags)
         {
-            Data.Quote quote = GetQuote(quoteId);
+            Model.Quote quote = GetQuote(quoteId);
             if (quote == null)
             {
                 return;
@@ -102,7 +102,7 @@ namespace TEMPO.BusinessLayer.Quotes
             quote.price = estimatedPrice;
             quote.lastupdateddate = DateTime.Now;
 
-            DataContext.quotetags.RemoveRange(quote.quotetags);
+            DataContext.QuoteTags.RemoveRange(quote.quotetags);
             BuildTags(tags, quote);
 
             DataContext.SaveChanges();
@@ -110,7 +110,7 @@ namespace TEMPO.BusinessLayer.Quotes
         
         public void Update(int quoteId, int clientId, string description, float estimatedHours, decimal estimatedPrice, string tags)
         {
-            Data.Quote quote = GetQuote(quoteId);
+            Model.Quote quote = GetQuote(quoteId);
             if (quote == null)
             {
                 return;
@@ -123,7 +123,7 @@ namespace TEMPO.BusinessLayer.Quotes
             quote.price = estimatedPrice;
             quote.lastupdateddate = DateTime.Now;
 
-            DataContext.quotetags.RemoveRange(quote.quotetags);
+            DataContext.QuoteTags.RemoveRange(quote.quotetags);
             BuildTags(tags, quote);
 
             DataContext.SaveChanges();
@@ -131,7 +131,7 @@ namespace TEMPO.BusinessLayer.Quotes
         
         public void Delete(int quoteId)
         {
-            Data.Quote quote = GetQuote(quoteId);
+            Model.Quote quote = GetQuote(quoteId);
             if (quote == null)
             {
                 return;
@@ -149,7 +149,7 @@ namespace TEMPO.BusinessLayer.Quotes
 
         public void AwardQuote(int quoteId)
         {
-            Data.Quote quote = GetQuote(quoteId);
+            Model.Quote quote = GetQuote(quoteId);
             if (quote == null)
             {
                 return;
@@ -161,7 +161,7 @@ namespace TEMPO.BusinessLayer.Quotes
 
         public void UnAwardQuote(int quoteId)
         {
-            Data.Quote quote = GetQuote(quoteId);
+            Model.Quote quote = GetQuote(quoteId);
             if (quote == null)
             {
                 return;
@@ -178,9 +178,9 @@ namespace TEMPO.BusinessLayer.Quotes
             DataContext.SaveChanges();
         }
 
-        public List<Data.Quote> FindQuotesByTag(string tag)
+        public List<Model.Quote> FindQuotesByTag(string tag)
         {
-            var matchingQuoteIds = DataContext.quotetags.Where(i => i.title.Contains(tag))
+            var matchingQuoteIds = DataContext.QuoteTags.Where(i => i.title.Contains(tag))
                 .Select(i => i.quoteid);
             return DataContext.Quotes.Where(i => matchingQuoteIds.Contains(i.quoteid))
                 .ToList();

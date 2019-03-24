@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TEMPO.Data;
+using TEMPO.Model;
 
 namespace TEMPO.BusinessLayer.Project
 {
     public class ProjectManager : BaseManager
     {
-        public List<Data.Project> GetProjects(bool? active = null, bool? hasQuote = null)
+        public List<Model.Project> GetProjects(bool? active = null, bool? hasQuote = null)
         {            
-            IQueryable<Data.Project> allProjects = DataContext.Projects;
+            IQueryable<Model.Project> allProjects = DataContext.Projects;
             if (active.HasValue)
             {
                 allProjects = allProjects.Where(i=>i.Active == active.Value);
@@ -32,39 +32,39 @@ namespace TEMPO.BusinessLayer.Project
             
         }
 
-        public List<Data.Project> GetProjects(int clientId)
+        public List<Model.Project> GetProjects(int clientId)
         {
             return DataContext.Projects.Where(i => i.clientid == clientId).ToList();
         }
 
-        public List<Data.ProjectSummary> GetProjectSummaries(int clientId)
+        public List<Model.ProjectSummary> GetProjectSummaries(int clientId)
         {
             return DataContext.ProjectSummaries.Where(i => i.clientid == clientId).ToList();
         }
 
-        public List<Data.ProjectSummary> GetProjectSummaries(bool active)
+        public List<Model.ProjectSummary> GetProjectSummaries(bool active)
         {
             return DataContext.ProjectSummaries.Where(i => i.active == active).ToList();
         }
 
-        public Data.Project GetProject(int projectId)
+        public Model.Project GetProject(int projectId)
         {
             return DataContext.Projects.Where(i => i.projectid == projectId).FirstOrDefault();
         }
 
-        public List<Data.JobYear> GetJobYears()
+        public List<Model.JobYear> GetJobYears()
         {
             return DataContext.JobYears.ToList();
         }
 
-        public List<Data.ProjectType> GetProjectTypes()
+        public List<Model.ProjectType> GetProjectTypes()
         {
             return DataContext.ProjectTypes.ToList();
         }
 
-        public Data.Project Create(int clientId, int jobYearId, string projectNumber, string refNumber, int typeId, string description, decimal? amount)
+        public Model.Project Create(int clientId, int jobYearId, string projectNumber, string refNumber, int typeId, string description, decimal? amount)
         {
-            var newProject = new Data.Project
+            var newProject = new Model.Project
             {
                 clientid = clientId,
                 Active = true,
@@ -82,7 +82,7 @@ namespace TEMPO.BusinessLayer.Project
 
         public void Update(int projectId, int jobYearId, string projectNumber, string refNumber, int typeId, string description, decimal? amount, bool active, int? weight, int? drawingCount)
         {
-            Data.Project project = GetProject(projectId);
+            Model.Project project = GetProject(projectId);
             if(project != null)
             {
                 project.jobnumyear = jobYearId;
@@ -99,14 +99,14 @@ namespace TEMPO.BusinessLayer.Project
             }
         }
 
-        public Data.Project FindAwardedProject(int quoteId)
+        public Model.Project FindAwardedProject(int quoteId)
         {
             return DataContext.Projects.Where(i => i.quoteid == quoteId).FirstOrDefault();
         }
 
         public void AssociateQuote(int projectId, int quoteId)
         {
-            Data.Project project = GetProject(projectId);
+            Model.Project project = GetProject(projectId);
             if (project != null)
             {
                 project.quoteid = quoteId;
@@ -116,7 +116,7 @@ namespace TEMPO.BusinessLayer.Project
 
         public void RemoveQuoteAssociation(int projectId)
         {
-            Data.Project project = GetProject(projectId);
+            Model.Project project = GetProject(projectId);
             if (project != null)
             {
                 project.quoteid = null;
@@ -126,7 +126,7 @@ namespace TEMPO.BusinessLayer.Project
 
         public void Delete(int projectId)
         {
-            Data.Project project = GetProject(projectId);
+            Model.Project project = GetProject(projectId);
             if (project != null)
             {
                 DataContext.Projects.Remove(project);
