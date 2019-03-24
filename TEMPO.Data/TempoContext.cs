@@ -17,8 +17,7 @@ namespace TEMPO.Data
 
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<JobYear> JobYears { get; set; }
-        public virtual DbSet<Mmt> Mmts { get; set; }
+        public virtual DbSet<JobYear> JobYears { get; set; }      
         public virtual DbSet<Module> modules { get; set; }
         public virtual DbSet<PeriodEnding> PeriodEndings { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
@@ -141,11 +140,6 @@ namespace TEMPO.Data
             modelBuilder.Entity<TimeEntry>()
                 .Property(e => e.saturday)
                 .HasPrecision(5, 2);
-
-            modelBuilder.Entity<TimeEntry>()
-                .HasMany(e => e.mmts)
-                .WithOptional(e => e.timeentry)
-                .WillCascadeOnDelete();
 
             modelBuilder.Entity<TimeSheet>()
                 .Property(e => e.notes)

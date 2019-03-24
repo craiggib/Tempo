@@ -59,7 +59,6 @@
     <Compile Include="DailyTime.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="JobYear.cs" />
-    <Compile Include="Mmt.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="PeriodEnding.cs" />
     <Compile Include="Project.cs" />

@@ -22,7 +22,7 @@ namespace TEMPO.WebApp.Controllers
         }
         public ActionResult Index(string sort)
         {
-            var clientList = _clientManager.GetClientSummary()
+            var clientList = _clientManager.GetClientSummary(DateTime.Now.AddMonths(-6))
                 .Select(i => 
                 {
                     ClientSummary clientSummary = Mapper.Map<Models.Client.ClientSummary>(i);                    

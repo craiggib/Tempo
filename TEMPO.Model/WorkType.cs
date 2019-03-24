@@ -11,8 +11,7 @@ namespace TEMPO.Model
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WorkType()
-        {
-            mmts = new HashSet<Mmt>();
+        {           
             timeentries = new HashSet<TimeEntry>();
         }
 
@@ -21,9 +20,7 @@ namespace TEMPO.Model
         [Required]
         [StringLength(50)]
         public string worktypename { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mmt> mmts { get; set; }
+       
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeEntry> timeentries { get; set; }

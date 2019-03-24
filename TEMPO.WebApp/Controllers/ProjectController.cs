@@ -24,7 +24,7 @@ namespace TEMPO.WebApp.Controllers
         {
             ProjectHome projectHome = new ProjectHome();
 
-            var projectList = _projectManager.GetProjectSummaries(true)
+            var projectList = _projectManager.GetProjectSummaries(true, DateTime.Now.AddMonths(-6))
                 .Select(i => Mapper.Map<ProjectSummary>(i));
 
             if (!string.IsNullOrEmpty(sort))
