@@ -52,6 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201903241858268_initial.cs" />
+    <Compile Include="Migrations\201903241858268_initial.Designer.cs">
+      <DependentUpon>201903241858268_initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempoContext.cs" />
@@ -68,6 +72,11 @@
       <Project>{2ba3640a-c5c4-4553-b3b3-864b396d3b9d}</Project>
       <Name>TEMPO.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903241858268_initial.resx">
+      <DependentUpon>201903241858268_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

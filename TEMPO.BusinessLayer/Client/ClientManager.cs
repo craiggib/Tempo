@@ -9,9 +9,17 @@ namespace TEMPO.BusinessLayer.Client
 {
     public class ClientManager : BaseManager
     {
+        public List<ClientSummary> GetClientSummary(DateTime lastHoursSince)
+        {
+            return DataContext.ClientSummaries
+                .Where(i => i.lastHoursLogged.HasValue && i.lastHoursLogged > lastHoursSince)
+                .ToList();
+        }
+
         public List<ClientSummary> GetClientSummary()
         {
-            return DataContext.ClientSummaries.ToList();
+            return DataContext.ClientSummaries
+                .ToList();
         }
 
         public Model.Client GetClient(int clientId)
@@ -45,6 +53,6 @@ namespace TEMPO.BusinessLayer.Client
 
             return newClient;
         }
-       
+
     }
 }

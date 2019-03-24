@@ -12,7 +12,6 @@ namespace TEMPO.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TimeEntry()
         {
-            mmts = new HashSet<Mmt>();
         }
 
         [Key]
@@ -38,8 +37,6 @@ namespace TEMPO.Model
 
         public int? projectid { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mmt> mmts { get; set; }
 
         public virtual Project project { get; set; }
 
