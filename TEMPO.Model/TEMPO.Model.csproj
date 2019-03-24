@@ -70,7 +70,6 @@
     <Compile Include="QuoteTag.cs" />
     <Compile Include="QuoteTagFrequency.cs" />
     <Compile Include="Status.cs" />
-    <Compile Include="TempoContext.cs" />
     <Compile Include="TimeEntry.cs" />
     <Compile Include="TimeEntrySummary.cs" />
     <Compile Include="TimeSheet.cs" />

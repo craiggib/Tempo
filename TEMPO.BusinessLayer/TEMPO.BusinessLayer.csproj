@@ -80,6 +80,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TEMPO.Data\TEMPO.Data.csproj">
+      <Project>{3da77959-17d5-48a5-8262-e8af5968391f}</Project>
+      <Name>TEMPO.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TEMPO.Model\TEMPO.Model.csproj">
       <Project>{2ba3640a-c5c4-4553-b3b3-864b396d3b9d}</Project>
       <Name>TEMPO.Model</Name>
