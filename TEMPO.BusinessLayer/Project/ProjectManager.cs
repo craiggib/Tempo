@@ -42,11 +42,9 @@ namespace TEMPO.BusinessLayer.Project
             return DataContext.ProjectSummaries.Where(i => i.clientid == clientId).ToList();
         }
 
-        public List<Model.ProjectSummary> GetProjectSummaries(bool active, DateTime lastHoursSince)
+        public List<Model.ProjectSummary> GetProjectSummaries(bool active)
         {
-            return DataContext.ProjectSummaries
-                .Where(i => i.active == active && i.lastHoursLogged.HasValue && i.lastHoursLogged > lastHoursSince)
-                .ToList();
+            return DataContext.ProjectSummaries.Where(i => i.active == active).ToList();
         }
 
         public Model.Project GetProject(int projectId)
